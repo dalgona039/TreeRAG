@@ -2,13 +2,11 @@ import json
 import os
 import re
 from typing import Dict, Any
-import google.generativeai as genai
 from pypdf import PdfReader
 from src.config import Config
 
 class RegulatoryIndexer:
     def __init__(self) -> None:
-        self.model: Any = genai.GenerativeModel(Config.MODEL_NAME)  # type: ignore
         self.generation_config: Dict[str, Any] = Config.GENERATION_CONFIG
 
     @staticmethod
@@ -59,7 +57,11 @@ class RegulatoryIndexer:
         """
 
         try:
-            response = self.model.generate_content(prompt, generation_config=self.generation_config)  # type: ignore
+            response = Config.CLIENT.models.generate_content(
+                model=Config.MODEL_NAME,
+                contents=prompt,
+                config=self.generation_config
+            )
             cleaned_text = self._clean_markdown_json(response.text)
             result = json.loads(cleaned_text)
             print(f"✅ Indexing completed for: {doc_title}")

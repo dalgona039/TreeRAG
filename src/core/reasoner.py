@@ -1,7 +1,6 @@
 import json
 import os
 from typing import Any
-import google.generativeai as genai
 from src.config import Config
 
 class RegulatoryReasoner:
@@ -18,7 +17,6 @@ class RegulatoryReasoner:
         except IOError as e:
             raise IOError(f"Failed to read index file: {e}")
 
-        self.model: Any = genai.GenerativeModel(Config.MODEL_NAME)  # type: ignore
         self.index_filename = index_filename
 
     def query(self, user_question: str) -> str:
@@ -44,7 +42,10 @@ class RegulatoryReasoner:
         """
 
         try:
-            response = self.model.generate_content(prompt)
+            response = Config.CLIENT.models.generate_content(
+                model=Config.MODEL_NAME,
+                contents=prompt
+            )
             if not response.text:
                 raise ValueError("Empty response from model")
             return response.text

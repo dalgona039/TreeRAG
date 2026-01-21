@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
 
 load_dotenv()
 
@@ -8,9 +8,10 @@ api_key = os.getenv("GOOGLE_API_KEY")
 if not api_key:
     raise ValueError("❌ .env 파일에 GOOGLE_API_KEY가 없습니다.")
 
-genai.configure(api_key=api_key)
+client = genai.Client(api_key=api_key)
 
 class Config:
+    CLIENT = client
     MODEL_NAME = "gemini-2.5-flash" 
     
     GENERATION_CONFIG = {
