@@ -1,14 +1,93 @@
 import os
 import shutil
+import json
 from typing import Dict, List
 from fastapi import APIRouter, UploadFile, File, HTTPException, status
 from fastapi.responses import JSONResponse
 from src.config import Config
 from src.core.indexer import RegulatoryIndexer
 from src.core.reasoner import RegulatoryReasoner
-from src.api.models import ChatRequest, ChatResponse, IndexRequest
+from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult
 
 router = APIRouter()
+
+def _route_documents(question: str, available_indices: List[str]) -> List[str]:
+    if not available_indices:
+        raise ValueError("No indexed documents available")
+    
+    if len(available_indices) == 1:
+        return available_indices
+    
+    doc_summaries = []
+    for filename in available_indices:
+        filepath = os.path.join(Config.INDEX_DIR, filename)
+        try:
+            with open(filepath, 'r', encoding='utf-8') as f:
+                tree = json.load(f)
+                doc_name = filename.replace("_index.json", "")
+                summary = tree.get("summary", tree.get("title", doc_name))
+                doc_summaries.append(f"- {doc_name}: {summary[:200]}")
+        except:
+            doc_summaries.append(f"- {filename.replace('_index.json', '')}")
+    
+    context = "\n".join(doc_summaries)
+    
+    prompt = f"""
+당신은 문서 라우터입니다.
+사용자의 질문을 분석하여, 어떤 규제 문서를 참조해야 하는지 선택하세요.
+
+### 사용 가능한 문서:
+{context}
+
+### 사용자 질문:
+{question}
+
+### 규칙:
+1. 질문과 가장 관련 있는 문서를 선택하세요.
+2. 여러 문서가 관련되어 있다면 모두 선택하세요.
+3. 반드시 위 목록에 있는 문서명만 사용하세요.
+4. 응답 형식: JSON 배열로만 답하세요. 설명 없이 문서명만.
+
+예시: ["2025학년도_교육과정_전자공학과", "교육과정_가이드라인"]
+
+### 선택된 문서 (JSON 배열):
+"""
+    
+    try:
+        response = Config.CLIENT.models.generate_content(
+            model=Config.MODEL_NAME,
+            contents=prompt
+        )
+        
+        result_text = response.text.strip()
+        result_text = result_text.replace("```json", "").replace("```", "").strip()
+        selected_names = json.loads(result_text)
+        
+        if not isinstance(selected_names, list):
+            selected_names = [selected_names]
+        
+        selected_files = []
+        for name in selected_names:
+            clean_name = name.strip()
+            for filename in available_indices:
+                doc_name = filename.replace("_index.json", "")
+                if doc_name == clean_name or filename == clean_name:
+                    selected_files.append(filename)
+                    break
+                if clean_name in doc_name or clean_name in filename:
+                    selected_files.append(filename)
+                    break
+        
+        if not selected_files:
+            print(f"⚠️ Router couldn't match documents, using all")
+            return available_indices
+        
+        print(f"📍 Router selected {len(selected_files)}/{len(available_indices)} documents: {selected_files}")
+        return selected_files
+        
+    except Exception as e:
+        print(f"⚠️ Router failed: {e}, using all documents")
+        return available_indices
 
 @router.get("/")
 async def health_check() -> Dict[str, str]:
@@ -116,13 +195,24 @@ async def chat(req: ChatRequest) -> ChatResponse:
             detail="Question cannot be empty"
         )
     
-    if not req.index_filenames or len(req.index_filenames) == 0:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="At least one index filename required"
-        )
+    if req.index_filenames and len(req.index_filenames) > 0:
+        selected_indices = req.index_filenames
+        print(f"📌 Using user-specified documents: {selected_indices}")
+    else:
+        available_indices = [
+            f for f in os.listdir(Config.INDEX_DIR)
+            if f.endswith("_index.json") and os.path.isfile(os.path.join(Config.INDEX_DIR, f))
+        ]
+        
+        if not available_indices:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="No indexed documents found. Please upload and index documents first."
+            )
+        
+        selected_indices = _route_documents(req.question, available_indices)
     
-    for index_filename in req.index_filenames:
+    for index_filename in selected_indices:
         if not index_filename.endswith("_index.json"):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -130,12 +220,16 @@ async def chat(req: ChatRequest) -> ChatResponse:
             )
     
     try:
-        reasoner = RegulatoryReasoner(req.index_filenames)
-        answer = reasoner.query(req.question)
+        reasoner = RegulatoryReasoner(selected_indices)
+        answer = reasoner.query(req.question, enable_comparison=req.enable_comparison)
         
         citations = _extract_citations(answer)
         
-        return ChatResponse(answer=answer, citations=citations)
+        comparison = None
+        if len(selected_indices) > 1 and req.enable_comparison:
+            comparison = _extract_comparison(answer, selected_indices)
+        
+        return ChatResponse(answer=answer, citations=citations, comparison=comparison)
     except FileNotFoundError as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -211,6 +305,38 @@ def _extract_citations(text: str) -> List[str]:
     unique_citations = []
     for c in citations:
         if c not in seen:
+
+def _extract_comparison(text: str, doc_names: List[str]) -> ComparisonResult:
+    import re
+    
+    has_comparison = False
+    commonalities = None
+    differences = None
+    
+    commonalities_match = re.search(r'\*\*1\.\s*공통점.*?\*\*(.+?)(?=\*\*2\.|📚|$)', text, re.DOTALL | re.IGNORECASE)
+    if commonalities_match:
+        commonalities = commonalities_match.group(1).strip()
+        has_comparison = True
+    
+    differences_match = re.search(r'\*\*2\.\s*차이점.*?\*\*(.+?)(?=\*\*3\.|📚|$)', text, re.DOTALL | re.IGNORECASE)
+    if differences_match:
+        differences = differences_match.group(1).strip()
+        has_comparison = True
+    
+    if not has_comparison:
+        table_match = re.search(r'\|.*?\|.*?\|.*?\n\|[-:]+\|[-:]+\|[-:]+\|', text)
+        if table_match:
+            has_comparison = True
+            differences = text[table_match.start():]
+    
+    clean_doc_names = [d.replace("_index.json", "") for d in doc_names]
+    
+    return ComparisonResult(
+        has_comparison=has_comparison,
+        documents_compared=clean_doc_names,
+        commonalities=commonalities,
+        differences=differences
+    )
             seen.add(c)
             unique_citations.append(c)
     

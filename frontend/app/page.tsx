@@ -12,10 +12,18 @@ import {
   Trash2, Copy, Check
 } from "lucide-react";
 
+type ComparisonResult = {
+  has_comparison: boolean;
+  documents_compared: string[];
+  commonalities?: string;
+  differences?: string;
+};
+
 type Message = {
   role: "user" | "assistant";
   content: string;
   citations?: string[];
+  comparison?: ComparisonResult;
 };
 
 type ChatSession = {
@@ -187,6 +195,7 @@ export default function Home() {
       
       const botMsg = res.data.answer;
       const citations = res.data.citations || [];
+      const comparison = res.data.comparison || null;
 
       setSessions(prev => prev.map(session => 
         session.id === currentSessionId 
@@ -195,7 +204,8 @@ export default function Home() {
               messages: [...updatedMessages, { 
                 role: "assistant", 
                 content: botMsg,
-                citations 
+                citations,
+                comparison 
               }] 
             }
           : session
@@ -413,6 +423,39 @@ export default function Home() {
                           📎 {citation}
                         </span>
                       ))}
+                    </div>
+                  )}
+                  
+                  {msg.comparison && msg.comparison.has_comparison && (
+                    <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center">
+                          <span className="text-lg">📊</span>
+                        </div>
+                        <h4 className="font-semibold text-amber-900">문서 비교 분석</h4>
+                      </div>
+                      
+                      <div className="text-sm text-amber-800 mb-2">
+                        <strong>비교 대상:</strong> {msg.comparison.documents_compared.join(" ↔ ")}
+                      </div>
+                      
+                      {msg.comparison.commonalities && (
+                        <div className="mb-3">
+                          <div className="font-medium text-green-700 mb-1">✓ 공통점</div>
+                          <div className="text-sm text-gray-700 bg-white p-2 rounded">
+                            {msg.comparison.commonalities}
+                          </div>
+                        </div>
+                      )}
+                      
+                      {msg.comparison.differences && (
+                        <div>
+                          <div className="font-medium text-red-700 mb-1">⚠ 차이점</div>
+                          <div className="text-sm text-gray-700 bg-white p-2 rounded overflow-x-auto">
+                            <ReactMarkdown>{msg.comparison.differences}</ReactMarkdown>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
