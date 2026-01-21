@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import time
 from typing import Dict, Any
 from pypdf import PdfReader
 from src.config import Config
@@ -56,26 +57,52 @@ class RegulatoryIndexer:
         {full_text}
         """
 
-        try:
-            response = Config.CLIENT.models.generate_content(
-                model=Config.MODEL_NAME,
-                contents=prompt,
-                config=self.generation_config
-            )
-            cleaned_text = self._clean_markdown_json(response.text)
-            result = json.loads(cleaned_text)
-            print(f"✅ Indexing completed for: {doc_title}")
-            return result
-        except json.JSONDecodeError as e:
-            print(f"❌ JSON parsing failed: {e}")
+        max_retries = 3
+        retry_delay = 15
+        
+        for attempt in range(max_retries):
             try:
-                print(f"Response text preview: {response.text[:500]}...")  # type: ignore
-            except:
-                pass
-            return {}
-        except Exception as e:
-            print(f"❌ Indexing Failed: {e}")
-            return {}
+                response = Config.CLIENT.models.generate_content(
+                    model=Config.MODEL_NAME,
+                    contents=prompt,
+                    config=self.generation_config
+                )
+                cleaned_text = self._clean_markdown_json(response.text)
+                result = json.loads(cleaned_text)
+                print(f"✅ Indexing completed for: {doc_title}")
+                return result
+            except json.JSONDecodeError as e:
+                print(f"❌ JSON parsing failed: {e}")
+                try:
+                    print(f"Response text preview: {response.text[:500]}...")
+                except:
+                    pass
+                return {}
+            except Exception as e:
+                error_str = str(e)
+                print(f"❌ Indexing Failed (attempt {attempt + 1}/{max_retries}): {e}")
+                
+                if "503" in error_str or "UNAVAILABLE" in error_str or "overloaded" in error_str:
+                    if attempt < max_retries - 1:
+                        wait_time = retry_delay * (attempt + 1)
+                        print(f"⏳ Server overloaded. Retrying in {wait_time} seconds...")
+                        time.sleep(wait_time)
+                        continue
+                
+                if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+                    if "retry" in error_str.lower():
+                        import re
+                        match = re.search(r'retry in ([\d.]+)s', error_str)
+                        if match and attempt < max_retries - 1:
+                            wait_time = float(match.group(1)) + 1
+                            print(f"⏳ Quota exceeded. Retrying in {wait_time} seconds...")
+                            time.sleep(wait_time)
+                            continue
+                
+                return {}
+        
+        print(f"❌ All retry attempts failed for: {doc_title}")
+        return {}
 
     def save_index(self, data: Dict, filename: str) -> None:
         if not data:
