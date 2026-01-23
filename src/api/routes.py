@@ -8,6 +8,7 @@ from src.config import Config
 from src.core.indexer import RegulatoryIndexer
 from src.core.reasoner import RegulatoryReasoner
 from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult, TreeResponse
+from src.api.openai_compat import ChatCompletionRequest, ChatCompletionResponse, openai_to_gemini_chat_completion
 
 router = APIRouter()
 
@@ -389,3 +390,11 @@ def _extract_comparison(text: str, doc_names: List[str]) -> ComparisonResult:
         commonalities=commonalities,
         differences=differences
     )
+
+@router.post("/v1/chat/completions")
+async def openai_compatible_chat_completion(request: ChatCompletionRequest) -> ChatCompletionResponse:
+    """
+    OpenAI 호환 Chat Completion API
+    Agent Lightning의 APO가 Gemini API를 사용할 수 있도록 변환
+    """
+    return await openai_to_gemini_chat_completion(request)

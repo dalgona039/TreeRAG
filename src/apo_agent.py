@@ -14,9 +14,7 @@ class QueryTask(TypedDict):
     index_filename: str
 
 
-SYSTEM_PROMPT = agl.PromptTemplate(
-    name="system_prompt",
-    template="""당신은 규제 준수 컨설턴트입니다.
+SYSTEM_PROMPT_TEXT = """당신은 규제 준수 컨설턴트입니다.
 제공된 여러 규제 문서의 인덱스를 사용하여 사용자의 질문에 정확하게 답변하세요.
 
 ### 중요 규칙:
@@ -34,12 +32,9 @@ SYSTEM_PROMPT = agl.PromptTemplate(
 ### 답변 구조:
 1. 직접 답변 (페이지 참조 포함)
 {comparison_instruction}
-3. 📚 참조 페이지 요약""",
-)
+3. 📚 참조 페이지 요약"""
 
-COMPARISON_SECTION = agl.PromptTemplate(
-    name="comparison_section",
-    template="""
+COMPARISON_SECTION_TEXT = """
 ### 📊 다중 문서 비교 분석 (필수):
 여러 문서가 제공되었으므로, 반드시 다음 형식으로 비교 분석을 포함하세요:
 
@@ -57,8 +52,7 @@ COMPARISON_SECTION = agl.PromptTemplate(
 **3. 규제 우선순위**
 - 충돌하는 규정이 있다면, 어떤 문서가 상위 규정인지 명시
 - 예: "ISO가 상위 표준이므로 우선 적용 [ISO, p.10]"
-""",
-)
+"""
 
 
 @agl.rollout
@@ -79,13 +73,13 @@ async def regulatory_agent(task: QueryTask, llm: agl.LLM) -> str:
     is_multi_doc = len(index_filenames) > 1
     
     comparison_section = (
-        COMPARISON_SECTION.render() if is_multi_doc else ""
+        COMPARISON_SECTION_TEXT if is_multi_doc else ""
     )
     comparison_instruction = (
         "2. 문서 비교 분석 (공통점/차이점 표)" if is_multi_doc else ""
     )
     
-    system_prompt = SYSTEM_PROMPT.render(
+    system_prompt = SYSTEM_PROMPT_TEXT.format(
         comparison_section=comparison_section,
         comparison_instruction=comparison_instruction,
     )
