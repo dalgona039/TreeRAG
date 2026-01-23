@@ -8,6 +8,7 @@ class ChatRequest(BaseModel):
     question: str
     index_filenames: Optional[List[str]] = None
     enable_comparison: bool = True
+    node_context: Optional[Dict[str, Any]] = None
 
 class ComparisonResult(BaseModel):
     has_comparison: bool

@@ -205,10 +205,21 @@ export default function Home() {
     setIsGenerating(true);
 
     try {
-      const res = await axios.post(`${API_BASE_URL}/chat`, {
+      const requestBody: any = {
         question: userMsg,
         index_filenames: currentSession.indexFiles,
-      });
+      };
+      
+      if (selectedNode) {
+        requestBody.node_context = {
+          id: selectedNode.id,
+          title: selectedNode.title,
+          page_ref: selectedNode.page_ref,
+          summary: selectedNode.summary,
+        };
+      }
+      
+      const res = await axios.post(`${API_BASE_URL}/chat`, requestBody);
       
       const botMsg = res.data.answer;
       const citations = res.data.citations || [];
@@ -595,13 +606,32 @@ export default function Home() {
 
         {currentSessionId && (
           <div className="bg-white p-4 md:pb-6 border-t border-slate-100">
+            {selectedNode && (
+              <div className="max-w-3xl mx-auto mb-3 flex items-center gap-2 text-xs bg-indigo-50 px-4 py-2 rounded-lg border border-indigo-200">
+                <span className="text-indigo-700">📌 선택된 섹션:</span>
+                <span className="font-medium text-indigo-900">{selectedNode.title}</span>
+                {selectedNode.page_ref && (
+                  <span className="text-indigo-600">(p.{selectedNode.page_ref})</span>
+                )}
+                <button
+                  onClick={() => {
+                    setSelectedNode(null);
+                    toast.success("섹션 선택 해제됨");
+                  }}
+                  className="ml-auto text-indigo-600 hover:text-indigo-800"
+                  aria-label="섹션 선택 해제"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
             <div className="max-w-3xl mx-auto relative">
               <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !isGenerating && handleSendMessage()}
-                placeholder="규정에 대해 궁금한 점을 입력하세요..."
+                placeholder={selectedNode ? `"${selectedNode.title}" 섹션에 대해 질문하기...` : "규정에 대해 궁금한 점을 입력하세요..."}
                 disabled={isGenerating}
                 className="w-full bg-[#f0f4f9] hover:bg-[#e9eef6] focus:bg-white border-2 border-transparent focus:border-indigo-200 rounded-full pl-6 pr-14 py-4 text-slate-700 placeholder:text-slate-400 focus:outline-none transition-all shadow-sm"
                 aria-label="질문 입력"
@@ -631,7 +661,10 @@ export default function Home() {
               <h3 className="font-semibold text-slate-800">문서 구조</h3>
             </div>
             <button
-              onClick={() => setShowTree(false)}
+              onClick={() => {
+                setShowTree(false);
+                setSelectedNode(null);
+              }}
               className="p-1 hover:bg-slate-100 rounded"
               aria-label="트리 닫기"
             >
@@ -639,8 +672,11 @@ export default function Home() {
             </button>
           </div>
           
-          <div className="px-4 py-2 bg-slate-50 border-b border-slate-100">
-            <div className="text-sm font-medium text-slate-700">{treeData.document_name}</div>
+          <div className="px-4 py-3 bg-slate-50 border-b border-slate-100">
+            <div className="text-sm font-medium text-slate-700 mb-1">{treeData.document_name}</div>
+            <div className="text-xs text-slate-500">
+              💡 팁: <span className="font-medium">Shift + 클릭</span>으로 섹션 선택 후 질문하기
+            </div>
           </div>
 
           <div className="flex-1 overflow-y-auto p-4">

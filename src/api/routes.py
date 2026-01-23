@@ -221,7 +221,18 @@ async def chat(req: ChatRequest) -> ChatResponse:
     
     try:
         reasoner = RegulatoryReasoner(selected_indices)
-        answer = reasoner.query(req.question, enable_comparison=req.enable_comparison)
+        
+        if req.node_context:
+            enhanced_question = f"""[컨텍스트: 문서 섹션 "{req.node_context.get('title', '')}"]
+
+사용자가 위 섹션에 대해 질문하고 있습니다.{f" (페이지: {req.node_context.get('page_ref', '')})" if req.node_context.get('page_ref') else ""}
+
+질문: {req.question}
+
+이 섹션과 관련된 내용을 중심으로 상세히 답변해주세요."""
+            answer = reasoner.query(enhanced_question, enable_comparison=req.enable_comparison)
+        else:
+            answer = reasoner.query(req.question, enable_comparison=req.enable_comparison)
         
         citations = _extract_citations(answer)
         
