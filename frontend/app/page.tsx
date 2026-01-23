@@ -65,6 +65,7 @@ export default function Home() {
   const [showTree, setShowTree] = useState(false);
   const [treeData, setTreeData] = useState<TreeData | null>(null);
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
+  const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -285,17 +286,37 @@ export default function Home() {
     });
   };
 
+  const handleNodeClick = (node: TreeNode, hasChildren: boolean, e: React.MouseEvent) => {
+    if (hasChildren) {
+      toggleNode(node.id);
+    }
+    
+    // Shift + 클릭으로 노드 선택 및 질문 생성
+    if (e.shiftKey) {
+      e.stopPropagation();
+      setSelectedNode(node);
+      
+      const question = `"${node.title}" 섹션에 대해 자세히 설명해주세요.${node.page_ref ? ` (페이지 ${node.page_ref})` : ''}`;
+      setInput(question);
+      toast.success(`노드 선택됨: ${node.title}`);
+    }
+  };
+
   const renderTreeNode = (node: TreeNode, level: number = 0): JSX.Element => {
     const isExpanded = expandedNodes.has(node.id);
     const hasChildren = node.children && node.children.length > 0;
+    const isSelected = selectedNode?.id === node.id;
     
     return (
       <div key={node.id} className="mb-1">
         <div 
-          className={`flex items-start gap-2 p-2 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors ${
+          className={`flex items-start gap-2 p-2 rounded-lg cursor-pointer transition-colors ${
             level > 0 ? 'ml-' + (level * 4) : ''
+          } ${
+            isSelected ? 'bg-indigo-100 border border-indigo-300' : 'hover:bg-slate-50'
           }`}
-          onClick={() => hasChildren && toggleNode(node.id)}
+          onClick={(e) => handleNodeClick(node, hasChildren, e)}
+          title="클릭: 펼치기/접기 | Shift+클릭: 이 섹션 질문하기"
         >
           {hasChildren ? (
             isExpanded ? <ChevronDown size={16} className="mt-1 text-slate-600" /> : <ChevronRight size={16} className="mt-1 text-slate-600" />
@@ -303,7 +324,9 @@ export default function Home() {
             <div className="w-4" />
           )}
           <div className="flex-1 min-w-0">
-            <div className="font-medium text-sm text-slate-800">{node.title}</div>
+            <div className={`font-medium text-sm ${
+              isSelected ? 'text-indigo-800' : 'text-slate-800'
+            }`}>{node.title}</div>
             {node.page_ref && (
               <div className="text-xs text-indigo-600 mt-0.5">📄 p.{node.page_ref}</div>
             )}

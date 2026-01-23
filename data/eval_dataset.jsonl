@@ -1,0 +1,5 @@
+{"id": "q001", "question": "인공지능반도체 융합전공의 졸업 학점은?", "expected_answer": "130학점", "index_filename": "2025년 인공지능반도체 융합전공_index.json"}
+{"id": "q002", "question": "반도체공학과의 전공 필수 과목은?", "expected_answer": "반도체공정", "index_filename": "2025학년도 교육과정 반도체공학과_index.json"}
+{"id": "q003", "question": "두 교육과정의 공통점은 무엇인가?", "expected_answer": "반도체 관련 교육과정", "index_filename": "2025년 인공지능반도체 융합전공_index.json,2025학년도 교육과정 반도체공학과_index.json"}
+{"id": "q004", "question": "AI 관련 필수 과목은?", "expected_answer": "인공지능개론", "index_filename": "2025년 인공지능반도체 융합전공_index.json"}
+{"id": "q005", "question": "두 교육과정의 차이점은 무엇인가?", "expected_answer": "융합전공은 AI 중심, 공학과는 반도체 중심", "index_filename": "2025년 인공지능반도체 융합전공_index.json,2025학년도 교육과정 반도체공학과_index.json"}
