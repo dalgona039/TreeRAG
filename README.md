@@ -132,10 +132,3 @@ We adopted the concept of "Tree-based Indexing" to overcome the limitations of f
 
 📜 License
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-
-```bash
-git add README.md
-git commit -m "Update README with detailed project specs and pipeline"
-git push origin main
-```
