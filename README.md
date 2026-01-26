@@ -52,54 +52,55 @@ This project consists of two main pipelines: **Data Ingestion** and **Reasoning*
 
 ```mermaid
 graph TD
-    subgraph "Stage 1: Data Ingestion Pipeline"
-        A[Raw Regulatory PDFs] -->|Structure Recognition| B(Preprocessing)
-        B -->|LLM Summarization| C{Tree Construction}
-        C --> D[Hierarchical JSON Tree]
-        D -->|Storage| E[(Regulatory Knowledge Base)]
-    end
+	subgraph "Stage 1: Data Ingestion Pipeline"
+		A[Raw Regulatory PDFs] -->|Structure Recognition| B(Preprocessing)
+		B -->|LLM Summarization| C{Tree Construction}
+		C --> D[Hierarchical JSON Tree]
+		D -->|Storage| E[(Regulatory Knowledge Base)]
+	end
 
-    subgraph "Stage 2: Reasoning & Serving Pipeline"
-        F[User Query] -->|Intent Analysis| G[Router Agent]
-        G -->|Select Target Tree| E
-        E -->|Recursive Tree Traversal| H[Reasoning Engine]
-        H -->|Context Synthesis| I[Gap Analysis & Citation]
-        I --> J[Final Answer with Traceability]
-    end
+	subgraph "Stage 2: Reasoning & Serving Pipeline"
+		F[User Query] -->|Intent Analysis| G[Router Agent]
+		G -->|Select Target Tree| E
+		E -->|Recursive Tree Traversal| H[Reasoning Engine]
+		H -->|Context Synthesis| I[Gap Analysis & Citation]
+		I --> J[Final Answer with Traceability]
+	end
 ```
-Stage 1: Data Ingestion (Indexing)
 
-Raw Data Collection: Ingest PDFs from FDA, ISO, MFDS, etc.
+### Stage 1: Data Ingestion (Indexing)
 
-Structure Parsing: Identify Table of Contents (ToC) to understand document hierarchy.
+1. **Raw Data Collection:** Ingest PDFs from FDA, ISO, MFDS, etc.
+2. **Structure Parsing:** Identify Table of Contents (ToC) to understand document hierarchy.
+3. **Tree Construction:** Use LLM to generate summaries and metadata for each node, building a parent-child tree structure.
 
-Tree Construction: Use LLM to generate summaries and metadata for each node, building a parent-child tree structure.
+### Stage 2: Reasoning (Serving)
 
-Stage 2: Reasoning (Serving)
+1. **Router Agent:** Analyzes user intent to select the relevant regulatory tree (e.g., selecting *ISO 14971* for risk management queries).
+2. **Deep Dive Traversal:** The engine traverses from root nodes down to leaf nodes to find precise information.
+3. **Response Generation:** Synthesizes findings and tags sources to ensure traceability.
 
-Router Agent: Analyzes user intent to select the relevant regulatory tree (e.g., selecting ISO 14971 for risk management queries).
+---
 
-Deep Dive Traversal: The engine traverses from root nodes down to leaf nodes to find precise information.
+## 💾 Getting Started
 
-Response Generation: Synthesizes findings and tags sources to ensure traceability.
+### Prerequisites
 
-💾 Getting Started
-Prerequisites
+* Python 3.10 or higher
+* Node.js 18 or higher
+* Google AI Studio API Key
 
-Python 3.10 or higher
+### 1. Clone the Repository
 
-Node.js 18 or higher
-
-Google AI Studio API Key
-
-1. Clone the Repository
-
-Bash
-git clone [https://github.com/dalgona039/Medi-Reg-Master.git](https://github.com/dalgona039/Medi-Reg-Master.git)
+```bash
+git clone https://github.com/dalgona039/Medi-Reg-Master.git
 cd Medi-Reg-Master
-2. Backend Setup
 
-Bash
+```
+
+### 2. Backend Setup
+
+```bash
 # Create and activate Conda environment
 conda create -n medireg python=3.13 -y
 conda activate medireg
@@ -113,9 +114,12 @@ echo "GOOGLE_API_KEY=your_api_key_here" > .env
 
 # Run the FastAPI Server
 python main.py
-3. Frontend Setup
 
-Bash
+```
+
+### 3. Frontend Setup
+
+```bash
 cd frontend
 
 # Install Node dependencies
@@ -123,12 +127,19 @@ npm install
 
 # Run the Development Server
 npm run dev
-Access the dashboard at http://localhost:3000.
 
-🙌 Acknowledgements & Inspiration
-This project is built upon the theoretical framework of VectifyAI/PageIndex.
+```
 
-We adopted the concept of "Tree-based Indexing" to overcome the limitations of flat vector search in high-stakes domains. Medi-Reg Master specializes this architecture for the Medical Device Regulatory Affairs (RA) domain, proving that structured AI reasoning is essential for compliance and safety.
+Access the dashboard at `http://localhost:3000`.
 
-📜 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
+
+## 🙌 Acknowledgements & Inspiration
+
+This project is built upon the theoretical framework of **[VectifyAI/PageIndex](https://github.com/VectifyAI/PageIndex)**.
+
+We adopted the concept of **"Tree-based Indexing"** to overcome the limitations of flat vector search in high-stakes domains. **Medi-Reg Master** specializes this architecture for the **Medical Device Regulatory Affairs (RA)** domain, proving that structured AI reasoning is essential for compliance and safety.
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
