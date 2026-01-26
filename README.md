@@ -134,12 +134,6 @@ We adopted the concept of "Tree-based Indexing" to overcome the limitations of f
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-### 💡 적용 방법
-
-1.  프로젝트 루트 폴더(`medireg-master`)의 `README.md` 파일을 엽니다.
-2.  위의 내용을 전부 복사해서 붙여넣습니다.
-3.  터미널에서 아래 명령어로 깃허브에 반영합니다.
-
 ```bash
 git add README.md
 git commit -m "Update README with detailed project specs and pipeline"
