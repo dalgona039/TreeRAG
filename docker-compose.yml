@@ -9,7 +9,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - USE_DEEP_TRAVERSAL=true
       - MAX_TRAVERSAL_DEPTH=5
       - MAX_BRANCHES_PER_LEVEL=3
