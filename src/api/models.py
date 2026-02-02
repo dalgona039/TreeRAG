@@ -26,11 +26,17 @@ class TraversalInfo(BaseModel):
     max_depth: int
     max_branches: int
 
+class ResolvedReference(BaseModel):
+    title: str
+    page_ref: Optional[str] = None
+    summary: Optional[str] = None
+
 class ChatResponse(BaseModel):
     answer: str
     citations: List[str]
     comparison: Optional[ComparisonResult] = None
     traversal_info: Optional[TraversalInfo] = None
+    resolved_references: Optional[List[ResolvedReference]] = None
 
 class TreeNode(BaseModel):
     id: str

@@ -265,11 +265,21 @@ async def chat(req: ChatRequest) -> ChatResponse:
             max_branches=traversal_info["max_branches"]
         )
         
+        # Extract resolved_references if available
+        resolved_refs = None
+        if "resolved_references" in traversal_info:
+            from src.api.models import ResolvedReference
+            resolved_refs = [
+                ResolvedReference(**ref) 
+                for ref in traversal_info["resolved_references"]
+            ]
+        
         return ChatResponse(
             answer=answer, 
             citations=citations, 
             comparison=comparison,
-            traversal_info=trav_info
+            traversal_info=trav_info,
+            resolved_references=resolved_refs
         )
     except FileNotFoundError as e:
         raise HTTPException(

@@ -10,7 +10,7 @@ import {
   Upload, FileText, Send, Bot, User, Loader2, 
   Plus, MessageSquare, PanelLeftClose, PanelLeft,
   Trash2, Copy, Check, ChevronRight, ChevronDown, FolderTree,
-  Settings, X
+  Settings, X, Download
 } from "lucide-react";
 
 type TreeNode = {
@@ -45,12 +45,19 @@ type TraversalInfo = {
   max_branches: number;
 };
 
+type ResolvedReference = {
+  title: string;
+  page_ref?: string;
+  summary?: string;
+};
+
 type Message = {
   role: "user" | "assistant";
   content: string;
   citations?: string[];
   comparison?: ComparisonResult;
   traversal_info?: TraversalInfo;
+  resolved_references?: ResolvedReference[];
 };
 
 type ChatSession = {
@@ -249,6 +256,7 @@ export default function Home() {
       const citations = res.data.citations || [];
       const comparison = res.data.comparison || null;
       const traversalInfo = res.data.traversal_info || null;
+      const resolvedReferences = res.data.resolved_references || null;
 
       setSessions(prev => prev.map(session => 
         session.id === currentSessionId 
@@ -259,7 +267,8 @@ export default function Home() {
                 content: botMsg,
                 citations,
                 comparison,
-                traversal_info: traversalInfo
+                traversal_info: traversalInfo,
+                resolved_references: resolvedReferences
               }] 
             }
           : session
@@ -348,9 +357,74 @@ export default function Home() {
       setPdfPage(parseInt(pageNum));
       setShowPdfViewer(true);
       toast.success(`PDF 열기: ${filename} (p.${pageNum})`);
-    } else {
-      toast.error("페이지 정보를 찾을 수 없습니다");
     }
+  };
+
+  const exportToMarkdown = (session: ChatSession) => {
+    let markdown = `# ${session.title}\n\n`;
+    markdown += `**생성일:** ${session.createdAt.toLocaleString('ko-KR')}\n\n`;
+    markdown += `**문서:** ${session.indexFiles.map(f => f.replace('_index.json', '')).join(', ')}\n\n`;
+    markdown += `---\n\n`;
+
+    session.messages.forEach((msg, idx) => {
+      if (msg.role === 'user') {
+        markdown += `## 질문 ${Math.floor((idx + 1) / 2)}\n\n`;
+        markdown += `> ${msg.content}\n\n`;
+      } else if (msg.role === 'assistant') {
+        markdown += `### 답변\n\n`;
+        markdown += `${msg.content}\n\n`;
+        
+        if (msg.citations && msg.citations.length > 0) {
+          markdown += `**출처:**\n`;
+          msg.citations.forEach(citation => {
+            markdown += `- ${citation}\n`;
+          });
+          markdown += `\n`;
+        }
+        
+        if (msg.resolved_references && msg.resolved_references.length > 0) {
+          markdown += `**Cross-reference 해결됨:**\n`;
+          msg.resolved_references.forEach(ref => {
+            markdown += `- ${ref.title}`;
+            if (ref.page_ref) markdown += ` (${ref.page_ref})`;
+            markdown += `\n`;
+          });
+          markdown += `\n`;
+        }
+        
+        if (msg.traversal_info && msg.traversal_info.used_deep_traversal) {
+          markdown += `**Deep Traversal 통계:**\n`;
+          markdown += `- Nodes Visited: ${msg.traversal_info.nodes_visited.length}\n`;
+          markdown += `- Nodes Selected: ${msg.traversal_info.nodes_selected.length}\n`;
+          markdown += `- Max Depth: ${msg.traversal_info.max_depth}\n`;
+          markdown += `- Max Branches: ${msg.traversal_info.max_branches}\n\n`;
+        }
+        
+        if (msg.comparison && msg.comparison.has_comparison) {
+          markdown += `**문서 비교 분석**\n\n`;
+          markdown += `비교 대상: ${msg.comparison.documents_compared.join(' ↔ ')}\n\n`;
+          if (msg.comparison.commonalities) {
+            markdown += `**공통점:**\n${msg.comparison.commonalities}\n\n`;
+          }
+          if (msg.comparison.differences) {
+            markdown += `**차이점:**\n${msg.comparison.differences}\n\n`;
+          }
+        }
+        
+        markdown += `---\n\n`;
+      }
+    });
+
+    const blob = new Blob([markdown], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${session.title.replace(/[^a-zA-Z0-9가-힣\s]/g, '_')}_${new Date().toISOString().split('T')[0]}.md`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    toast.success('Markdown 파일로 저장되었습니다');
   };
 
   const renderTreeNode = (node: TreeNode, level: number = 0): JSX.Element => {
@@ -513,6 +587,14 @@ export default function Home() {
 
           {currentSessionId && currentSession && (
             <div className="flex items-center gap-2">
+              <button
+                onClick={() => exportToMarkdown(currentSession)}
+                className="flex items-center gap-2 px-4 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-700 text-sm rounded-lg transition-colors"
+                title="대화 내용 다운로드"
+              >
+                <Download size={16} />
+                Export
+              </button>
               <button
                 onClick={() => setShowSettings(!showSettings)}
                 className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm rounded-lg transition-colors"
@@ -695,6 +777,33 @@ export default function Home() {
                           </div>
                         </div>
                       )}
+                    </div>
+                  )}
+
+                  {msg.resolved_references && msg.resolved_references.length > 0 && (
+                    <div className="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-xl">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center">
+                          <span className="text-lg">🔗</span>
+                        </div>
+                        <h4 className="font-semibold text-purple-900">Cross-reference 해결됨</h4>
+                      </div>
+                      <div className="text-xs text-purple-700 mb-2">
+                        질문에서 {msg.resolved_references.length}개의 참조가 감지되어 자동으로 컨텍스트에 추가되었습니다
+                      </div>
+                      <div className="space-y-2 max-h-40 overflow-y-auto">
+                        {msg.resolved_references.map((ref, i) => (
+                          <div key={i} className="bg-white p-2 rounded text-sm">
+                            <div className="font-medium text-purple-700">{ref.title}</div>
+                            {ref.page_ref && (
+                              <div className="text-xs text-slate-500 mt-1">페이지: {ref.page_ref}</div>
+                            )}
+                            {ref.summary && (
+                              <div className="text-xs text-slate-600 mt-1 line-clamp-2">{ref.summary}</div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
 

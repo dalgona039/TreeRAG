@@ -3,6 +3,7 @@ import os
 from typing import Any, List, Dict
 from src.config import Config
 from src.core.tree_traversal import TreeNavigator, format_traversal_results
+from src.core.reference_resolver import ReferenceResolver
 
 class TreeRAGReasoner:
     def __init__(self, index_filenames: List[str], use_deep_traversal: bool = True):
@@ -36,6 +37,21 @@ class TreeRAGReasoner:
             "max_branches": max_branches
         }
         
+        # 🔍 Cross-reference detection and resolution
+        reference_context = ""
+        resolved_refs = []
+        for tree in self.index_trees:
+            resolver = ReferenceResolver(tree)
+            refs = resolver.detect_references(user_question)
+            if refs:
+                resolved_nodes = resolver.resolve_all_references(user_question)
+                if resolved_nodes:
+                    resolved_refs.extend(resolved_nodes)
+                    ref_context = resolver.format_resolved_context(resolved_nodes)
+                    if ref_context:
+                        reference_context += ref_context
+                        print(f"📎 Resolved {len(resolved_nodes)} cross-references: {[r.get('title') for r in resolved_nodes]}")
+        
         if self.use_deep_traversal:
             print("🌲 Using deep tree traversal mode")
             context_str, trav_data = self._build_context_with_traversal(user_question, max_depth, max_branches)
@@ -43,6 +59,10 @@ class TreeRAGReasoner:
         else:
             print("📄 Using flat context mode (legacy)")
             context_str = self._build_flat_context()
+        
+        # Add resolved references to context
+        if reference_context:
+            context_str = reference_context + "\n\n" + context_str
         
         is_multi_doc = len(self.index_filenames) > 1
         comparison_prompt = ""
@@ -128,6 +148,18 @@ class TreeRAGReasoner:
             )
             if not response.text:
                 raise ValueError("Empty response from model")
+            
+            # Add resolved_references to traversal_info if available
+            if resolved_refs:
+                traversal_info["resolved_references"] = [
+                    {
+                        "title": ref.get("title", ""),
+                        "page_ref": ref.get("page_ref"),
+                        "summary": ref.get("summary")
+                    }
+                    for ref in resolved_refs
+                ]
+            
             return response.text, traversal_info
         except Exception as e:
             print(f"❌ Query failed: {e}")
