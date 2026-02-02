@@ -10,25 +10,15 @@ from typing import List, Dict, Any, Optional, Tuple
 class ReferenceResolver:
     """Detects and resolves cross-references in user queries."""
     
-    # 다양한 참조 패턴 (한글/영문)
     REFERENCE_PATTERNS = [
-        # 섹션 참조
         r'(?:Section|섹션|section)\s*(\d+(?:\.\d+)*)',
         r'(\d+(?:\.\d+)+)\s*(?:Section|섹션|section)',
-        
-        # 장/챕터 참조
         r'(?:Chapter|장|chapter|챕터)\s*(\d+)',
         r'(\d+)\s*(?:장|챕터)',
-        
-        # 표 참조
         r'(?:Table|표|table)\s*(\d+(?:\.\d+)*)',
         r'표\s*<?\s*(\d+(?:\.\d+)*)\s*>?',
-        
-        # 그림/도표 참조
         r'(?:Figure|그림|figure|Fig\.|도)\s*(\d+(?:\.\d+)*)',
         r'그림\s*<?\s*(\d+(?:\.\d+)*)\s*>?',
-        
-        # 부록 참조
         r'(?:Appendix|부록|appendix)\s*([A-Z]|\d+)',
         r'부록\s*([A-Z가-힣]|\d+)',
     ]
@@ -54,29 +44,24 @@ class ReferenceResolver:
             node_id = node.get("id", "")
             title = node.get("title", "")
             
-            # Index by ID
             if node_id:
                 index[node_id.lower()] = node
             
-            # Index by title
             if title:
                 index[title.lower()] = node
                 
-                # Extract section numbers from title
                 section_match = re.search(r'(\d+(?:\.\d+)+)', title)
                 if section_match:
                     section_num = section_match.group(1)
                     index[f"section_{section_num}"] = node
                     index[section_num] = node
                 
-                # Extract chapter numbers
                 chapter_match = re.search(r'(?:Chapter|장|챕터)\s*(\d+)', title, re.IGNORECASE)
                 if chapter_match:
                     chapter_num = chapter_match.group(1)
                     index[f"chapter_{chapter_num}"] = node
                     index[f"장_{chapter_num}"] = node
                 
-                # Extract table/figure numbers
                 table_match = re.search(r'(?:Table|표)\s*(\d+(?:\.\d+)*)', title, re.IGNORECASE)
                 if table_match:
                     table_num = table_match.group(1)
@@ -89,7 +74,6 @@ class ReferenceResolver:
                     index[f"figure_{figure_num}"] = node
                     index[f"그림_{figure_num}"] = node
             
-            # Recursively index children
             for child in node.get("children", []):
                 traverse(child, f"{path}/{title}" if path else title)
         

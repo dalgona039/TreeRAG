@@ -1,11 +1,12 @@
 import json
 import os
-from typing import Any, List, Dict
+from typing import Any, List, Dict, Optional
 from src.config import Config
 from src.core.tree_traversal import TreeNavigator, format_traversal_results
 from src.core.reference_resolver import ReferenceResolver
+from src.utils.cache import get_cache
+from src.utils.hallucination_detector import create_detector
 
-# Domain-specific prompts
 DOMAIN_PROMPTS = {
     "general": """당신은 전문 문서 분석 AI 어시스턴트입니다.
 제공된 문서의 인덱스를 사용하여 사용자의 질문에 정확하게 답변하세요.""",
@@ -43,7 +44,6 @@ DOMAIN_PROMPTS = {
 - 인용 형식을 정확히 따르고 페이지 번호를 반드시 포함하세요"""
 }
 
-# Language instructions
 LANGUAGE_INSTRUCTIONS = {
     "ko": "**중요: 모든 답변은 반드시 한국어로 작성하세요.**",
     "en": "**IMPORTANT: You MUST respond in English only.**",
@@ -70,9 +70,27 @@ class TreeRAGReasoner:
                 raise IOError(f"Failed to read index file {index_filename}: {e}")
 
 
-    def query(self, user_question: str, enable_comparison: bool = True, max_depth: int = 5, max_branches: int = 3, domain_template: str = "general", language: str = "ko") -> tuple[str, dict]:
+    def query(self, user_question: str, enable_comparison: bool = True, max_depth: int = 5, max_branches: int = 3, domain_template: str = "general", language: str = "ko", node_context: Optional[dict] = None) -> tuple[str, dict]:
         if not user_question or not user_question.strip():
             raise ValueError("user_question cannot be empty")
+        
+        cache = get_cache()
+        cached_response = cache.get(
+            question=user_question,
+            index_files=self.index_filenames,
+            use_deep_traversal=self.use_deep_traversal,
+            max_depth=max_depth,
+            max_branches=max_branches,
+            domain_template=domain_template,
+            language=language,
+            node_context=node_context
+        )
+        
+        if cached_response:
+            print(f"✅ Cache HIT - Returning cached response")
+            return cached_response["answer"], cached_response["metadata"]
+        
+        print(f"❌ Cache MISS - Generating new response")
         
         traversal_info = {
             "used_deep_traversal": self.use_deep_traversal,
@@ -82,7 +100,6 @@ class TreeRAGReasoner:
             "max_branches": max_branches
         }
         
-        # 🔍 Cross-reference detection and resolution
         reference_context = ""
         resolved_refs = []
         for tree in self.index_trees:
@@ -105,7 +122,6 @@ class TreeRAGReasoner:
             print("📄 Using flat context mode (legacy)")
             context_str = self._build_flat_context()
         
-        # Add resolved references to context
         if reference_context:
             context_str = reference_context + "\n\n" + context_str
         
@@ -134,10 +150,8 @@ class TreeRAGReasoner:
 - 예: "최신 버전(2024)의 내용이 적용됩니다 [문서A, p.10]"
 """
 
-        # Get domain-specific prompt
         domain_prompt = DOMAIN_PROMPTS.get(domain_template, DOMAIN_PROMPTS["general"])
         
-        # Get language instruction
         language_instruction = LANGUAGE_INSTRUCTIONS.get(language, LANGUAGE_INSTRUCTIONS["ko"])
         
         prompt = f"""
@@ -201,7 +215,6 @@ class TreeRAGReasoner:
             if not response.text:
                 raise ValueError("Empty response from model")
             
-            # Add resolved_references to traversal_info if available
             if resolved_refs:
                 traversal_info["resolved_references"] = [
                     {
@@ -211,6 +224,59 @@ class TreeRAGReasoner:
                     }
                     for ref in resolved_refs
                 ]
+            
+            detector = create_detector(confidence_threshold=0.6)
+            
+            source_nodes = []
+            if self.use_deep_traversal:
+                for tree_idx, tree in enumerate(self.index_trees):
+                    doc_name = self.index_filenames[tree_idx].replace("_index.json", "")
+                    navigator = TreeNavigator(tree, doc_name)
+                    relevant_nodes, _ = navigator.search(
+                        query=user_question,
+                        max_depth=max_depth,
+                        max_branches=max_branches
+                    )
+                    source_nodes.extend([node["node"] for node in relevant_nodes])
+            else:
+                for tree in self.index_trees:
+                    source_nodes.extend(self._extract_all_nodes(tree))
+            
+            if resolved_refs:
+                source_nodes.extend(resolved_refs)
+            
+            detection_result = detector.detect(response.text, source_nodes)
+            
+            traversal_info["hallucination_detection"] = {
+                "overall_confidence": detection_result["overall_confidence"],
+                "is_reliable": detection_result["is_reliable"],
+                "hallucinated_count": detection_result["hallucinated_count"],
+                "total_sentences": detection_result["total_sentences"]
+            }
+            
+            if detection_result["is_reliable"]:
+                print(f"✅ Hallucination check: {detection_result['overall_confidence']:.1%} confidence")
+            else:
+                print(f"⚠️ Hallucination detected: {detection_result['hallucinated_count']}/{detection_result['total_sentences']} sentences low confidence")
+            
+
+            cache = get_cache()
+            cache_data = {
+                "answer": response.text,
+                "metadata": traversal_info
+            }
+            cache.set(
+                question=user_question,
+                index_files=self.index_filenames,
+                use_deep_traversal=self.use_deep_traversal,
+                max_depth=max_depth,
+                max_branches=max_branches,
+                domain_template=domain_template,
+                language=language,
+                response=cache_data,
+                node_context=node_context
+            )
+            print(f"💾 Response cached")
             
             return response.text, traversal_info
         except Exception as e:
@@ -257,3 +323,25 @@ class TreeRAGReasoner:
             })
         
         return json.dumps(combined_context, ensure_ascii=False)
+    
+    def _extract_all_nodes(self, tree: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Extract all nodes from a tree structure recursively.
+        
+        Args:
+            tree: Tree structure (dict with 'children' list)
+        
+        Returns:
+            Flat list of all nodes
+        """
+        nodes = []
+        
+        def traverse(node):
+            if isinstance(node, dict):
+                nodes.append(node)
+                if "children" in node and isinstance(node["children"], list):
+                    for child in node["children"]:
+                        traverse(child)
+        
+        traverse(tree)
+        return nodes

@@ -2,14 +2,18 @@ import os
 import shutil
 import json
 from typing import Dict, List
-from fastapi import APIRouter, UploadFile, File, HTTPException, status
+from fastapi import APIRouter, UploadFile, File, HTTPException, status, Request
 from fastapi.responses import JSONResponse, FileResponse
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 from src.config import Config
 from src.core.indexer import RegulatoryIndexer
 from src.core.reasoner import TreeRAGReasoner
 from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult, TreeResponse, TraversalInfo
+from src.utils.cache import get_cache
 
 router = APIRouter()
+limiter = Limiter(key_func=get_remote_address)
 
 def _route_documents(question: str, available_indices: List[str]) -> List[str]:
     if not available_indices:
@@ -130,7 +134,8 @@ async def upload_file(file: UploadFile = File(...)) -> Dict[str, str]:
         )
 
 @router.post("/index")
-async def create_index(req: IndexRequest) -> Dict[str, str]:
+@limiter.limit("10/minute")  # Allow 10 indexing operations per minute
+async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
     print(f"[DEBUG] Index request for filename: {req.filename}")
     
     if not req.filename.lower().endswith('.pdf'):
@@ -188,7 +193,8 @@ async def create_index(req: IndexRequest) -> Dict[str, str]:
         )
 
 @router.post("/chat", response_model=ChatResponse)
-async def chat(req: ChatRequest) -> ChatResponse:
+@limiter.limit("30/minute")  # Allow 30 queries per minute per IP
+async def chat(request: Request, req: ChatRequest) -> ChatResponse:
     if not req.question or not req.question.strip():
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -271,7 +277,6 @@ async def chat(req: ChatRequest) -> ChatResponse:
             max_branches=traversal_info["max_branches"]
         )
         
-        # Extract resolved_references if available
         resolved_refs = None
         if "resolved_references" in traversal_info:
             from src.api.models import ResolvedReference
@@ -457,3 +462,24 @@ def _extract_comparison(text: str, doc_names: List[str]) -> ComparisonResult:
         commonalities=commonalities,
         differences=differences
     )
+
+@router.get("/cache/stats")
+async def get_cache_stats():
+    """Get cache performance statistics."""
+    cache = get_cache()
+    stats = cache.get_stats()
+    return {
+        "status": "success",
+        "cache_stats": stats
+    }
+
+
+@router.post("/cache/clear")
+async def clear_cache():
+    """Clear all cached responses."""
+    cache = get_cache()
+    cache.clear()
+    return {
+        "status": "success",
+        "message": "Cache cleared successfully"
+    }
