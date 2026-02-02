@@ -7,7 +7,6 @@ from src.core.reasoner import TreeRAGReasoner
 
 
 def load_dataset(path: str) -> List[Dict]:
-    """평가 데이터셋 로드"""
     tasks = []
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
@@ -16,22 +15,17 @@ def load_dataset(path: str) -> List[Dict]:
 
 
 def calculate_score(response: str, expected_answer: str) -> float:
-    """답변 품질 점수 계산 (0.0 ~ 1.0)"""
     score = 0.0
     
-    # 1. 예상 답변 포함 여부 (40%)
     if expected_answer.lower() in response.lower():
         score += 0.4
     
-    # 2. 인용 존재 여부 (30%)
     if "[" in response and "p." in response:
         score += 0.3
     
-    # 3. 출처 요약 존재 여부 (20%)
     if "📚" in response or "참조 페이지" in response:
         score += 0.2
     
-    # 4. 충분한 설명 (10%)
     if len(response) > 100:
         score += 0.1
     
@@ -39,7 +33,6 @@ def calculate_score(response: str, expected_answer: str) -> float:
 
 
 async def evaluate_prompt(dataset: List[Dict]) -> Dict:
-    """현재 프롬프트 성능 평가"""
     print("🔍 프롬프트 성능 평가 시작...\n")
     
     scores = []
@@ -81,7 +74,6 @@ async def evaluate_prompt(dataset: List[Dict]) -> Dict:
 
 
 def main():
-    """메인 실행 함수"""
     eval_path = "data/eval_dataset.jsonl"
     
     if not os.path.exists(eval_path):
@@ -101,7 +93,6 @@ def main():
     print(f"개별 점수: {[f'{s:.2f}' for s in results['scores']]}")
     print("="*60 + "\n")
     
-    # 결과 저장
     output_path = "data/evaluation_results.json"
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
