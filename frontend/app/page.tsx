@@ -52,7 +52,7 @@ type ApiError = {
 };
 
 const API_BASE_URL = "http://localhost:8000/api";
-const STORAGE_KEY = "medi-reg-sessions";
+const STORAGE_KEY = "treerag-sessions";
 
 export default function Home() {
   const [sessions, setSessions] = useState<ChatSession[]>([]);
@@ -449,7 +449,7 @@ export default function Home() {
               </button>
             )}
             <h1 className="text-lg font-semibold text-slate-700 flex items-center gap-2">
-              Medi-Reg Master <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">AI</span>
+              TreeRAG <span className="text-xs bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded-full">AI</span>
             </h1>
           </div>
 
@@ -489,10 +489,10 @@ export default function Home() {
               <div className="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-xl">
                 <FileText className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-700 mb-2">Medi-Reg Master</h2>
+              <h2 className="text-2xl font-bold text-slate-700 mb-2">TreeRAG</h2>
               <p className="max-w-md text-center text-slate-500">
-                상단에서 규제 문서를 업로드하면 자동으로 분석합니다.<br/>
-                AI가 문서를 구조화하여 법적 근거 기반의 상담을 제공합니다.
+                PDF 문서를 업로드하면 AI가 자동으로 구조화하여 분석합니다.<br/>
+                계층적 트리 구조로 문서를 탐색하고 정확한 답변을 제공합니다.
               </p>
               <p className="text-xs text-slate-400 mt-4">
                 단축키: <kbd className="px-2 py-1 bg-slate-100 rounded">Ctrl+K</kbd> 새 세션
@@ -646,7 +646,7 @@ export default function Home() {
               </button>
             </div>
             <div className="text-center mt-2 text-xs text-slate-400">
-              AI 답변은 규제 문서에 기반하지만, 반드시 원문을 재확인하시기 바랍니다.
+              AI 답변은 업로드된 문서에 기반하지만, 중요한 결정 시 반드시 원문을 재확인하시기 바랍니다.
             </div>
           </div>
         )}

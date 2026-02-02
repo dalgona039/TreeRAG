@@ -6,7 +6,7 @@ from fastapi import APIRouter, UploadFile, File, HTTPException, status
 from fastapi.responses import JSONResponse
 from src.config import Config
 from src.core.indexer import RegulatoryIndexer
-from src.core.reasoner import RegulatoryReasoner
+from src.core.reasoner import TreeRAGReasoner
 from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult, TreeResponse
 
 router = APIRouter()
@@ -91,7 +91,7 @@ def _route_documents(question: str, available_indices: List[str]) -> List[str]:
 
 @router.get("/")
 async def health_check() -> Dict[str, str]:
-    return {"status": "ok", "service": "Medi-Reg Master API"}
+    return {"status": "ok", "service": "TreeRAG API"}
 
 @router.post("/upload")
 async def upload_file(file: UploadFile = File(...)) -> Dict[str, str]:
@@ -220,7 +220,7 @@ async def chat(req: ChatRequest) -> ChatResponse:
             )
     
     try:
-        reasoner = RegulatoryReasoner(selected_indices)
+        reasoner = TreeRAGReasoner(selected_indices)
         
         if req.node_context:
             enhanced_question = f"""[컨텍스트: 문서 섹션 "{req.node_context.get('title', '')}"]

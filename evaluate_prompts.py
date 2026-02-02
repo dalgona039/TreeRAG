@@ -3,7 +3,7 @@ import asyncio
 import json
 import os
 from typing import List, Dict
-from src.core.reasoner import RegulatoryReasoner
+from src.core.reasoner import TreeRAGReasoner
 
 
 def load_dataset(path: str) -> List[Dict]:
@@ -50,7 +50,7 @@ async def evaluate_prompt(dataset: List[Dict]) -> Dict:
         
         try:
             index_filenames = task["index_filename"].split(",")
-            reasoner = RegulatoryReasoner(index_filenames)
+            reasoner = TreeRAGReasoner(index_filenames)
             
             response = reasoner.query(task["question"])
             score = calculate_score(response, task["expected_answer"])

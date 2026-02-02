@@ -3,7 +3,7 @@ import os
 from typing import Any, List, Dict
 from src.config import Config
 
-class RegulatoryReasoner:
+class TreeRAGReasoner:
     def __init__(self, index_filenames: List[str]):
         self.index_trees: List[Dict[str, Any]] = []
         self.index_filenames = index_filenames
@@ -55,14 +55,14 @@ class RegulatoryReasoner:
 | 예: 필수학점 | 18학점 [p.5] | 21학점 [p.4] |
 | 예: 선택과목 | 10개 [p.7] | 15개 [p.6] |
 
-**3. 규제 우선순위**
-- 충돌하는 규정이 있다면, 어떤 문서가 상위 규정인지 명시
-- 예: "ISO가 상위 표준이므로 우선 적용 [ISO, p.10]"
+**3. 문서 우선순위 (해당시)**
+- 충돌하는 내용이 있다면, 어떤 문서가 최신/공식인지 명시
+- 예: "최신 버전(2024)의 내용이 적용됩니다 [문서A, p.10]"
 """
 
         prompt = f"""
-당신은 규제 준수 컨설턴트입니다.
-제공된 여러 규제 문서의 인덱스를 사용하여 사용자의 질문에 정확하게 답변하세요.
+당신은 전문 문서 분석 AI 어시스턴트입니다.
+제공된 문서의 인덱스를 사용하여 사용자의 질문에 정확하게 답변하세요.
 
 ### 📋 답변 작성 단계 (반드시 순서대로):
 

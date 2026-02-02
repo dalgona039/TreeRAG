@@ -14,7 +14,7 @@ def create_app() -> FastAPI:
     initialize_directories()
     
     app = FastAPI(
-        title="Medi-Reg Master API",
+        title="TreeRAG API",
         version="1.0.0",
         description="AI-powered regulatory document consultation system",
         docs_url="/docs",

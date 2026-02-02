@@ -1,7 +1,7 @@
 import os
 from typing import Optional, List
 from src.core.indexer import RegulatoryIndexer
-from src.core.reasoner import RegulatoryReasoner
+from src.core.reasoner import TreeRAGReasoner
 from src.config import Config
 
 def _ensure_data_directories() -> None:
@@ -58,7 +58,7 @@ def _process_document(pdf_path: str, pdf_filename: str, index_filename: str) -> 
 def _run_consultation(index_filename: str) -> None:
     print("\n--- 🧠 Phase 2: AI Consultant Ready ---")
     try:
-        reasoner = RegulatoryReasoner(index_filename)
+        reasoner = TreeRAGReasoner(index_filename)
         
         while True:
             q = input("\nQ (종료: q): ").strip()
