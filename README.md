@@ -24,15 +24,17 @@
 ### ✨ Key Features
 
 #### 📂 **Multi-Document RAG**
-- Upload multiple PDFs simultaneously
+- Upload multiple PDFs simultaneously with **batch upload progress tracking**
 - Automatic document routing based on query relevance
 - Cross-document comparison with side-by-side analysis
+- Real-time upload and indexing status
 
 #### 🌲 **Tree-Based Navigation**
 - **Collapsible hierarchical tree** for document exploration
 - **Shift+Click node selection** for context-aware queries
 - **Deep Tree Traversal** with LLM-guided navigation (90%+ context reduction)
 - Visual feedback with highlighted selected sections
+- **Cross-reference resolution** - Auto-detect "Section X", "Chapter Y" references
 
 #### 📊 **Intelligent Comparison**
 - **Automatic table generation** for multi-document analysis
@@ -49,6 +51,34 @@
 - Multi-turn conversations with memory
 - Reference previous questions naturally
 - Session management with auto-save
+- **Export to Markdown** - Download full conversation history with metadata
+- **Conversation search** - Filter sessions by title or content
+
+#### 🎯 **Domain Optimization**
+- **5 specialized domain templates:**
+  - 📋 General - Standard document analysis
+  - 🏥 Medical - Clinical and healthcare documents
+  - ⚖️ Legal - Contracts and regulatory compliance
+  - 💼 Financial - Reports and audit documentation
+  - 🎓 Academic - Research papers and theses
+- Domain-specific prompts for optimized analysis
+
+#### 🌐 **Multi-language Support**
+- **Full interface translation** in 3 languages:
+  - 🇰🇷 한국어 (Korean)
+  - 🇺🇸 English
+  - 🇯🇵 日本語 (Japanese)
+- AI responses in selected language
+- Complete UI localization (buttons, labels, messages)
+
+#### 📈 **Performance Monitoring**
+- Real-time **performance dashboard** with:
+  - Total queries count
+  - Average response time
+  - Average context size (tokens)
+  - Deep Traversal usage statistics
+  - Recent queries history (last 10)
+- Track API usage and optimization opportunities
 
 ---
 
@@ -127,15 +157,22 @@ npm run dev
 ### First Use
 
 1. **Upload PDFs** - Click "📤 PDF 업로드" and select one or more PDFs
-2. **Ask Questions** - Type naturally: "What are the main requirements?"
-3. **Configure Deep Traversal** - Click ⚙️ settings to enable/disable and tune parameters:
-   - **Use Deep Traversal:** Toggle LLM-guided navigation (recommended for large documents)
+   - **Batch upload supported** with real-time progress tracking
+   - See current file, status, and progress percentage
+2. **Configure Settings** - Click ⚙️ Settings to customize:
+   - **Document Domain:** Choose from General, Medical, Legal, Financial, or Academic
+   - **Response Language:** Select Korean, English, or Japanese (applies to both AI responses and UI)
+   - **Deep Traversal:** Toggle LLM-guided navigation (recommended for large documents)
    - **Max Depth:** How deep to explore tree (1-10, default: 5)
    - **Max Branches:** How many children to explore per node (1-10, default: 3)
+3. **Ask Questions** - Type naturally: "What are the main requirements?"
 4. **Explore Tree** - Click "트리 구조" to navigate document hierarchy
 5. **Compare Documents** - Upload multiple PDFs and ask: "Compare document A and B"
 6. **Select Context** - Shift+Click on tree nodes to focus queries on specific sections
 7. **View PDF Sources** - Click on any citation (e.g., [Doc, p.5]) to open PDF viewer
+8. **Search History** - Use the search bar in sidebar to filter conversations
+9. **Monitor Performance** - Click 📊 Performance to view usage statistics
+10. **Export Conversation** - Click Export button to download chat as Markdown
 
 ---
 
@@ -260,14 +297,15 @@ TreeRAG/
 │   ├── core/
 │   │   ├── reasoner.py        # TreeRAGReasoner - main logic
 │   │   ├── indexer.py         # PDF → PageIndex conversion
-│   │   └── tree_traversal.py  # Deep traversal with LLM guidance
+│   │   ├── tree_traversal.py  # Deep traversal with LLM guidance
+│   │   └── reference_resolver.py  # Cross-reference detection
 │   ├── api/
 │   │   ├── routes.py          # FastAPI endpoints
 │   │   └── models.py          # Pydantic schemas
 │   └── config.py              # Configuration
 ├── frontend/
 │   └── app/
-│       └── page.tsx           # Main React UI with PDF viewer
+│       └── page.tsx           # Main React UI (1500+ lines)
 ├── data/
 │   ├── raw/                   # Uploaded PDFs
 │   └── indices/               # Generated PageIndex files
@@ -283,6 +321,8 @@ TreeRAG/
 - Generates structured answers with citations
 - Handles multi-document comparison
 - Supports both flat and deep traversal modes
+- Domain-specific prompt optimization (5 templates)
+- Multi-language response generation (Korean, English, Japanese)
 
 **TreeNavigator** ([src/core/tree_traversal.py](src/core/tree_traversal.py))
 - LLM-guided deep tree traversal
@@ -290,17 +330,28 @@ TreeRAG/
 - Selects most promising branches to explore
 - Collects traversal statistics (nodes visited/selected)
 
+**ReferenceResolver** ([src/core/reference_resolver.py](src/core/reference_resolver.py))
+- Automatic cross-reference detection
+- Pattern matching for "Section X", "Chapter Y", etc.
+- Korean and English pattern support
+- Auto-inject referenced context into queries
+
 **Router Agent** ([src/api/routes.py](src/api/routes.py))
 - Automatically selects relevant documents for queries
 - Enables efficient multi-document workflows
 - Serves PDF files with UTF-8 filename encoding
+- Handles batch upload with progress tracking
 
-**Tree Navigation** ([frontend/app/page.tsx](frontend/app/page.tsx))
+**Tree Navigation & UI** ([frontend/app/page.tsx](frontend/app/page.tsx))
 - Collapsible tree visualization
 - Shift+Click node selection
 - Context-aware query enhancement
 - Deep traversal settings panel
 - PDF viewer with citation click-through
+- Multi-language UI (60+ translated elements)
+- Real-time performance dashboard
+- Conversation search and filtering
+- Export to Markdown functionality
 
 ### Running Tests
 
@@ -320,12 +371,18 @@ We welcome contributions! Areas for improvement:
 
 - [x] PDF viewer integration (click citation → view PDF page) ✅
 - [x] Deep tree traversal with LLM-guided navigation ✅
-- [ ] Export conversation to Markdown/PDF
-- [ ] Cross-reference resolution (auto-detect "Section X" references)
-- [ ] Batch document upload with progress tracking
-- [ ] Custom domain templates (medical, legal, financial)
+- [x] Export conversation to Markdown ✅
+- [x] Cross-reference resolution (auto-detect "Section X" references) ✅
+- [x] Batch document upload with progress tracking ✅
+- [x] Custom domain templates (general, medical, legal, financial, academic) ✅
+- [x] Multi-language support (Korean, English, Japanese) ✅
+- [x] Conversation history search ✅
+- [x] Performance monitoring dashboard ✅
 - [ ] Hallucination detection
-- [ ] Multi-language support
+- [ ] Advanced visualizations (charts, graphs)
+- [ ] API rate limiting and caching
+- [ ] Docker deployment configuration
+- [ ] Unit and integration tests
 
 ---
 
