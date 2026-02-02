@@ -19,6 +19,8 @@
 
 **TreeRAG** is a next-generation document intelligence platform that transforms dense PDFs into **hierarchical knowledge trees**, enabling precise information retrieval with full page-level traceability. Unlike flat vector search, TreeRAG preserves document structure, making it ideal for complex domains requiring accuracy and auditability.
 
+> **Built on [PageIndex](https://github.com/VectifyAI/PageIndex)** - This project is inspired by and adapted from the PageIndex framework, a vectorless, reasoning-based RAG system that uses hierarchical tree indexing for human-like document retrieval.
+
 ### ✨ Key Features
 
 #### 📂 **Multi-Document RAG**
@@ -45,6 +47,42 @@
 - Multi-turn conversations with memory
 - Reference previous questions naturally
 - Session management with auto-save
+
+---
+
+## 🏗 Architecture & Pipeline
+
+This project consists of two main pipelines: **Data Ingestion** and **Reasoning**.
+
+```mermaid
+graph TD
+	subgraph "Stage 1: Data Ingestion Pipeline"
+		A[Raw Regulatory PDFs] -->|Structure Recognition| B(Preprocessing)
+		B -->|LLM Summarization| C{Tree Construction}
+		C --> D[Hierarchical JSON Tree]
+		D -->|Storage| E[(Regulatory Knowledge Base)]
+	end
+
+	subgraph "Stage 2: Reasoning & Serving Pipeline"
+		F[User Query] -->|Intent Analysis| G[Router Agent]
+		G -->|Select Target Tree| E
+		E -->|Recursive Tree Traversal| H[Reasoning Engine]
+		H -->|Context Synthesis| I[Gap Analysis & Citation]
+		I --> J[Final Answer with Traceability]
+	end
+```
+
+### Stage 1: Data Ingestion (Indexing)
+
+1. **Raw Data Collection:** Ingest PDFs from FDA, ISO, MFDS, etc.
+2. **Structure Parsing:** Identify Table of Contents (ToC) to understand document hierarchy.
+3. **Tree Construction:** Use LLM to generate summaries and metadata for each node, building a parent-child tree structure.
+
+### Stage 2: Reasoning (Serving)
+
+1. **Router Agent:** Analyzes user intent to select the relevant regulatory tree (e.g., selecting *ISO 14971* for risk management queries).
+2. **Deep Dive Traversal:** The engine traverses from root nodes down to leaf nodes to find precise information.
+3. **Response Generation:** Synthesizes findings and tags sources to ensure traceability.
 
 ---
 
