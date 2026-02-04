@@ -1,4 +1,3 @@
-#!/bin/bash
 
 HOOKS_DIR=".git-hooks"
 GIT_HOOKS_DIR=".git/hooks"
