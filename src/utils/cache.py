@@ -29,18 +29,29 @@ class QueryCache:
                      max_branches: int, domain_template: str, 
                      language: str, node_context: Optional[dict] = None) -> str:
         """Generate cache key from query parameters."""
+        normalized_question = self._smart_normalize(question, language)
+        
         key_data = {
-            "question": question.strip().lower(),
+            "question": normalized_question,
             "index_files": sorted(index_files),
             "use_deep_traversal": use_deep_traversal,
             "max_depth": max_depth,
             "max_branches": max_branches,
             "domain_template": domain_template,
             "language": language,
-            "node_context": node_context
+            "node_context": node_context if node_context else {}
         }
-        key_string = json.dumps(key_data, sort_keys=True)
-        return hashlib.sha256(key_string.encode()).hexdigest()
+        key_string = json.dumps(key_data, sort_keys=True, ensure_ascii=True)
+        return hashlib.sha256(key_string.encode('utf-8')).hexdigest()
+    
+    def _smart_normalize(self, question: str, language: str) -> str:
+        """Smart normalization based on language."""
+        question = question.strip()
+        
+        if language.lower() in ['en', 'english']:
+            return question.lower()
+        
+        return question
     
     def get(self, question: str, index_files: list, 
             use_deep_traversal: bool, max_depth: int, 

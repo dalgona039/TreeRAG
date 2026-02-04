@@ -1,14 +1,22 @@
 import os
+import logging
 from dotenv import load_dotenv
 from google import genai
 
 load_dotenv()
 
+logger = logging.getLogger(__name__)
+
 api_key = os.getenv("GOOGLE_API_KEY")
 if not api_key:
-    raise ValueError("❌ .env 파일에 GOOGLE_API_KEY가 없습니다.")
+    logger.error("Missing required environment variable for API authentication")
+    raise ValueError("Configuration error: Missing required environment variable")
 
-client = genai.Client(api_key=api_key)
+try:
+    client = genai.Client(api_key=api_key)
+except Exception as e:
+    logger.error(f"Failed to initialize API client: {type(e).__name__}")
+    raise ValueError("Configuration error: Failed to initialize API client") from None
 
 class Config:
     CLIENT = client

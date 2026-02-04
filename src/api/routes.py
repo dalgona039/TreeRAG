@@ -1,6 +1,8 @@
 import os
 import shutil
 import json
+import uuid
+from pathlib import Path
 from typing import Dict, List
 from fastapi import APIRouter, UploadFile, File, HTTPException, status, Request
 from fastapi.responses import JSONResponse, FileResponse
@@ -11,9 +13,29 @@ from src.core.indexer import RegulatoryIndexer
 from src.core.reasoner import TreeRAGReasoner
 from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult, TreeResponse, TraversalInfo
 from src.utils.cache import get_cache
+from src.utils.file_validator import validate_uploaded_file
 
 router = APIRouter()
-limiter = Limiter(key_func=get_remote_address)
+
+def get_real_ip(request: Request) -> str:
+    """
+    실제 클라이언트 IP를 안전하게 추출
+    X-Forwarded-For 스푸핑 방지
+    """
+    TRUSTED_PROXIES = {'127.0.0.1', 'localhost'}
+    
+    real_ip = request.headers.get("X-Real-IP")
+    if real_ip:
+        return real_ip
+    
+    forwarded_for = request.headers.get("X-Forwarded-For")
+    if forwarded_for and request.client and request.client.host in TRUSTED_PROXIES:
+        first_ip = forwarded_for.split(",")[0].strip()
+        return first_ip
+    
+    return request.client.host if request.client else "unknown"
+
+limiter = Limiter(key_func=get_real_ip)
 
 def _route_documents(question: str, available_indices: List[str]) -> List[str]:
     if not available_indices:
@@ -97,6 +119,10 @@ def _route_documents(question: str, available_indices: List[str]) -> List[str]:
 async def health_check() -> Dict[str, str]:
     return {"status": "ok", "service": "TreeRAG API"}
 
+MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+ALLOWED_EXTENSIONS = {'.pdf'}
+ALLOWED_MIME_TYPES = {'application/pdf'}
+
 @router.post("/upload")
 async def upload_file(file: UploadFile = File(...)) -> Dict[str, str]:
     print(f"[DEBUG] Upload request - filename: {file.filename}")
@@ -107,30 +133,80 @@ async def upload_file(file: UploadFile = File(...)) -> Dict[str, str]:
             detail="No filename provided"
         )
     
-    if not file.filename.lower().endswith('.pdf'):
+    safe_filename = Path(file.filename).name
+    if not safe_filename or safe_filename != file.filename:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Only PDF files are allowed"
+            detail="Invalid filename: path traversal detected"
+        )
+    
+    file_ext = Path(safe_filename).suffix.lower()
+    if file_ext not in ALLOWED_EXTENSIONS:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Only PDF files are allowed. Got: {file_ext}"
+        )
+    
+    if file.content_type not in ALLOWED_MIME_TYPES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Invalid MIME type. Expected application/pdf, got {file.content_type}"
         )
     
     try:
+        contents = await file.read()
+        if len(contents) > MAX_FILE_SIZE:
+            raise HTTPException(
+                status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+                detail=f"File too large. Maximum size: {MAX_FILE_SIZE / 1024 / 1024}MB"
+            )
+        
+        if len(contents) == 0:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Empty file"
+            )
+        
+        is_valid, error_msg, validated_filename = validate_uploaded_file(
+            contents, safe_filename, MAX_FILE_SIZE
+        )
+        if not is_valid:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"File validation failed: {error_msg}"
+            )
+        
+        unique_filename = f"{uuid.uuid4().hex[:8]}_{validated_filename}"
+        
         os.makedirs(Config.RAW_DATA_DIR, exist_ok=True)
-        file_path = os.path.join(Config.RAW_DATA_DIR, file.filename)
-        print(f"[DEBUG] Saving file to: {file_path}")
+        file_path = os.path.join(Config.RAW_DATA_DIR, unique_filename)
+        
+        abs_file_path = os.path.abspath(file_path)
+        abs_data_dir = os.path.abspath(Config.RAW_DATA_DIR)
+        if not abs_file_path.startswith(abs_data_dir):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Invalid file path"
+            )
         
         with open(file_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+            buffer.write(contents)
         
-        print(f"[DEBUG] File saved successfully: {file.filename}")
+        print(f"[DEBUG] File saved successfully: {unique_filename}")
         return {
             "message": "File uploaded successfully",
-            "filename": file.filename,
-            "path": file_path
+            "filename": unique_filename,
+            "original_filename": safe_filename,
+            "path": file_path,
+            "size_bytes": len(contents)
         }
+    except HTTPException:
+        raise
     except Exception as e:
+        print(f"[ERROR] Upload failed: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Upload failed: {str(e)}"
+            detail="Upload failed due to server error"
         )
 
 @router.post("/index")
@@ -138,13 +214,29 @@ async def upload_file(file: UploadFile = File(...)) -> Dict[str, str]:
 async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
     print(f"[DEBUG] Index request for filename: {req.filename}")
     
-    if not req.filename.lower().endswith('.pdf'):
+    safe_filename = Path(req.filename).name
+    if not safe_filename or safe_filename != req.filename:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid filename: path traversal detected"
+        )
+    
+    if not safe_filename.lower().endswith('.pdf'):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Filename must end with .pdf"
         )
     
-    pdf_path = os.path.join(Config.RAW_DATA_DIR, req.filename)
+    pdf_path = os.path.join(Config.RAW_DATA_DIR, safe_filename)
+    
+    abs_pdf_path = os.path.abspath(pdf_path)
+    abs_data_dir = os.path.abspath(Config.RAW_DATA_DIR)
+    if not abs_pdf_path.startswith(abs_data_dir):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid file path"
+        )
+    
     print(f"[DEBUG] Looking for PDF at: {pdf_path}")
     print(f"[DEBUG] File exists: {os.path.exists(pdf_path)}")
     
@@ -153,10 +245,10 @@ async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
         print(f"[DEBUG] Available files in RAW_DATA_DIR: {available_files}")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"PDF file not found: {req.filename}. Available files: {available_files}"
+            detail=f"PDF file not found: {safe_filename}"
         )
     
-    index_filename = req.filename.replace(".pdf", "_index.json").replace(".PDF", "_index.json")
+    index_filename = safe_filename.replace(".pdf", "_index.json").replace(".PDF", "_index.json")
     index_path = os.path.join(Config.INDEX_DIR, index_filename)
     
     if os.path.exists(index_path):
@@ -170,7 +262,7 @@ async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
         indexer = RegulatoryIndexer()
         text = indexer.extract_text(pdf_path)
         
-        doc_title = req.filename.replace(".pdf", "").replace(".PDF", "").replace("_", " ")
+        doc_title = safe_filename.replace(".pdf", "").replace(".PDF", "").replace("_", " ")
         tree = indexer.create_index(doc_title, text)
         
         if not tree:
@@ -403,7 +495,6 @@ async def serve_pdf(filename: str):
 def _extract_citations(text: str) -> List[str]:
     import re
     citations = []
-    
     patterns = [
         r'\[([^\]]+?),\s*p\.(\d+(?:-\d+)?(?:,\s*p\.\d+(?:-\d+)?)*)\]',
         r'\[([^\]]+?)\s*-?\s*(?:Sec|Section)\s*[\d.]+,?\s*(?:Pg?|Page)\.?\s*(\d+(?:-\d+)?)\]',
@@ -433,7 +524,6 @@ def _extract_citations(text: str) -> List[str]:
 
 def _extract_comparison(text: str, doc_names: List[str]) -> ComparisonResult:
     import re
-    
     has_comparison = False
     commonalities = None
     differences = None

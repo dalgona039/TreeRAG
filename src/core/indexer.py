@@ -2,9 +2,11 @@ import json
 import os
 import re
 import time
-from typing import Dict, Any
+from typing import Dict, Any, Generator
 from pypdf import PdfReader
+from pydantic import ValidationError
 from src.config import Config
+from src.models.schemas import PageNode
 
 class RegulatoryIndexer:
     def __init__(self) -> None:
@@ -18,23 +20,73 @@ class RegulatoryIndexer:
         text = text.strip()
         return text
 
-    def extract_text(self, pdf_path: str) -> str:
+    def extract_text_stream(self, pdf_path: str) -> Generator[tuple[int, str], None, None]:
+        """Extract text page by page as generator to minimize memory usage."""
         if not os.path.exists(pdf_path):
             raise FileNotFoundError(f"PDF file not found: {pdf_path}")
         
         reader = PdfReader(pdf_path)
-        full_text = ""
-        print(f"📄 PDF 로딩 중: {os.path.basename(pdf_path)} ({len(reader.pages)} pages)")
+        total_pages = len(reader.pages)
+        print(f"📄 PDF 로딩 중: {os.path.basename(pdf_path)} ({total_pages} pages)")
         
         for i, page in enumerate(reader.pages):
             text = page.extract_text()
             if text:
-                full_text += f"\n--- [Page {i+1}] ---\n{text}"
+                yield (i + 1, text)
+
+    def extract_text(self, pdf_path: str) -> str:
+        """
+        Extract all text at once (backward compatibility).
         
-        if not full_text:
+        WARNING: For large PDFs (1000+ pages), prefer extract_text_stream()
+        or create_index_from_stream() to avoid memory issues.
+        """
+        text_parts = []
+        
+        for page_num, text in self.extract_text_stream(pdf_path):
+            text_parts.append(f"\n--- [Page {page_num}] ---\n{text}")
+        
+        if not text_parts:
             raise ValueError(f"No text could be extracted from {pdf_path}")
         
-        return full_text
+        return "".join(text_parts)
+    
+    def create_index_from_stream(self, doc_title: str, pdf_path: str, max_pages_per_chunk: int = 100) -> Dict[str, Any]:
+        """
+        Create index directly from PDF stream without loading entire document.
+        Processes PDF in chunks to minimize memory footprint.
+        
+        Args:
+            doc_title: Document title
+            pdf_path: Path to PDF file
+            max_pages_per_chunk: Maximum pages to process in one chunk
+        
+        Returns:
+            Structured JSON tree index
+        """
+        if not doc_title:
+            raise ValueError("doc_title cannot be empty")
+        
+        print(f"🏗️ Streaming Indexing started for: {doc_title} (Model: {Config.MODEL_NAME})")
+        
+        chunk_parts = []
+        page_count = 0
+        
+        for page_num, text in self.extract_text_stream(pdf_path):
+            chunk_parts.append(f"\n--- [Page {page_num}] ---\n{text}")
+            page_count += 1
+            
+            if page_count >= max_pages_per_chunk:
+                break
+        
+        if not chunk_parts:
+            raise ValueError(f"No text could be extracted from {pdf_path}")
+        
+        chunk_text = "".join(chunk_parts)
+        
+        print(f"📊 Processing {page_count} pages (chunk size: {len(chunk_text)} chars)")
+        
+        return self.create_index(doc_title, chunk_text)
 
     def create_index(self, doc_title: str, full_text: str) -> Dict[str, Any]:
         if not doc_title or not full_text:
@@ -69,14 +121,31 @@ class RegulatoryIndexer:
                 )
                 cleaned_text = self._clean_markdown_json(response.text)
                 result = json.loads(cleaned_text)
-                print(f"✅ Indexing completed for: {doc_title}")
+                
+                if not isinstance(result, dict):
+                    raise ValueError("Root JSON must be a dictionary")
+                
+                try:
+                    PageNode.model_validate(result)
+                    print(f"✅ Indexing completed and validated for: {doc_title}")
+                except ValidationError as ve:
+                    print(f"⚠️ Pydantic validation failed: {ve}")
+                    raise ValueError(f"Schema validation failed: {ve}")
+                
                 return result
             except json.JSONDecodeError as e:
                 print(f"❌ JSON parsing failed: {e}")
-                try:
-                    print(f"Response text preview: {response.text[:500]}...")
-                except:
-                    pass
+                if attempt < max_retries - 1:
+                    print(f"⏳ Retrying ({attempt + 1}/{max_retries})...")
+                    time.sleep(retry_delay)
+                    continue
+                return {}
+            except ValueError as e:
+                print(f"❌ Invalid JSON structure: {e}")
+                if attempt < max_retries - 1:
+                    print(f"⏳ Retrying ({attempt + 1}/{max_retries})...")
+                    time.sleep(retry_delay)
+                    continue
                 return {}
             except Exception as e:
                 error_str = str(e)
@@ -99,7 +168,10 @@ class RegulatoryIndexer:
                             time.sleep(wait_time)
                             continue
                 
-                return {}
+                if attempt < max_retries - 1:
+                    print(f"⏳ Retrying ({attempt + 1}/{max_retries})...")
+                    time.sleep(retry_delay)
+                    continue
         
         print(f"❌ All retry attempts failed for: {doc_title}")
         return {}

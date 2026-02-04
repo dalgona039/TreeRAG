@@ -1,9 +1,12 @@
 import json
 from typing import Dict, Any, List, Optional, Tuple
+from fastapi import HTTPException
 from src.config import Config
 
 
 class TreeNavigator:
+    MAX_DEPTH_LIMIT = 10
+    MAX_NODES_LIMIT = 1000
     
     def __init__(self, tree: Dict[str, Any], document_name: str):
         self.tree = tree
@@ -11,6 +14,7 @@ class TreeNavigator:
         self.visited_nodes: List[str] = []
         self.relevant_nodes: List[Dict[str, Any]] = []
         self.visited_titles: List[str] = []
+        self.node_count = 0
     
     def search(
         self, 
@@ -21,8 +25,26 @@ class TreeNavigator:
         print(f"🔍 Starting deep traversal for: {self.document_name}")
         print(f"   Query: {query[:100]}...")
         
+        if max_depth > self.MAX_DEPTH_LIMIT:
+            raise HTTPException(
+                status_code=400,
+                detail=f"max_depth ({max_depth}) exceeds limit ({self.MAX_DEPTH_LIMIT}). "
+                       f"Document structure is too complex for deep traversal."
+            )
+        
+        self.node_count = 0
+        self.visited_nodes = []
+        self.relevant_nodes = []
+        self.visited_titles = []
+        
         root = self.tree
-        self._traverse_node(root, query, current_depth=0, max_depth=max_depth, max_branches=max_branches)
+        try:
+            self._traverse_iterative(root, query, max_depth, max_branches)
+        except HTTPException:
+            raise
+        except Exception as e:
+            print(f"⚠️ Unexpected error during traversal: {e}")
+            raise HTTPException(status_code=500, detail=f"Traversal failed: {str(e)}")
         
         print(f"✅ Found {len(self.relevant_nodes)} relevant sections")
         
@@ -36,55 +58,70 @@ class TreeNavigator:
         
         return self.relevant_nodes, traversal_stats
     
-    def _traverse_node(
+    def _traverse_iterative(
         self,
-        node: Dict[str, Any],
+        root: Dict[str, Any],
         query: str,
-        current_depth: int,
         max_depth: int,
-        max_branches: int,
-        parent_context: str = ""
+        max_branches: int
     ) -> None:
-        node_id = node.get("id", "unknown")
-        node_title = node.get("title", "Untitled")
+        """Iterative DFS using stack to avoid recursion limits."""
+        stack = [(root, 0, "")]
         
-        if node_id in self.visited_nodes:
-            return
-        
-        self.visited_nodes.append(node_id)
-        self.visited_titles.append(node_title)
-        is_relevant = self._evaluate_node_relevance(node, query, parent_context, current_depth)
-        
-        if is_relevant:
-            if not node.get("children") or current_depth >= max_depth:
-                self.relevant_nodes.append({
-                    "node": node,
-                    "path": parent_context + f" > {node.get('title', 'Untitled')}",
-                    "depth": current_depth
-                })
-                print(f"   ✓ Depth {current_depth}: {node.get('title', 'Untitled')}")
+        while stack:
+            node, current_depth, parent_context = stack.pop()
             
-            if current_depth < max_depth and node.get("children"):
-                children = node["children"]
+            node_id = node.get("id", "unknown")
+            node_title = node.get("title", "Untitled")
+            
+            self.node_count += 1
+            if self.node_count > self.MAX_NODES_LIMIT:
+                raise HTTPException(
+                    status_code=413,
+                    detail=f"Document too large: visited {self.node_count} nodes. "
+                           f"Please use a more specific query or reduce max_depth."
+                )
+            
+            if current_depth >= max_depth:
+                continue
+            
+            if node_id in self.visited_nodes:
+                continue
+            
+            self.visited_nodes.append(node_id)
+            self.visited_titles.append(node_title)
+            
+            is_relevant = self._evaluate_node_relevance(node, query, parent_context, current_depth)
+            
+            if is_relevant:
+                if not node.get("children") or current_depth >= max_depth - 1:
+                    self.relevant_nodes.append({
+                        "node": node,
+                        "path": parent_context + f" > {node_title}" if parent_context else node_title,
+                        "depth": current_depth
+                    })
+                    print(f"   ✓ Depth {current_depth}: {node_title}")
                 
-                if len(children) > max_branches:
-                    children = self._select_most_relevant_children(
-                        children, 
-                        query, 
-                        max_branches,
-                        parent_context + f" > {node.get('title', 'Untitled')}"
-                    )
-                
-                new_context = parent_context + f" > {node.get('title', 'Untitled')}"
-                for child in children:
-                    self._traverse_node(
-                        child, 
-                        query, 
-                        current_depth + 1, 
-                        max_depth, 
-                        max_branches,
-                        new_context
-                    )
+                if current_depth < max_depth and node.get("children"):
+                    children = node["children"]
+                    
+                    if len(children) > max_branches:
+                        children = self._select_most_relevant_children(
+                            children, 
+                            query, 
+                            max_branches,
+                            parent_context + f" > {node_title}" if parent_context else node_title
+                        )
+                    
+                    new_context = parent_context + f" > {node_title}" if parent_context else node_title
+                    for child in reversed(children):
+                        if len(stack) + self.node_count > self.MAX_NODES_LIMIT:
+                            raise HTTPException(
+                                status_code=413,
+                                detail=f"Document structure too complex: stack size + visited nodes exceeds limit. "
+                                       f"Please use a more specific query or reduce max_depth/max_branches."
+                            )
+                        stack.append((child, current_depth + 1, new_context))
     
     def _evaluate_node_relevance(
         self,

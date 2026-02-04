@@ -6,21 +6,17 @@ from src.utils.hallucination_detector import HallucinationDetector, create_detec
 
 
 class TestHallucinationDetector:
-    """Test suite for HallucinationDetector class."""
     
     def test_detector_initialization(self):
-        """Test detector initializes with correct parameters."""
         detector = HallucinationDetector(confidence_threshold=0.7)
         assert detector.confidence_threshold == 0.7
     
     def test_factory_function(self):
-        """Test create_detector factory function."""
         detector = create_detector(confidence_threshold=0.8)
         assert isinstance(detector, HallucinationDetector)
         assert detector.confidence_threshold == 0.8
     
     def test_perfect_grounding(self):
-        """Test detection with perfectly grounded answer."""
         detector = create_detector()
         
         source_nodes = [
@@ -37,7 +33,6 @@ class TestHallucinationDetector:
         assert result["hallucinated_count"] == 0
     
     def test_complete_hallucination(self):
-        """Test detection with completely hallucinated answer."""
         detector = create_detector()
         
         source_nodes = [
@@ -53,7 +48,6 @@ class TestHallucinationDetector:
         assert result["hallucinated_count"] > 0
     
     def test_partial_hallucination(self):
-        """Test detection with mixed grounded and hallucinated content."""
         detector = create_detector()
         
         source_nodes = [
@@ -65,11 +59,9 @@ class TestHallucinationDetector:
         result = detector.detect(answer, source_nodes)
         
         assert result["total_sentences"] == 2
-        # At least one sentence should be hallucinated
         assert result["hallucinated_count"] >= 1
     
     def test_sentence_splitting(self):
-        """Test sentence splitting functionality."""
         detector = create_detector()
         
         text = "First sentence. Second sentence! Third sentence?"
@@ -81,7 +73,6 @@ class TestHallucinationDetector:
         assert "Third sentence" in sentences[2]
     
     def test_confidence_calculation_exact_match(self):
-        """Test confidence calculation for exact match."""
         detector = create_detector()
         
         sentence = "This is a test sentence."
@@ -89,10 +80,8 @@ class TestHallucinationDetector:
         
         confidence = detector._calculate_sentence_confidence(sentence, source)
         
-        assert confidence >= 0.9  # Should be very high for exact match
-    
+        assert confidence >= 0.9  
     def test_confidence_calculation_no_match(self):
-        """Test confidence calculation for no match."""
         detector = create_detector()
         
         sentence = "Quantum blockchain AI revolution."
@@ -100,10 +89,8 @@ class TestHallucinationDetector:
         
         confidence = detector._calculate_sentence_confidence(sentence, source)
         
-        assert confidence < 0.5  # Should be low for no overlap
-    
+        assert confidence < 0.5  
     def test_warning_formatting(self):
-        """Test warning marker insertion."""
         detector = create_detector()
         
         source_nodes = [{"content": "Known fact A."}]
@@ -112,12 +99,10 @@ class TestHallucinationDetector:
         result = detector.detect(answer, source_nodes)
         formatted = detector.format_with_warnings(answer, result)
         
-        # Should contain warning marker if low confidence detected
         if result["hallucinated_count"] > 0:
             assert "⚠️" in formatted
     
     def test_summary_generation_high_confidence(self):
-        """Test summary for high confidence result."""
         detector = create_detector()
         
         result = {
@@ -131,10 +116,9 @@ class TestHallucinationDetector:
         
         assert "95" in summary or "95.0%" in summary
         assert "✅" in summary or "매우 높음" in summary
-        assert "0" in summary  # Zero hallucinated sentences
+        assert "0" in summary  
     
     def test_summary_generation_low_confidence(self):
-        """Test summary for low confidence result."""
         detector = create_detector()
         
         result = {
@@ -148,11 +132,10 @@ class TestHallucinationDetector:
         
         assert "40" in summary or "40.0%" in summary
         assert "낮음" in summary or "❌" in summary
-        assert "3" in summary  # Three hallucinated sentences
-        assert "⚠️" in summary  # Warning indicator
+        assert "3" in summary 
+        assert "⚠️" in summary  
     
     def test_empty_source_nodes(self):
-        """Test detection with no source nodes."""
         detector = create_detector()
         
         source_nodes = []
@@ -160,12 +143,10 @@ class TestHallucinationDetector:
         
         result = detector.detect(answer, source_nodes)
         
-        # Should have low confidence with no sources
         assert result["overall_confidence"] < 0.6
         assert result["is_reliable"] is False
     
     def test_korean_text_handling(self):
-        """Test detector handles Korean text correctly."""
         detector = create_detector()
         
         source_nodes = [
@@ -180,7 +161,6 @@ class TestHallucinationDetector:
         assert result["is_reliable"] is True
     
     def test_multiple_source_nodes(self):
-        """Test detection with multiple source nodes."""
         detector = create_detector()
         
         source_nodes = [
@@ -193,46 +173,36 @@ class TestHallucinationDetector:
         
         result = detector.detect(answer, source_nodes)
         
-        # Should find good overlap with multiple sources
         assert result["overall_confidence"] > 0.5
     
     def test_short_sentences_ignored(self):
-        """Test that very short sentences are ignored."""
         detector = create_detector()
         
         source_nodes = [{"content": "Main content here."}]
         answer = "Yes. Main content here."
         
         result = detector.detect(answer, source_nodes)
-        
-        # "Yes." should be ignored due to length < 10
-        # Only "Main content here." should be analyzed
+
         assert result["total_sentences"] == 1
     
     def test_different_thresholds(self):
-        """Test detector behavior with different thresholds."""
         source_nodes = [{"content": "TreeRAG is a system."}]
         answer = "TreeRAG is a system for documents."
         
-        # Strict threshold
         strict_detector = create_detector(confidence_threshold=0.9)
         strict_result = strict_detector.detect(answer, source_nodes)
         
-        # Lenient threshold
         lenient_detector = create_detector(confidence_threshold=0.5)
         lenient_result = lenient_detector.detect(answer, source_nodes)
         
-        # Same confidence score, different reliability assessment
         assert strict_result["overall_confidence"] == lenient_result["overall_confidence"]
         
-        # But may have different is_reliable flags
         if strict_result["overall_confidence"] < 0.9:
             assert strict_result["is_reliable"] is False
         if lenient_result["overall_confidence"] >= 0.5:
             assert lenient_result["is_reliable"] is True
     
     def test_sentence_analysis_structure(self):
-        """Test structure of sentence-level analysis."""
         detector = create_detector()
         
         source_nodes = [{"content": "Test content."}]

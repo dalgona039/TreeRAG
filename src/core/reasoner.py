@@ -325,15 +325,6 @@ class TreeRAGReasoner:
         return json.dumps(combined_context, ensure_ascii=False)
     
     def _extract_all_nodes(self, tree: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """
-        Extract all nodes from a tree structure recursively.
-        
-        Args:
-            tree: Tree structure (dict with 'children' list)
-        
-        Returns:
-            Flat list of all nodes
-        """
         nodes = []
         
         def traverse(node):

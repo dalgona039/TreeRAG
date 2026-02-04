@@ -197,6 +197,29 @@ npm run dev
 # Frontend runs on http://localhost:3000
 ```
 
+### Security Setup (Required for Development)
+
+```bash
+# Install Git hooks to prevent API key leaks
+bash setup-git-hooks.sh
+
+# Test the hook
+echo "AIzaSyTest123" > test.txt
+git add test.txt
+git commit -m "test"  # Will be blocked ✅
+
+# Verify .gitignore
+cat .gitignore | grep -E "\.env|secrets/"
+```
+
+**What Git Hooks Protect:**
+- ✅ API Keys (Google, OpenAI, AWS, GitHub)
+- ✅ .env files
+- ✅ secrets/ directory
+- ✅ Passwords and tokens in code
+
+See [SECURITY.md](SECURITY.md) for complete security guidelines.
+
 ### Performance & Production Features
 
 #### Caching System
