@@ -66,6 +66,7 @@ export function useChat(
       const comparison = res.data.comparison || null;
       const traversalInfo = res.data.traversal_info || null;
       const resolvedReferences = res.data.resolved_references || null;
+      const hallucinationWarning = res.data.hallucination_warning || null;
 
       const responseTime = (Date.now() - startTime) / 1000;
       const contextSize = traversalInfo?.total_tokens || 0;
@@ -106,7 +107,8 @@ export function useChat(
                 citations,
                 comparison,
                 traversal_info: traversalInfo,
-                resolved_references: resolvedReferences
+                resolved_references: resolvedReferences,
+                hallucination_warning: hallucinationWarning
               }] 
             }
           : session
