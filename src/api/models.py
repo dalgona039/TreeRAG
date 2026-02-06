@@ -12,8 +12,8 @@ class ChatRequest(BaseModel):
     use_deep_traversal: Optional[bool] = None
     max_depth: Optional[int] = None
     max_branches: Optional[int] = None
-    domain_template: Optional[str] = "general"  # general, medical, legal, financial, academic
-    language: Optional[str] = "ko"  # ko, en, ja
+    domain_template: Optional[str] = "general"  
+    language: Optional[str] = "ko" 
 
 class ComparisonResult(BaseModel):
     has_comparison: bool

@@ -156,7 +156,7 @@ graph TD
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/TreeRAG.git
+git clone https://github.com/dalgona039/TreeRAG.git
 cd TreeRAG
 
 # 2. Configure API key
