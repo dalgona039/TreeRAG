@@ -20,7 +20,7 @@ except Exception as e:
 
 class Config:
     CLIENT = client
-    MODEL_NAME = "gemini-2.5-flash" 
+    MODEL_NAME = "gemini-3-pro-preview" 
     
     GENERATION_CONFIG = {
         "temperature": 0.0,

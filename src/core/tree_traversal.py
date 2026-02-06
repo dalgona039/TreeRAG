@@ -183,7 +183,6 @@ JSON만 출력하세요:
             result = json.loads(response.text)
             is_relevant = result.get("relevant", False)
             
-            # Debug output
             if is_relevant:
                 print(f"   → Exploring: {title} (Reason: {result.get('reason', 'N/A')[:50]}...)")
             

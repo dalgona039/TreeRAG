@@ -1,15 +1,3 @@
-"""
-Test script for Deep Tree Traversal functionality
-
-This script tests the new TreeNavigator and verifies:
-1. Tree traversal logic works correctly
-2. Relevant nodes are identified
-3. Context size is reduced compared to flat approach
-4. Citations are preserved
-
-Usage:
-    python test_tree_traversal.py
-"""
 
 import sys
 import os
@@ -92,7 +80,6 @@ def create_mock_tree():
 
 
 def test_tree_navigator():
-    """Test TreeNavigator with a mock tree."""
     print("\n" + "="*80)
     print("TEST 1: TreeNavigator Basic Functionality")
     print("="*80)
@@ -129,7 +116,6 @@ def test_tree_navigator():
 
 
 def test_context_size_comparison():
-    """Compare context sizes between flat and traversal approaches."""
     print("\n" + "="*80)
     print("TEST 2: Context Size Comparison")
     print("="*80)
@@ -137,11 +123,9 @@ def test_context_size_comparison():
     tree = create_mock_tree()
     doc_name = "Mock_Medical_Device_Regulation"
     
-    # Flat context size
     flat_context = json.dumps([{"document": doc_name, "content": tree}], ensure_ascii=False)
     flat_size = len(flat_context)
     
-    # Traversal context size
     query = "How to validate medical device software?"
     navigator = TreeNavigator(tree, doc_name)
     results = navigator.search(query, max_depth=3, max_branches=2)
@@ -160,7 +144,6 @@ def test_context_size_comparison():
 
 
 def test_format_output():
-    """Test the formatted output for LLM consumption."""
     print("\n" + "="*80)
     print("TEST 3: Formatted Output")
     print("="*80)
@@ -180,15 +163,11 @@ def test_format_output():
 
 
 def test_mock_end_to_end():
-    """
-    Test end-to-end with mock data (without actual API calls).
-    This tests the logic without consuming API quota.
-    """
+
     print("\n" + "="*80)
     print("TEST 4: End-to-End Logic Test (Mock)")
     print("="*80)
     
-    # Save mock tree to temp file
     tree = create_mock_tree()
     temp_file = os.path.join(Config.INDEX_DIR, "test_mock_index.json")
     
@@ -199,12 +178,10 @@ def test_mock_end_to_end():
     print(f"✅ Created mock index: {temp_file}")
     
     try:
-        # Test with deep traversal
         print("\n🌲 Testing with deep traversal enabled...")
         reasoner = TreeRAGReasoner(["test_mock_index.json"], use_deep_traversal=True)
         print("✅ TreeRAGReasoner initialized successfully with deep traversal")
         
-        # Test with flat context
         print("\n📄 Testing with flat context (legacy mode)...")
         reasoner_flat = TreeRAGReasoner(["test_mock_index.json"], use_deep_traversal=False)
         print("✅ TreeRAGReasoner initialized successfully with flat context")
@@ -221,7 +198,6 @@ def test_mock_end_to_end():
 
 
 def main():
-    """Run all tests."""
     print("\n" + "="*80)
     print("🧪 DEEP TREE TRAVERSAL TEST SUITE")
     print("="*80)

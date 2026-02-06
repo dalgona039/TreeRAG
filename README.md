@@ -8,7 +8,7 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/RAG-Tree--Based-green" alt="Tree-Based RAG" />
-  <img src="https://img.shields.io/badge/Gemini-2.5--flash-purple" alt="Gemini 2.5-flash" />
+  <img src="https://img.shields.io/badge/Gemini-2.0--flash--exp-purple" alt="Gemini 2.0-flash-exp" />
   <img src="https://img.shields.io/badge/FastAPI-Backend-teal" alt="FastAPI" />
   <img src="https://img.shields.io/badge/React-19-blue" alt="React 19" />
 </div>
@@ -45,6 +45,8 @@
 - Every answer includes **[Document, p.X]** references
 - **Click citations** to open PDF viewer at exact page
 - **Native browser PDF viewer** with instant navigation
+- **Smart filename matching** - Handles Korean characters and special symbols
+- **Fuzzy matching** - Automatically matches abbreviated document names to actual files
 - 100% traceability for audit compliance
 
 #### 💬 **Conversational Context**
@@ -305,13 +307,18 @@ curl -X POST http://localhost:8000/api/cache/clear
 
 #### Backend
 - **FastAPI** - High-performance async API
-- **google.genai** - Gemini 2.5-flash for LLM reasoning
+- **google.genai** - Gemini 2.0-flash-exp for LLM reasoning (configurable)
 - **Python 3.14.2 (medireg)** - Current runtime
+- **Type-safe API** - Pydantic models with proper validation
+- **Smart file handling** - UUID-based filenames for uniqueness, original name preservation
 
 #### Frontend
 - **Next.js 16** - React framework with Turbopack
 - **React 19** - Latest UI capabilities
+- **TypeScript** - Type-safe development
 - **Tailwind CSS 4** - Modern styling
+- **Custom Hooks** - useSessions, useUpload, useChat, useTree, usePerformance
+- **Component Architecture** - 22 modular components (Sidebar, Chat, Document, Settings, etc.)
 - **lucide-react** - Beautiful icons
 
 ### PageIndex Structure
@@ -399,8 +406,18 @@ TreeRAG/
 │   │   └── hallucination_detector.py  # AI safety layer
 │   └── config.py              # Configuration
 ├── frontend/
-│   └── app/
-│       └── page.tsx           # Main React UI (1500+ lines)
+│   ├── app/
+│   │   └── page.tsx           # Main page (238 lines, refactored)
+│   ├── components/
+│   │   ├── Chat/              # Chat UI components
+│   │   ├── Document/          # Tree & document viewer
+│   │   ├── Layout/            # Header, PDF viewer
+│   │   ├── Settings/          # Settings & performance
+│   │   ├── Sidebar/           # Session management
+│   │   └── ui/                # Reusable UI components
+│   ├── hooks/                 # Custom React hooks
+│   ├── lib/                   # API client & types
+│   └── constants/             # UI text & configuration
 ├── tests/
 │   ├── test_api.py
 │   ├── test_api_routes.py
@@ -426,12 +443,13 @@ TreeRAG/
 
 **TreeRAGReasoner** ([src/core/reasoner.py](src/core/reasoner.py))
 - Loads PageIndex files
-- Processes queries with Gemini 2.5-flash
+- Processes queries with Gemini 2.0-flash-exp (configurable model)
 - Generates structured answers with citations
 - Handles multi-document comparison
 - Supports both flat and deep traversal modes
 - Domain-specific prompt optimization (5 templates)
 - Multi-language response generation (Korean, English, Japanese)
+- Clean, production-ready code (removed debugging comments)
 
 **TreeNavigator** ([src/core/tree_traversal.py](src/core/tree_traversal.py))
 - LLM-guided deep tree traversal
@@ -450,17 +468,31 @@ TreeRAG/
 - Enables efficient multi-document workflows
 - Serves PDF files with UTF-8 filename encoding
 - Handles batch upload with progress tracking
+- UUID-based file naming for uniqueness
+- Fuzzy filename matching for PDF serving
+- Type-safe API responses with proper validation
 
-**Tree Navigation & UI** ([frontend/app/page.tsx](frontend/app/page.tsx))
-- Collapsible tree visualization
-- Shift+Click node selection
-- Context-aware query enhancement
-- Deep traversal settings panel
-- PDF viewer with citation click-through
-- Multi-language UI (60+ translated elements)
-- Real-time performance dashboard
-- Conversation search and filtering
-- Export to Markdown functionality
+**Frontend Architecture** ([frontend/](frontend/))
+- **Modular Components** - 22 separated components for maintainability
+  - Chat panel (MessageList, MessageItem, ChatInput)
+  - Document panel (TreeNode, DocumentPanel)
+  - Sidebar (SessionList, SessionItem)
+  - Settings & Performance panels
+  - Reusable UI components (WelcomeScreen, UploadProgress)
+- **Custom Hooks** - Clean state management
+  - useSessions - Session CRUD with localStorage
+  - useUpload - File upload with progress tracking
+  - useChat - Chat logic with streaming
+  - useTree - Tree navigation & selection
+  - usePerformance - Metrics tracking
+- **Type Safety** - Full TypeScript with proper interfaces
+- **Smart Features**
+  - Collapsible tree visualization
+  - Shift+Click node selection
+  - PDF viewer with fuzzy filename matching
+  - Multi-language UI (Korean, English, Japanese)
+  - Real-time performance dashboard
+  - Conversation search and export
 
 ### Running Tests
 

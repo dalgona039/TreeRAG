@@ -49,12 +49,10 @@ export default function SafeMarkdown({ content, className = '' }: SafeMarkdownPr
       <h3 className="text-lg font-bold my-2" {...props} />
     ),
     
-    // 단락
     p: ({ node, ...props }) => (
       <p className="my-2 leading-relaxed" {...props} />
     ),
     
-    // 구분선
     hr: ({ node, ...props }) => (
       <hr className="my-4 border-gray-300" {...props} />
     ),

@@ -3,7 +3,7 @@ import shutil
 import json
 import uuid
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Any
 from fastapi import APIRouter, UploadFile, File, HTTPException, status, Request
 from fastapi.responses import JSONResponse, FileResponse
 from slowapi import Limiter
@@ -18,10 +18,6 @@ from src.utils.file_validator import validate_uploaded_file
 router = APIRouter()
 
 def get_real_ip(request: Request) -> str:
-    """
-    실제 클라이언트 IP를 안전하게 추출
-    X-Forwarded-For 스푸핑 방지
-    """
     TRUSTED_PROXIES = {'127.0.0.1', 'localhost'}
     
     real_ip = request.headers.get("X-Real-IP")
@@ -119,12 +115,12 @@ def _route_documents(question: str, available_indices: List[str]) -> List[str]:
 async def health_check() -> Dict[str, str]:
     return {"status": "ok", "service": "TreeRAG API"}
 
-MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+MAX_FILE_SIZE = 50 * 1024 * 1024
 ALLOWED_EXTENSIONS = {'.pdf'}
 ALLOWED_MIME_TYPES = {'application/pdf'}
 
 @router.post("/upload")
-async def upload_file(file: UploadFile = File(...)) -> Dict[str, str]:
+async def upload_file(file: UploadFile = File(...)) -> Dict[str, Any]:
     print(f"[DEBUG] Upload request - filename: {file.filename}")
     
     if not file.filename:
@@ -210,7 +206,7 @@ async def upload_file(file: UploadFile = File(...)) -> Dict[str, str]:
         )
 
 @router.post("/index")
-@limiter.limit("10/minute")  # Allow 10 indexing operations per minute
+@limiter.limit("10/minute")
 async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
     print(f"[DEBUG] Index request for filename: {req.filename}")
     
@@ -285,7 +281,7 @@ async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
         )
 
 @router.post("/chat", response_model=ChatResponse)
-@limiter.limit("30/minute")  # Allow 30 queries per minute per IP
+@limiter.limit("30/minute")
 async def chat(request: Request, req: ChatRequest) -> ChatResponse:
     if not req.question or not req.question.strip():
         raise HTTPException(
@@ -472,17 +468,52 @@ async def get_tree_structure(index_filename: str) -> TreeResponse:
 
 @router.get("/pdf/{filename}")
 async def serve_pdf(filename: str):
-    from urllib.parse import quote
+    from urllib.parse import quote, unquote
+    import logging
     
-    pdf_path = os.path.join(Config.RAW_DATA_DIR, filename)
+    logger = logging.getLogger(__name__)
+    
+    decoded_filename = unquote(filename)
+    logger.info(f"[PDF Request] Original: {filename}")
+    logger.info(f"[PDF Request] Decoded: {decoded_filename}")
+    
+    pdf_path = os.path.join(Config.RAW_DATA_DIR, decoded_filename)
+    logger.info(f"[PDF Request] Trying exact match: {pdf_path}")
     
     if not os.path.exists(pdf_path):
+        logger.warning(f"[PDF Request] Exact match failed, searching for similar files...")
+        
+        try:
+            all_files = os.listdir(Config.RAW_DATA_DIR)
+            pdf_files = [f for f in all_files if f.endswith('.pdf')]
+            
+            logger.info(f"[PDF Request] Available PDF files: {pdf_files}")
+            
+            search_name = decoded_filename.replace('.pdf', '').lower()
+            logger.info(f"[PDF Request] Searching for: {search_name}")
+            
+            for pdf_file in pdf_files:
+                file_without_ext = pdf_file.replace('.pdf', '').lower()
+                if (file_without_ext == search_name or 
+                    search_name in file_without_ext or 
+                    file_without_ext in search_name):
+                    logger.info(f"[PDF Request] Found similar file: {pdf_file}")
+                    pdf_path = os.path.join(Config.RAW_DATA_DIR, pdf_file)
+                    decoded_filename = pdf_file
+                    break
+            
+        except Exception as e:
+            logger.error(f"[PDF Request] Error during file search: {str(e)}")
+    
+    if not os.path.exists(pdf_path):
+        logger.error(f"[PDF Request] File not found after all attempts: {decoded_filename}")
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"PDF file not found: {filename}"
+            detail=f"PDF file not found: {decoded_filename}"
         )
     
-    encoded_filename = quote(filename.encode('utf-8'))
+    logger.info(f"[PDF Request] Serving file: {pdf_path}")
+    encoded_filename = quote(decoded_filename.encode('utf-8'))
     
     return FileResponse(
         pdf_path,
@@ -555,7 +586,6 @@ def _extract_comparison(text: str, doc_names: List[str]) -> ComparisonResult:
 
 @router.get("/cache/stats")
 async def get_cache_stats():
-    """Get cache performance statistics."""
     cache = get_cache()
     stats = cache.get_stats()
     return {
@@ -566,7 +596,6 @@ async def get_cache_stats():
 
 @router.post("/cache/clear")
 async def clear_cache():
-    """Clear all cached responses."""
     cache = get_cache()
     cache.clear()
     return {

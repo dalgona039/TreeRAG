@@ -100,7 +100,6 @@ class ReferenceResolver:
                 ref_text = match.group(0)
                 ref_number = match.group(1)
                 
-                # Determine reference type
                 if any(keyword in ref_text.lower() for keyword in ['section', '섹션']):
                     ref_key = f"section_{ref_number}"
                 elif any(keyword in ref_text.lower() for keyword in ['chapter', '장', '챕터']):
@@ -112,7 +111,6 @@ class ReferenceResolver:
                 elif any(keyword in ref_text.lower() for keyword in ['appendix', '부록']):
                     ref_key = f"appendix_{ref_number}"
                 else:
-                    # Fallback: just use the number
                     ref_key = ref_number
                 
                 references.append((ref_text, ref_key))
@@ -129,11 +127,9 @@ class ReferenceResolver:
         Returns:
             Node dict or None if not found
         """
-        # Try exact match first
         if reference_key.lower() in self.node_index:
             return self.node_index[reference_key.lower()]
         
-        # Try without prefix
         if '_' in reference_key:
             suffix = reference_key.split('_', 1)[1]
             if suffix in self.node_index:

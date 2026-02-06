@@ -40,7 +40,7 @@ def _select_pdf(pdf_files: List[str]) -> Optional[str]:
         except ValueError:
             print("Please enter a valid number")
         except KeyboardInterrupt:
-            print("\n👋 Cancelled")
+            print("Cancelled")
             return None
 
 def _process_document(pdf_path: str, pdf_filename: str, index_filename: str) -> bool:

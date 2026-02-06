@@ -14,13 +14,11 @@ from src.middleware.security import SecurityHeadersMiddleware
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/minute"])
 
 class HealthCheckCache:
-    """Cache for health check results to avoid unnecessary API calls."""
     def __init__(self, ttl_seconds: int = 300):
         self.ttl_seconds = ttl_seconds
         self.cache: Dict[str, tuple[bool, float]] = {}
     
     def get(self, key: str) -> Optional[bool]:
-        """Get cached result if not expired."""
         if key in self.cache:
             result, timestamp = self.cache[key]
             if time.time() - timestamp < self.ttl_seconds:
@@ -28,13 +26,11 @@ class HealthCheckCache:
         return None
     
     def set(self, key: str, value: bool) -> None:
-        """Cache a health check result."""
         self.cache[key] = (value, time.time())
 
 health_cache = HealthCheckCache(ttl_seconds=300)
 
 async def check_api_connectivity() -> bool:
-    """Check if Gemini API is accessible (cached for 5 minutes)."""
     cached = health_cache.get("api_connectivity")
     if cached is not None:
         return cached
@@ -54,7 +50,6 @@ async def check_api_connectivity() -> bool:
         return False
 
 def check_disk_writable() -> bool:
-    """Check if index directory is writable."""
     try:
         test_file = os.path.join(Config.INDEX_DIR, ".health_check")
         with open(test_file, "w") as f:
@@ -66,7 +61,6 @@ def check_disk_writable() -> bool:
         return False
 
 def check_indices_directory() -> bool:
-    """Check if indices directory exists and is accessible."""
     try:
         return os.path.isdir(Config.INDEX_DIR) and os.access(Config.INDEX_DIR, os.R_OK)
     except Exception as e:
