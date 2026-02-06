@@ -10,13 +10,13 @@
 ### 1. Setup Environment
 ```bash
 # Create .env file
-echo "GEMINI_API_KEY=your_api_key_here" > .env
+echo "GOOGLE_API_KEY=your_api_key_here" > .env
 ```
 
 ### 2. Build and Run
 ```bash
 # Build and start all services
-docker-compose up -d
+docker-compose up --build -d
 
 # View logs
 docker-compose logs -f
@@ -35,7 +35,7 @@ docker-compose down
 ### Environment Variables
 ```bash
 # Backend
-GEMINI_API_KEY=your_api_key
+GOOGLE_API_KEY=your_api_key
 USE_DEEP_TRAVERSAL=true
 MAX_TRAVERSAL_DEPTH=5
 MAX_BRANCHES_PER_LEVEL=3
@@ -67,9 +67,6 @@ docker-compose up -d --scale backend=3
 ## 🔧 Development with Docker
 
 ```bash
-# Run with hot reload
-docker-compose -f docker-compose.dev.yml up
-
 # Run tests in container
 docker-compose exec backend pytest tests/
 
