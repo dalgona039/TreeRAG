@@ -39,6 +39,7 @@ class ChatResponse(BaseModel):
     comparison: Optional[ComparisonResult] = None
     traversal_info: Optional[TraversalInfo] = None
     resolved_references: Optional[List[ResolvedReference]] = None
+    hallucination_warning: Optional[Dict[str, Any]] = None
 
 class TreeNode(BaseModel):
     id: str

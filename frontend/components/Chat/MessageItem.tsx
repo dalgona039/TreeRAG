@@ -67,6 +67,27 @@ export default function MessageItem({
           </div>
         )}
         
+        {message.hallucination_warning && (
+          <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-lg">
+            <div className="flex items-start gap-2">
+              <span className="text-lg">⚠️</span>
+              <div className="flex-1">
+                <h4 className="font-semibold text-red-900 mb-1">Hallucination Warning</h4>
+                <p className="text-sm text-red-700">
+                  {message.hallucination_warning.message}
+                </p>
+                <p className="text-xs text-red-600 mt-1">
+                  Overall confidence: {(message.hallucination_warning.overall_confidence * 100).toFixed(1)}%
+                  (threshold: {(message.hallucination_warning.threshold * 100)}%)
+                </p>
+                <p className="text-xs text-red-600 mt-1 font-medium">
+                  ⚠️ This answer may not be grounded in the documents. Please verify with original sources.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+        
         {message.comparison && message.comparison.has_comparison && (
           <div className="mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl">
             <div className="flex items-center gap-2 mb-3">

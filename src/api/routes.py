@@ -14,6 +14,7 @@ from src.core.reasoner import TreeRAGReasoner
 from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult, TreeResponse, TraversalInfo
 from src.utils.cache import get_cache
 from src.utils.file_validator import validate_uploaded_file
+from src.utils.hallucination_detector import HallucinationDetector
 
 router = APIRouter()
 
@@ -373,12 +374,30 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
                 for ref in traversal_info["resolved_references"]
             ]
         
+        hallucination_warning = None
+        detector = HallucinationDetector(confidence_threshold=0.3)
+        detection_result = detector.detect(answer, traversal_info["nodes_selected"])
+        
+        if not detection_result["is_reliable"] and len(detection_result["sentence_analysis"]) > 0:
+            low_conf_count = sum(1 for s in detection_result["sentence_analysis"] if not s["is_grounded"])
+            total_count = len(detection_result["sentence_analysis"])
+            low_conf_ratio = low_conf_count / total_count if total_count > 0 else 0
+            
+            if low_conf_ratio >= 0.7:
+                hallucination_warning = {
+                    "message": f"{low_conf_count}/{total_count} sentences have low confidence",
+                    "overall_confidence": detection_result["overall_confidence"],
+                    "threshold": detector.confidence_threshold
+                }
+                print(f"⚠️ Hallucination detected: {low_conf_count}/{total_count} sentences low confidence (overall: {detection_result['overall_confidence']:.2f})")
+        
         return ChatResponse(
             answer=answer, 
             citations=citations, 
             comparison=comparison,
             traversal_info=trav_info,
-            resolved_references=resolved_refs
+            resolved_references=resolved_refs,
+            hallucination_warning=hallucination_warning
         )
     except FileNotFoundError as e:
         raise HTTPException(

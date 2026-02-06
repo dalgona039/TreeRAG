@@ -71,33 +71,76 @@ class HallucinationDetector:
         """
         Calculate confidence that a sentence is grounded in source.
         
-        Uses multiple signals:
+        Enhanced semantic similarity using:
         1. Direct substring matching
-        2. Semantic similarity (word overlap)
-        3. N-gram overlap
+        2. Weighted word overlap (domain terms, numbers)
+        3. N-gram overlap (bigrams, trigrams)
+        4. Character-level similarity
+        5. Citation presence boost
         """
         sentence_lower = sentence.lower()
         source_lower = source_text.lower()
         
+        if len(sentence_lower) < 10:
+            return 0.7
+        
         if sentence_lower in source_lower:
             return 1.0
         
-        sentence_words = set(re.findall(r'\w+', sentence_lower))
-        source_words = set(re.findall(r'\w+', source_lower))
+        signals = []
+        
+        citation_patterns = [r'\[.+?,\s*p\.\d+\]', r'section\s+\d+', r'chapter\s+\d+', r'table\s+\d+']
+        has_citation = any(re.search(pattern, sentence_lower) for pattern in citation_patterns)
+        if has_citation:
+            signals.append(0.8)
+        
+        sentence_words = re.findall(r'\w+', sentence_lower)
+        source_words = re.findall(r'\w+', source_lower)
         
         stop_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 
-                     'of', 'with', 'is', 'are', 'was', 'were', 'been', 'be', 'have', 'has', 'had'}
-        sentence_words = sentence_words - stop_words
-        source_words = source_words - stop_words
+                     'of', 'with', 'is', 'are', 'was', 'were', 'been', 'be', 'have', 'has', 'had',
+                     'this', 'that', 'these', 'those', 'it', 'its', 'which', 'what', 'who'}
         
-        if not sentence_words:
-            return 0.5
+        sentence_words_filtered = [w for w in sentence_words if w not in stop_words]
+        source_words_set = set(source_words)
         
-        word_overlap = len(sentence_words & source_words) / len(sentence_words)
+        if sentence_words_filtered:
+            word_weights = []
+            for word in sentence_words_filtered:
+                weight = 1.0
+                if re.match(r'\d+', word):
+                    weight = 2.0
+                if len(word) > 8:
+                    weight = 1.5
+                if word in source_words_set:
+                    word_weights.append(weight)
+            
+            if len(sentence_words_filtered) > 0:
+                weighted_overlap = sum(word_weights) / (len(sentence_words_filtered) * 2.0)
+                signals.append(weighted_overlap)
         
-        similarity = SequenceMatcher(None, sentence_lower, source_lower).ratio()
+        bigrams_sent = [' '.join(sentence_words[i:i+2]) for i in range(len(sentence_words)-1)]
+        bigrams_src = [' '.join(source_words[i:i+2]) for i in range(len(source_words)-1)]
+        if bigrams_sent:
+            bigram_overlap = len([b for b in bigrams_sent if b in bigrams_src]) / len(bigrams_sent)
+            signals.append(bigram_overlap)
         
-        confidence = (word_overlap * 0.7) + (similarity * 0.3)
+        trigrams_sent = [' '.join(sentence_words[i:i+3]) for i in range(len(sentence_words)-2)]
+        trigrams_src = [' '.join(source_words[i:i+3]) for i in range(len(source_words)-2)]
+        if trigrams_sent:
+            trigram_overlap = len([t for t in trigrams_sent if t in trigrams_src]) / len(trigrams_sent)
+            signals.append(trigram_overlap * 1.2)
+        
+        chunks = [sentence_lower[i:i+20] for i in range(0, len(sentence_lower), 10)]
+        chunk_matches = sum(1 for chunk in chunks if chunk in source_lower)
+        if chunks:
+            chunk_score = chunk_matches / len(chunks)
+            signals.append(chunk_score)
+        
+        if signals:
+            confidence = sum(signals) / len(signals)
+        else:
+            confidence = 0.0
         
         return min(confidence, 1.0)
     
