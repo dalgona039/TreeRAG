@@ -13,13 +13,11 @@ class PageNode(BaseModel):
     
     @validator('children', pre=True, always=True)
     def validate_children(cls, v):
-        """Ensure children is None or a list."""
         if v is None or v == []:
             return None
         return v
     
     class Config:
-        """Pydantic config."""
         extra = 'allow'
 
 
