@@ -47,7 +47,7 @@ class BenchmarkResult:
         metrics: 계산된 메트릭들
     """
     test_case: QueryTestCase
-    system_name: str  # 'TreeRAG' 또는 'FlatRAG'
+    system_name: str
     retrieved_docs: List[str]
     generated_answer: str
     latency_ms: float
@@ -148,11 +148,9 @@ class BenchmarkFramework:
         """
         print(f"  🔍 Query: {test_case.query[:60]}...")
         
-        # 시간 측정 시작
         start_time = time.time()
         
         try:
-            # 시스템 쿼리 실행
             answer, metadata = system.query(
                 test_case.query,
                 max_depth=5,
@@ -161,7 +159,6 @@ class BenchmarkFramework:
             
             latency_ms = (time.time() - start_time) * 1000
             
-            # 메타데이터에서 정보 추출
             retrieved_docs = self._extract_retrieved_docs(metadata)
             context_size = metadata.get('context_size', 0)
             
@@ -182,7 +179,6 @@ class BenchmarkFramework:
                 }
             )
         
-        # 메트릭 계산
         metrics = self._calculate_metrics(
             test_case=test_case,
             retrieved_docs=retrieved_docs,
@@ -234,14 +230,12 @@ class BenchmarkFramework:
         
         results = {'TreeRAG': []}
         
-        # TreeRAG 평가
         print("📊 Evaluating TreeRAG...")
         for i, test_case in enumerate(self.test_cases, 1):
             print(f"[{i}/{len(self.test_cases)}]", end=" ")
             result = self.run_single_query(tree_rag_system, test_case, 'TreeRAG')
             results['TreeRAG'].append(result)
         
-        # FlatRAG 평가 (있는 경우)
         if flat_rag_system:
             results['FlatRAG'] = []
             print(f"\n📊 Evaluating FlatRAG...")
@@ -254,7 +248,6 @@ class BenchmarkFramework:
         print("✅ Benchmark completed!")
         print(f"{'='*60}\n")
         
-        # 결과 저장
         if save_results:
             self._save_results(results, output_dir)
         
@@ -263,12 +256,10 @@ class BenchmarkFramework:
     
     def _extract_retrieved_docs(self, metadata: Dict[str, Any]) -> List[str]:
         """메타데이터에서 검색된 문서 ID 추출"""
-        # traversal_info가 있는 경우TreeRAG)
         if 'traversal_info' in metadata:
             nodes = metadata['traversal_info'].get('nodes_selected', [])
             return [node.get('node', {}).get('id', '') for node in nodes]
         
-        # 단순 retrieved_docs 리스트인 경우 (FlatRAG)
         if 'retrieved_docs' in metadata:
             return metadata['retrieved_docs']
         
@@ -286,7 +277,6 @@ class BenchmarkFramework:
         relevant_set = set(test_case.relevant_docs)
         metrics = {}
         
-        # Precision, Recall, F1 @ K (K=1,3,5)
         for k in [1, 3, 5]:
             metrics[f'precision@{k}'] = EvaluationMetrics.precision_at_k(
                 retrieved_docs, relevant_set, k
@@ -298,14 +288,12 @@ class BenchmarkFramework:
                 retrieved_docs, relevant_set, k
             )
         
-        # NDCG@K (relevant_scores가 있는 경우)
         if test_case.relevant_scores:
             for k in [3, 5]:
                 metrics[f'ndcg@{k}'] = EvaluationMetrics.ndcg_at_k(
                     retrieved_docs, test_case.relevant_scores, k
                 )
         
-        # Citation Accuracy (expected_citations가 있는 경우)
         if test_case.expected_citations:
             citation_acc, citation_details = EvaluationMetrics.citation_accuracy(
                 generated_answer,
@@ -315,13 +303,9 @@ class BenchmarkFramework:
             metrics['citations_found'] = citation_details['correct']
             metrics['citations_missing'] = citation_details['missing']
         
-        # Faithfulness (간단한 버전)
         if retrieved_docs and generated_answer:
-            # 실제로는 retrieved_docs의 실제 텍스트가 필요하지만
-            # 여기서는 단순화
             metrics['answer_length'] = len(generated_answer)
         
-        # Context size
         metrics['context_size'] = context_size
         
         return metrics
@@ -334,7 +318,6 @@ class BenchmarkFramework:
         filename = f"benchmark_results_{timestamp}.json"
         filepath = os.path.join(output_dir, filename)
         
-        # BenchmarkResult를 dict로 변환
         serializable_results = {}
         for system_name, result_list in results.items():
             serializable_results[system_name] = [r.to_dict() for r in result_list]
@@ -371,13 +354,11 @@ class BenchmarkFramework:
         report.append(f"Test Cases: {len(self.test_cases)}")
         report.append("")
         
-        # 각 시스템별 리포트
         for system_name, result_list in results.items():
             report.append("-" * 80)
             report.append(f"📊 {system_name} Results")
             report.append("-" * 80)
             
-            # 메트릭 집계
             all_metrics = [r.metrics for r in result_list]
             aggregated = EvaluationMetrics.aggregate_metrics(all_metrics)
             
@@ -430,7 +411,6 @@ class BenchmarkFramework:
             
             report.append("")
         
-        # TreeRAG vs FlatRAG 비교
         if 'TreeRAG' in results and 'FlatRAG' in results:
             report.append("-" * 80)
             report.append("⚔️  TreeRAG vs FlatRAG Comparison")
@@ -443,7 +423,6 @@ class BenchmarkFramework:
                 [r.metrics for r in results['FlatRAG']]
             )
             
-            # 주요 메트릭 비교
             for metric_name in ['precision@3', 'recall@3', 'f1@3']:
                 if metric_name in tree_metrics and metric_name in flat_metrics:
                     tree_val = tree_metrics[metric_name]['mean']
@@ -455,7 +434,6 @@ class BenchmarkFramework:
                         f"FlatRAG={flat_val:.4f} (Δ={diff:+.4f})"
                     )
             
-            # Context Size 비교
             if 'context_size' in tree_metrics and 'context_size' in flat_metrics:
                 tree_ctx = tree_metrics['context_size']['mean']
                 flat_ctx = flat_metrics['context_size']['mean']
@@ -465,7 +443,6 @@ class BenchmarkFramework:
                     f"({flat_ctx:.0f} → {tree_ctx:.0f} tokens)"
                 )
             
-            # Latency 비교
             tree_latency = sum(r.latency_ms for r in results['TreeRAG']) / len(results['TreeRAG'])
             flat_latency = sum(r.latency_ms for r in results['FlatRAG']) / len(results['FlatRAG'])
             latency_comp = EvaluationMetrics.latency_comparison(tree_latency, flat_latency)
@@ -527,7 +504,6 @@ class BenchmarkFramework:
         table.append("| Metric | TreeRAG | FlatRAG | Improvement |")
         table.append("|--------|---------|---------|-------------|")
         
-        # Retrieval metrics
         for metric_name in ['precision@3', 'recall@3', 'f1@3', 'ndcg@3']:
             if metric_name in tree_metrics and metric_name in flat_metrics:
                 tree_val = tree_metrics[metric_name]['mean']
@@ -539,7 +515,6 @@ class BenchmarkFramework:
                     f"{improvement:+.1f}% |"
                 )
         
-        # Context size
         if 'context_size' in tree_metrics and 'context_size' in flat_metrics:
             tree_ctx = tree_metrics['context_size']['mean']
             flat_ctx = flat_metrics['context_size']['mean']
@@ -550,7 +525,6 @@ class BenchmarkFramework:
                 f"{reduction:.1f}% reduction |"
             )
         
-        # Latency
         tree_latency = sum(r.latency_ms for r in results['TreeRAG']) / len(results['TreeRAG'])
         flat_latency = sum(r.latency_ms for r in results['FlatRAG']) / len(results['FlatRAG'])
         latency_improvement = ((flat_latency - tree_latency) / flat_latency * 100) if flat_latency > 0 else 0
@@ -578,7 +552,6 @@ class BenchmarkFramework:
         table.append("Metric & TreeRAG & Flat RAG & Improvement \\\\")
         table.append("\\hline")
         
-        # Retrieval metrics
         for metric_name in ['precision@3', 'recall@3', 'f1@3']:
             if metric_name in tree_metrics and metric_name in flat_metrics:
                 tree_val = tree_metrics[metric_name]['mean']
