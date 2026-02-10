@@ -400,106 +400,333 @@ TreeRAG uses a proprietary **PageIndex** format that preserves document hierarch
 ```
 TreeRAG/
 ├── src/
-│   ├── core/
-│   │   ├── reasoner.py        # TreeRAGReasoner - main logic
-│   │   ├── indexer.py         # PDF → PageIndex conversion
-│   │   ├── tree_traversal.py  # Deep traversal with LLM guidance
-│   │   └── reference_resolver.py  # Cross-reference detection
-│   ├── api/
-│   │   ├── routes.py          # FastAPI endpoints
-│   │   └── models.py          # Pydantic schemas
-│   ├── utils/
-│   │   ├── cache.py           # LRU cache with TTL
-│   │   └── hallucination_detector.py  # AI safety with 5-signal algorithm
-│   └── config.py              # Configuration
-├── frontend/
+│   ├── core/                          # Core algorithms & business logic
+│   │   ├── reasoner.py                # TreeRAGReasoner - main inference engine
+│   │   ├── indexer.py                 # PDF → PageIndex conversion
+│   │   ├── tree_traversal.py          # Deep traversal with LLM guidance
+│   │   ├── reference_resolver.py      # Cross-reference detection
+│   │   ├── retrieval_model.py         # Formal objective function (P(v|q))
+│   │   ├── flat_rag_baseline.py       # Flat RAG comparison baseline
+│   │   ├── beam_search.py             # Efficient beam search navigation
+│   │   ├── contextual_compressor.py   # Context window optimization
+│   │   ├── error_recovery.py          # Over-filtering detection & recovery
+│   │   ├── reasoning_graph.py         # Graph-based semantic reasoning
+│   │   └── domain_benchmark.py        # Multi-domain evaluation framework
+│   │
+│   ├── repositories/                  # Data access layer (Repository Pattern)
+│   │   ├── document_repository.py     # PDF document management
+│   │   └── index_repository.py        # PageIndex CRUD operations
+│   │
+│   ├── services/                      # Business logic & coordination
+│   │   ├── chat_service.py            # Conversational Q&A
+│   │   ├── index_service.py           # Indexing orchestration
+│   │   ├── upload_service.py          # File upload & validation
+│   │   └── document_router_service.py # Multi-document routing
+│   │
+│   ├── api/                           # REST API endpoints
+│   │   ├── routes.py                  # Main API endpoints (chat, index, search, graph, benchmark)
+│   │   ├── routes_refactored.py       # Refactored routes (optional)
+│   │   ├── task_routes.py             # Celery task status endpoints
+│   │   └── models.py                  # Pydantic request/response schemas
+│   │
+│   ├── middleware/                    # Request/response middleware
+│   │   └── security.py                # Security & validation
+│   │
+│   ├── utils/                         # Utility functions
+│   │   ├── cache.py                   # LRU cache with TTL
+│   │   ├── redis_cache.py             # Redis L2 cache integration
+│   │   ├── hallucination_detector.py  # 5-signal semantic safety
+│   │   ├── rate_limiter.py            # SlowAPI-based rate limiting
+│   │   └── file_validator.py          # PDF validation
+│   │
+│   ├── tasks/                         # Async task workers
+│   │   ├── indexing_tasks.py          # Celery async indexing
+│   │   └── __init__.py
+│   │
+│   ├── models/                        # Data models
+│   │   ├── schemas.py                 # Pydantic models (PageNode, etc)
+│   │   └── __init__.py
+│   │
+│   ├── celery_app.py                  # Celery configuration
+│   ├── config.py                      # Environment & API configuration
+│   └── __init__.py
+│
+├── frontend/                          # Next.js React 19 frontend
 │   ├── app/
-│   │   └── page.tsx           # Main page (238 lines, refactored)
-│   ├── components/
-│   │   ├── Chat/              # Chat UI components
-│   │   ├── Document/          # Tree & document viewer
-│   │   ├── Layout/            # Header, PDF viewer
-│   │   ├── Settings/          # Settings & performance
-│   │   ├── Sidebar/           # Session management
-│   │   └── ui/                # Reusable UI components
-│   ├── hooks/                 # Custom React hooks
-│   ├── lib/                   # API client & types
-│   └── constants/             # UI text & configuration
-├── tests/
-│   ├── test_api.py
-│   ├── test_api_routes.py
-│   ├── test_cache.py
-│   ├── test_cache_normalization.py
-│   ├── test_core_functionality.py
-│   ├── test_error_handling.py
-│   ├── test_integration_real_api.py
-│   ├── test_p1_improvements.py
-│   ├── test_rate_limiter.py
-│   ├── test_reasoner.py
-│   ├── test_hallucination_detector.py
-│   └── conftest.py
+│   │   ├── layout.tsx                 # Root layout with providers
+│   │   ├── page.tsx                   # Main application page
+│   │   ├── globals.css                # Global styles
+│   │   └── favicon.ico
+│   │
+│   ├── components/                    # 22 modular React components
+│   │   ├── Chat/
+│   │   │   ├── ChatPanel.tsx          # Main chat interface
+│   │   │   ├── MessageList.tsx        # Message history
+│   │   │   └── MessageItem.tsx        # Individual message rendering
+│   │   │
+│   │   ├── Document/
+│   │   │   ├── DocumentPanel.tsx      # Document viewer container
+│   │   │   └── TreeNode.tsx           # Tree node component (collapsible)
+│   │   │
+│   │   ├── Layout/
+│   │   │   ├── Header.tsx             # Top navigation bar
+│   │   │   └── PdfViewer.tsx          # Native PDF viewer integration
+│   │   │
+│   │   ├── Sidebar/
+│   │   │   ├── Sidebar.tsx            # Session management sidebar
+│   │   │   └── SessionItem.tsx        # Session list item
+│   │   │
+│   │   ├── Settings/
+│   │   │   ├── SettingsPanel.tsx      # Domain, language, params
+│   │   │   └── PerformancePanel.tsx   # Real-time metrics dashboard
+│   │   │
+│   │   ├── ui/                        # Reusable UI primitives
+│   │   │   ├── UploadProgress.tsx     # Batch upload progress
+│   │   │   ├── WelcomeScreen.tsx      # Initial landing screen
+│   │   │   ├── TaskProgress.tsx       # Real-time task polling
+│   │   │   ├── ErrorBoundary.tsx      # Error handling (class & functional)
+│   │   │   ├── LoadingStates.tsx      # Spinner, Skeleton, Overlays
+│   │   │   └── index.ts               # UI component exports
+│   │   │
+│   │   ├── SafeMarkdown.tsx           # Markdown rendering
+│   │   ├── providers/
+│   │   │   ├── QueryProvider.tsx      # React Query setup
+│   │   │   ├── Providers.tsx          # Combined provider wrapper
+│   │   │   └── index.ts               # Provider exports
+│   │   └── __init__.py
+│   │
+│   ├── hooks/                         # Custom React hooks (11 total)
+│   │   ├── useChat.ts                 # Chat message management
+│   │   ├── usePerformance.ts          # Metrics polling
+│   │   ├── useSessions.ts             # Session CRUD
+│   │   ├── useTree.ts                 # Document tree state
+│   │   ├── useUpload.ts               # File upload handling
+│   │   ├── useQueries.ts              # React Query hooks (query + mutations)
+│   │   └── index.ts                   # Hook exports
+│   │
+│   ├── lib/
+│   │   ├── api.ts                     # Axios API client
+│   │   └── types.ts                   # TypeScript interfaces
+│   │
+│   ├── constants/
+│   │   └── ui-text.ts                 # UI text strings & i18n
+│   │
+│   ├── public/                        # Static assets
+│   │   └── images/
+│   │
+│   ├── package.json                   # Dependencies (React 19, Next.js 16, TailwindCSS 4)
+│   ├── tsconfig.json                  # TypeScript configuration
+│   ├── next.config.ts                 # Next.js configuration
+│   ├── next-env.d.ts                  # Next.js type definitions
+│   ├── postcss.config.mjs              # PostCSS configuration
+│   ├── eslint.config.mjs               # ESLint configuration
+│   └── README.md
+│
+├── tests/                             # 323+ unit & integration tests
+│   ├── test_api.py                    # API endpoint tests
+│   ├── test_api_routes.py             # Route handler tests
+│   ├── test_core_functionality.py     # Core algorithm tests
+│   ├── test_cache.py                  # LRU cache tests
+│   ├── test_cache_normalization.py    # Cache key normalization
+│   ├── test_error_handling.py         # Error recovery tests
+│   ├── test_file_validator.py         # PDF validation tests
+│   ├── test_hallucination_detector.py # AI safety tests
+│   ├── test_integration_real_api.py   # Real Gemini API tests (optional)
+│   ├── test_p1_improvements.py        # PHASE 1 functionality tests
+│   ├── test_rate_limiter.py           # Rate limiting tests
+│   ├── test_reasoning_graph.py        # Reasoning graph tests (35 tests)
+│   ├── test_domain_benchmark.py       # Domain benchmark tests (44 tests)
+│   └── conftest.py                    # Pytest configuration & fixtures
+│
 ├── data/
-│   ├── raw/                   # Uploaded PDFs
-│   └── indices/               # Generated PageIndex files
-├── main.py                    # FastAPI server entry
-├── pytest.ini                 # Test configuration
-└── requirements.txt
+│   ├── raw/                           # Uploaded PDF files
+│   ├── indices/                       # Generated PageIndex JSON files
+│   │   └── {document_name}_index.json
+│   │   └── {document_name}_graph.json (Reasoning graphs)
+│   │   └── {document_name}_benchmark.json (Domain benchmarks)
+│   └── benchmark_reports/             # Benchmark evaluation reports
+│
+├── main.py                            # FastAPI server entry point
+├── main_terminal.py                   # Terminal UI (alternative interface)
+├── celery_app.py                      # Celery worker configuration
+├── requirements.txt                   # Python dependencies
+├── pytest.ini                         # Pytest configuration
+├── docker-compose.yml                 # Multi-container Docker setup
+├── Dockerfile                         # Backend container definition
+├── Dockerfile.frontend                # Frontend container definition
+├── DOCKER.md                          # Docker deployment guide
+├── setup-git-hooks.sh                 # Security: API key leak prevention
+├── .env.example                       # Environment template
+├── .gitignore                         # Git ignore rules
+├── PHASE_1_비판점_및_개선계획.md         # PHASE 1 planning & critique
+├── PHASE_2_상세계획.md                  # PHASE 2 detailed roadmap
+├── PHASE_1-4_구현_요약.md               # Implementation summary
+├── PHASE_1-4_REPORT.md                 # Detailed execution report
+├── README.md                          # This file
+└── LICENSE
 ```
+
+### Directory Purposes
+
+| Directory | Purpose | Key Files |
+|-----------|---------|-----------|
+| `src/core/` | Core algorithms & reasoning | reasoner.py, beam_search.py, reasoning_graph.py |
+| `src/repositories/` | Data persistence layer | document_repository.py, index_repository.py |
+| `src/services/` | Business logic coordination | chat_service.py, index_service.py |
+| `src/api/` | REST API endpoints | routes.py, task_routes.py |
+| `src/utils/` | Helper utilities | cache.py, redis_cache.py, hallucination_detector.py |
+| `src/tasks/` | Async Celery workers | indexing_tasks.py |
+| `frontend/components/` | React UI components | 22 modular, reusable components |
+| `frontend/hooks/` | Custom React logic | 11 specialized data & state hooks |
+| `tests/` | Test suite | 323+ unit & integration tests |
+| `data/` | Persistent storage | PDFs, PageIndex JSON, benchmark reports |
 
 ### Key Components
 
+#### Backend Core (`src/core/`)
+
 **TreeRAGReasoner** ([src/core/reasoner.py](src/core/reasoner.py))
-- Loads PageIndex files
-- Processes queries with Gemini 2.0-flash-exp (configurable model)
-- Generates structured answers with citations
-- Handles multi-document comparison
-- Supports both flat and deep traversal modes
-- Domain-specific prompt optimization (5 templates)
-- Multi-language response generation (Korean, English, Japanese)
-- Clean, production-ready code (removed debugging comments)
+- Main inference engine for the system
+- Loads PageIndex files and processes user queries
+- LLM integration with Gemini 2.0-flash-exp (configurable)
+- Generates structured answers with page-level citations
+- Handles multi-document comparison and routing
+- Supports both flat retrieval and deep traversal modes
+- Domain-specific prompt templates (General, Medical, Legal, Financial, Academic)
+- Multi-language output (Korean, English, Japanese)
 
 **TreeNavigator** ([src/core/tree_traversal.py](src/core/tree_traversal.py))
-- LLM-guided deep tree traversal
-- Evaluates node relevance at each level
-- Selects most promising branches to explore
-- Collects traversal statistics (nodes visited/selected)
+- LLM-guided deep tree traversal algorithm
+- Iterative DFS with stack-based implementation (avoids recursion limits)
+- Node relevance evaluation at each level
+- Adaptive branch selection (1-5 branches based on confidence)
+- Traversal statistics collection (nodes visited, depth used, branches used)
+- Error recovery for over-filtering scenarios
+
+**Beam Search** ([src/core/beam_search.py](src/core/beam_search.py))
+- Efficient tree navigation using beam search
+- Confidence-weighted node ranking
+- 30%+ context reduction vs. simple DFS
+- Maintains 95%+ relevance preservation
+- Priority queue-based expansion
+
+**Contextual Compressor** ([src/core/contextual_compressor.py](src/core/contextual_compressor.py))
+- Context window optimization
+- TFIDF + semantic importance scoring
+- Token reduction: ~30% average
+- Multiple compression modes (top-k, concatenated)
+- State-aware prompt adaptation
 
 **ReferenceResolver** ([src/core/reference_resolver.py](src/core/reference_resolver.py))
-- Automatic cross-reference detection
-- Pattern matching for "Section X", "Chapter Y", etc.
-- Korean and English pattern support
-- Auto-inject referenced context into queries
+- Automatic cross-reference detection ("Section X", "Chapter Y", etc.)
+- Pattern matching for Korean and English references
+- Context injection for auto-detected references
+- Supports hierarchical reference patterns
 
-**Router Agent** ([src/api/routes.py](src/api/routes.py))
-- Automatically selects relevant documents for queries
-- Enables efficient multi-document workflows
-- Serves PDF files with UTF-8 filename encoding
-- Handles batch upload with progress tracking
-- UUID-based file naming for uniqueness
-- Fuzzy filename matching for PDF serving
-- Type-safe API responses with proper validation
+**Reasoning Graph** ([src/core/reasoning_graph.py](src/core/reasoning_graph.py))
+- Semantic graph construction from document tree
+- 9 reasoning edge types: cause_effect, support, contrast, elaboration, temporal, reference, definition, example, parent_child
+- Multi-hop path discovery with confidence weighting
+- Natural language explanations for connections
+- Serializable graph format (JSON)
 
-**Frontend Architecture** ([frontend/](frontend/))
-- **Modular Components** - 22 separated components for maintainability
-  - Chat panel (MessageList, MessageItem, ChatInput)
-  - Document panel (TreeNode, DocumentPanel)
-  - Sidebar (SessionList, SessionItem)
-  - Settings & Performance panels
-  - Reusable UI components (WelcomeScreen, UploadProgress)
-- **Custom Hooks** - Clean state management
-  - useSessions - Session CRUD with localStorage
-  - useUpload - File upload with progress tracking
-  - useChat - Chat logic with streaming
-  - useTree - Tree navigation & selection
-  - usePerformance - Metrics tracking
-- **Type Safety** - Full TypeScript with proper interfaces
-- **Smart Features**
-  - Collapsible tree visualization
-  - Shift+Click node selection
-  - PDF viewer with fuzzy filename matching
-  - Multi-language UI (Korean, English, Japanese)
-  - Real-time performance dashboard
-  - Conversation search and export
+**Domain Benchmark** ([src/core/domain_benchmark.py](src/core/domain_benchmark.py))
+- Multi-domain evaluation framework (7 domains)
+- Domain classification with keyword + LLM detection
+- Answer evaluation with similarity and keyword recall metrics
+- Benchmark question dataset management
+- Performance ranking across domains
+- Automated report generation
+
+**Additional Core Modules:**
+- **retrieval_model.py** - Formal objective function: P(v|q) = 0.7·semantic + 0.2·structural + 0.1·contextual
+- **flat_rag_baseline.py** - Structure-free RAG baseline for comparison (BM25 + semantic + structural)
+- **error_recovery.py** - Dual-stage filtering (70% LLM + 30% keyword) with over-filtering detection
+- **indexer.py** - PDF → PageIndex conversion with hierarchical structure preservation
+
+#### Data Access & Services (`src/repositories/`, `src/services/`)
+
+**Repositories** (Clean Architecture)
+- **DocumentRepository** - PDF file management (CRUD, validation)
+- **IndexRepository** - PageIndex JSON operations (load, save, query)
+
+**Services** (Business Logic)
+- **ChatService** - Multi-turn conversation management with context
+- **IndexService** - Indexing orchestration and async task management
+- **UploadService** - File validation and storage
+- **DocumentRouterService** - Multi-document relevance routing
+
+#### API Layer (`src/api/`)
+
+**Routes** ([src/api/routes.py](src/api/routes.py)) - 20+ endpoints including:
+- `/chat/` - Conversational Q&A with streaming
+- `/index/pdf` - PDF upload and indexing
+- `/graph/build/{document_name}` - Reasoning graph construction
+- `/graph/{document_name}/search` - Reasoning-based search
+- `/benchmark/{document_name}/classify` - Domain classification
+- `/benchmark/{document_name}/run` - Benchmark evaluation
+- `/cache/stats`, `/cache/clear` - Cache management
+- Task routes for async job monitoring
+
+**Models** ([src/api/models.py](src/api/models.py)) - Pydantic request/response schemas
+- Type validation and auto-documentation
+- JSON serialization/deserialization
+
+#### Utilities & Infrastructure
+
+**Caching** ([src/utils/cache.py](src/utils/cache.py), [src/utils/redis_cache.py](src/utils/redis_cache.py))
+- L1: In-memory LRU cache (100 items, 1-hour TTL)
+- L2: Redis distributed cache (optional, with fallback)
+- 70%+ cache hit rate on repeated queries
+- Cache statistics and management
+
+**Hallucination Detection** ([src/utils/hallucination_detector.py](src/utils/hallucination_detector.py))
+- 5-signal semantic similarity algorithm
+- LLM + embedding + keyword overlap analysis
+- Confidence scoring (0.0-1.0)
+- Real-time detection with configurable threshold
+
+**Rate Limiting** ([src/utils/rate_limiter.py](src/utils/rate_limiter.py))
+- SlowAPI-based protection
+- Per-IP request tracking
+- Configurable limits (30 chat/min, 10 index/min)
+
+**File Validation** ([src/utils/file_validator.py](src/utils/file_validator.py))
+- PDF format verification
+- File size validation
+- Encoding detection
+
+**Async Tasks** ([src/tasks/indexing_tasks.py](src/tasks/indexing_tasks.py))
+- Celery async task queue
+- Background PDF indexing
+- Progress tracking and callbacks
+- Result persistence
+
+#### Frontend (`frontend/`)
+
+**Components Architecture** (22 modular React components)
+- **Chat** - Conversational UI with streaming responses
+- **Document** - Tree visualization and navigation
+- **Layout** - Header and PDF viewer
+- **Settings** - Domain, language, traversal parameters
+- **Sidebar** - Session and conversation history
+- **UI** - Reusable primitives (buttons, modals, loaders)
+- **Providers** - React Query, Toaster, error boundaries
+
+**State Management**
+- **Zustand Stores** - Lightweight global state (11 stores)
+- **React Query** - Server data fetching with caching
+- **Custom Hooks** - 11 specialized hooks for common operations
+
+**TypeScript** - Full type safety across frontend
+
+#### Configuration & Deployment
+
+- **config.py** - Centralized configuration (API keys, paths, models)
+- **celery_app.py** - Celery worker setup
+- **docker-compose.yml** - Multi-container orchestration
+- **Dockerfile**, **Dockerfile.frontend** - Container definitions
+- **requirements.txt** - Python dependencies
 
 ### Running Tests
 
@@ -508,11 +735,15 @@ TreeRAG/
 conda activate medireg
 pytest tests/ -v -m "not integration_real"
 
-# Run cache tests only
-pytest tests/test_cache.py -v
+# Run specific test suites
+pytest tests/test_reasoning_graph.py -v           # Reasoning graph (35 tests)
+pytest tests/test_domain_benchmark.py -v         # Domain benchmark (44 tests)
+pytest tests/test_core_functionality.py -v       # Core algorithms
+pytest tests/test_hallucination_detector.py -v   # AI safety
+pytest tests/test_cache.py -v                    # Caching layer
 
-# Run hallucination detection tests
-pytest tests/test_hallucination_detector.py -v
+# Run with coverage
+pytest tests/ --cov=src --cov-report=html
 
 # Run real API integration tests (costs money)
 REAL_API_TEST=1 pytest tests/test_integration_real_api.py -v -m integration_real
