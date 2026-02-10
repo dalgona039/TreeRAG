@@ -8,6 +8,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from src.api.routes import router
+from src.api.task_routes import router as task_router
 from src.config import Config
 from src.middleware.security import SecurityHeadersMiddleware
 
@@ -155,6 +156,7 @@ def create_app() -> FastAPI:
         return health_status
     
     app.include_router(router, prefix="/api", tags=["API"])
+    app.include_router(task_router, prefix="/api/tasks", tags=["Tasks"])
     
     return app
 

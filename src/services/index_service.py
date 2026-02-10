@@ -8,7 +8,6 @@ from src.core.indexer import RegulatoryIndexer
 
 @dataclass
 class IndexResult:
-    """인덱싱 결과"""
     success: bool
     index_filename: Optional[str] = None
     status: str = "failed"  # "created", "existing", "failed"

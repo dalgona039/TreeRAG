@@ -1,6 +1,23 @@
 version: '3.8'
 
 services:
+  redis:
+    image: redis:7-alpine
+    container_name: treerag-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - treerag-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    command: redis-server --appendonly yes
+
   backend:
     build:
       context: .
@@ -13,18 +30,47 @@ services:
       - USE_DEEP_TRAVERSAL=true
       - MAX_TRAVERSAL_DEPTH=5
       - MAX_BRANCHES_PER_LEVEL=3
+      - REDIS_URL=redis://redis:6379/0
     volumes:
       - ./data:/app/data
       - ./src:/app/src
     networks:
       - treerag-network
     restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/api/')"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: treerag-celery-worker
+    command: celery -A src.celery_app worker --loglevel=info --queues=default,indexing --concurrency=2
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - ./data:/app/data
+      - ./src:/app/src
+    networks:
+      - treerag-network
+    restart: unless-stopped
+    depends_on:
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "celery", "-A", "src.celery_app", "inspect", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
 
   frontend:
     build:
@@ -54,4 +100,6 @@ networks:
 
 volumes:
   data:
+    driver: local
+  redis-data:
     driver: local

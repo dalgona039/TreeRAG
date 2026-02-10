@@ -6,6 +6,7 @@ from typing import Optional, List, Dict, Any
 from src.config import Config
 from src.repositories import IndexRepository
 from src.core.reasoner import TreeRAGReasoner
+from src.core.contextual_compressor import ContextualCompressor
 from src.utils.hallucination_detector import HallucinationDetector
 from .document_router_service import DocumentRouterService
 
@@ -66,11 +67,14 @@ class ChatService:
         self,
         index_repository: Optional[IndexRepository] = None,
         document_router: Optional[DocumentRouterService] = None,
-        hallucination_threshold: float = 0.3
+        hallucination_threshold: float = 0.3,
+        enable_compression: bool = True
     ):
         self.index_repo = index_repository or IndexRepository()
         self.document_router = document_router or DocumentRouterService(self.index_repo)
         self.hallucination_threshold = hallucination_threshold
+        self.enable_compression = enable_compression
+        self.compressor = ContextualCompressor() if enable_compression else None
     
     def chat(
         self,

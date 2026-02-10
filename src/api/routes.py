@@ -623,3 +623,204 @@ async def clear_cache():
         "status": "success",
         "message": "Cache cleared successfully"
     }
+
+
+@router.post("/graph/build/{document_name}")
+async def build_reasoning_graph(
+    document_name: str,
+    infer_edges: bool = True,
+    max_edge_distance: int = 2
+):
+    from src.core.reasoning_graph import ReasoningGraph
+    
+    index_file = f"{document_name}_index.json"
+    index_path = os.path.join(Config.INDEX_DIR, index_file)
+    
+    if not os.path.exists(index_path):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Document '{document_name}' not found in indices"
+        )
+    
+    try:
+        with open(index_path, 'r', encoding='utf-8') as f:
+            tree = json.load(f)
+        
+        graph = ReasoningGraph(document_name)
+        graph.build_from_tree(tree, infer_edges=infer_edges, max_edge_distance=max_edge_distance)
+        
+        graph_path = os.path.join(Config.INDEX_DIR, f"{document_name}_graph.json")
+        with open(graph_path, 'w', encoding='utf-8') as f:
+            json.dump(graph.to_dict(), f, ensure_ascii=False, indent=2)
+        
+        return {
+            "status": "success",
+            "document_name": document_name,
+            "graph_stats": graph.to_dict()["stats"],
+            "graph_path": graph_path
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to build reasoning graph: {str(e)}"
+        )
+
+
+@router.get("/graph/{document_name}")
+async def get_reasoning_graph(document_name: str):
+    from src.core.reasoning_graph import ReasoningGraph
+    
+    graph_path = os.path.join(Config.INDEX_DIR, f"{document_name}_graph.json")
+    
+    if not os.path.exists(graph_path):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Reasoning graph for '{document_name}' not found. "
+                   f"Build it first using POST /graph/build/{document_name}"
+        )
+    
+    try:
+        with open(graph_path, 'r', encoding='utf-8') as f:
+            graph_data = json.load(f)
+        
+        return {
+            "status": "success",
+            "graph": graph_data
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to load reasoning graph: {str(e)}"
+        )
+
+
+@router.post("/graph/{document_name}/search")
+async def search_with_reasoning(
+    document_name: str,
+    query: str,
+    max_hops: int = 3,
+    top_k: int = 5
+):
+    from src.core.reasoning_graph import ReasoningGraph, GraphNavigator
+    
+    graph_path = os.path.join(Config.INDEX_DIR, f"{document_name}_graph.json")
+    
+    if not os.path.exists(graph_path):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Reasoning graph for '{document_name}' not found"
+        )
+    
+    try:
+        with open(graph_path, 'r', encoding='utf-8') as f:
+            graph_data = json.load(f)
+        
+        graph = ReasoningGraph.from_dict(graph_data)
+        navigator = GraphNavigator(graph)
+        
+        result = navigator.search_with_reasoning(
+            query=query,
+            max_hops=max_hops,
+            top_k=top_k
+        )
+        
+        return {
+            "status": "success",
+            "result": result
+        }
+        
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Reasoning search failed: {str(e)}"
+        )
+
+
+@router.get("/graph/{document_name}/explain")
+async def explain_connection(
+    document_name: str,
+    node_a: str,
+    node_b: str
+):
+    from src.core.reasoning_graph import ReasoningGraph, GraphNavigator
+    
+    graph_path = os.path.join(Config.INDEX_DIR, f"{document_name}_graph.json")
+    
+    if not os.path.exists(graph_path):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Reasoning graph for '{document_name}' not found"
+        )
+    
+    try:
+        with open(graph_path, 'r', encoding='utf-8') as f:
+            graph_data = json.load(f)
+        
+        graph = ReasoningGraph.from_dict(graph_data)
+        navigator = GraphNavigator(graph)
+        
+        explanation = navigator.explain_connection(node_a, node_b)
+        
+        if explanation is None:
+            raise HTTPException(
+                status_code=404,
+                detail=f"One or both nodes not found: {node_a}, {node_b}"
+            )
+        
+        return {
+            "status": "success",
+            "explanation": explanation
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to explain connection: {str(e)}"
+        )
+
+
+@router.get("/graph/{document_name}/node/{node_id}")
+async def get_node_context(
+    document_name: str,
+    node_id: str,
+    include_neighbors: bool = True
+):
+    from src.core.reasoning_graph import ReasoningGraph
+    
+    graph_path = os.path.join(Config.INDEX_DIR, f"{document_name}_graph.json")
+    
+    if not os.path.exists(graph_path):
+        raise HTTPException(
+            status_code=404,
+            detail=f"Reasoning graph for '{document_name}' not found"
+        )
+    
+    try:
+        with open(graph_path, 'r', encoding='utf-8') as f:
+            graph_data = json.load(f)
+        
+        graph = ReasoningGraph.from_dict(graph_data)
+        context = graph.get_node_context(node_id, include_neighbors)
+        
+        if not context:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Node '{node_id}' not found in graph"
+            )
+        
+        return {
+            "status": "success",
+            "context": context
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to get node context: {str(e)}"
+        )

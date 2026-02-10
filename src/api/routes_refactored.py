@@ -1,13 +1,3 @@
-"""
-API Routes - Thin Controller Layer
-
-이 파일은 HTTP 요청/응답만 처리합니다.
-비즈니스 로직은 Service 계층에 위임합니다.
-
-아키텍처:
-- Routes (Controller) → Services → Repositories → Data
-"""
-
 import os
 import json
 from typing import Dict, List, Any
@@ -70,7 +60,6 @@ async def health_check() -> Dict[str, str]:
 
 @router.post("/upload")
 async def upload_file(file: UploadFile = File(...)) -> Dict[str, Any]:
-    """PDF 파일 업로드"""
     logger.info(f"[Upload] Request - filename: {file.filename}")
     
     if not file.filename:
@@ -117,7 +106,6 @@ async def upload_file(file: UploadFile = File(...)) -> Dict[str, Any]:
 @router.post("/index")
 @limiter.limit("10/minute")
 async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
-    """PDF 인덱싱"""
     logger.info(f"[Index] Request for: {req.filename}")
     
     result = index_service.create_index(req.filename)
@@ -146,8 +134,6 @@ async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
 @router.post("/chat", response_model=ChatResponse)
 @limiter.limit("30/minute")
 async def chat(request: Request, req: ChatRequest) -> ChatResponse:
-    """RAG 채팅"""
-    # Node context 변환
     node_context = None
     if req.node_context:
         node_context = NodeContext(
@@ -232,13 +218,11 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
 
 @router.get("/indices")
 async def list_indices() -> Dict[str, List[str]]:
-    """인덱스 목록 조회"""
     indices = index_repo.list_all()
     return {"indices": sorted(indices)}
 
 @router.get("/pdfs")
 async def list_pdfs() -> Dict[str, List[str]]:
-    """PDF 목록 조회"""
     pdfs = document_repo.list_all()
     return {"pdfs": sorted(pdfs)}
 
@@ -246,7 +230,6 @@ async def list_pdfs() -> Dict[str, List[str]]:
 
 @router.get("/tree/{index_filename}", response_model=TreeResponse)
 async def get_tree_structure(index_filename: str) -> TreeResponse:
-    """트리 구조 조회"""
     if not index_filename.endswith("_index.json"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -268,7 +251,6 @@ async def get_tree_structure(index_filename: str) -> TreeResponse:
 
 @router.get("/pdf/{filename}")
 async def serve_pdf(filename: str):
-    """PDF 파일 서빙"""
     decoded_filename = unquote(filename)
     logger.info(f"[PDF] Request: {decoded_filename}")
     
@@ -311,14 +293,12 @@ async def serve_pdf(filename: str):
 
 @router.get("/cache/stats")
 async def get_cache_stats():
-    """캐시 통계 조회"""
     cache = get_cache()
     stats = cache.get_stats()
     return {"status": "success", "cache_stats": stats}
 
 @router.post("/cache/clear")
 async def clear_cache():
-    """캐시 초기화"""
     cache = get_cache()
     cache.clear()
     return {"status": "success", "message": "Cache cleared successfully"}

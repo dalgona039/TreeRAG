@@ -4,6 +4,7 @@ from typing import Any, List, Dict, Optional, Literal
 from src.config import Config
 from src.core.tree_traversal import TreeNavigator, format_traversal_results
 from src.core.beam_search import BeamSearchNavigator, format_beam_results
+from src.core.contextual_compressor import ContextualCompressor, format_compressed_context
 from src.core.reference_resolver import ReferenceResolver
 from src.utils.cache import get_cache
 from src.utils.hallucination_detector import create_detector
@@ -60,20 +61,16 @@ class TreeRAGReasoner:
         index_filenames: List[str], 
         use_deep_traversal: bool = True,
         traversal_algorithm: TraversalAlgorithm = "beam_search",
-        beam_width: int = 5
+        beam_width: int = 5,
+        enable_compression: bool = True
     ):
-        """
-        Args:
-            index_filenames: 인덱스 파일 목록
-            use_deep_traversal: 깊은 탐색 사용 여부
-            traversal_algorithm: 탐색 알고리즘 ("dfs" 또는 "beam_search")
-            beam_width: Beam Search 너비 (beam_search 사용 시)
-        """
         self.index_trees: List[Dict[str, Any]] = []
         self.index_filenames = index_filenames
         self.use_deep_traversal = use_deep_traversal
         self.traversal_algorithm = traversal_algorithm
         self.beam_width = beam_width
+        self.enable_compression = enable_compression
+        self.compressor = ContextualCompressor() if enable_compression else None
         
         for index_filename in index_filenames:
             path = os.path.join(Config.INDEX_DIR, index_filename)
@@ -358,7 +355,24 @@ class TreeRAGReasoner:
             "nodes_selected": all_selected
         }
         
-        return "\n\n---\n\n".join(all_results), traversal_data
+        final_context = "\n\n---\n\n".join(all_results)
+        
+        if self.enable_compression and self.compressor and all_selected:
+            print(f"🗜️ Applying contextual compression ({len(all_selected)} nodes)")
+            compression_result = self.compressor.compress(all_selected, query)
+            
+            if compression_result.compressed_count < compression_result.original_count:
+                final_context = format_compressed_context(compression_result)
+                traversal_data["compression"] = {
+                    "original_count": compression_result.original_count,
+                    "compressed_count": compression_result.compressed_count,
+                    "ratio": compression_result.compression_ratio,
+                    "tokens_saved": compression_result.total_tokens_saved
+                }
+                print(f"   Compressed: {compression_result.original_count} → {compression_result.compressed_count} nodes")
+                print(f"   Tokens saved: ~{compression_result.total_tokens_saved}")
+        
+        return final_context, traversal_data
     
     def _build_flat_context(self) -> str:
         combined_context = []

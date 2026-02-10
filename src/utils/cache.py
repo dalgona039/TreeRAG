@@ -1,12 +1,17 @@
 """
 Simple in-memory cache for API responses.
 Reduces Gemini API calls and speeds up repeated queries.
+
+NOTE: For production with Redis, use redis_cache.py instead:
+    from src.utils.redis_cache import get_hybrid_cache
 """
 import hashlib
 import json
 import time
 from typing import Optional, Dict, Any
 from collections import OrderedDict
+
+from .redis_cache import get_hybrid_cache as _get_hybrid_cache, HybridCache
 
 
 class QueryCache:
@@ -118,8 +123,23 @@ class QueryCache:
 
 
 _query_cache = QueryCache(max_size=100, ttl_seconds=3600)
+_use_redis = False
 
 
-def get_cache() -> QueryCache:
-    """Get the global cache instance."""
+def get_cache():
+    """Get the global cache instance.
+    
+    Returns HybridCache (with Redis support) if REDIS_URL is set,
+    otherwise returns in-memory QueryCache.
+    """
+    global _use_redis
+    
+    if _use_redis:
+        return _get_hybrid_cache()
+    
+    import os
+    if os.getenv("REDIS_URL"):
+        _use_redis = True
+        return _get_hybrid_cache()
+    
     return _query_cache
