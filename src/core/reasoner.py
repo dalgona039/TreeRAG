@@ -1,11 +1,15 @@
 import json
 import os
-from typing import Any, List, Dict, Optional
+from typing import Any, List, Dict, Optional, Literal
 from src.config import Config
 from src.core.tree_traversal import TreeNavigator, format_traversal_results
+from src.core.beam_search import BeamSearchNavigator, format_beam_results
 from src.core.reference_resolver import ReferenceResolver
 from src.utils.cache import get_cache
 from src.utils.hallucination_detector import create_detector
+
+# Traversal algorithm types
+TraversalAlgorithm = Literal["dfs", "beam_search"]
 
 DOMAIN_PROMPTS = {
     "general": """당신은 전문 문서 분석 AI 어시스턴트입니다.
@@ -51,10 +55,25 @@ LANGUAGE_INSTRUCTIONS = {
 }
 
 class TreeRAGReasoner:
-    def __init__(self, index_filenames: List[str], use_deep_traversal: bool = True):
+    def __init__(
+        self, 
+        index_filenames: List[str], 
+        use_deep_traversal: bool = True,
+        traversal_algorithm: TraversalAlgorithm = "beam_search",
+        beam_width: int = 5
+    ):
+        """
+        Args:
+            index_filenames: 인덱스 파일 목록
+            use_deep_traversal: 깊은 탐색 사용 여부
+            traversal_algorithm: 탐색 알고리즘 ("dfs" 또는 "beam_search")
+            beam_width: Beam Search 너비 (beam_search 사용 시)
+        """
         self.index_trees: List[Dict[str, Any]] = []
         self.index_filenames = index_filenames
         self.use_deep_traversal = use_deep_traversal
+        self.traversal_algorithm = traversal_algorithm
+        self.beam_width = beam_width
         
         for index_filename in index_filenames:
             path = os.path.join(Config.INDEX_DIR, index_filename)
@@ -290,23 +309,51 @@ class TreeRAGReasoner:
         
         for idx, tree in enumerate(self.index_trees):
             doc_name = self.index_filenames[idx].replace("_index.json", "")
-            navigator = TreeNavigator(tree, doc_name)
-            relevant_nodes, trav_stats = navigator.search(
-                query=query,
-                max_depth=max_depth,
-                max_branches=max_branches
-            )
-            formatted = format_traversal_results(relevant_nodes, doc_name)
+            
+            # 알고리즘에 따라 다른 Navigator 사용
+            if self.traversal_algorithm == "beam_search":
+                print(f"🔍 Using Beam Search (width={self.beam_width})")
+                navigator = BeamSearchNavigator(tree, doc_name, beam_width=self.beam_width)
+                relevant_nodes, trav_stats = navigator.search(
+                    query=query,
+                    max_depth=max_depth,
+                    min_score_threshold=0.3
+                )
+                formatted = format_beam_results(relevant_nodes, doc_name)
+            else:
+                print(f"🔍 Using DFS (branches={max_branches})")
+                navigator = TreeNavigator(tree, doc_name)
+                relevant_nodes, trav_stats = navigator.search(
+                    query=query,
+                    max_depth=max_depth,
+                    max_branches=max_branches
+                )
+                formatted = format_traversal_results(relevant_nodes, doc_name)
+            
             all_results.append(formatted)
             
-            all_visited.extend([f"{doc_name}: {title}" for title in trav_stats["visited_titles"]])
-            all_selected.extend([{
-                "document": doc_name,
-                "title": node["node"].get("title", "Untitled"),
-                "page_ref": node["node"].get("page_ref", "N/A")
-            } for node in relevant_nodes])
+            # 알고리즘에 따라 다른 통계 형식 처리
+            if self.traversal_algorithm == "beam_search":
+                # Beam Search: nodes_visited는 ID 목록, nodes_selected는 점수 포함
+                all_visited.extend([f"{doc_name}: node_{i}" for i in range(trav_stats.get("nodes_visited", 0) if isinstance(trav_stats.get("nodes_visited"), int) else len(trav_stats.get("nodes_visited", [])))])
+                all_selected.extend([{
+                    "document": doc_name,
+                    "title": node["node"].get("title", "Untitled"),
+                    "page_ref": node["node"].get("page_ref", "N/A"),
+                    "score": node.get("score", 0.0)
+                } for node in relevant_nodes])
+            else:
+                # DFS: visited_titles 목록
+                all_visited.extend([f"{doc_name}: {title}" for title in trav_stats.get("visited_titles", [])])
+                all_selected.extend([{
+                    "document": doc_name,
+                    "title": node["node"].get("title", "Untitled"),
+                    "page_ref": node["node"].get("page_ref", "N/A")
+                } for node in relevant_nodes])
         
         traversal_data = {
+            "algorithm": self.traversal_algorithm,
+            "beam_width": self.beam_width if self.traversal_algorithm == "beam_search" else None,
             "nodes_visited": all_visited,
             "nodes_selected": all_selected
         }
