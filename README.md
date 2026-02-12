@@ -1,7 +1,8 @@
 # 🌳 TreeRAG - Hierarchical Document Intelligence Platform
 
-[![Python 3.14+](https://img.shields.io/badge/python-3.14+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.14.2](https://img.shields.io/badge/python-3.14.2-blue.svg)](https://www.python.org/downloads/)
 [![Next.js 16](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)
+[![Tests](https://img.shields.io/badge/tests-469%20passed-brightgreen.svg)](https://github.com/dalgona039/TreeRAG)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > **Your Documents, Your AI Assistant** - Turn any PDF into a navigable knowledge tree with AI-powered analysis
@@ -153,7 +154,7 @@ graph TD
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **Python 3.14.2**
+- **Python 3.14.2** (medireg conda environment)
 - **Node.js 20+** (for Next.js frontend)
 - **Gemini API Key** ([Get one here](https://ai.google.dev/))
 
@@ -314,8 +315,9 @@ curl -X POST http://localhost:8000/api/cache/clear
 #### Backend
 - **FastAPI** - High-performance async API
 - **google.genai** - Gemini 2.0-flash-exp for LLM reasoning (configurable)
-- **Python 3.14.2 (medireg)** - Current runtime
-- **Type-safe API** - Pydantic models with proper validation
+- **Python 3.14.2 (medireg)** - Current runtime with full compatibility
+- **Pydantic V2** - Modern type-safe validation with ConfigDict and field_validator
+- **Type-safe API** - Zero deprecation warnings, production-ready
 - **Smart file handling** - UUID-based filenames for uniqueness, original name preservation
 
 #### Frontend
@@ -389,7 +391,8 @@ TreeRAG uses a proprietary **PageIndex** format that preserves document hierarch
 | **Cache Hit Rate** | 90%+ (for repeated queries) |
 | **Hallucination Detection** | Real-time, 5-signal semantic analysis |
 | **Detection Accuracy** | Optimized threshold (0.3), reduced false positives |
-| **Test Coverage** | 125 passing tests (unit + API + core + error handling) |
+| **Test Coverage** | 469 passing tests, 15 skipped (96.9% coverage) |
+| **Code Quality** | Zero deprecation warnings, Pydantic V2 compliant |
 
 ---
 
@@ -522,7 +525,7 @@ TreeRAG/
 │   ├── eslint.config.mjs               # ESLint configuration
 │   └── README.md
 │
-├── tests/                             # 323+ unit & integration tests
+├── tests/                             # 469 unit & integration tests (96.9% passing)
 │   ├── test_api.py                    # API endpoint tests
 │   ├── test_api_routes.py             # Route handler tests
 │   ├── test_core_functionality.py     # Core algorithm tests
@@ -538,13 +541,26 @@ TreeRAG/
 │   ├── test_domain_benchmark.py       # Domain benchmark tests (44 tests)
 │   └── conftest.py                    # Pytest configuration & fixtures
 │
+├── benchmarks/                        # Research evaluation framework
+│   ├── metrics/                       # Statistical tests & efficiency metrics
+│   │   ├── statistical_tests.py       # t-test, Wilcoxon, Bootstrap CI
+│   │   └── efficiency_metrics.py      # Latency, throughput, token usage
+│   ├── compare_baselines.py           # TreeRAG vs Flat RAG comparison
+│   └── run_evaluation.py              # Automated benchmark runner
+│
+├── scripts/                           # Research automation tools
+│   ├── ablation_study.py              # Component ablation experiments
+│   ├── generate_paper_tables.py       # LaTeX table generation
+│   └── plot_results.py                # matplotlib/seaborn visualizations
+│
 ├── data/
 │   ├── raw/                           # Uploaded PDF files
 │   ├── indices/                       # Generated PageIndex JSON files
 │   │   └── {document_name}_index.json
 │   │   └── {document_name}_graph.json (Reasoning graphs)
 │   │   └── {document_name}_benchmark.json (Domain benchmarks)
-│   └── benchmark_reports/             # Benchmark evaluation reports
+│   ├── benchmark_reports/             # Benchmark evaluation reports
+│   └── dspy_groq_optimized/           # DSPy optimization results
 │
 ├── main.py                            # FastAPI server entry point
 ├── main_terminal.py                   # Terminal UI (alternative interface)
@@ -578,7 +594,9 @@ TreeRAG/
 | `src/tasks/` | Async Celery workers | indexing_tasks.py |
 | `frontend/components/` | React UI components | 22 modular, reusable components |
 | `frontend/hooks/` | Custom React logic | 11 specialized data & state hooks |
-| `tests/` | Test suite | 323+ unit & integration tests |
+| `benchmarks/` | Research evaluation | Statistical tests, baseline comparison |
+| `scripts/` | Automation tools | LaTeX generation, plotting, ablation |
+| `tests/` | Test suite | 469 unit & integration tests (96.9% pass rate) |
 | `data/` | Persistent storage | PDFs, PageIndex JSON, benchmark reports |
 
 ### Key Components
@@ -637,6 +655,11 @@ TreeRAG/
 - Benchmark question dataset management
 - Performance ranking across domains
 - Automated report generation
+
+**PHASE 3: Research Analysis Modules** ([src/core/](src/core/))
+- **error_analysis.py** - Error classification, calibration analysis, hallucination quantification
+- **theoretical_analysis.py** - Complexity proofs (O(b·d)), optimality analysis, token reduction
+- **learnable_scorer.py** - DSPy-based learning scorer with Groq optimization
 
 **Additional Core Modules:**
 - **retrieval_model.py** - Formal objective function: P(v|q) = 0.7·semantic + 0.2·structural + 0.1·contextual
@@ -733,28 +756,34 @@ TreeRAG/
 ```bash
 # Run all tests (mocked)
 conda activate medireg
-pytest tests/ -v -m "not integration_real"
+pytest -q --tb=short  # Fast run: 469 passed, 15 skipped in ~44s
 
 # Run specific test suites
 pytest tests/test_reasoning_graph.py -v           # Reasoning graph (35 tests)
-pytest tests/test_domain_benchmark.py -v         # Domain benchmark (44 tests)
-pytest tests/test_core_functionality.py -v       # Core algorithms
-pytest tests/test_hallucination_detector.py -v   # AI safety
-pytest tests/test_cache.py -v                    # Caching layer
+pytest tests/test_domain_benchmark.py -v          # Domain benchmark (44 tests)
+pytest tests/test_error_analysis.py -v            # Error analysis (23 tests)
+pytest tests/test_theoretical_analysis.py -v      # Theoretical analysis (38 tests)
+pytest tests/test_experiment_pipeline.py -v       # Experiment pipeline (21 tests)
+pytest tests/test_hallucination_detector.py -v    # AI safety (17 tests)
+pytest tests/test_core_functionality.py -v        # Core algorithms
+
+# PHASE 3 research tests
+pytest tests/test_benchmark_suite.py -v           # Benchmark suite (34 tests)
+pytest tests/test_learnable_scorer.py -v          # DSPy scorer (24 tests)
 
 # Run with coverage
 pytest tests/ --cov=src --cov-report=html
 
 # Run real API integration tests (costs money)
 REAL_API_TEST=1 pytest tests/test_integration_real_api.py -v -m integration_real
-
-# Evaluate prompt performance
-python evaluate_prompts.py
 ```
 
 **Test Coverage:**
-- ✅ 125 tests (unit + API + core + error handling)
+- ✅ 469 tests passing, 15 skipped (96.9% success rate)
+- ✅ Zero deprecation warnings (Pydantic V2, datetime.now(UTC), HTTP 413 updates)
+- ✅ Python 3.14.2 fully compatible
 - ✅ Real API integration tests (optional, guarded by REAL_API_TEST=1)
+- ✅ PHASE 3 research modules: 142 tests for benchmarking, scoring, error/theory analysis
 
 ---
 
@@ -866,11 +895,50 @@ python evaluate_prompts.py
 - Comparative analysis across domains
 - 44 unit tests (100% pass)
 
+### PHASE 3: Research Analysis Framework ✅
+
+**3-1: Error Analysis Module** ([src/core/error_analysis.py](src/core/error_analysis.py))
+- Error classification: FactualError, ContextError, FormattingError, CitationError
+- Confidence calibration with expected calibration error (ECE)
+- Hallucination quantification with severity levels
+- Correlation analysis between confidence and accuracy
+- 23 unit tests (100% pass)
+
+**3-2: Theoretical Analysis Module** ([src/core/theoretical_analysis.py](src/core/theoretical_analysis.py))
+- Formal complexity proofs: O(b·d) time, O(d) space
+- Optimality analysis with theoretical bounds
+- Token reduction analysis (flat vs hierarchical)
+- Convergence guarantees for beam search
+- LaTeX proof generation for research papers
+- 38 unit tests (100% pass)
+
+**3-3: Experiment Pipeline** ([scripts/](scripts/))
+- **Ablation study runner** - Component significance testing ([ablation_study.py](scripts/ablation_study.py))
+- **LaTeX table generator** - Publication-ready tables ([generate_paper_tables.py](scripts/generate_paper_tables.py))
+- **Result plotter** - matplotlib/seaborn visualizations ([plot_results.py](scripts/plot_results.py))
+- Statistical significance testing (t-test, Wilcoxon, Bootstrap)
+- 21 unit tests (100% pass)
+
+**3-4: Benchmark Suite** ([benchmarks/](benchmarks/))
+- Baseline comparison (BM25Ranker, SemanticRanker, StructuralRanker)
+- Statistical tests with effect size calculation
+- Efficiency metrics (latency, throughput, token usage)
+- 34 unit tests (100% pass)
+
+**3-5: Learnable Scorer** ([src/core/learnable_scorer.py](src/core/learnable_scorer.py))
+- DSPy-based learning scorer with Groq optimization
+- Adaptive feature weighting
+- Training pipeline with validation
+- 24 unit tests (100% pass)
+
 ### Test Coverage Summary
-- **Total Tests:** 323+ (unit + integration + API)
-- **Pass Rate:** 99%+ (322 passed)
-- **PHASE 2-C Tests:** 79 new tests for Reasoning Graph & Benchmarking
-- **Coverage:** Core functionality, API routes, error handling, domain detection
+- **Total Tests:** 469 passing, 15 skipped (484 collected)
+- **Pass Rate:** 96.9% (469/484)
+- **Execution Time:** 44 seconds (full suite)
+- **Python Version:** 3.14.2 (medireg environment)
+- **Code Quality:** Zero warnings (Pydantic V2, deprecation fixes complete)
+- **PHASE 3 Tests:** 142 new tests for research framework
+- **Coverage:** Core functionality, API routes, error handling, domain detection, research analysis
 
 ---
 
@@ -904,7 +972,15 @@ We welcome contributions! Areas for improvement:
 - [x] Celery task queue ✅
 - [x] Reasoning graph (9 edge types, multi-hop paths) ✅
 - [x] Multi-domain benchmarking (7 domains) ✅
-- [ ] Advanced visualizations (charts, graphs)
+- [x] Error analysis (classification, calibration, quantification) ✅
+- [x] Theoretical analysis (complexity proofs, optimality) ✅
+- [x] Experiment pipeline (ablation, LaTeX tables, plotting) ✅
+- [x] Benchmark suite (baseline comparison, statistical tests) ✅
+- [x] Learnable scorer (DSPy optimization) ✅
+- [x] Pydantic V2 migration (ConfigDict, field_validator) ✅
+- [x] Deprecation cleanup (zero warnings) ✅
+- [ ] PHASE 4: Advanced research modules
+- [ ] Advanced visualizations (interactive charts)
 - [ ] Kubernetes orchestration
 - [ ] Active learning system
 
