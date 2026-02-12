@@ -164,9 +164,9 @@ class TestHallucinationDetector:
         detector = create_detector()
         
         source_nodes = [
-            {"content": "First fact about TreeRAG."},
-            {"content": "Second fact about indexing."},
-            {"content": "Third fact about retrieval."}
+            {"content": "TreeRAG uses hierarchical structures."},
+            {"content": "The system provides indexing capabilities."},
+            {"content": "Retrieval mechanisms are optimized for speed."}
         ]
         
         answer = "TreeRAG uses indexing and retrieval mechanisms."

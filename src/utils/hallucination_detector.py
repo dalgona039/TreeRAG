@@ -116,7 +116,8 @@ class HallucinationDetector:
                     word_weights.append(weight)
             
             if len(sentence_words_filtered) > 0:
-                weighted_overlap = sum(word_weights) / (len(sentence_words_filtered) * 2.0)
+                weighted_overlap = sum(word_weights) / len(sentence_words_filtered)
+                signals.append(weighted_overlap)
                 signals.append(weighted_overlap)
         
         bigrams_sent = [' '.join(sentence_words[i:i+2]) for i in range(len(sentence_words)-1)]
@@ -129,7 +130,7 @@ class HallucinationDetector:
         trigrams_src = [' '.join(source_words[i:i+3]) for i in range(len(source_words)-2)]
         if trigrams_sent:
             trigram_overlap = len([t for t in trigrams_sent if t in trigrams_src]) / len(trigrams_sent)
-            signals.append(trigram_overlap * 1.2)
+            signals.append(trigram_overlap)
         
         chunks = [sentence_lower[i:i+20] for i in range(0, len(sentence_lower), 10)]
         chunk_matches = sum(1 for chunk in chunks if chunk in source_lower)

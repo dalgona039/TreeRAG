@@ -1,6 +1,6 @@
 """Pydantic schemas for data validation."""
 from typing import Optional, List
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, ConfigDict, field_validator
 
 
 class PageNode(BaseModel):
@@ -10,15 +10,14 @@ class PageNode(BaseModel):
     page_ref: str = Field(default="", description="Page reference (e.g., '12-15')")
     text: Optional[str] = Field(default=None, description="Full text content")
     children: Optional[List['PageNode']] = Field(default=None, description="Child nodes")
+
+    model_config = ConfigDict(extra="allow")
     
-    @validator('children', pre=True, always=True)
+    @field_validator("children", mode="before")
     def validate_children(cls, v):
         if v is None or v == []:
             return None
         return v
-    
-    class Config:
-        extra = 'allow'
 
 
 PageNode.model_rebuild()

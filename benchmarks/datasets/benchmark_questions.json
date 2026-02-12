@@ -1,0 +1,188 @@
+{
+  "version": "1.0",
+  "description": "TreeRAG benchmark questions for evaluation",
+  "n_questions": 20,
+  "domains": ["technical", "academic", "financial", "legal", "medical", "general"],
+  "questions": [
+    {
+      "question_id": "tech_001",
+      "question": "What is the main architecture of the TreeRAG system?",
+      "document_id": "treerag_documentation",
+      "relevant_sections": ["architecture_overview", "core_components"],
+      "expected_answer": "TreeRAG uses a hierarchical tree structure where documents are parsed into nested sections, enabling targeted traversal instead of flat chunk retrieval.",
+      "domain": "technical",
+      "difficulty": "easy"
+    },
+    {
+      "question_id": "tech_002",
+      "question": "How does the beam search algorithm improve retrieval quality?",
+      "document_id": "treerag_documentation",
+      "relevant_sections": ["beam_search_module", "algorithm_details"],
+      "expected_answer": "Beam search maintains multiple promising paths during tree traversal, exploring alternatives when the top path yields low confidence, improving recall for complex queries.",
+      "domain": "technical",
+      "difficulty": "medium"
+    },
+    {
+      "question_id": "tech_003",
+      "question": "Explain the contextual compression mechanism and its token reduction capabilities.",
+      "document_id": "treerag_documentation",
+      "relevant_sections": ["contextual_compressor", "token_optimization", "compression_algorithms"],
+      "expected_answer": "Contextual compression uses extractive and abstractive methods to reduce context length by 40-60% while preserving relevant information for the query.",
+      "domain": "technical",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "tech_004",
+      "question": "What caching strategies are used for repeated queries?",
+      "document_id": "treerag_documentation",
+      "relevant_sections": ["redis_cache", "embedding_cache"],
+      "expected_answer": "TreeRAG uses Redis-based caching with normalized query hashing, TTL expiration, and cache warming for frequently accessed documents.",
+      "domain": "technical",
+      "difficulty": "medium"
+    },
+    {
+      "question_id": "tech_005",
+      "question": "How does the hallucination detection system work?",
+      "document_id": "treerag_documentation",
+      "relevant_sections": ["hallucination_detector", "claim_verification"],
+      "expected_answer": "The hallucination detector extracts claims from generated answers and verifies each against the retrieved context using semantic similarity and keyword matching.",
+      "domain": "technical",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "acad_001",
+      "question": "What are the prerequisites for the semiconductor engineering course?",
+      "document_id": "2025_curriculum",
+      "relevant_sections": ["prerequisites", "course_requirements"],
+      "expected_answer": "Prerequisites include Physics II, Calculus III, and Introduction to Electrical Engineering.",
+      "domain": "academic",
+      "difficulty": "easy"
+    },
+    {
+      "question_id": "acad_002",
+      "question": "Describe the research methodology used in the biomedical engineering report.",
+      "document_id": "biomed_report",
+      "relevant_sections": ["methodology", "experimental_design", "data_collection"],
+      "expected_answer": "The research used a mixed-methods approach combining quantitative sensor data analysis with qualitative user studies.",
+      "domain": "academic",
+      "difficulty": "medium"
+    },
+    {
+      "question_id": "acad_003",
+      "question": "What were the key findings regarding Python web framework performance?",
+      "document_id": "python_project_report",
+      "relevant_sections": ["results", "performance_analysis", "conclusions"],
+      "expected_answer": "FastAPI showed 2.3x better throughput than Flask for async workloads, while Django excelled in ORM-heavy applications.",
+      "domain": "academic",
+      "difficulty": "medium"
+    },
+    {
+      "question_id": "fin_001",
+      "question": "What was the company's revenue growth in Q3 2024?",
+      "document_id": "quarterly_report",
+      "relevant_sections": ["financial_highlights", "revenue_breakdown"],
+      "expected_answer": "Q3 2024 revenue grew 15.3% year-over-year to $4.2 billion.",
+      "domain": "financial",
+      "difficulty": "easy"
+    },
+    {
+      "question_id": "fin_002",
+      "question": "Analyze the cash flow statement and identify key concerns.",
+      "document_id": "annual_report",
+      "relevant_sections": ["cash_flow_statement", "liquidity_analysis", "risk_factors"],
+      "expected_answer": "Operating cash flow decreased 8% due to inventory buildup, while investing activities increased for R&D expansion.",
+      "domain": "financial",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "legal_001",
+      "question": "What are the termination clauses in the service agreement?",
+      "document_id": "service_contract",
+      "relevant_sections": ["termination", "notice_period", "exit_conditions"],
+      "expected_answer": "Either party may terminate with 30 days written notice. Immediate termination applies for material breach after 5-day cure period.",
+      "domain": "legal",
+      "difficulty": "medium"
+    },
+    {
+      "question_id": "legal_002",
+      "question": "What liability limitations apply to data breaches?",
+      "document_id": "data_agreement",
+      "relevant_sections": ["liability", "indemnification", "data_protection"],
+      "expected_answer": "Liability is capped at 12 months of fees, excluding gross negligence. Data breach notification must occur within 72 hours.",
+      "domain": "legal",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "med_001",
+      "question": "What are the recommended dosage guidelines for the medication?",
+      "document_id": "drug_information",
+      "relevant_sections": ["dosage", "administration", "patient_population"],
+      "expected_answer": "Adults: 10-20mg twice daily with food. Renal impairment requires 50% dose reduction.",
+      "domain": "medical",
+      "difficulty": "medium"
+    },
+    {
+      "question_id": "med_002",
+      "question": "List the contraindications and drug interactions.",
+      "document_id": "drug_information",
+      "relevant_sections": ["contraindications", "drug_interactions", "warnings"],
+      "expected_answer": "Contraindicated with MAO inhibitors and severe hepatic impairment. Interactions include CYP3A4 inhibitors and anticoagulants.",
+      "domain": "medical",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "gen_001",
+      "question": "What is the main purpose of this document?",
+      "document_id": "sample_document",
+      "relevant_sections": ["introduction", "overview"],
+      "expected_answer": "The document provides comprehensive guidelines for implementing the new system.",
+      "domain": "general",
+      "difficulty": "easy"
+    },
+    {
+      "question_id": "gen_002",
+      "question": "Summarize the key recommendations in the conclusion.",
+      "document_id": "sample_document",
+      "relevant_sections": ["conclusion", "recommendations"],
+      "expected_answer": "Key recommendations include phased implementation, stakeholder training, and quarterly review cycles.",
+      "domain": "general",
+      "difficulty": "medium"
+    },
+    {
+      "question_id": "multi_001",
+      "question": "Compare the different approaches mentioned in sections 2 and 4.",
+      "document_id": "comparison_doc",
+      "relevant_sections": ["section_2", "section_4", "comparison_table"],
+      "expected_answer": "Section 2's approach prioritizes speed while Section 4 emphasizes accuracy. The comparison shows trade-offs between the two.",
+      "domain": "technical",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "multi_002",
+      "question": "What evidence supports the main claim in the introduction?",
+      "document_id": "research_paper",
+      "relevant_sections": ["introduction", "evidence_section", "supporting_data"],
+      "expected_answer": "Supporting evidence includes three empirical studies and statistical analysis showing 95% confidence intervals.",
+      "domain": "academic",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "cross_001",
+      "question": "How do the financial projections relate to the technical roadmap?",
+      "document_id": "business_plan",
+      "relevant_sections": ["financial_projections", "technical_roadmap", "milestone_alignment"],
+      "expected_answer": "Revenue milestones are tied to product releases: Q2 MVP launch enables $1M ARR, Q4 enterprise features target $5M.",
+      "domain": "financial",
+      "difficulty": "hard"
+    },
+    {
+      "question_id": "cross_002",
+      "question": "What regulatory compliance requirements affect the implementation timeline?",
+      "document_id": "project_plan",
+      "relevant_sections": ["regulatory_requirements", "timeline", "compliance_checklist"],
+      "expected_answer": "GDPR compliance adds 6 weeks for data handling review. SOC2 certification required before enterprise sales.",
+      "domain": "legal",
+      "difficulty": "hard"
+    }
+  ]
+}

@@ -41,7 +41,7 @@ class TestValidationErrors:
         """Test invalid JSON handling."""
         response = test_client.post(
             "/api/chat",
-            data="invalid json",
+            content="invalid json",
             headers={"Content-Type": "application/json"}
         )
         

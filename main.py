@@ -1,5 +1,6 @@
 import os
 import time
+from datetime import datetime, UTC
 from typing import List, Dict, Any, Optional
 import uvicorn
 from fastapi import FastAPI, Request
@@ -109,7 +110,7 @@ def create_app() -> FastAPI:
         return {
             "status": "healthy",
             "service": "TreeRAG API",
-            "timestamp": __import__('datetime').datetime.utcnow().isoformat()
+            "timestamp": datetime.now(UTC).isoformat()
         }
     
     @app.get("/health/deep")
@@ -123,7 +124,7 @@ def create_app() -> FastAPI:
         health_status = {
             "status": "healthy",
             "service": "TreeRAG API",
-            "timestamp": __import__('datetime').datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "checks": {},
             "cache_info": {
                 "ttl_seconds": health_cache.ttl_seconds,
