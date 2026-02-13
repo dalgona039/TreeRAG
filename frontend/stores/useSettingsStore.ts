@@ -9,14 +9,14 @@ interface SettingsState {
   
   // Display settings
   domainTemplate: string;
-  language: "ko" | "en";
+  language: "ko" | "en" | "ja";
   
   // Actions
   setUseDeepTraversal: (value: boolean) => void;
   setMaxDepth: (value: number) => void;
   setMaxBranches: (value: number) => void;
   setDomainTemplate: (value: string) => void;
-  setLanguage: (value: "ko" | "en") => void;
+  setLanguage: (value: "ko" | "en" | "ja") => void;
   
   // Bulk update
   updateSettings: (settings: Partial<SettingsState>) => void;

@@ -1,4 +1,4 @@
-# TreeRAG Frontend - Next.js
+# TreeRAG Frontend - Next.js Production Mode
 FROM node:20-slim
 
 # Set working directory
@@ -7,8 +7,8 @@ WORKDIR /app
 # Copy package files
 COPY frontend/package*.json ./
 
-# Install dependencies (including devDependencies for build)
-RUN npm ci && npm rebuild
+# Install dependencies
+RUN npm ci
 
 # Copy application code
 COPY frontend/ .
@@ -23,5 +23,5 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD node -e "require('http').get('http://localhost:3000', (res) => process.exit(res.statusCode === 200 ? 0 : 1))"
 
-# Run the application
+# Run in production mode
 CMD ["npm", "start"]

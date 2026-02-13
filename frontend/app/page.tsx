@@ -63,19 +63,25 @@ export default function Home() {
   
   // Wrapper for language change (component expects string, store uses union type)
   const handleLanguageChange = (value: string) => {
-    if (value === 'ko' || value === 'en') {
+    if (value === 'ko' || value === 'en' || value === 'ja') {
       setLanguage(value);
     }
   };
   
-  // Performance store
-  const performanceMetrics = usePerformanceStore(state => ({
-    totalQueries: state.totalQueries,
-    avgResponseTime: state.avgResponseTime,
-    avgContextSize: state.avgContextSize,
-    deepTraversalUsage: state.deepTraversalUsage,
-    queriesHistory: state.queriesHistory,
-  }));
+  // Performance store - select fields individually to avoid infinite loop
+  const totalQueries = usePerformanceStore(state => state.totalQueries);
+  const avgResponseTime = usePerformanceStore(state => state.avgResponseTime);
+  const avgContextSize = usePerformanceStore(state => state.avgContextSize);
+  const deepTraversalUsage = usePerformanceStore(state => state.deepTraversalUsage);
+  const queriesHistory = usePerformanceStore(state => state.queriesHistory);
+  
+  const performanceMetrics = {
+    totalQueries,
+    avgResponseTime,
+    avgContextSize,
+    deepTraversalUsage,
+    queriesHistory,
+  };
   
   // Chat store
   const input = useChatStore(state => state.input);
