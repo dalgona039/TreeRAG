@@ -1,8 +1,3 @@
-"""
-실제 TreeRAG 시스템과 통합하는 평가 스크립트
-
-시뮬레이션이 아닌 실제 TreeRAG API를 호출
-"""
 
 import sys
 import json
@@ -27,18 +22,13 @@ from benchmarks.metrics.fidelity_metrics import FidelityAnalysis
 
 
 class RealTreeRAGEvaluator(EvaluationRunner):
-    """실제 TreeRAG API를 호출하는 평가기"""
     
     def __init__(
         self, 
         config: EvaluationConfig,
         api_base_url: str = "http://localhost:8000"
     ):
-        """
-        Args:
-            config: 평가 설정
-            api_base_url: TreeRAG API 기본 URL
-        """
+
         super().__init__(config)
         self.api_base_url = api_base_url.rstrip('/')
         
@@ -47,7 +37,6 @@ class RealTreeRAGEvaluator(EvaluationRunner):
         question: str,
         document_id: Optional[str] = None
     ) -> Dict[str, Any]:
-        """TreeRAG API 호출"""
         
         url = f"{self.api_base_url}/chat"
         
@@ -69,9 +58,8 @@ class RealTreeRAGEvaluator(EvaluationRunner):
                 return await response.json()
     
     def _evaluate_treerag(self) -> SystemResult:
-        """TreeRAG 시스템을 실제 API로 평가"""
         
-        print("\n🌳 TreeRAG 실제 시스템 평가 시작...")
+        print("TreeRAG 실제 시스템 평가 시작...")
         
         result = SystemResult(
             system_name="TreeRAG (Real)",
@@ -262,7 +250,7 @@ def main():
     report = evaluator.run()
     
     print("\n" + "=" * 70)
-    print("✅ 실제 시스템 평가 완료!")
+    print("실제 시스템 평가 완료!")
     print("=" * 70)
     print(f"\n결과 확인:")
     print(f"  python scripts/view_results.py benchmarks/results/{args.experiment}/evaluation_report.json")
