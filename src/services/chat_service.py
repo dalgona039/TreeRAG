@@ -84,7 +84,7 @@ class ChatService:
         max_depth: Optional[int] = None,
         max_branches: Optional[int] = None,
         domain_template: str = "general",
-        language: str = "ko",
+        language: str = "auto",
         node_context: Optional[NodeContext] = None,
         enable_comparison: bool = False
     ) -> ChatResult:
@@ -112,6 +112,7 @@ class ChatService:
         use_traversal = use_deep_traversal if use_deep_traversal is not None else Config.USE_DEEP_TRAVERSAL
         depth = max_depth if max_depth is not None else Config.MAX_TRAVERSAL_DEPTH
         branches = max_branches if max_branches is not None else Config.MAX_BRANCHES_PER_LEVEL
+        resolved_language = self._resolve_language(question, language)
         
         try:
             reasoner = TreeRAGReasoner(
@@ -119,7 +120,7 @@ class ChatService:
                 use_deep_traversal=use_traversal
             )
             
-            actual_question = self._enhance_question(question, node_context)
+            actual_question = self._enhance_question(question, node_context, resolved_language)
             
             answer, traversal_info = reasoner.query(
                 actual_question,
@@ -127,7 +128,7 @@ class ChatService:
                 max_depth=depth,
                 max_branches=branches,
                 domain_template=domain_template,
-                language=language
+                language=resolved_language
             )
             
             citations = self._extract_citations(answer)
@@ -175,13 +176,24 @@ class ChatService:
     def _enhance_question(
         self, 
         question: str, 
-        node_context: Optional[NodeContext]
+        node_context: Optional[NodeContext],
+        language: str
     ) -> str:
         if not node_context:
             return question
         
+        if language == "en":
+            page_info = f" (page: {node_context.page_ref})" if node_context.page_ref else ""
+            return f"""[Context: document section "{node_context.title}"]
+
+The user is asking about this section.{page_info}
+
+Question: {question}
+
+Please answer in detail focusing on information relevant to this section."""
+
         page_info = f" (페이지: {node_context.page_ref})" if node_context.page_ref else ""
-        
+
         return f"""[컨텍스트: 문서 섹션 "{node_context.title}"]
 
 사용자가 위 섹션에 대해 질문하고 있습니다.{page_info}
@@ -189,6 +201,19 @@ class ChatService:
 질문: {question}
 
 이 섹션과 관련된 내용을 중심으로 상세히 답변해주세요."""
+
+    @staticmethod
+    def _detect_language(text: str) -> str:
+        if re.search(r'[가-힣]', text):
+            return "ko"
+        if re.search(r'[ぁ-ゖァ-ヺ一-龯]', text):
+            return "ja"
+        return "en"
+
+    def _resolve_language(self, question: str, language: Optional[str]) -> str:
+        if language and language in {"ko", "en", "ja"}:
+            return language
+        return self._detect_language(question)
     
     def _extract_citations(self, answer: str) -> List[str]:
         """답변에서 인용 추출

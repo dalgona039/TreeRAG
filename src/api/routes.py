@@ -2,6 +2,7 @@ import os
 import shutil
 import json
 import uuid
+import re
 import logging
 from pathlib import Path
 from typing import Dict, List, Any, Optional
@@ -20,6 +21,14 @@ from src.utils.hallucination_detector import HallucinationDetector
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
+
+
+def _detect_language(text: str) -> str:
+    if re.search(r'[가-힣]', text):
+        return "ko"
+    if re.search(r'[ぁ-ゖァ-ヺ一-龯]', text):
+        return "ja"
+    return "en"
 
 def get_real_ip(request: Request) -> str:
     TRUSTED_PROXIES = {'127.0.0.1', 'localhost'}
@@ -324,7 +333,9 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
         max_depth = req.max_depth if req.max_depth is not None else Config.MAX_TRAVERSAL_DEPTH
         max_branches = req.max_branches if req.max_branches is not None else Config.MAX_BRANCHES_PER_LEVEL
         domain_template = req.domain_template if req.domain_template else "general"
-        language = req.language if req.language else "ko"
+        language = req.language if req.language else "auto"
+        if language == "auto":
+            language = _detect_language(req.question)
         
         reasoner = TreeRAGReasoner(
             selected_indices,
@@ -332,7 +343,17 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
         )
         
         if req.node_context:
-            enhanced_question = f"""[컨텍스트: 문서 섹션 "{req.node_context.get('title', '')}"]
+            if language == "en":
+                page_info = f" (page: {req.node_context.get('page_ref', '')})" if req.node_context.get('page_ref') else ""
+                enhanced_question = f"""[Context: document section \"{req.node_context.get('title', '')}\"]
+
+The user is asking about this section.{page_info}
+
+Question: {req.question}
+
+Please answer in detail focusing on information relevant to this section."""
+            else:
+                enhanced_question = f"""[컨텍스트: 문서 섹션 "{req.node_context.get('title', '')}"]
 
 사용자가 위 섹션에 대해 질문하고 있습니다.{f" (페이지: {req.node_context.get('page_ref', '')})" if req.node_context.get('page_ref') else ""}
 

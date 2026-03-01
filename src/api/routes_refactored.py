@@ -17,12 +17,10 @@ from src.services.chat_service import NodeContext
 from src.repositories import DocumentRepository, IndexRepository
 from src.utils.cache import get_cache
 
-# ===== Router Setup =====
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
 
-# Rate limiter
 def get_real_ip(request: Request) -> str:
     TRUSTED_PROXIES = {'127.0.0.1', 'localhost'}
     
@@ -39,24 +37,19 @@ def get_real_ip(request: Request) -> str:
 
 limiter = Limiter(key_func=get_real_ip)
 
-# ===== Dependency Injection =====
 
-# Repositories (데이터 접근)
 document_repo = DocumentRepository()
 index_repo = IndexRepository()
 
-# Services (비즈니스 로직)
 upload_service = UploadService(document_repo)
 index_service = IndexService(document_repo, index_repo)
 chat_service = ChatService(index_repo)
 
-# ===== Health Check =====
 
 @router.get("/")
 async def health_check() -> Dict[str, str]:
     return {"status": "ok", "service": "TreeRAG API"}
 
-# ===== Upload Endpoint =====
 
 @router.post("/upload")
 async def upload_file(file: UploadFile = File(...)) -> Dict[str, Any]:
@@ -101,7 +94,6 @@ async def upload_file(file: UploadFile = File(...)) -> Dict[str, Any]:
             detail="Upload failed due to server error"
         )
 
-# ===== Index Endpoint =====
 
 @router.post("/index")
 @limiter.limit("10/minute")
@@ -111,7 +103,6 @@ async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
     result = index_service.create_index(req.filename)
     
     if not result.success:
-        # 에러 유형에 따른 상태 코드 결정
         if "not found" in (result.error_message or "").lower():
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
@@ -129,7 +120,6 @@ async def create_index(request: Request, req: IndexRequest) -> Dict[str, str]:
         "status": result.status
     }
 
-# ===== Chat Endpoint =====
 
 @router.post("/chat", response_model=ChatResponse)
 @limiter.limit("30/minute")
@@ -150,7 +140,7 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
         max_depth=req.max_depth,
         max_branches=req.max_branches,
         domain_template=req.domain_template or "general",
-        language=req.language or "ko",
+        language=req.language or "auto",
         node_context=node_context,
         enable_comparison=req.enable_comparison or False
     )
@@ -166,7 +156,6 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
             detail=result.error_message
         )
     
-    # 응답 변환
     comparison = None
     if result.comparison:
         comparison = ComparisonResult(
@@ -214,7 +203,6 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
         hallucination_warning=hallucination_warning
     )
 
-# ===== List Endpoints =====
 
 @router.get("/indices")
 async def list_indices() -> Dict[str, List[str]]:
@@ -226,7 +214,6 @@ async def list_pdfs() -> Dict[str, List[str]]:
     pdfs = document_repo.list_all()
     return {"pdfs": sorted(pdfs)}
 
-# ===== Tree Endpoint =====
 
 @router.get("/tree/{index_filename}", response_model=TreeResponse)
 async def get_tree_structure(index_filename: str) -> TreeResponse:
@@ -247,17 +234,14 @@ async def get_tree_structure(index_filename: str) -> TreeResponse:
     doc_name = index_filename.replace("_index.json", "")
     return TreeResponse(document_name=doc_name, tree=tree_data)
 
-# ===== PDF Serving Endpoint =====
 
 @router.get("/pdf/{filename}")
 async def serve_pdf(filename: str):
     decoded_filename = unquote(filename)
     logger.info(f"[PDF] Request: {decoded_filename}")
     
-    # 정확한 매칭 시도
     pdf_path = document_repo.get_path(decoded_filename)
     
-    # 유사 파일 검색
     if not pdf_path:
         logger.warning(f"[PDF] Exact match failed, searching...")
         all_pdfs = document_repo.list_all()
@@ -289,7 +273,6 @@ async def serve_pdf(filename: str):
         }
     )
 
-# ===== Cache Endpoints =====
 
 @router.get("/cache/stats")
 async def get_cache_stats():

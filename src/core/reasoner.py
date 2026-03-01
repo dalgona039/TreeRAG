@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from typing import Any, List, Dict, Optional, Literal
 from src.config import Config
 from src.core.tree_traversal import TreeNavigator, format_traversal_results
@@ -86,9 +87,43 @@ class TreeRAGReasoner:
                 raise IOError(f"Failed to read index file {index_filename}: {e}")
 
 
-    def query(self, user_question: str, enable_comparison: bool = True, max_depth: int = 5, max_branches: int = 3, domain_template: str = "general", language: str = "ko", node_context: Optional[dict] = None) -> tuple[str, dict]:
+    @staticmethod
+    def _detect_language(text: str) -> str:
+        if re.search(r'[가-힣]', text):
+            return "ko"
+        if re.search(r'[ぁ-ゖァ-ヺ一-龯]', text):
+            return "ja"
+        return "en"
+
+    def _resolve_language(self, user_question: str, language: Optional[str]) -> str:
+        if language in LANGUAGE_INSTRUCTIONS:
+            return language
+        return self._detect_language(user_question)
+
+    def _build_no_context_response(self, language: str) -> str:
+        if language == "ko":
+            return (
+                "제공된 인덱스에서 질문과 직접적으로 관련된 섹션을 찾지 못했습니다.\n\n"
+                "현재 문서만으로는 답변을 확정할 수 없어 추가 확인이 필요합니다.\n\n"
+                "📚 참조 페이지: 없음"
+            )
+        if language == "ja":
+            return (
+                "提供されたインデックスから、質問に直接関連するセクションを見つけられませんでした。\n\n"
+                "現在の文書だけでは回答を確定できないため、追加確認が必要です。\n\n"
+                "📚 参照ページ: なし"
+            )
+        return (
+            "No sections directly relevant to the question were found in the provided index.\n\n"
+            "The current document alone is insufficient to provide a definitive answer, so further verification is required.\n\n"
+            "📚 Reference Pages: None"
+        )
+
+    def query(self, user_question: str, enable_comparison: bool = True, max_depth: int = 5, max_branches: int = 3, domain_template: str = "general", language: Optional[str] = "auto", node_context: Optional[dict] = None) -> tuple[str, dict]:
         if not user_question or not user_question.strip():
             raise ValueError("user_question cannot be empty")
+
+        language = self._resolve_language(user_question, language)
         
         cache = get_cache()
         cached_response = cache.get(
@@ -140,6 +175,26 @@ class TreeRAGReasoner:
         
         if reference_context:
             context_str = reference_context + "\n\n" + context_str
+
+        if not traversal_info["nodes_selected"] and not resolved_refs:
+            fallback_answer = self._build_no_context_response(language)
+            cache_data = {
+                "answer": fallback_answer,
+                "metadata": traversal_info
+            }
+            cache.set(
+                question=user_question,
+                index_files=self.index_filenames,
+                use_deep_traversal=self.use_deep_traversal,
+                max_depth=max_depth,
+                max_branches=max_branches,
+                domain_template=domain_template,
+                language=language,
+                response=cache_data,
+                node_context=node_context
+            )
+            print("💾 Response cached (no relevant sections)")
+            return fallback_answer, traversal_info
         
         is_multi_doc = len(self.index_filenames) > 1
         comparison_prompt = ""

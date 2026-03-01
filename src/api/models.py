@@ -13,7 +13,7 @@ class ChatRequest(BaseModel):
     max_depth: Optional[int] = None
     max_branches: Optional[int] = None
     domain_template: Optional[str] = "general"  
-    language: Optional[str] = "ko" 
+    language: Optional[str] = "auto" 
 
 class ComparisonResult(BaseModel):
     has_comparison: bool
