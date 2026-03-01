@@ -1,6 +1,21 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { ChatSession, Message, TreeNode } from "@/lib/types";
+import type { ChatSession, Message } from "@/lib/types";
+
+const normalizeSession = (raw: Partial<ChatSession>): ChatSession => {
+  const createdAt = raw.createdAt instanceof Date
+    ? raw.createdAt
+    : new Date(raw.createdAt ?? Date.now());
+
+  return {
+    id: String(raw.id ?? Date.now()),
+    title: typeof raw.title === "string" && raw.title.trim() ? raw.title : "Untitled Session",
+    indexFiles: Array.isArray(raw.indexFiles) ? raw.indexFiles : [],
+    originalFilenames: Array.isArray(raw.originalFilenames) ? raw.originalFilenames : undefined,
+    messages: Array.isArray(raw.messages) ? raw.messages : [],
+    createdAt: Number.isNaN(createdAt.getTime()) ? new Date() : createdAt,
+  };
+};
 
 interface SessionState {
   // Session data
@@ -74,6 +89,26 @@ export const useSessionStore = create<SessionState>()(
         sessions: state.sessions,
         currentSessionId: state.currentSessionId,
       }),
+      merge: (persistedState, currentState) => {
+        const persisted = (persistedState ?? {}) as Partial<SessionState>;
+        const normalizedSessions = Array.isArray(persisted.sessions)
+          ? persisted.sessions.map((session) => normalizeSession(session as Partial<ChatSession>))
+          : currentState.sessions;
+
+        const preferredSessionId = persisted.currentSessionId ?? null;
+        const hasPreferredSession = preferredSessionId
+          ? normalizedSessions.some((session) => session.id === preferredSessionId)
+          : false;
+
+        return {
+          ...currentState,
+          ...persisted,
+          sessions: normalizedSessions,
+          currentSessionId: hasPreferredSession
+            ? preferredSessionId
+            : (normalizedSessions[0]?.id ?? null),
+        };
+      },
     }
   )
 );

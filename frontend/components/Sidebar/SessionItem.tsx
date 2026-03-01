@@ -20,6 +20,11 @@ export default function SessionItem({
   onDelete,
   t 
 }: SessionItemProps) {
+  const createdAt = session.createdAt instanceof Date
+    ? session.createdAt
+    : new Date(session.createdAt as unknown as string);
+  const safeCreatedAt = Number.isNaN(createdAt.getTime()) ? new Date() : createdAt;
+
   return (
     <div
       className={`group relative w-full text-left flex items-center gap-3 px-4 py-2 rounded-full text-sm mb-1 transition-colors ${
@@ -36,7 +41,7 @@ export default function SessionItem({
         <div className="flex-1 min-w-0">
           <div className="truncate">{session.title}</div>
           <div className="text-xs text-slate-400">
-            {formatDistanceToNow(session.createdAt, { addSuffix: true, locale: ko })}
+            {formatDistanceToNow(safeCreatedAt, { addSuffix: true, locale: ko })}
           </div>
         </div>
       </button>
