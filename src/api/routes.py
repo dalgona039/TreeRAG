@@ -55,28 +55,28 @@ def _estimate_context_tokens(nodes_selected: List[Dict[str, Any]]) -> int:
 
     total_chars = 0
     for node in nodes_selected:
-
-
-    @router.get("/sessions", response_model=SessionSyncResponse)
-    async def load_sessions() -> SessionSyncResponse:
-        data = session_repo.load()
-        return SessionSyncResponse(
-            sessions=data.get("sessions", []),
-            currentSessionId=data.get("currentSessionId")
-        )
-
-
-    @router.put("/sessions", response_model=SessionSyncResponse)
-    async def save_sessions(req: SessionSyncRequest) -> SessionSyncResponse:
-        saved = session_repo.save(req.sessions, req.currentSessionId)
-        return SessionSyncResponse(
-            sessions=saved.get("sessions", []),
-            currentSessionId=saved.get("currentSessionId")
-        )
         total_chars += len(str(node.get("title", "")))
         total_chars += len(str(node.get("content", "")))
 
     return total_chars // 4
+
+
+@router.get("/sessions", response_model=SessionSyncResponse)
+async def load_sessions() -> SessionSyncResponse:
+    data = session_repo.load()
+    return SessionSyncResponse(
+        sessions=data.get("sessions", []),
+        currentSessionId=data.get("currentSessionId")
+    )
+
+
+@router.put("/sessions", response_model=SessionSyncResponse)
+async def save_sessions(req: SessionSyncRequest) -> SessionSyncResponse:
+    saved = session_repo.save(req.sessions, req.currentSessionId)
+    return SessionSyncResponse(
+        sessions=saved.get("sessions", []),
+        currentSessionId=saved.get("currentSessionId")
+    )
 
 async def _route_documents(question: str, available_indices: List[str]) -> List[str]:
     if not available_indices:

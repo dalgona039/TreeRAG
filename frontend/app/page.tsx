@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { UI_TEXT } from "@/constants/ui-text";
+import { api } from "@/lib/api";
 import { 
   useSessionStore, 
   useSettingsStore, 
@@ -23,6 +24,9 @@ import PerformancePanel from "@/components/Settings/PerformancePanel";
 import PdfViewer from "@/components/Layout/PdfViewer";
 
 export default function Home() {
+  const [sessionSyncReady, setSessionSyncReady] = useState(false);
+  const syncSignatureRef = useRef<string>("");
+
   // ===== Zustand Stores (No Prop Drilling!) =====
   
   // Session store
@@ -126,6 +130,76 @@ export default function Home() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [createNewSession]);
+
+  useEffect(() => {
+    const hydrateSessions = async () => {
+      try {
+        const remote = await api.loadSessions();
+        const remoteSessions = Array.isArray(remote.sessions)
+          ? remote.sessions.map((session: any) => ({
+              ...session,
+              createdAt: new Date(session.createdAt ?? Date.now()),
+              messages: Array.isArray(session.messages) ? session.messages : [],
+              indexFiles: Array.isArray(session.indexFiles) ? session.indexFiles : [],
+            }))
+          : [];
+
+        const localState = useSessionStore.getState();
+        const localSessions = localState.sessions;
+
+        const shouldAdoptRemote = remoteSessions.length > 0 && localSessions.length === 0;
+
+        if (shouldAdoptRemote) {
+          setSessions(remoteSessions);
+          const nextId = remote.currentSessionId && remoteSessions.some((s: any) => s.id === remote.currentSessionId)
+            ? remote.currentSessionId
+            : remoteSessions[0].id;
+          setCurrentSessionId(nextId);
+          syncSignatureRef.current = JSON.stringify({ sessions: remoteSessions, currentSessionId: nextId });
+        } else {
+          syncSignatureRef.current = JSON.stringify({ sessions: localSessions, currentSessionId: localState.currentSessionId });
+        }
+      } catch (error) {
+        console.error("Failed to hydrate sessions from backend:", error);
+      } finally {
+        setSessionSyncReady(true);
+      }
+    };
+
+    hydrateSessions();
+  }, [setCurrentSessionId, setSessions]);
+
+  useEffect(() => {
+    if (!sessionSyncReady) {
+      return;
+    }
+
+    const payload = {
+      sessions: sessions.map((session) => ({
+        ...session,
+        createdAt: session.createdAt instanceof Date
+          ? session.createdAt.toISOString()
+          : session.createdAt,
+      })),
+      currentSessionId,
+    };
+
+    const signature = JSON.stringify(payload);
+    if (signature === syncSignatureRef.current) {
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      try {
+        await api.saveSessions(payload);
+        syncSignatureRef.current = signature;
+      } catch (error) {
+        console.error("Failed to sync sessions to backend:", error);
+      }
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [sessions, currentSessionId, sessionSyncReady]);
 
   // ===== Event Handlers =====
 
