@@ -22,8 +22,8 @@ DOMAIN_PROMPTS = {
 - 의학 용어를 정확하게 사용하고 필요시 설명을 추가하세요
 - 임상 가이드라인과 근거 기반 의학(EBM)을 준수하세요
 - 진단, 치료, 약물에 대한 정보는 반드시 페이지 참조와 함께 제공하세요
-- 부작용, 금기사항, 주의사항을 명확히 명시하세요
-- 불확실한 정보는 "추가 확인이 필요합니다"라고 명시하세요""",
+- 질문이 **진단/치료/약물/시술의 안전성**을 직접 요구할 때만 부작용·금기사항·주의사항을 명시하세요
+- 불확실성 고지는 질문이 요구한 정보 범위 안에서만 작성하세요""",
     
     "legal": """당신은 법률 전문 AI 어시스턴트입니다.
 **법률 문서 분석 원칙:**
@@ -57,6 +57,35 @@ LANGUAGE_INSTRUCTIONS = {
 }
 
 class TreeRAGReasoner:
+    PROMPT_CACHE_VERSION = "2026-03-01-v3"
+
+    @staticmethod
+    def _normalize_model_answer(answer_text: str) -> str:
+        text = (answer_text or "").strip()
+        if not text:
+            return text
+
+        if text.startswith("```json") and text.endswith("```"):
+            text = text.replace("```json", "", 1).rsplit("```", 1)[0].strip()
+        elif text.startswith("```") and text.endswith("```"):
+            text = text.replace("```", "", 1).rsplit("```", 1)[0].strip()
+
+        try:
+            parsed = json.loads(text)
+            if isinstance(parsed, dict) and isinstance(parsed.get("answer"), str):
+                text = parsed["answer"].strip()
+            elif isinstance(parsed, str):
+                text = parsed.strip()
+        except Exception:
+            pass
+
+        if "\\n" in text:
+            text = text.replace("\\n", "\n")
+        if "\\t" in text:
+            text = text.replace("\\t", "\t")
+
+        return text.strip()
+
     def __init__(
         self, 
         index_filenames: List[str], 
@@ -124,6 +153,8 @@ class TreeRAGReasoner:
             raise ValueError("user_question cannot be empty")
 
         language = self._resolve_language(user_question, language)
+        cache_node_context = dict(node_context) if node_context else {}
+        cache_node_context["__prompt_cache_version"] = self.PROMPT_CACHE_VERSION
         
         cache = get_cache()
         cached_response = cache.get(
@@ -134,12 +165,13 @@ class TreeRAGReasoner:
             max_branches=max_branches,
             domain_template=domain_template,
             language=language,
-            node_context=node_context
+            node_context=cache_node_context
         )
         
         if cached_response:
             print(f"✅ Cache HIT - Returning cached response")
-            return cached_response["answer"], cached_response["metadata"]
+            normalized_cached = self._normalize_model_answer(cached_response["answer"])
+            return normalized_cached, cached_response["metadata"]
         
         print(f"❌ Cache MISS - Generating new response")
         
@@ -252,6 +284,8 @@ class TreeRAGReasoner:
 2. **페이지 번호 필수** - 모든 사실적 진술에 [문서명, p.번호] 형식으로 표기
 3. **간결하고 정확하게** - 질문에 직접 답하는 정보를 우선 제시
 4. **숫자/이름은 정확히** - 학점 수, 과목명, 날짜 등은 인덱스에 있는 그대로 기재
+5. **질문 범위 밖 문장 금지** - 질문에서 묻지 않은 주제(예: 임상적 부작용/금기사항, 법적 면책 문구, 투자 주의문)는 임의로 추가하지 마세요
+6. **마무리 문장 제한** - 답변 마지막에는 참조 페이지만 작성하고, 일반론적 주의 문구를 덧붙이지 마세요
 {comparison_prompt}
 
 ### 답변 템플릿:
@@ -280,6 +314,10 @@ class TreeRAGReasoner:
             )
             if not response.text:
                 raise ValueError("Empty response from model")
+
+            answer_text = self._normalize_model_answer(response.text)
+            if not answer_text:
+                raise ValueError("Empty normalized answer from model")
             
             if resolved_refs:
                 traversal_info["resolved_references"] = [
@@ -311,7 +349,7 @@ class TreeRAGReasoner:
             if resolved_refs:
                 source_nodes.extend(resolved_refs)
             
-            detection_result = detector.detect(response.text, source_nodes)
+            detection_result = detector.detect(answer_text, source_nodes)
             
             traversal_info["hallucination_detection"] = {
                 "overall_confidence": detection_result["overall_confidence"],
@@ -328,7 +366,7 @@ class TreeRAGReasoner:
 
             cache = get_cache()
             cache_data = {
-                "answer": response.text,
+                "answer": answer_text,
                 "metadata": traversal_info
             }
             cache.set(
@@ -340,11 +378,11 @@ class TreeRAGReasoner:
                 domain_template=domain_template,
                 language=language,
                 response=cache_data,
-                node_context=node_context
+                node_context=cache_node_context
             )
             print(f"💾 Response cached")
             
-            return response.text, traversal_info
+            return answer_text, traversal_info
         except Exception as e:
             print(f"❌ Query failed: {e}")
             raise
