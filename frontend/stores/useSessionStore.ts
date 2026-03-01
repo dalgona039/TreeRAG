@@ -2,6 +2,19 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { ChatSession, Message } from "@/lib/types";
 
+const unwrapPersistedSessionState = (persistedState: unknown): Partial<SessionState> => {
+  if (!persistedState || typeof persistedState !== "object") {
+    return {};
+  }
+
+  const maybeWrapped = persistedState as { state?: unknown };
+  if (maybeWrapped.state && typeof maybeWrapped.state === "object") {
+    return maybeWrapped.state as Partial<SessionState>;
+  }
+
+  return persistedState as Partial<SessionState>;
+};
+
 const normalizeSession = (raw: Partial<ChatSession>): ChatSession => {
   const createdAt = raw.createdAt instanceof Date
     ? raw.createdAt
@@ -90,7 +103,7 @@ export const useSessionStore = create<SessionState>()(
         currentSessionId: state.currentSessionId,
       }),
       merge: (persistedState, currentState) => {
-        const persisted = (persistedState ?? {}) as Partial<SessionState>;
+        const persisted = unwrapPersistedSessionState(persistedState);
         const normalizedSessions = Array.isArray(persisted.sessions)
           ? persisted.sessions.map((session) => normalizeSession(session as Partial<ChatSession>))
           : currentState.sessions;

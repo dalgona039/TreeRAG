@@ -14,7 +14,8 @@ import aiofiles
 from src.config import Config
 from src.core.indexer import RegulatoryIndexer
 from src.core.reasoner import TreeRAGReasoner
-from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult, TreeResponse, TraversalInfo
+from src.api.models import ChatRequest, ChatResponse, IndexRequest, ComparisonResult, TreeResponse, TraversalInfo, SessionSyncRequest, SessionSyncResponse
+from src.repositories import SessionRepository
 from src.utils.cache import get_cache
 from src.utils.file_validator import validate_uploaded_file
 from src.utils.hallucination_detector import HallucinationDetector
@@ -45,6 +46,7 @@ def get_real_ip(request: Request) -> str:
     return request.client.host if request.client else "unknown"
 
 limiter = Limiter(key_func=get_real_ip)
+session_repo = SessionRepository()
 
 
 def _estimate_context_tokens(nodes_selected: List[Dict[str, Any]]) -> int:
@@ -53,6 +55,24 @@ def _estimate_context_tokens(nodes_selected: List[Dict[str, Any]]) -> int:
 
     total_chars = 0
     for node in nodes_selected:
+
+
+    @router.get("/sessions", response_model=SessionSyncResponse)
+    async def load_sessions() -> SessionSyncResponse:
+        data = session_repo.load()
+        return SessionSyncResponse(
+            sessions=data.get("sessions", []),
+            currentSessionId=data.get("currentSessionId")
+        )
+
+
+    @router.put("/sessions", response_model=SessionSyncResponse)
+    async def save_sessions(req: SessionSyncRequest) -> SessionSyncResponse:
+        saved = session_repo.save(req.sessions, req.currentSessionId)
+        return SessionSyncResponse(
+            sessions=saved.get("sessions", []),
+            currentSessionId=saved.get("currentSessionId")
+        )
         total_chars += len(str(node.get("title", "")))
         total_chars += len(str(node.get("content", "")))
 

@@ -43,6 +43,14 @@ class ChatResponse(BaseModel):
     resolved_references: Optional[List[ResolvedReference]] = None
     hallucination_warning: Optional[Dict[str, Any]] = None
 
+class SessionSyncRequest(BaseModel):
+    sessions: List[Dict[str, Any]] = []
+    currentSessionId: Optional[str] = None
+
+class SessionSyncResponse(BaseModel):
+    sessions: List[Dict[str, Any]]
+    currentSessionId: Optional[str] = None
+
 class TreeNode(BaseModel):
     id: str
     title: str

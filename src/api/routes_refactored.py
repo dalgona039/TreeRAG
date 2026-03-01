@@ -10,11 +10,12 @@ import logging
 from src.config import Config
 from src.api.models import (
     ChatRequest, ChatResponse, IndexRequest, 
-    ComparisonResult, TreeResponse, TraversalInfo, ResolvedReference
+    ComparisonResult, TreeResponse, TraversalInfo, ResolvedReference,
+    SessionSyncRequest, SessionSyncResponse
 )
 from src.services import UploadService, IndexService, ChatService
 from src.services.chat_service import NodeContext
-from src.repositories import DocumentRepository, IndexRepository
+from src.repositories import DocumentRepository, IndexRepository, SessionRepository
 from src.utils.cache import get_cache
 
 
@@ -40,6 +41,7 @@ limiter = Limiter(key_func=get_real_ip)
 
 document_repo = DocumentRepository()
 index_repo = IndexRepository()
+session_repo = SessionRepository()
 
 upload_service = UploadService(document_repo)
 index_service = IndexService(document_repo, index_repo)
@@ -210,6 +212,24 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
 async def list_indices() -> Dict[str, List[str]]:
     indices = index_repo.list_all()
     return {"indices": sorted(indices)}
+
+
+@router.get("/sessions", response_model=SessionSyncResponse)
+async def load_sessions() -> SessionSyncResponse:
+    data = session_repo.load()
+    return SessionSyncResponse(
+        sessions=data.get("sessions", []),
+        currentSessionId=data.get("currentSessionId")
+    )
+
+
+@router.put("/sessions", response_model=SessionSyncResponse)
+async def save_sessions(req: SessionSyncRequest) -> SessionSyncResponse:
+    saved = session_repo.save(req.sessions, req.currentSessionId)
+    return SessionSyncResponse(
+        sessions=saved.get("sessions", []),
+        currentSessionId=saved.get("currentSessionId")
+    )
 
 @router.get("/pdfs")
 async def list_pdfs() -> Dict[str, List[str]]:
