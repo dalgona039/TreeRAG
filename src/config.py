@@ -46,23 +46,27 @@ class Config:
         if "automaticFunctionCalling" in normalized and "automatic_function_calling" not in normalized:
             normalized["automatic_function_calling"] = normalized.pop("automaticFunctionCalling")
 
-        afc = normalized.get("automatic_function_calling")
+        base_config: dict[str, Any] = {
+            "temperature": cls.GENERATION_CONFIG.temperature if cls.GENERATION_CONFIG.temperature is not None else 0.0,
+            "response_mime_type": cls.GENERATION_CONFIG.response_mime_type or "application/json",
+            "automatic_function_calling": cls.GENERATION_CONFIG.automatic_function_calling
+            or types.AutomaticFunctionCallingConfig(maximum_remote_calls=cls.AFC_MAX_REMOTE_CALLS),
+        }
+        base_config.update(normalized)
+
+        afc = base_config.get("automatic_function_calling")
         if isinstance(afc, dict):
             afc = {**afc}
             if "maximumRemoteCalls" in afc and "maximum_remote_calls" not in afc:
                 afc["maximum_remote_calls"] = afc.pop("maximumRemoteCalls")
             afc.setdefault("maximum_remote_calls", cls.AFC_MAX_REMOTE_CALLS)
-            normalized["automatic_function_calling"] = types.AutomaticFunctionCallingConfig(**afc)
+            base_config["automatic_function_calling"] = types.AutomaticFunctionCallingConfig(**afc)
         elif afc is None:
-            normalized["automatic_function_calling"] = types.AutomaticFunctionCallingConfig(
+            base_config["automatic_function_calling"] = types.AutomaticFunctionCallingConfig(
                 maximum_remote_calls=cls.AFC_MAX_REMOTE_CALLS
             )
 
-        return types.GenerateContentConfig(
-            temperature=0.0,
-            response_mime_type="application/json",
-            **normalized
-        )
+        return types.GenerateContentConfig(**base_config)
 
     RAW_DATA_DIR = "data/raw"
     INDEX_DIR = "data/indices"
