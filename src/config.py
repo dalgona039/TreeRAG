@@ -27,9 +27,9 @@ class Config:
     
     GENERATION_CONFIG = types.GenerateContentConfig(
         temperature=0.0,
-        responseMimeType="application/json",
-        automaticFunctionCalling=types.AutomaticFunctionCallingConfig(
-            maximumRemoteCalls=AFC_MAX_REMOTE_CALLS
+        response_mime_type="application/json",
+        automatic_function_calling=types.AutomaticFunctionCallingConfig(
+            maximum_remote_calls=AFC_MAX_REMOTE_CALLS
         )
     )
 
@@ -37,30 +37,30 @@ class Config:
     def get_generation_config(cls, **overrides: Any) -> types.GenerateContentConfig:
         normalized = {**overrides}
 
-        if "response_mime_type" in normalized and "responseMimeType" not in normalized:
-            normalized["responseMimeType"] = normalized.pop("response_mime_type")
+        if "responseMimeType" in normalized and "response_mime_type" not in normalized:
+            normalized["response_mime_type"] = normalized.pop("responseMimeType")
 
-        if "max_output_tokens" in normalized and "maxOutputTokens" not in normalized:
-            normalized["maxOutputTokens"] = normalized.pop("max_output_tokens")
+        if "maxOutputTokens" in normalized and "max_output_tokens" not in normalized:
+            normalized["max_output_tokens"] = normalized.pop("maxOutputTokens")
 
-        if "automatic_function_calling" in normalized and "automaticFunctionCalling" not in normalized:
-            normalized["automaticFunctionCalling"] = normalized.pop("automatic_function_calling")
+        if "automaticFunctionCalling" in normalized and "automatic_function_calling" not in normalized:
+            normalized["automatic_function_calling"] = normalized.pop("automaticFunctionCalling")
 
-        afc = normalized.get("automaticFunctionCalling")
+        afc = normalized.get("automatic_function_calling")
         if isinstance(afc, dict):
             afc = {**afc}
-            if "maximum_remote_calls" in afc and "maximumRemoteCalls" not in afc:
-                afc["maximumRemoteCalls"] = afc.pop("maximum_remote_calls")
-            afc.setdefault("maximumRemoteCalls", cls.AFC_MAX_REMOTE_CALLS)
-            normalized["automaticFunctionCalling"] = types.AutomaticFunctionCallingConfig(**afc)
+            if "maximumRemoteCalls" in afc and "maximum_remote_calls" not in afc:
+                afc["maximum_remote_calls"] = afc.pop("maximumRemoteCalls")
+            afc.setdefault("maximum_remote_calls", cls.AFC_MAX_REMOTE_CALLS)
+            normalized["automatic_function_calling"] = types.AutomaticFunctionCallingConfig(**afc)
         elif afc is None:
-            normalized["automaticFunctionCalling"] = types.AutomaticFunctionCallingConfig(
-                maximumRemoteCalls=cls.AFC_MAX_REMOTE_CALLS
+            normalized["automatic_function_calling"] = types.AutomaticFunctionCallingConfig(
+                maximum_remote_calls=cls.AFC_MAX_REMOTE_CALLS
             )
 
         return types.GenerateContentConfig(
             temperature=0.0,
-            responseMimeType="application/json",
+            response_mime_type="application/json",
             **normalized
         )
 
