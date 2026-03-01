@@ -177,23 +177,17 @@ class TreeRAGReasoner:
             context_str = reference_context + "\n\n" + context_str
 
         if not traversal_info["nodes_selected"] and not resolved_refs:
+            traversal_info["fallback_reason"] = "no_relevant_sections"
+            traversal_info["detected_language"] = language
+            traversal_info["selected_documents"] = [
+                filename.replace("_index.json", "") for filename in self.index_filenames
+            ]
             fallback_answer = self._build_no_context_response(language)
-            cache_data = {
-                "answer": fallback_answer,
-                "metadata": traversal_info
-            }
-            cache.set(
-                question=user_question,
-                index_files=self.index_filenames,
-                use_deep_traversal=self.use_deep_traversal,
-                max_depth=max_depth,
-                max_branches=max_branches,
-                domain_template=domain_template,
-                language=language,
-                response=cache_data,
-                node_context=node_context
+            print(
+                "⚠️ No relevant sections selected "
+                f"(algorithm={self.traversal_algorithm}, docs={len(self.index_filenames)}, "
+                f"max_depth={max_depth}, max_branches={max_branches})"
             )
-            print("💾 Response cached (no relevant sections)")
             return fallback_answer, traversal_info
         
         is_multi_doc = len(self.index_filenames) > 1
@@ -370,7 +364,7 @@ class TreeRAGReasoner:
                 relevant_nodes, trav_stats = navigator.search(
                     query=query,
                     max_depth=max_depth,
-                    min_score_threshold=0.3
+                    min_score_threshold=0.2
                 )
                 formatted = format_beam_results(relevant_nodes, doc_name)
             else:
