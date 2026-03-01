@@ -15,12 +15,21 @@ logger = logging.getLogger(__name__)
 class HallucinationDetector:
     """Detects potential hallucinations in LLM-generated responses."""
     
-    def __init__(self, confidence_threshold: float = 0.5):
+    def __init__(
+        self,
+        confidence_threshold: float = 0.5,
+        sentence_threshold: float | None = None,
+        overall_threshold: float | None = None,
+    ):
         """
         Args:
-            confidence_threshold: Minimum confidence score (0-1) to consider valid
+            confidence_threshold: Backward-compatible default threshold
+            sentence_threshold: Threshold for sentence-level grounding
+            overall_threshold: Threshold for overall answer reliability
         """
-        self.confidence_threshold = confidence_threshold
+        self.sentence_threshold = sentence_threshold if sentence_threshold is not None else confidence_threshold
+        self.overall_threshold = overall_threshold if overall_threshold is not None else confidence_threshold
+        self.confidence_threshold = self.sentence_threshold
     
     def detect(self, answer: str, source_nodes: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
@@ -33,7 +42,7 @@ class HallucinationDetector:
         Returns:
             Detection result with overall confidence and sentence-level analysis
         """
-        source_text = " ".join([node.get("content", "") for node in source_nodes])
+        source_text = self._build_source_text(source_nodes)
         
         logger.debug("Hallucination Detection:")
         logger.debug(f"  - Source nodes count: {len(source_nodes)}")
@@ -53,7 +62,7 @@ class HallucinationDetector:
             sentence_scores.append({
                 "sentence": sentence,
                 "confidence": confidence,
-                "is_grounded": confidence >= self.confidence_threshold
+                "is_grounded": confidence >= self.sentence_threshold
             })
         
         if sentence_scores:
@@ -66,16 +75,38 @@ class HallucinationDetector:
         logger.debug(f"  - Total sentences analyzed: {len(sentence_scores)}")
         logger.debug(f"  - Overall confidence: {overall_confidence:.3f}")
         logger.debug(f"  - Hallucinated sentences: {len(hallucinated)}")
-        logger.debug(f"  - Is reliable: {overall_confidence >= self.confidence_threshold}")
+        logger.debug(f"  - Is reliable: {overall_confidence >= self.overall_threshold}")
         
         return {
             "overall_confidence": round(overall_confidence, 3),
-            "is_reliable": overall_confidence >= self.confidence_threshold,
+            "is_reliable": overall_confidence >= self.overall_threshold,
             "sentence_analysis": sentence_scores,
             "hallucinated_count": len(hallucinated),
             "total_sentences": len(sentence_scores),
-            "hallucinated_sentences": hallucinated
+            "hallucinated_sentences": hallucinated,
+            "thresholds": {
+                "sentence": self.sentence_threshold,
+                "overall": self.overall_threshold,
+            }
         }
+
+    def _build_source_text(self, source_nodes: List[Dict[str, Any]]) -> str:
+        chunks: List[str] = []
+
+        for node in source_nodes:
+            if not isinstance(node, dict):
+                continue
+
+            content = str(node.get("content", "") or "").strip()
+            summary = str(node.get("summary", "") or "").strip()
+            text = str(node.get("text", "") or "").strip()
+            title = str(node.get("title", "") or "").strip()
+
+            merged = " ".join(part for part in [title, content, summary, text] if part)
+            if merged:
+                chunks.append(merged)
+
+        return " ".join(chunks)
     
     def _split_sentences(self, text: str) -> List[str]:
         """Split text into sentences."""
@@ -108,7 +139,13 @@ class HallucinationDetector:
         scores = []
         
         # 1. Citation presence (strong signal)
-        citation_patterns = [r'\[.+?,\s*p\.\d+\]', r'section\s+\d+', r'chapter\s+\d+', r'table\s+\d+']
+        citation_patterns = [
+            r'\[.+?,\s*p\.\d+(?:[-–]\d+)?\]',
+            r'\[.+?,\s*pp\.\d+(?:[-–]\d+)?\]',
+            r'section\s+\d+',
+            r'chapter\s+\d+',
+            r'table\s+\d+'
+        ]
         has_citation = any(re.search(pattern, sentence_lower) for pattern in citation_patterns)
         if has_citation:
             scores.append(0.85)
@@ -249,14 +286,24 @@ class HallucinationDetector:
         return summary.strip()
 
 
-def create_detector(confidence_threshold: float = 0.5) -> HallucinationDetector:
+def create_detector(
+    confidence_threshold: float = 0.5,
+    sentence_threshold: float | None = None,
+    overall_threshold: float | None = None,
+) -> HallucinationDetector:
     """
     Factory function to create a hallucination detector.
     
     Args:
-        confidence_threshold: Minimum confidence (0-1) to consider valid
+        confidence_threshold: Backward-compatible default threshold
+        sentence_threshold: Sentence-level threshold
+        overall_threshold: Overall reliability threshold
     
     Returns:
         Configured HallucinationDetector instance
     """
-    return HallucinationDetector(confidence_threshold=confidence_threshold)
+    return HallucinationDetector(
+        confidence_threshold=confidence_threshold,
+        sentence_threshold=sentence_threshold,
+        overall_threshold=overall_threshold,
+    )

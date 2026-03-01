@@ -437,7 +437,7 @@ Please answer in detail focusing on information relevant to this section."""
             ]
         
         hallucination_warning = None
-        detector = HallucinationDetector(confidence_threshold=0.5)
+        detector = HallucinationDetector(sentence_threshold=0.5, overall_threshold=0.45)
         detection_result = detector.detect(answer, traversal_info["nodes_selected"])
         
         if not detection_result["is_reliable"] and len(detection_result["sentence_analysis"]) > 0:
@@ -449,7 +449,8 @@ Please answer in detail focusing on information relevant to this section."""
                 hallucination_warning = {
                     "message": f"{low_conf_count}/{total_count} sentences have low confidence",
                     "overall_confidence": detection_result["overall_confidence"],
-                    "threshold": detector.confidence_threshold
+                    "threshold": detector.overall_threshold,
+                    "sentence_threshold": detector.sentence_threshold
                 }
                 logger.warning(f"Hallucination detected: {low_conf_count}/{total_count} sentences low confidence (overall: {detection_result['overall_confidence']:.2f})")
         

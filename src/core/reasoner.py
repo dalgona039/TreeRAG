@@ -329,22 +329,23 @@ class TreeRAGReasoner:
                     for ref in resolved_refs
                 ]
             
-            detector = create_detector(confidence_threshold=0.6)
+            detector = create_detector(sentence_threshold=0.55, overall_threshold=0.45)
             
-            source_nodes = []
-            if self.use_deep_traversal:
-                for tree_idx, tree in enumerate(self.index_trees):
-                    doc_name = self.index_filenames[tree_idx].replace("_index.json", "")
-                    navigator = TreeNavigator(tree, doc_name)
-                    relevant_nodes, _ = navigator.search(
-                        query=user_question,
-                        max_depth=max_depth,
-                        max_branches=max_branches
-                    )
-                    source_nodes.extend([node["node"] for node in relevant_nodes])
-            else:
-                for tree in self.index_trees:
-                    source_nodes.extend(self._extract_all_nodes(tree))
+            source_nodes = list(traversal_info.get("nodes_selected", []))
+            if not source_nodes:
+                if self.use_deep_traversal:
+                    for tree_idx, tree in enumerate(self.index_trees):
+                        doc_name = self.index_filenames[tree_idx].replace("_index.json", "")
+                        navigator = TreeNavigator(tree, doc_name)
+                        relevant_nodes, _ = navigator.search(
+                            query=user_question,
+                            max_depth=max_depth,
+                            max_branches=max_branches
+                        )
+                        source_nodes.extend([node["node"] for node in relevant_nodes])
+                else:
+                    for tree in self.index_trees:
+                        source_nodes.extend(self._extract_all_nodes(tree))
             
             if resolved_refs:
                 source_nodes.extend(resolved_refs)
