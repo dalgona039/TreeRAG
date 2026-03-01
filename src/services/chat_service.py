@@ -34,6 +34,8 @@ class TraversalInfo:
     nodes_selected: List[Dict[str, Any]]
     max_depth: int
     max_branches: int
+    context_tokens: Optional[int] = None
+    total_tokens: Optional[int] = None
 
 
 @dataclass
@@ -136,13 +138,17 @@ class ChatService:
             comparison = None
             if len(routing_result.selected_indices) > 1 and enable_comparison:
                 comparison = self._extract_comparison(answer, routing_result.selected_indices)
+
+            context_tokens = self._estimate_context_tokens(traversal_info["nodes_selected"])
             
             trav_info = TraversalInfo(
                 used_deep_traversal=traversal_info["used_deep_traversal"],
                 nodes_visited=traversal_info["nodes_visited"],
                 nodes_selected=traversal_info["nodes_selected"],
                 max_depth=traversal_info["max_depth"],
-                max_branches=traversal_info["max_branches"]
+                max_branches=traversal_info["max_branches"],
+                context_tokens=context_tokens,
+                total_tokens=context_tokens
             )
             
             resolved_refs = None
@@ -214,6 +220,18 @@ Please answer in detail focusing on information relevant to this section."""
         if language and language in {"ko", "en", "ja"}:
             return language
         return self._detect_language(question)
+
+    @staticmethod
+    def _estimate_context_tokens(nodes_selected: List[Dict[str, Any]]) -> int:
+        if not nodes_selected:
+            return 0
+
+        total_chars = 0
+        for node in nodes_selected:
+            total_chars += len(str(node.get("title", "")))
+            total_chars += len(str(node.get("content", "")))
+
+        return total_chars // 4
     
     def _extract_citations(self, answer: str) -> List[str]:
         """답변에서 인용 추출

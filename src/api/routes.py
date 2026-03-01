@@ -46,6 +46,18 @@ def get_real_ip(request: Request) -> str:
 
 limiter = Limiter(key_func=get_real_ip)
 
+
+def _estimate_context_tokens(nodes_selected: List[Dict[str, Any]]) -> int:
+    if not nodes_selected:
+        return 0
+
+    total_chars = 0
+    for node in nodes_selected:
+        total_chars += len(str(node.get("title", "")))
+        total_chars += len(str(node.get("content", "")))
+
+    return total_chars // 4
+
 async def _route_documents(question: str, available_indices: List[str]) -> List[str]:
     if not available_indices:
         raise ValueError("No indexed documents available")
@@ -384,12 +396,16 @@ Please answer in detail focusing on information relevant to this section."""
         if len(selected_indices) > 1 and req.enable_comparison:
             comparison = _extract_comparison(answer, selected_indices)
         
+        context_tokens = _estimate_context_tokens(traversal_info["nodes_selected"])
+
         trav_info = TraversalInfo(
             used_deep_traversal=traversal_info["used_deep_traversal"],
             nodes_visited=traversal_info["nodes_visited"],
             nodes_selected=traversal_info["nodes_selected"],
             max_depth=traversal_info["max_depth"],
-            max_branches=traversal_info["max_branches"]
+            max_branches=traversal_info["max_branches"],
+            context_tokens=context_tokens,
+            total_tokens=context_tokens
         )
         
         resolved_refs = None

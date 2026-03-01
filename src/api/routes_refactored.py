@@ -172,7 +172,9 @@ async def chat(request: Request, req: ChatRequest) -> ChatResponse:
             nodes_visited=result.traversal_info.nodes_visited,
             nodes_selected=result.traversal_info.nodes_selected,
             max_depth=result.traversal_info.max_depth,
-            max_branches=result.traversal_info.max_branches
+            max_branches=result.traversal_info.max_branches,
+            context_tokens=result.traversal_info.context_tokens,
+            total_tokens=result.traversal_info.total_tokens
         )
     
     resolved_refs = None

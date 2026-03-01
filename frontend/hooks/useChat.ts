@@ -3,6 +3,21 @@ import { toast } from "react-hot-toast";
 import { api } from "@/lib/api";
 import type { ChatSession, Message, ApiError, TreeNode } from "@/lib/types";
 
+const estimateContextTokens = (traversalInfo: any): number => {
+  if (!traversalInfo) return 0;
+  if (typeof traversalInfo.context_tokens === "number") return traversalInfo.context_tokens;
+  if (typeof traversalInfo.total_tokens === "number") return traversalInfo.total_tokens;
+
+  const selectedNodes = Array.isArray(traversalInfo.nodes_selected) ? traversalInfo.nodes_selected : [];
+  const totalChars = selectedNodes.reduce((acc: number, node: any) => {
+    const title = typeof node?.title === "string" ? node.title : "";
+    const content = typeof node?.content === "string" ? node.content : "";
+    return acc + title.length + content.length;
+  }, 0);
+
+  return Math.floor(totalChars / 4);
+};
+
 export function useChat(
   sessions: ChatSession[],
   setSessions: React.Dispatch<React.SetStateAction<ChatSession[]>>,
@@ -69,7 +84,7 @@ export function useChat(
       const hallucinationWarning = res.data.hallucination_warning || null;
 
       const responseTime = (Date.now() - startTime) / 1000;
-      const contextSize = traversalInfo?.total_tokens || 0;
+      const contextSize = estimateContextTokens(traversalInfo);
 
       setPerformanceMetrics((prev: any) => {
         const newHistory = [

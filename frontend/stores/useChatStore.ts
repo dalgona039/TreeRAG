@@ -7,6 +7,21 @@ import { useUIStore } from "./useUIStore";
 import { usePerformanceStore } from "./usePerformanceStore";
 import type { Message } from "@/lib/types";
 
+const estimateContextTokens = (traversalInfo: any): number => {
+  if (!traversalInfo) return 0;
+  if (typeof traversalInfo.context_tokens === "number") return traversalInfo.context_tokens;
+  if (typeof traversalInfo.total_tokens === "number") return traversalInfo.total_tokens;
+
+  const selectedNodes = Array.isArray(traversalInfo.nodes_selected) ? traversalInfo.nodes_selected : [];
+  const totalChars = selectedNodes.reduce((acc: number, node: any) => {
+    const title = typeof node?.title === "string" ? node.title : "";
+    const content = typeof node?.content === "string" ? node.content : "";
+    return acc + title.length + content.length;
+  }, 0);
+
+  return Math.floor(totalChars / 4);
+};
+
 interface ChatState {
   // Input state
   input: string;
@@ -88,7 +103,7 @@ export const useChatStore = create<ChatState>()((set, get) => ({
       
       // Record performance metrics
       const responseTime = (Date.now() - startTime) / 1000;
-      const contextSize = traversal_info?.total_tokens || 0;
+      const contextSize = estimateContextTokens(traversal_info);
       
       performanceStore.recordQuery({
         responseTime,

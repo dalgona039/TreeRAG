@@ -27,6 +27,8 @@ class TraversalInfo(BaseModel):
     nodes_selected: List[Dict[str, Any]]
     max_depth: int
     max_branches: int
+    context_tokens: Optional[int] = None
+    total_tokens: Optional[int] = None
 
 class ResolvedReference(BaseModel):
     title: str
