@@ -50,7 +50,7 @@ async def check_api_connectivity() -> bool:
         response = Config.CLIENT.models.generate_content(
             model=Config.MODEL_NAME,
             contents="ping",
-            config={"max_output_tokens": 10}
+            config=Config.get_generation_config(max_output_tokens=10)
         )
         result = bool(response.text)
         health_cache.set("api_connectivity", result)

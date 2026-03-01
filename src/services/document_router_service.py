@@ -93,7 +93,8 @@ class DocumentRouterService:
         try:
             response = Config.CLIENT.models.generate_content(
                 model=Config.MODEL_NAME,
-                contents=prompt
+                contents=prompt,
+                config=Config.get_generation_config()
             )
             
             result_text = (response.text or "").strip()

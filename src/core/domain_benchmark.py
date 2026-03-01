@@ -295,7 +295,7 @@ JSON only:"""
             response = Config.CLIENT.models.generate_content(
                 model=Config.MODEL_NAME,
                 contents=prompt,
-                config={"response_mime_type": "application/json"}
+                config=Config.get_generation_config(response_mime_type="application/json")
             )
             
             if not response.text:
@@ -386,7 +386,7 @@ JSON only:"""
             response = Config.CLIENT.models.generate_content(
                 model=Config.MODEL_NAME,
                 contents=prompt,
-                config={"response_mime_type": "application/json"}
+                config=Config.get_generation_config(response_mime_type="application/json")
             )
             
             if not response.text:
@@ -720,7 +720,7 @@ JSON only:"""
             response = Config.CLIENT.models.generate_content(
                 model=Config.MODEL_NAME,
                 contents=prompt,
-                config={"response_mime_type": "application/json"}
+                config=Config.get_generation_config(response_mime_type="application/json")
             )
             
             if not response.text:

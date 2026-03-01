@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 class RegulatoryIndexer:
     def __init__(self) -> None:
-        self.generation_config: Dict[str, Any] = Config.GENERATION_CONFIG
+        self.generation_config: Any = Config.get_generation_config()
 
     @staticmethod
     def _clean_markdown_json(text: str) -> str:
@@ -122,7 +122,7 @@ class RegulatoryIndexer:
                     contents=prompt,
                     config=self.generation_config
                 )
-                cleaned_text = self._clean_markdown_json(response.text)
+                cleaned_text = self._clean_markdown_json(response.text or "")
                 logger.debug(f"API Response (first 500 chars): {cleaned_text[:500]}")
                 result = json.loads(cleaned_text)
                 logger.debug(f"Parsed JSON type: {type(result).__name__}")

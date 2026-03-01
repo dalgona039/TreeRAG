@@ -83,10 +83,11 @@ async def _route_documents(question: str, available_indices: List[str]) -> List[
     try:
         response = Config.CLIENT.models.generate_content(
             model=Config.MODEL_NAME,
-            contents=prompt
+            contents=prompt,
+            config=Config.get_generation_config()
         )
         
-        result_text = response.text.strip()
+        result_text = (response.text or "").strip()
         result_text = result_text.replace("```json", "").replace("```", "").strip()
         selected_names = json.loads(result_text)
         

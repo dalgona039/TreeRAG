@@ -1,7 +1,9 @@
 import os
 import logging
+from typing import Any
 from dotenv import load_dotenv
 from google import genai
+from google.genai import types
 
 load_dotenv()
 
@@ -20,12 +22,47 @@ except Exception as e:
 
 class Config:
     CLIENT = client
-    MODEL_NAME = "gemini-3-flash-preview"
+    MODEL_NAME = "gemini-3.1-pro-preview"
+    AFC_MAX_REMOTE_CALLS = 50
     
-    GENERATION_CONFIG = {
-        "temperature": 0.0,
-        "response_mime_type": "application/json"
-    }
+    GENERATION_CONFIG = types.GenerateContentConfig(
+        temperature=0.0,
+        responseMimeType="application/json",
+        automaticFunctionCalling=types.AutomaticFunctionCallingConfig(
+            maximumRemoteCalls=AFC_MAX_REMOTE_CALLS
+        )
+    )
+
+    @classmethod
+    def get_generation_config(cls, **overrides: Any) -> types.GenerateContentConfig:
+        normalized = {**overrides}
+
+        if "response_mime_type" in normalized and "responseMimeType" not in normalized:
+            normalized["responseMimeType"] = normalized.pop("response_mime_type")
+
+        if "max_output_tokens" in normalized and "maxOutputTokens" not in normalized:
+            normalized["maxOutputTokens"] = normalized.pop("max_output_tokens")
+
+        if "automatic_function_calling" in normalized and "automaticFunctionCalling" not in normalized:
+            normalized["automaticFunctionCalling"] = normalized.pop("automatic_function_calling")
+
+        afc = normalized.get("automaticFunctionCalling")
+        if isinstance(afc, dict):
+            afc = {**afc}
+            if "maximum_remote_calls" in afc and "maximumRemoteCalls" not in afc:
+                afc["maximumRemoteCalls"] = afc.pop("maximum_remote_calls")
+            afc.setdefault("maximumRemoteCalls", cls.AFC_MAX_REMOTE_CALLS)
+            normalized["automaticFunctionCalling"] = types.AutomaticFunctionCallingConfig(**afc)
+        elif afc is None:
+            normalized["automaticFunctionCalling"] = types.AutomaticFunctionCallingConfig(
+                maximumRemoteCalls=cls.AFC_MAX_REMOTE_CALLS
+            )
+
+        return types.GenerateContentConfig(
+            temperature=0.0,
+            responseMimeType="application/json",
+            **normalized
+        )
 
     RAW_DATA_DIR = "data/raw"
     INDEX_DIR = "data/indices"
