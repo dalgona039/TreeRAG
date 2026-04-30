@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+description: "TreeRAG Step-1 Promptfoo PoC"
+
+prompts:
+  - "{{question}}"
+
+providers:
+  - id: file://./provider.py
+    label: treerag-local-api
+
+tests:
+  - file://./tests/basic.yaml

@@ -1,0 +1,16 @@
+- description: "General English question"
+  vars:
+    question: "Summarize the main topic of this document."
+    language: "en"
+
+- description: "한국어 기본 질문"
+  vars:
+    question: "이 문서의 핵심 내용을 세 문장으로 요약해줘."
+    language: "ko"
+
+- description: "특정 인덱스 대상 질문 (선택)"
+  vars:
+    question: "이 문서에서 가장 중요한 요구사항 3가지는 무엇인가요?"
+    language: "ko"
+    # 쉼표 구분 문자열 또는 배열 모두 지원됩니다.
+    index_filenames: "2025학년도 교육과정 반도체공학과_index.json"
