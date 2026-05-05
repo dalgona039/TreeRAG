@@ -1,0 +1,284 @@
+{
+  "id": "ROOT",
+  "title": "Low power reprogrammable DNA basecaller with an efficient HMM accelerator for real time nanopore sequencing",
+  "summary": "A scientific report detailing a 130-nm CMOS DNA basecaller using a 64-state Hidden Markov Model (HMM) with a serial-parallel architecture to optimize power and accuracy.",
+  "page_ref": "1-30",
+  "children": [
+    {
+      "id": "CH1",
+      "title": "1. INTRODUCTION",
+      "summary": "Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator.",
+      "page_ref": "3-4",
+      "children": [
+        {
+          "id": "SEC1.1",
+          "title": "Technological Shift",
+          "summary": "Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.",
+          "page_ref": "3",
+          "children": [
+            {
+              "id": "ART1.1.1",
+              "title": "Basecalling Process",
+              "summary": "The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).",
+              "page_ref": "3"
+            }
+          ]
+        },
+        {
+          "id": "SEC1.2",
+          "title": "Proposed Architecture",
+          "summary": "Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.",
+          "page_ref": "3-4",
+          "children": [
+            {
+              "id": "ART1.2.1",
+              "title": "Serial-Parallel Structure",
+              "summary": "A method to scale up to 4096 states while optimizing resource utilization.",
+              "page_ref": "4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH2",
+      "title": "2. ADVANCES IN HARDWARE-BASED DNA SEQUENCING BASECALLERS",
+      "summary": "Historical context and comparative analysis of existing FPGA and ASIC-based sequencing accelerators.",
+      "page_ref": "4-7",
+      "children": [
+        {
+          "id": "SEC2.1",
+          "title": "Nanopore Sensing Mechanism",
+          "summary": "Description of ion flow through nanoscale pores and current fluctuations caused by DNA translocation.",
+          "page_ref": "5-6",
+          "children": [
+            {
+              "id": "ART2.1.1",
+              "title": "Signal Processing",
+              "summary": "The transformation of noisy time-series signals into readable genetic data.",
+              "page_ref": "6"
+            }
+          ]
+        },
+        {
+          "id": "SEC2.2",
+          "title": "Comparative Benchmarks",
+          "summary": "Analysis of previous works by Olson, Sharma, Hammad, Rashed, and Chen regarding power and accuracy.",
+          "page_ref": "6-7",
+          "children": [
+            {
+              "id": "ART2.2.1",
+              "title": "Hardware Trade-offs",
+              "summary": "The balance between power efficiency, accuracy, and throughput in existing hardware.",
+              "page_ref": "7"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH3",
+      "title": "3. HMM-BASED BASECALLER",
+      "summary": "Theoretical framework for using Hidden Markov Models to decode noisy nanopore signals.",
+      "page_ref": "8",
+      "children": [
+        {
+          "id": "SEC3.1",
+          "title": "Probabilistic Modeling",
+          "summary": "Using the Viterbi algorithm to identify the most likely sequence of nucleotides.",
+          "page_ref": "8",
+          "children": [
+            {
+              "id": "ART3.1.1",
+              "title": "K-mer Influence",
+              "summary": "Addressing the overlapping influence of multiple bases on the sensor output.",
+              "page_ref": "8"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH4",
+      "title": "4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS",
+      "summary": "Technical details on the sensor model, Viterbi detection, and memory management strategies.",
+      "page_ref": "9-12",
+      "children": [
+        {
+          "id": "SEC4.1",
+          "title": "Sensor Model and State Space",
+          "summary": "Construction of HMM states based on k-mer labels and radix-4 number systems.",
+          "page_ref": "9",
+          "children": [
+            {
+              "id": "ART4.1.1",
+              "title": "State Transitions",
+              "summary": "Definition of stay, step, and skip transitions for the basecalling algorithm.",
+              "page_ref": "9"
+            }
+          ]
+        },
+        {
+          "id": "SEC4.2",
+          "title": "Memory Subsystem",
+          "summary": "Management of posterior probabilities using dual-port BRAM and ping-pong mechanisms.",
+          "page_ref": "11-12",
+          "children": [
+            {
+              "id": "ART4.2.1",
+              "title": "Logarithm Pre-computation",
+              "summary": "Off-chip pre-processing of log values to reduce silicon overhead.",
+              "page_ref": "12"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH5",
+      "title": "5. BRUTE FORCE 64-STATE ARCHITECTURE",
+      "summary": "Description of the unrolled loop architecture for high-intensity HMM processing.",
+      "page_ref": "12-13",
+      "children": [
+        {
+          "id": "SEC5.1",
+          "title": "Computational Blocks",
+          "summary": "Parallel logem blocks, adders, and comparators used in the brute-force model.",
+          "page_ref": "12",
+          "children": [
+            {
+              "id": "ART5.1.1",
+              "title": "Normalization",
+              "summary": "Subtraction of minimum values to prevent overflow in posterior probabilities.",
+              "page_ref": "12"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH6",
+      "title": "6. COARSE GRAINED 16-STATE STRUCTURE",
+      "summary": "Optimization through resource sharing and redundant output elimination.",
+      "page_ref": "14-15",
+      "children": [
+        {
+          "id": "SEC6.1",
+          "title": "Resource Sharing Logic",
+          "summary": "Reduction of adder and comparator counts by identifying identical output patterns.",
+          "page_ref": "14",
+          "children": [
+            {
+              "id": "ART6.1.1",
+              "title": "Comparator Optimization",
+              "summary": "Use of fine-grained 4-input comparator blocks to improve efficiency.",
+              "page_ref": "15"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH7",
+      "title": "7. SERIAL-PARALLEL 64 STATES HMM",
+      "summary": "Implementation of the main building block for the proposed serial-parallel architecture.",
+      "page_ref": "16-17",
+      "children": [
+        {
+          "id": "SEC7.1",
+          "title": "Operational Timeline",
+          "summary": "Staggered HMM computations and resource reuse over 16 clock cycles.",
+          "page_ref": "16-17",
+          "children": [
+            {
+              "id": "ART7.1.1",
+              "title": "Throughput Management",
+              "summary": "Balancing processing cycles with area minimization.",
+              "page_ref": "17"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH8",
+      "title": "8. FPGA/CHIP COMMUNICATION",
+      "summary": "Protocol for data transfer between the FPGA and the ASIC chip.",
+      "page_ref": "17-19",
+      "children": [
+        {
+          "id": "SEC8.1",
+          "title": "Handshaking Mechanism",
+          "summary": "Use of RDin/RDo and valin/valo signals for synchronized transmission.",
+          "page_ref": "18",
+          "children": [
+            {
+              "id": "ART8.1.1",
+              "title": "Frequency Regulation",
+              "summary": "Adjusting output transmission frequency via enable signal off-time.",
+              "page_ref": "19"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH9",
+      "title": "9. SIMULATION RESULTS",
+      "summary": "Comprehensive performance evaluation including accuracy, power, and throughput benchmarks.",
+      "page_ref": "19-27",
+      "children": [
+        {
+          "id": "SEC9.1",
+          "title": "Accuracy and SNR",
+          "summary": "Analysis of bit-width effects on basecalling precision across different noise levels.",
+          "page_ref": "19-20",
+          "children": [
+            {
+              "id": "ART9.1.1",
+              "title": "Comparative Performance",
+              "summary": "Comparison against Nanocall, Meta-Align, DeepNano, and Bonito.",
+              "page_ref": "23-26"
+            }
+          ]
+        },
+        {
+          "id": "SEC9.2",
+          "title": "Hardware Metrics",
+          "summary": "Core area and power consumption data for the 130-nm TSMC implementation.",
+          "page_ref": "21-22",
+          "children": [
+            {
+              "id": "ART9.2.1",
+              "title": "Energy Efficiency",
+              "summary": "Calculation of M Bases/sec/W to demonstrate superior efficiency.",
+              "page_ref": "26-27"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "CH10",
+      "title": "10. CONCLUSION",
+      "summary": "Final summary of the 64-state reconfigurable accelerator's contributions to real-time DNA sequencing.",
+      "page_ref": "27-28",
+      "children": [
+        {
+          "id": "SEC10.1",
+          "title": "Summary of Findings",
+          "summary": "Confirmation of 6x lower power consumption compared to brute-force methods.",
+          "page_ref": "27",
+          "children": [
+            {
+              "id": "ART10.1.1",
+              "title": "Future Research",
+              "summary": "Exploration of hybrid HMM-deep learning architectures.",
+              "page_ref": "28"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -34,8 +34,10 @@ env/
 .env.*.local
 
 # Data Files (PDF and Indices)
+# Keep raw PDFs out of the repo, but include index JSONs used at runtime
 data/raw/*.pdf
-data/indices/*.json
+# track index JSONs (these are needed by the app)
+!data/indices/*.json
 
 # Keep directory structure
 !data/raw/.gitkeep
@@ -115,11 +117,7 @@ __pycache__/
 venv/
 .pytest_cache/
 
-
 .DS_Store
-
-data/raw/
-data/indices/
 
 frontend/node_modules/
 frontend/.next/

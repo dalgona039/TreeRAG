@@ -1,0 +1,144 @@
+{
+  "id": "doc",
+  "title": "0cbccdf9 2204.08939v1-2",
+  "summary": "This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques.",
+  "page_ref": "1-30",
+  "children": [
+    {
+      "id": "ch1",
+      "title": "1. Introduction",
+      "summary": "Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems.",
+      "page_ref": "2-4"
+    },
+    {
+      "id": "ch2",
+      "title": "2. Methodology",
+      "summary": "Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.",
+      "page_ref": "5-12",
+      "children": [
+        {
+          "id": "ch2.s1",
+          "title": "2.1. Patient-speciﬁc aorta geometry parameterization",
+          "summary": "Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.",
+          "page_ref": "5-10",
+          "children": [
+            {
+              "id": "ch2.s1.a1",
+              "title": "2.1.1. Aorta dataset pre-processing",
+              "summary": "Describes the initial steps for preparing 3D aorta geometries reconstructed from MRI scans. This includes trimming branches to simplify structures, sampling point clouds (4000 vertices) using voronoi clustering, and aligning geometries to a template using the rigid iterative closest points (ICP) algorithm to regularize position and orientation.",
+              "page_ref": "6"
+            },
+            {
+              "id": "ch2.s1.a2",
+              "title": "2.1.2. Statistical shape modeling and virtual aorta synthesis",
+              "summary": "Explains the three-phase process for statistical shape modeling (SSM) and virtual aorta synthesis: (1) building correspondence among original shapes using the LDDMM algorithm, (2) projecting shapes to a latent space via PCA for concise parameterization, and (3) synthesizing new virtual aortas using random linear interpolation or uniform PCA sampling to generate a large dataset.",
+              "page_ref": "6-10"
+            }
+          ]
+        },
+        {
+          "id": "ch2.s2",
+          "title": "2.2. Automatic CFD simulation routine",
+          "summary": "Details the Python routine developed to automate the tedious procedures of CFD simulations. This includes geometry pre-processing (extending entry/exit, smoothing, adding caps using VMTK), generating 3D unstructured triangular meshes, setting boundary conditions, performing simulations with OpenFOAM (using SIMPLE algorithm), and post-processing by projecting simulated field data onto meshes.",
+          "page_ref": "10-11"
+        },
+        {
+          "id": "ch2.s3",
+          "title": "2.3. ML-based surrogate model",
+          "summary": "Introduces the supervised deep learning solution for building a fast forward map from geometric to solution space. It utilizes PCA encoding-decoding to reduce learning complexity and employs fully-connected deep neural networks (MLPs) to learn the non-linear mappings between encoded inputs and outputs.",
+          "page_ref": "11-12",
+          "children": [
+            {
+              "id": "ch2.s3.a1",
+              "title": "2.3.1. Encoding-decoding formulation.",
+              "summary": "Explains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space.",
+              "page_ref": "11"
+            },
+            {
+              "id": "ch2.s3.a2",
+              "title": "2.3.2. Learning architecture optimization.",
+              "summary": "Describes the optimization process for the MLP architecture and hyperparameters (number of layers, neurons, batch size, initial learning rate) using a Bayesian optimization algorithm, specifically RAY-tune with the Asynchronous Successive Halving Algorithm (ASHA), to achieve the best learning performance efficiently.",
+              "page_ref": "11-12"
+            },
+            {
+              "id": "ch2.s3.a3",
+              "title": "2.3.3. Evaluation of performance",
+              "summary": "Defines the Relative Mean Square Error (RMSE) as the metric for evaluating the performance of the ML-based surrogate model. It specifies how RMSE is calculated for scalar fields (pressure) and vector fields (wall shear stress, velocity), including both vector and magnitude errors, and how it's averaged across multiple samples in a test dataset.",
+              "page_ref": "12"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ch3",
+      "title": "3. Results and Discussion",
+      "summary": "Presents the findings from the statistical shape analysis and synthesis, followed by a detailed study of the surrogate CFD modeling using deep learning. It includes numerical setup, learning performance, prediction of local hemodynamic information, and an analysis of training cost and prediction speedup. The chapter concludes with a comparison between the DNN-based and bi-fidelity surrogate models.",
+      "page_ref": "12-22",
+      "children": [
+        {
+          "id": "ch3.s1",
+          "title": "3.1. Statistical shape analysis and synthesis",
+          "summary": "Details the registration of eight original patient-specific aorta geometries and the synthesis of a large number of virtual aortas. It demonstrates the diffeomorphism process and compares uniform PCA sampling with random interpolation, concluding that uniform PCA sampling provides better coverage of the input space and generates synthetic geometries that accurately reflect biological variations.",
+          "page_ref": "12-14"
+        },
+        {
+          "id": "ch3.s2",
+          "title": "3.2. Surrogate CFD modeling using deep learning",
+          "summary": "Describes the numerical setup for CFD simulations (Newtonian blood flow, rigid walls, parabolic inlet velocity, OpenFOAM) and the learning performance study using a dataset of 1,000 aorta geometries. It reports very low prediction errors for DNN surrogates across different training-testing ratios and discusses the accuracy of predicting local hemodynamic information and the significant speedup achieved over full CFD simulations.",
+          "page_ref": "14-20",
+          "children": [
+            {
+              "id": "ch3.s2.a1",
+              "title": "Predicting local hemodynamic information.",
+              "summary": "Illustrates the ML-based surrogate model's capability to rapidly predict local hemodynamic information, such as blood flow patterns, surface pressure, and wall shear stress (WSS) distributions. Comparisons with CFD ground truth show good agreement, though slight discrepancies are noted near stenosis regions, particularly for complex flow features with large pressure gradients.",
+              "page_ref": "16-19"
+            },
+            {
+              "id": "ch3.s2.a2",
+              "title": "Training cost and prediction speedup.",
+              "summary": "Analyzes the computational efficiency of the DNN-based surrogate model, noting that each neural network takes about two minutes to train and inference for solution field prediction takes less than 0.0012 seconds. This represents a 100,000x speedup over a full CFD simulation, justifying the initial offline data generation cost for many-query applications like optimization and uncertainty quantification.",
+              "page_ref": "19-20"
+            }
+          ]
+        },
+        {
+          "id": "ch3.s3",
+          "title": "3.3. Comparison of DNN-based and bi-ﬁdelity surrogate models",
+          "summary": "Compares the proposed DNN-based surrogate model with a state-of-the-art bi-fidelity (BF) surrogate model, both built with the same amount of training labels. The DNN model consistently outperforms the BF model in terms of accuracy and efficiency across various training scenarios and exhibits more robust behavior in small data regimes, despite the BF model's multi-fidelity strategy.",
+          "page_ref": "20-22"
+        }
+      ]
+    },
+    {
+      "id": "ch4",
+      "title": "4. Conclusion",
+      "summary": "Summarizes the successful development of a statistical shape modeling (SSM) approach for parameterizing and synthesizing 3D patient aorta geometries, and an ML-based surrogate model for predicting comprehensive local hemodynamic information. It highlights the model's accuracy, efficiency (100,000x speedup), and superior performance compared to bi-fidelity models, emphasizing its potential for applications requiring massive model queries and its general applicability to other anatomies.",
+      "page_ref": "22-23"
+    },
+    {
+      "id": "ch5",
+      "title": "Acknowledgment",
+      "summary": "The authors acknowledge funding support from the National Science Foundation (award numbers CMMI-1934300 and OAC-2047127) and startup funds from the College of Engineering at the University of Notre Dame for this study.",
+      "page_ref": "23"
+    },
+    {
+      "id": "ch6",
+      "title": "Compliance with Ethical Standards",
+      "summary": "The authors declare that they have no conflict of interest regarding this research.",
+      "page_ref": "23"
+    },
+    {
+      "id": "ch7",
+      "title": "Appendix A. Optimized MLP structures and hyperparameters",
+      "summary": "Presents Table A.2, which details the optimized multilayer perceptron (MLP) structures and hyperparameters for predicting pressure, velocity, and wall shear stress (WSS) fields. These parameters were determined using Bayesian tuning for each of the decoupled MLPs.",
+      "page_ref": "24"
+    },
+    {
+      "id": "ch8",
+      "title": "References",
+      "summary": "Lists 48 academic references cited throughout the document, covering topics such as cardiovascular disease statistics, medical imaging, computational fluid dynamics, reduced-order modeling, machine learning in biomechanics, and uncertainty quantification.",
+      "page_ref": "24-30"
+    }
+  ]
+}
