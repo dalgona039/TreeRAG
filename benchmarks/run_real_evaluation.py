@@ -1,261 +1,386 @@
+#!/usr/bin/env python3
+"""
+End-to-end evaluation runner (PHASE C-3 of the KCI publication plan).
 
-import sys
+Runs every benchmark question through one or more retrieval systems, scores the
+answers with ROUGE-L / BERTScore / (optional) LLM-judge, runs paired
+significance tests of TreeRAG-Beam against each baseline, and writes a JSON
+report plus a comparison table.
+
+Systems: ``bm25``, ``dense``, ``flatrag``, ``treerag_dfs``, ``treerag_beam``
+(or ``all``).
+
+Online vs offline:
+  The runner pings Gemini once. When reachable it uses the real
+  :class:`TreeRAGReasoner` for the TreeRAG systems and :class:`GeminiJudge` for
+  the LLM-judge axis. When unreachable (e.g. sandbox without network) it falls
+  back to deterministic keyword traversal + extractive answers and a BERTScore
+  proxy, so the full pipeline still runs. Use ``--mode`` to force a mode.
+
+Usage::
+
+    python benchmarks/run_real_evaluation.py \
+        --dataset benchmarks/datasets/full_benchmark.json --systems all
+    python benchmarks/run_real_evaluation.py --systems bm25,treerag_beam --use-llm-judge
+"""
+from __future__ import annotations
+
+import argparse
 import json
+import os
+import sys
 import time
-import asyncio
-import aiohttp
+from datetime import datetime
 from pathlib import Path
-from typing import List, Dict, Optional, Any
+from typing import Any, Dict, List, Optional, Tuple
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
+_PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 
-from benchmarks.run_evaluation import (
-    EvaluationRunner, EvaluationConfig, BenchmarkDataset, 
-    BenchmarkQuestion, SystemResult
-)
-from benchmarks.compare_baselines import BaselineType
-from benchmarks.metrics.retrieval_metrics import (
-    RetrievalResult, QueryResult, create_query_result
-)
-from benchmarks.metrics.efficiency_metrics import LatencyMeasurement, TokenUsage
-from benchmarks.metrics.fidelity_metrics import FidelityAnalysis
+from benchmarks.metrics.text_similarity import bertscore_f1, rouge_l_score, _token_f1
+from benchmarks.metrics.statistical_tests import StatisticalTests
+from src.config import Config
 
-
-class RealTreeRAGEvaluator(EvaluationRunner):
-    
-    def __init__(
-        self, 
-        config: EvaluationConfig,
-        api_base_url: str = "http://localhost:8000"
-    ):
-
-        super().__init__(config)
-        self.api_base_url = api_base_url.rstrip('/')
-        
-    async def _call_treerag_api(
-        self, 
-        question: str,
-        document_id: Optional[str] = None
-    ) -> Dict[str, Any]:
-        
-        url = f"{self.api_base_url}/chat"
-        
-        payload = {
-            "question": question,
-            "use_contextual_compression": True,
-            "use_hallucination_detection": True
-        }
-        
-        if document_id:
-            payload["document_id"] = document_id
-        
-        async with aiohttp.ClientSession() as session:
-            async with session.post(url, json=payload) as response:
-                if response.status != 200:
-                    error = await response.text()
-                    raise Exception(f"API 오류: {error}")
-                
-                return await response.json()
-    
-    def _evaluate_treerag(self) -> SystemResult:
-        
-        print("TreeRAG 실제 시스템 평가 시작...")
-        
-        result = SystemResult(
-            system_name="TreeRAG (Real)",
-            system_type=BaselineType.TREE_RAG
-        )
-        
-        query_results = []
-        latency_measurements = []
-        token_usages = []
-        fidelity_analyses = []
-        
-        loop = asyncio.get_event_loop()
-        
-        for idx, question in enumerate(self.dataset.questions, 1):
-            print(f"  [{idx}/{len(self.dataset.questions)}] {question.question_id}")
-            
-            try:
-                start_time = time.perf_counter()
-
-                api_response = loop.run_until_complete(
-                    self._call_treerag_api(
-                        question.question,
-                        question.document_id
-                    )
-                )
-                
-                end_time = time.perf_counter()
-                latency_ms = (end_time - start_time) * 1000
-
-                answer = api_response.get("answer", "")
-                context = api_response.get("context", "")
-                traversal = api_response.get("traversal", {})
-
-                visited_sections = traversal.get("visited_sections", [])
-                retrieved = []
-                
-                for i, section in enumerate(visited_sections[:10]):
-                    section_id = section.get("id", f"section_{i}")
-                    score = section.get("score", 0.0)
-
-                    is_relevant = section_id in question.relevant_sections
-                    
-                    retrieved.append(RetrievalResult(
-                        doc_id=section_id,
-                        rank=i + 1,
-                        score=score,
-                        relevance=1.0 if is_relevant else 0.0
-                    ))
-
-                qr = QueryResult(
-                    query_id=question.question_id,
-                    query_text=question.question,
-                    retrieved=retrieved,
-                    relevant_doc_ids=set(question.relevant_sections),
-                    latency_ms=latency_ms
-                )
-                query_results.append(qr)
-
-                latency_measurements.append(LatencyMeasurement(
-                    query_id=question.question_id,
-                    total_ms=latency_ms,
-                    traversal_ms=traversal.get("time_ms", 0),
-                    llm_ms=api_response.get("llm_time_ms", 0)
-                ))
-
-                tokens_info = api_response.get("tokens", {})
-                token_usages.append(TokenUsage(
-                    query_id=question.question_id,
-                    input_tokens=tokens_info.get("input", 0),
-                    output_tokens=tokens_info.get("output", 0),
-                    total_tokens=tokens_info.get("total", 0),
-                    context_tokens=len(context) // 4,
-                    original_document_tokens=tokens_info.get("original", 10000)
-                ))
-
-                fidelity_analyses.append(
-                    self.fidelity_metrics.analyze_answer(
-                        question.question_id,
-                        answer,
-                        context
-                    )
-                )
-
-                result.per_query_scores[question.question_id] = {
-                    "latency": latency_ms,
-                    "tokens": tokens_info.get("total", 0)
-                }
-                
-                print(f"    ✓ 완료: {latency_ms:.1f}ms")
-                
-            except Exception as e:
-                print(f"    ✗ 오류: {e}")
-                query_results.append(QueryResult(
-                    query_id=question.question_id,
-                    query_text=question.question,
-                    retrieved=[],
-                    relevant_doc_ids=set(question.relevant_sections),
-                    latency_ms=0.0
-                ))
-
-        result.retrieval_metrics = self.retrieval_metrics.compute_all_metrics(
-            query_results, self.config.k_values
-        )
-        
-        for measurement in latency_measurements:
-            self.efficiency_metrics.record_latency(measurement)
-        for usage in token_usages:
-            self.efficiency_metrics.record_tokens(usage)
-        result.efficiency_metrics = self.efficiency_metrics.compute_all()
-        
-        result.fidelity_metrics = self.fidelity_metrics.compute_metrics(fidelity_analyses)
-        
-        self.efficiency_metrics.clear()
-        
-        print("  ✓ TreeRAG 평가 완료")
-        return result
+ALL_SYSTEMS = ["bm25", "dense", "flatrag", "treerag_dfs", "treerag_beam"]
+SYSTEM_LABELS = {
+    "bm25": "BM25",
+    "dense": "Dense Retrieval",
+    "flatrag": "FlatRAG",
+    "treerag_dfs": "TreeRAG-DFS",
+    "treerag_beam": "TreeRAG-Beam",
+}
+DEFAULT_REPORT_DIR = _PROJECT_ROOT / "data" / "benchmark_reports"
 
 
-def main():
-    """실제 TreeRAG 시스템 평가 실행"""
-    
-    import argparse
-    
-    parser = argparse.ArgumentParser(
-        description="실제 TreeRAG API로 벤치마크 평가"
-    )
-    
-    parser.add_argument(
-        "--questions", "-q",
-        default="benchmarks/datasets/my_benchmark_questions.json",
-        help="질문 데이터셋 경로"
-    )
-    
-    parser.add_argument(
-        "--api-url",
-        default="http://localhost:8000",
-        help="TreeRAG API URL"
-    )
-    
-    parser.add_argument(
-        "--experiment", "-e",
-        default="real_evaluation",
-        help="실험 이름"
-    )
-    
-    parser.add_argument(
-        "--output", "-o",
-        default="benchmarks/results",
-        help="결과 저장 디렉토리"
-    )
-    
-    args = parser.parse_args()
-
-    questions_path = Path(args.questions)
-    if not questions_path.exists():
-        print(f"❌ 질문 데이터셋을 찾을 수 없습니다: {questions_path}")
-        print("\n먼저 질문 데이터셋을 작성하세요.")
-        print("예시: benchmarks/datasets/my_benchmark_questions.json")
+# --------------------------------------------------------------------------- #
+# Tree / answer helpers
+# --------------------------------------------------------------------------- #
+def _flatten(node: Dict[str, Any], depth: int, acc: List[Tuple[Dict[str, Any], int]]) -> None:
+    if not isinstance(node, dict):
         return
+    acc.append((node, depth))
+    for child in node.get("children", []) or []:
+        _flatten(child, depth + 1, acc)
 
-    print(f"🔗 TreeRAG API 연결 확인: {args.api_url}")
-    import requests
+
+def _node_text(node: Dict[str, Any]) -> str:
+    return f"{node.get('title', '')} {node.get('summary', '')}".strip()
+
+
+def extractive_answer(nodes: List[Dict[str, Any]]) -> str:
+    """Synthesise a deterministic answer from retrieved nodes."""
+    if not nodes:
+        return ""
+    parts = []
+    for n in nodes:
+        title = n.get("title", "")
+        summary = n.get("summary", "")
+        parts.append(f"{title}: {summary}".strip(": ").strip())
+    return " ".join(parts)
+
+
+def keyword_traversal(
+    tree: Dict[str, Any], query: str, k: int, prefer_shallow: bool = False
+) -> List[Dict[str, Any]]:
+    """Keyword-scored node selection (offline DFS/Beam approximation).
+
+    Scores every node by token-F1 against the query; ``prefer_shallow`` adds a
+    mild depth penalty (DFS-style path preference) vs the wider Beam variant.
+    """
+    flat: List[Tuple[Dict[str, Any], int]] = []
+    _flatten(tree, 0, flat)
+    scored = []
+    for node, depth in flat:
+        if node.get("id") == "ROOT":
+            continue
+        s = _token_f1(query, _node_text(node))
+        if prefer_shallow:
+            s *= (0.9 ** depth)
+        scored.append((s, node))
+    scored.sort(key=lambda x: x[0], reverse=True)
+    return [n for s, n in scored[:k] if s > 0]
+
+
+# --------------------------------------------------------------------------- #
+# System adapters
+# --------------------------------------------------------------------------- #
+class Evaluator:
+    def __init__(self, mode: str, use_llm_judge: bool):
+        self.mode = mode  # "online" | "offline"
+        self.use_llm_judge = use_llm_judge and mode == "online"
+        self._index_cache: Dict[str, Any] = {}
+        self._bm25_cache: Dict[str, Any] = {}
+        self._dense_cache: Dict[str, Any] = {}
+        self._reasoner_cache: Dict[Tuple[str, str], Any] = {}
+        self._judge = None
+        if self.use_llm_judge:
+            from benchmarks.metrics.llm_judge import GeminiJudge
+
+            self._judge = GeminiJudge()
+
+    def load_tree(self, doc_id: str) -> Dict[str, Any]:
+        if doc_id not in self._index_cache:
+            path = os.path.join(Config.INDEX_DIR, doc_id)
+            if not os.path.exists(path) and not doc_id.endswith(".json"):
+                path = os.path.join(Config.INDEX_DIR, f"{doc_id}.json")
+            with open(path, "r", encoding="utf-8") as f:
+                self._index_cache[doc_id] = json.load(f)
+        return self._index_cache[doc_id]
+
+    # -- individual systems -------------------------------------------------
+    def _run_bm25(self, q: str, doc_id: str, branches: int):
+        from src.core.bm25_baseline import BM25Retriever
+
+        if doc_id not in self._bm25_cache:
+            self._bm25_cache[doc_id] = BM25Retriever(self.load_tree(doc_id))
+        nodes = self._bm25_cache[doc_id].retrieve(q, top_k=branches)
+        return extractive_answer(nodes), nodes
+
+    def _run_dense(self, q: str, doc_id: str, branches: int):
+        from src.core.dense_retrieval_baseline import DenseRetriever
+
+        if doc_id not in self._dense_cache:
+            self._dense_cache[doc_id] = DenseRetriever(self.load_tree(doc_id))
+        nodes = self._dense_cache[doc_id].retrieve(q, top_k=branches)
+        return extractive_answer(nodes), nodes
+
+    def _run_flatrag(self, q: str, doc_id: str, branches: int):
+        from src.core.flat_rag_baseline import FlatRAGBaseline
+
+        key = f"flat::{doc_id}"
+        if key not in self._index_cache:
+            self._index_cache[key] = FlatRAGBaseline([doc_id])
+        baseline = self._index_cache[key]
+        answer, meta = baseline.query(q, max_branches=branches)
+        nodes = [{"id": d} for d in meta.get("retrieved_docs", [])]
+        return answer, nodes
+
+    def _run_treerag(self, q: str, doc_id: str, algo: str, branches: int):
+        if self.mode == "online":
+            from src.core.reasoner import TreeRAGReasoner
+
+            key = (doc_id, algo)
+            if key not in self._reasoner_cache:
+                self._reasoner_cache[key] = TreeRAGReasoner(
+                    [doc_id],
+                    traversal_algorithm="dfs" if algo == "dfs" else "beam_search",
+                    enable_compression=True,
+                )
+            answer, meta = self._reasoner_cache[key].query(q, max_branches=branches)
+            nodes = meta.get("nodes_selected", []) or []
+            nodes = [n if isinstance(n, dict) else {"id": n} for n in nodes]
+            return answer, nodes
+        # offline keyword approximation
+        k = branches if algo == "dfs" else max(branches, 5)
+        nodes = keyword_traversal(
+            self.load_tree(doc_id), q, k, prefer_shallow=(algo == "dfs")
+        )
+        return extractive_answer(nodes), nodes
+
+    def run_system(self, system: str, q: str, doc_id: str, branches: int = 3):
+        if system == "bm25":
+            return self._run_bm25(q, doc_id, branches)
+        if system == "dense":
+            return self._run_dense(q, doc_id, branches)
+        if system == "flatrag":
+            return self._run_flatrag(q, doc_id, branches)
+        if system == "treerag_dfs":
+            return self._run_treerag(q, doc_id, "dfs", branches)
+        if system == "treerag_beam":
+            return self._run_treerag(q, doc_id, "beam", branches)
+        raise ValueError(f"Unknown system: {system}")
+
+    # -- scoring ------------------------------------------------------------
+    def score_answer(self, question, context, answer, expected) -> Dict[str, Any]:
+        out = {
+            "rouge_l": rouge_l_score(answer, expected),
+            "bertscore": bertscore_f1(answer, expected, lang="ko"),
+            "llm_judge": None,
+        }
+        if self._judge is not None:
+            out["llm_judge"] = self._judge.score_average(
+                question, context, answer, expected
+            )
+        return out
+
+
+# --------------------------------------------------------------------------- #
+# Orchestration
+# --------------------------------------------------------------------------- #
+def detect_mode(requested: str) -> str:
+    if requested in ("online", "offline"):
+        return requested
     try:
-        response = requests.get(f"{args.api_url}/health", timeout=5)
-        if response.status_code != 200:
-            print(f"⚠️  API 응답 이상: {response.status_code}")
-            print("계속 진행하시겠습니까? (y/n)")
-            if input().lower() != 'y':
-                return
-    except Exception as e:
-        print(f"⚠️  API 연결 실패: {e}")
-        print("TreeRAG 서버가 실행 중인지 확인하세요.")
-        print("계속 진행하시겠습니까? (y/n)")
-        if input().lower() != 'y':
-            return
+        Config.CLIENT.models.generate_content(model=Config.MODEL_NAME, contents="ping")
+        return "online"
+    except Exception:
+        return "offline"
 
-    print("✓ API 연결 확인 완료\n")
 
-    config = EvaluationConfig(
-        experiment_name=args.experiment,
-        systems=["treerag"],
-        questions_path=args.questions,
-        output_dir=args.output,
-        verbose=True
-    )
+def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator) -> Dict[str, Any]:
+    questions = dataset["questions"]
+    per_system: Dict[str, List[Dict[str, Any]]] = {s: [] for s in systems}
 
-    evaluator = RealTreeRAGEvaluator(config, api_base_url=args.api_url)
-    report = evaluator.run()
-    
-    print("\n" + "=" * 70)
-    print("실제 시스템 평가 완료!")
-    print("=" * 70)
-    print(f"\n결과 확인:")
-    print(f"  python scripts/view_results.py benchmarks/results/{args.experiment}/evaluation_report.json")
-    print()
+    for system in systems:
+        print(f"\n▶ Running system: {SYSTEM_LABELS.get(system, system)} "
+              f"over {len(questions)} questions ...")
+        for q in questions:
+            expected = q.get("expected_answer_hint", "")
+            t0 = time.perf_counter()
+            try:
+                answer, nodes = evaluator.run_system(
+                    system, q["question"], q["document_id"]
+                )
+            except Exception as exc:
+                answer, nodes = "", []
+                print(f"   ⚠️  {system} failed on {q['question_id']}: {exc}")
+            latency = time.perf_counter() - t0
+
+            context = extractive_answer(nodes)
+            scores = evaluator.score_answer(q["question"], context, answer, expected)
+            per_system[system].append(
+                {
+                    "question_id": q["question_id"],
+                    "document_id": q["document_id"],
+                    "answer": answer,
+                    "retrieved_count": len(nodes),
+                    "context_tokens": int(len(context) / 4),
+                    "latency": latency,
+                    **scores,
+                }
+            )
+    return per_system
+
+
+def _mean(values) -> float:
+    values = [v for v in values if v is not None]
+    return sum(values) / len(values) if values else 0.0
+
+
+def aggregate(per_system: Dict[str, List[Dict[str, Any]]]) -> Dict[str, Dict[str, float]]:
+    agg = {}
+    for system, rows in per_system.items():
+        judge_vals = [r["llm_judge"] for r in rows if r["llm_judge"] is not None]
+        agg[system] = {
+            "rouge_l": _mean([r["rouge_l"] for r in rows]),
+            "bertscore": _mean([r["bertscore"] for r in rows]),
+            "llm_judge": _mean(judge_vals) if judge_vals else None,
+            "latency": _mean([r["latency"] for r in rows]),
+            "context_tokens": _mean([r["context_tokens"] for r in rows]),
+            "n": len(rows),
+        }
+    return agg
+
+
+def significance(per_system: Dict[str, List[Dict[str, Any]]], systems: List[str]) -> Dict[str, Any]:
+    if "treerag_beam" not in systems:
+        return {}
+    st = StatisticalTests()
+    beam = {r["question_id"]: r["rouge_l"] for r in per_system["treerag_beam"]}
+    results = {}
+    for system in systems:
+        if system == "treerag_beam":
+            continue
+        base = {r["question_id"]: r["rouge_l"] for r in per_system[system]}
+        common = [qid for qid in beam if qid in base]
+        a = [beam[qid] for qid in common]
+        b = [base[qid] for qid in common]
+        res = st.paired_ttest(a, b)
+        results[system] = {
+            "p_value": res.p_value,
+            "significant": res.significant,
+            "effect_size": res.effect_size,
+            "mean_diff": res.mean_difference,
+        }
+    return results
+
+
+# --------------------------------------------------------------------------- #
+# Reporting
+# --------------------------------------------------------------------------- #
+def print_table(agg: Dict[str, Dict[str, float]], systems: List[str]) -> None:
+    print("\n┌─────────────────┬─────────┬───────────┬───────────┬──────────┬────────┐")
+    print("│ System          │ ROUGE-L │ BERTScore │ LLM-Judge │ Latency  │ CTX(K) │")
+    print("├─────────────────┼─────────┼───────────┼───────────┼──────────┼────────┤")
+    for system in systems:
+        a = agg[system]
+        lj = f"{a['llm_judge']:.2f}" if a["llm_judge"] else "  -  "
+        print(
+            f"│ {SYSTEM_LABELS.get(system, system):<15} │  {a['rouge_l']:.3f}  │"
+            f"   {a['bertscore']:.3f}   │   {lj:^5} │  {a['latency']:.3f}s │"
+            f" {a['context_tokens']/1000:>5.1f}  │"
+        )
+    print("└─────────────────┴─────────┴───────────┴───────────┴──────────┴────────┘")
+
+
+def print_significance(sig: Dict[str, Any]) -> None:
+    if not sig:
+        return
+    print("\nPaired t-test (TreeRAG-Beam vs baseline, ROUGE-L):")
+    for system, r in sig.items():
+        star = " *" if r["significant"] else ""
+        print(
+            f"  vs {SYSTEM_LABELS.get(system, system):<16} "
+            f"p={r['p_value']:.4f}  Δ={r['mean_diff']:+.3f}  d={r['effect_size']:.2f}{star}"
+        )
+
+
+# --------------------------------------------------------------------------- #
+def main(argv: Optional[List[str]] = None) -> int:
+    parser = argparse.ArgumentParser(description="TreeRAG evaluation runner (PHASE C-3)")
+    parser.add_argument("--dataset", default=str(_PROJECT_ROOT / "benchmarks/datasets/full_benchmark.json"))
+    parser.add_argument("--systems", default="all")
+    parser.add_argument("--output", default=None)
+    parser.add_argument("--use-llm-judge", action="store_true")
+    parser.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
+    args = parser.parse_args(argv)
+
+    systems = ALL_SYSTEMS if args.systems == "all" else [
+        s.strip() for s in args.systems.split(",") if s.strip()
+    ]
+    unknown = [s for s in systems if s not in ALL_SYSTEMS]
+    if unknown:
+        parser.error(f"Unknown system(s): {unknown}. Choose from {ALL_SYSTEMS} or 'all'.")
+
+    with open(args.dataset, "r", encoding="utf-8") as f:
+        dataset = json.load(f)
+
+    mode = detect_mode(args.mode)
+    print(f"Evaluation mode : {mode.upper()}  "
+          f"({'real Gemini reasoner+judge' if mode == 'online' else 'offline keyword+extractive fallback'})")
+    print(f"Systems         : {', '.join(systems)}")
+    print(f"Questions       : {dataset.get('total_questions', len(dataset['questions']))}")
+
+    evaluator = Evaluator(mode=mode, use_llm_judge=args.use_llm_judge)
+    per_system = evaluate(dataset, systems, evaluator)
+    agg = aggregate(per_system)
+    sig = significance(per_system, systems)
+
+    print_table(agg, systems)
+    print_significance(sig)
+
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    out_path = Path(args.output) if args.output else DEFAULT_REPORT_DIR / f"evaluation_{ts}.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    report = {
+        "timestamp": ts,
+        "mode": mode,
+        "dataset": os.path.basename(args.dataset),
+        "systems": systems,
+        "summary": agg,
+        "significance": sig,
+        "per_question": per_system,
+    }
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    # Stable copy for downstream table/figure generation.
+    latest = DEFAULT_REPORT_DIR / "evaluation_latest.json"
+    with open(latest, "w", encoding="utf-8") as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    print(f"\n💾 Report → {out_path}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

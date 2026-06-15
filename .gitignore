@@ -128,3 +128,6 @@ PHASE_1-4_구현_요약.md
 PHASE_1_비판점_및_개선계획.md
 PHASE_2_상세계획.md
 RESEARCH_OVERVIEW.md
+
+# Dense retrieval embedding caches (PHASE B-2, regenerable)
+data/indices/*_dense_index.pkl

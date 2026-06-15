@@ -92,7 +92,8 @@ class TreeRAGReasoner:
         use_deep_traversal: bool = True,
         traversal_algorithm: TraversalAlgorithm = "beam_search",
         beam_width: int = 5,
-        enable_compression: bool = True
+        enable_compression: bool = True,
+        enable_reference_resolver: bool = True
     ):
         self.index_trees: List[Dict[str, Any]] = []
         self.index_filenames = index_filenames
@@ -100,6 +101,7 @@ class TreeRAGReasoner:
         self.traversal_algorithm = traversal_algorithm
         self.beam_width = beam_width
         self.enable_compression = enable_compression
+        self.enable_reference_resolver = enable_reference_resolver
         self.compressor = ContextualCompressor() if enable_compression else None
         
         for index_filename in index_filenames:
@@ -185,7 +187,7 @@ class TreeRAGReasoner:
         
         reference_context = ""
         resolved_refs = []
-        for tree in self.index_trees:
+        for tree in (self.index_trees if self.enable_reference_resolver else []):
             resolver = ReferenceResolver(tree)
             refs = resolver.detect_references(user_question)
             if refs:
@@ -247,6 +249,10 @@ class TreeRAGReasoner:
 - 예: "최신 버전(2024)의 내용이 적용됩니다 [문서A, p.10]"
 """
 
+        # Precomputed to keep the prompt f-string free of backslash-in-expression
+        # (portable across Python 3.10–3.12).
+        comparison_template = "\n[문서 비교 분석: 공통점/차이점 표]" if is_multi_doc else ""
+
         domain_prompt = DOMAIN_PROMPTS.get(domain_template, DOMAIN_PROMPTS["general"])
         
         language_instruction = LANGUAGE_INSTRUCTIONS.get(language, LANGUAGE_INSTRUCTIONS["ko"])
@@ -293,7 +299,7 @@ class TreeRAGReasoner:
 [핵심 답변 1-2문장 + 페이지 참조]
 
 [상세 설명 (필요시) + 페이지 참조]
-{f"\n[문서 비교 분석: 공통점/차이점 표]" if is_multi_doc else ""}
+{comparison_template}
 
 📚 **참조 페이지**: [문서명, p.X], [문서명, p.Y-Z]
 

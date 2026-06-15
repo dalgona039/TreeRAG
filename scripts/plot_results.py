@@ -420,43 +420,124 @@ def generate_all_plots(
     return saved_plots
 
 
+
+# ======================================================================
+# PHASE D additions (KCI plan): new CLI entrypoint + helpers.
+# Original classes above are retained for backward compatibility.
+# ======================================================================
+import argparse
+import json
+import sys
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+
+try:
+    import seaborn as sns
+
+    sns.set_theme(style="whitegrid")
+except Exception:  # seaborn optional
+    plt.style.use("seaborn-v0_8-whitegrid") if "seaborn-v0_8-whitegrid" in plt.style.available else None
+
+_PROJECT_ROOT = Path(__file__).resolve().parents[1]
+REPORT_DIR = _PROJECT_ROOT / "data" / "benchmark_reports"
+FIG_DIR = REPORT_DIR / "figures"
+LABELS = {
+    "bm25": "BM25",
+    "dense": "Dense",
+    "flatrag": "FlatRAG",
+    "treerag_dfs": "TreeRAG-DFS",
+    "treerag_beam": "TreeRAG-Beam",
+}
+
+
+def _save(fig, name: str) -> None:
+    FIG_DIR.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "pdf"):
+        fig.savefig(FIG_DIR / f"{name}.{ext}", dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print(f"  ✓ {name}.png / {name}.pdf")
+
+
+def figure_comparison(report) -> None:
+    systems = report["systems"]
+    summ = report["summary"]
+    labels = [LABELS.get(s, s) for s in systems]
+    rouge = [summ[s]["rouge_l"] for s in systems]
+    bert = [summ[s]["bertscore"] for s in systems]
+
+    x = range(len(systems))
+    w = 0.38
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.bar([i - w / 2 for i in x], rouge, w, label="ROUGE-L", color="#4C72B0")
+    ax.bar([i + w / 2 for i in x], bert, w, label="BERTScore", color="#DD8452")
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(labels, rotation=20, ha="right")
+    ax.set_ylabel("Score")
+    ax.set_title("System comparison: ROUGE-L vs BERTScore")
+    ax.legend()
+    _save(fig, "figure_1_comparison")
+
+
+def figure_ablation(ablation) -> None:
+    rows = sorted(ablation["configs"], key=lambda r: r["rouge_l"])
+    names = [r["id"] for r in rows]
+    scores = [r["rouge_l"] for r in rows]
+    deltas = [r["delta_rouge_l_vs_full"] for r in rows]
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+    bars = ax.barh(names, scores, color="#55A868")
+    for bar, d in zip(bars, deltas):
+        ax.text(bar.get_width() + 0.005, bar.get_y() + bar.get_height() / 2,
+                f"Δ={d:+.3f}", va="center", fontsize=9)
+    ax.set_xlabel("ROUGE-L")
+    ax.set_title("Ablation: ROUGE-L by configuration")
+    ax.margins(x=0.15)
+    _save(fig, "figure_2_ablation")
+
+
+def figure_efficiency(report) -> None:
+    systems = report["systems"]
+    summ = report["summary"]
+    fig, ax = plt.subplots(figsize=(9, 5))
+    cmap = plt.get_cmap("tab10")
+    for i, s in enumerate(systems):
+        a = summ[s]
+        ax.scatter(
+            a["latency"], a["rouge_l"],
+            s=max(60, a["context_tokens"] * 4 + 60),
+            color=cmap(i % 10), alpha=0.7, edgecolors="k",
+            label=LABELS.get(s, s),
+        )
+        ax.annotate(LABELS.get(s, s), (a["latency"], a["rouge_l"]),
+                    xytext=(5, 5), textcoords="offset points", fontsize=8)
+    ax.set_xlabel("Latency (s)")
+    ax.set_ylabel("ROUGE-L")
+    ax.set_title("Efficiency: Latency vs ROUGE-L (bubble = context size)")
+    ax.legend(fontsize=8, loc="best")
+    _save(fig, "figure_3_efficiency")
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description="Generate figures (PHASE D-3)")
+    parser.add_argument("--evaluation", default=str(REPORT_DIR / "evaluation_latest.json"))
+    parser.add_argument("--ablation", default=str(REPORT_DIR / "ablation_results.json"))
+    args = parser.parse_args(argv)
+
+    with open(args.evaluation, "r", encoding="utf-8") as f:
+        report = json.load(f)
+    with open(args.ablation, "r", encoding="utf-8") as f:
+        ablation = json.load(f)
+
+    print(f"Generating figures → {FIG_DIR}")
+    figure_comparison(report)
+    figure_ablation(ablation)
+    figure_efficiency(report)
+    return 0
+
+
 if __name__ == "__main__":
-    if MATPLOTLIB_AVAILABLE:
-        sample_results = {
-            "Flat RAG": {
-                "precision_at_5": 0.65,
-                "recall_at_5": 0.72,
-                "ndcg_at_5": 0.68,
-                "mrr": 0.71,
-                "groundedness": 0.82
-            },
-            "TreeRAG": {
-                "precision_at_5": 0.78,
-                "recall_at_5": 0.85,
-                "ndcg_at_5": 0.81,
-                "mrr": 0.84,
-                "groundedness": 0.91
-            },
-            "BM25": {
-                "precision_at_5": 0.55,
-                "recall_at_5": 0.62,
-                "ndcg_at_5": 0.58,
-                "mrr": 0.60,
-                "groundedness": 0.75
-            }
-        }
-        
-        plotter = ResultPlotter("results/figures")
-        path = plotter.plot_performance_comparison(
-            sample_results,
-            ["precision_at_5", "recall_at_5", "ndcg_at_5", "mrr", "groundedness"],
-            title="System Comparison"
-        )
-        print(f"Saved: {path}")
-        path = plotter.plot_radar_chart(
-            sample_results,
-            ["precision_at_5", "recall_at_5", "ndcg_at_5", "mrr", "groundedness"]
-        )
-        print(f"Saved: {path}")
-    else:
-        print("matplotlib not available - run 'pip install matplotlib seaborn'")
+    raise SystemExit(main())

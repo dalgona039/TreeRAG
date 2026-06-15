@@ -1,0 +1,53 @@
+% Auto-generated from evaluation_latest.json (mode=offline) and ablation_results.json.
+% NOTE: regenerate after an ONLINE run for publication numbers.
+% Table 1: Main system comparison
+\begin{table}[t]
+\centering
+\caption{Main comparison across retrieval systems. Best per column in \textbf{bold}.}
+\label{tab:main}
+\begin{tabular}{lrrrrr}
+\toprule
+System & ROUGE-L & BERTScore & LLM-Judge & Latency (s) & CTX (K) \\
+\midrule
+BM25 & 0.488 & 0.526 & -- & 0.004 & 0.1 \\
+Dense Retrieval & 0.379 & 0.422 & -- & \textbf{0.000} & 0.1 \\
+FlatRAG & 0.378 & 0.409 & -- & 0.000 & \textbf{0.0} \\
+TreeRAG-DFS & \textbf{0.496} & \textbf{0.538} & -- & 0.001 & 0.1 \\
+TreeRAG-Beam & 0.399 & 0.437 & -- & 0.001 & 0.2 \\
+\bottomrule
+\end{tabular}
+\\[2pt]\footnotesize{Paired $t$-test vs TreeRAG-Beam (ROUGE-L). BM25: $p=0.0001$$^{*}$; Dense Retrieval: $p=0.3914$; FlatRAG: $p=0.2407$; TreeRAG-DFS: $p=0.0000$$^{*}$. $^{*}p<0.05$.}
+\end{table}
+
+% Table 2: Ablation study
+\begin{table}[t]
+\centering
+\caption{Ablation study. $\Delta$ is ROUGE-L relative to the full system.}
+\label{tab:ablation}
+\begin{tabular}{lrrr}
+\toprule
+Configuration & ROUGE-L & $\Delta$ vs Full & CTX Reduction \\
+\midrule
+cfg\_base & \textbf{0.496} & +0.047 & +22.7\% \\
+cfg\_beam & 0.399 & -0.049 & -22.8\% \\
+cfg\_beam\_compress & 0.493 & +0.044 & +22.6\% \\
+cfg\_full & 0.449 & +0.000 & +0.0\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 3: Efficiency by document size
+\begin{table}[t]
+\centering
+\caption{Context reduction of TreeRAG-Beam vs FlatRAG by document size.}
+\label{tab:efficiency}
+\begin{tabular}{lrr}
+\toprule
+Document size & \# Questions & CTX Reduction \\
+\midrule
+<50p & 70 & +0.0\% \\
+50-100p & 0 & -- \\
+>100p & 0 & -- \\
+\bottomrule
+\end{tabular}
+\end{table}

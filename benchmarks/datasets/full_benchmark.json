@@ -1,0 +1,821 @@
+{
+  "version": "2.0",
+  "backend": "offline",
+  "total_questions": 70,
+  "documents": [
+    "0cbccdf9_2204.08939v1-2_index.json",
+    "2025학년도 교육과정 반도체공학과_index.json",
+    "61dd7aa0_s41598-026-41649-2_reference_index.json",
+    "92928ecd_생체의공학개론_보고서_index.json",
+    "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json",
+    "c7b780a9_생체의공학개론#11_index.json",
+    "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+  ],
+  "questions": [
+    {
+      "question": "What is 0cbccdf9 2204.08939v1-2?",
+      "expected_sections": [
+        "doc"
+      ],
+      "expected_answer_hint": "This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_001",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "What is 1. Introduction?",
+      "expected_sections": [
+        "ch1"
+      ],
+      "expected_answer_hint": "Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_002",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "What is 2. Methodology?",
+      "expected_sections": [
+        "ch2"
+      ],
+      "expected_answer_hint": "Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_003",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "What is 2.1. Patient-speciﬁc aorta geometry parameterization?",
+      "expected_sections": [
+        "ch2.s1"
+      ],
+      "expected_answer_hint": "Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_004",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "What is 2.1.1. Aorta dataset pre-processing?",
+      "expected_sections": [
+        "ch2.s1.a1"
+      ],
+      "expected_answer_hint": "Describes the initial steps for preparing 3D aorta geometries reconstructed from MRI scans. This includes trimming branches to simplify structures, sampling point clouds (4000 vertices) using voronoi clustering, and aligning geometries to a template using the rigid iterative closest points (ICP) algorithm to regularize position and orientation.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_005",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "How does 0cbccdf9 2204.08939v1-2 relate to 1. Introduction?",
+      "expected_sections": [
+        "doc",
+        "ch1"
+      ],
+      "expected_answer_hint": "This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques. Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_006",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "How does 1. Introduction relate to 2. Methodology?",
+      "expected_sections": [
+        "ch1",
+        "ch2"
+      ],
+      "expected_answer_hint": "Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems. Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_007",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "How does 2. Methodology relate to 2.1. Patient-speciﬁc aorta geometry parameterization?",
+      "expected_sections": [
+        "ch2",
+        "ch2.s1"
+      ],
+      "expected_answer_hint": "Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions. Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_008",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "What are the differences between 0cbccdf9 2204.08939v1-2 and 2. Methodology?",
+      "expected_sections": [
+        "doc",
+        "ch2"
+      ],
+      "expected_answer_hint": "This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques. Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_009",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "What are the differences between 1. Introduction and 2.1. Patient-speciﬁc aorta geometry parameterization?",
+      "expected_sections": [
+        "ch1",
+        "ch2.s1"
+      ],
+      "expected_answer_hint": "Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems. Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_010",
+      "document_id": "0cbccdf9_2204.08939v1-2_index.json"
+    },
+    {
+      "question": "2025학년도 교육과정 반도체공학과에 대해 설명하시오.",
+      "expected_sections": [
+        "document"
+      ],
+      "expected_answer_hint": "2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_011",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "제 1 장 총 칙에 대해 설명하시오.",
+      "expected_sections": [
+        "1"
+      ],
+      "expected_answer_hint": "반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_012",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "제1조(교육목적)에 대해 설명하시오.",
+      "expected_sections": [
+        "1.1"
+      ],
+      "expected_answer_hint": "반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_013",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "제2조(일반원칙)에 대해 설명하시오.",
+      "expected_sections": [
+        "1.2"
+      ],
+      "expected_answer_hint": "반도체공학 단일전공과정 적용 대상, 교과목 구분, 전공필수/선택 과목 개설 원칙, 선수과목 이수 체계 등을 규정함.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_014",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "적용 대상에 대해 설명하시오.",
+      "expected_sections": [
+        "1.2.1"
+      ],
+      "expected_answer_hint": "본 교육과정은 반도체공학과 재학생에게 적용되며, 타학과 학생의 다전공/부전공 이수 시 본 시행세칙을 따름.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_015",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "2025학년도 교육과정 반도체공학과와(과) 제 1 장 총 칙은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "document",
+        "1"
+      ],
+      "expected_answer_hint": "2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_016",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "제 1 장 총 칙와(과) 제1조(교육목적)은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "1",
+        "1.1"
+      ],
+      "expected_answer_hint": "반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_017",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "제1조(교육목적)와(과) 제2조(일반원칙)은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "1.1",
+        "1.2"
+      ],
+      "expected_answer_hint": "반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함. 반도체공학 단일전공과정 적용 대상, 교과목 구분, 전공필수/선택 과목 개설 원칙, 선수과목 이수 체계 등을 규정함.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_018",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "2025학년도 교육과정 반도체공학과와(과) 제1조(교육목적)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "document",
+        "1.1"
+      ],
+      "expected_answer_hint": "2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_019",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "제 1 장 총 칙와(과) 제2조(일반원칙)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "1",
+        "1.2"
+      ],
+      "expected_answer_hint": "반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함. 반도체공학 단일전공과정 적용 대상, 교과목 구분, 전공필수/선택 과목 개설 원칙, 선수과목 이수 체계 등을 규정함.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_020",
+      "document_id": "2025학년도 교육과정 반도체공학과_index.json"
+    },
+    {
+      "question": "What is 1. INTRODUCTION?",
+      "expected_sections": [
+        "CH1"
+      ],
+      "expected_answer_hint": "Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_021",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is Technological Shift?",
+      "expected_sections": [
+        "SEC1.1"
+      ],
+      "expected_answer_hint": "Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_022",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is Basecalling Process?",
+      "expected_sections": [
+        "ART1.1.1"
+      ],
+      "expected_answer_hint": "The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_023",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is Proposed Architecture?",
+      "expected_sections": [
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_024",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is Serial-Parallel Structure?",
+      "expected_sections": [
+        "ART1.2.1"
+      ],
+      "expected_answer_hint": "A method to scale up to 4096 states while optimizing resource utilization.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_025",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "How does 1. INTRODUCTION relate to Technological Shift?",
+      "expected_sections": [
+        "CH1",
+        "SEC1.1"
+      ],
+      "expected_answer_hint": "Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator. Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_026",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "How does Technological Shift relate to Basecalling Process?",
+      "expected_sections": [
+        "SEC1.1",
+        "ART1.1.1"
+      ],
+      "expected_answer_hint": "Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_027",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "How does Basecalling Process relate to Proposed Architecture?",
+      "expected_sections": [
+        "ART1.1.1",
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T). Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_028",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What are the differences between 1. INTRODUCTION and Basecalling Process?",
+      "expected_sections": [
+        "CH1",
+        "ART1.1.1"
+      ],
+      "expected_answer_hint": "Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator. The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_029",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What are the differences between Technological Shift and Proposed Architecture?",
+      "expected_sections": [
+        "SEC1.1",
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_030",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발에 대해 설명하시오.",
+      "expected_sections": [
+        "DOC-2025104184"
+      ],
+      "expected_answer_hint": "본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_031",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "서론에 대해 설명하시오.",
+      "expected_sections": [
+        "CH-01"
+      ],
+      "expected_answer_hint": "현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_032",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "의공학 분야의 AI 패러다임 전환에 대해 설명하시오.",
+      "expected_sections": [
+        "SEC-01-01"
+      ],
+      "expected_answer_hint": "제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_033",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "엔드투엔드 딥러닝의 부상에 대해 설명하시오.",
+      "expected_sections": [
+        "ART-01-01-01"
+      ],
+      "expected_answer_hint": "전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_034",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "보고서의 분석 방향에 대해 설명하시오.",
+      "expected_sections": [
+        "ART-01-01-02"
+      ],
+      "expected_answer_hint": "데이터 가용성과 해석 가능성을 축으로, 제한된 데이터 환경에서의 하이브리드 접근과 대규모 데이터 환경에서의 엔드투엔드 딥러닝을 비교 분석합니다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_035",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발와(과) 서론은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "DOC-2025104184",
+        "CH-01"
+      ],
+      "expected_answer_hint": "본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다. 현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_036",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "서론와(과) 의공학 분야의 AI 패러다임 전환은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "CH-01",
+        "SEC-01-01"
+      ],
+      "expected_answer_hint": "현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_037",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "의공학 분야의 AI 패러다임 전환와(과) 엔드투엔드 딥러닝의 부상은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "SEC-01-01",
+        "ART-01-01-01"
+      ],
+      "expected_answer_hint": "제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_038",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발와(과) 의공학 분야의 AI 패러다임 전환의 차이점은 무엇인가?",
+      "expected_sections": [
+        "DOC-2025104184",
+        "SEC-01-01"
+      ],
+      "expected_answer_hint": "본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_039",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "서론와(과) 엔드투엔드 딥러닝의 부상의 차이점은 무엇인가?",
+      "expected_sections": [
+        "CH-01",
+        "ART-01-01-01"
+      ],
+      "expected_answer_hint": "현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_040",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "bd2f85ad 웹:파이썬 프로그래밍 프로젝트 #6 보고서에 대해 설명하시오.",
+      "expected_sections": [
+        "root"
+      ],
+      "expected_answer_hint": "딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템(CDSS) 개발에 관한 연구 보고서로, 스마트 인솔 데이터를 활용한 골반 움직임 복원 및 의료진용 대시보드 구현 내용을 담고 있음.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_041",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1. 서론에 대해 설명하시오.",
+      "expected_sections": [
+        "ch1"
+      ],
+      "expected_answer_hint": "연구의 배경, 임상 현장의 한계점 정의 및 딥러닝 기반 CDSS '워크핏'의 개발 목표를 서술함.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_042",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1 연구 배경에 대해 설명하시오.",
+      "expected_sections": [
+        "sec1.1"
+      ],
+      "expected_answer_hint": "생활 양식 변화에 따른 근골격계 질환 증가와 동적 보행 분석의 임상적 중요성을 설명함.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_043",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1.1 현대 사회의 생활 양식 변화와 근골격계 질환의 증가에 대해 설명하시오.",
+      "expected_sections": [
+        "art1.1.1"
+      ],
+      "expected_answer_hint": "좌식 생활 보편화로 인한 요추 관련 질환의 전 연령대 확산 현상을 기술함.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_044",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1.2 동적 보행 분석의 임상적 중요성에 대해 설명하시오.",
+      "expected_sections": [
+        "art1.1.2"
+      ],
+      "expected_answer_hint": "정적 영상 검사의 한계를 보완하기 위한 정량적 보행 데이터의 필요성을 강조함.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_045",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "bd2f85ad 웹:파이썬 프로그래밍 프로젝트 #6 보고서와(과) 1. 서론은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "root",
+        "ch1"
+      ],
+      "expected_answer_hint": "딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템(CDSS) 개발에 관한 연구 보고서로, 스마트 인솔 데이터를 활용한 골반 움직임 복원 및 의료진용 대시보드 구현 내용을 담고 있음. 연구의 배경, 임상 현장의 한계점 정의 및 딥러닝 기반 CDSS '워크핏'의 개발 목표를 서술함.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_046",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1. 서론와(과) 1.1 연구 배경은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "ch1",
+        "sec1.1"
+      ],
+      "expected_answer_hint": "연구의 배경, 임상 현장의 한계점 정의 및 딥러닝 기반 CDSS '워크핏'의 개발 목표를 서술함. 생활 양식 변화에 따른 근골격계 질환 증가와 동적 보행 분석의 임상적 중요성을 설명함.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_047",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1 연구 배경와(과) 1.1.1 현대 사회의 생활 양식 변화와 근골격계 질환의 증가은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "sec1.1",
+        "art1.1.1"
+      ],
+      "expected_answer_hint": "생활 양식 변화에 따른 근골격계 질환 증가와 동적 보행 분석의 임상적 중요성을 설명함. 좌식 생활 보편화로 인한 요추 관련 질환의 전 연령대 확산 현상을 기술함.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_048",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "bd2f85ad 웹:파이썬 프로그래밍 프로젝트 #6 보고서와(과) 1.1 연구 배경의 차이점은 무엇인가?",
+      "expected_sections": [
+        "root",
+        "sec1.1"
+      ],
+      "expected_answer_hint": "딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템(CDSS) 개발에 관한 연구 보고서로, 스마트 인솔 데이터를 활용한 골반 움직임 복원 및 의료진용 대시보드 구현 내용을 담고 있음. 생활 양식 변화에 따른 근골격계 질환 증가와 동적 보행 분석의 임상적 중요성을 설명함.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_049",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1. 서론와(과) 1.1.1 현대 사회의 생활 양식 변화와 근골격계 질환의 증가의 차이점은 무엇인가?",
+      "expected_sections": [
+        "ch1",
+        "art1.1.1"
+      ],
+      "expected_answer_hint": "연구의 배경, 임상 현장의 한계점 정의 및 딥러닝 기반 CDSS '워크핏'의 개발 목표를 서술함. 좌식 생활 보편화로 인한 요추 관련 질환의 전 연령대 확산 현상을 기술함.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_050",
+      "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "초음파의 개요 및 역사에 대해 설명하시오.",
+      "expected_sections": [
+        "CH1"
+      ],
+      "expected_answer_hint": "초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_051",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파 영상의 정의에 대해 설명하시오.",
+      "expected_sections": [
+        "SEC1.1"
+      ],
+      "expected_answer_hint": "초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_052",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파의 역사에 대해 설명하시오.",
+      "expected_sections": [
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_053",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "음파의 물리적 특성에 대해 설명하시오.",
+      "expected_sections": [
+        "CH2"
+      ],
+      "expected_answer_hint": "음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_054",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "음파의 기본 원리 및 변수에 대해 설명하시오.",
+      "expected_sections": [
+        "SEC2.1"
+      ],
+      "expected_answer_hint": "매질이 필요한 파동으로서의 음파 정의와 주파수, 주기, 파장, 전파속도 등 주요 음향 변수 설명",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_055",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파의 개요 및 역사와(과) 초음파 영상의 정의은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "CH1",
+        "SEC1.1"
+      ],
+      "expected_answer_hint": "초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸 초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_056",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파 영상의 정의와(과) 초음파의 역사은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "SEC1.1",
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술 박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_057",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파의 역사와(과) 음파의 물리적 특성은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "SEC1.2",
+        "CH2"
+      ],
+      "expected_answer_hint": "박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정 음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_058",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파의 개요 및 역사와(과) 초음파의 역사의 차이점은 무엇인가?",
+      "expected_sections": [
+        "CH1",
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸 박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_059",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파 영상의 정의와(과) 음파의 물리적 특성의 차이점은 무엇인가?",
+      "expected_sections": [
+        "SEC1.1",
+        "CH2"
+      ],
+      "expected_answer_hint": "초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술 음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_060",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "웹:파이썬 프로그래밍 프로젝트 #6 보고서에 대해 설명하시오.",
+      "expected_sections": [
+        "document"
+      ],
+      "expected_answer_hint": "웹/파이썬 프로그래밍 프로젝트 #6 보고서: 딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템 (CDSS) 개발. 경희대학교 생체의공학과 이원석 (2025104184) 작성.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_061",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1. 서론에 대해 설명하시오.",
+      "expected_sections": [
+        "chapter_1"
+      ],
+      "expected_answer_hint": "현대 사회의 생활 양식 변화와 근골격계 질환의 증가, 동적 보행 분석의 임상적 중요성, 임상 현장의 한계점(진단의 주관성, 전문 분석 장비의 낮은 접근성, 환자 소통의 어려움)을 제시하고, 이를 해결하기 위한 딥러닝 기반 임상 의사 결정 지원 시스템(CDSS) '워크핏'의 개발 목표와 가상 센서 기술, 설명 가능한 AI를 통한 진료 효율성 증대 방안을 소개한다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_062",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1 연구 배경에 대해 설명하시오.",
+      "expected_sections": [
+        "section_1_1"
+      ],
+      "expected_answer_hint": "현대 사회의 생활 양식 변화로 인한 근골격계 질환 증가와 요추 질환의 사회적 문제화, 그리고 기존 정적 영상 검사의 한계를 보완하는 동적 보행 분석의 임상적 중요성을 설명한다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_063",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1.1 현대 사회의 생활 양식 변화와 근골격계 질환의 증가에 대해 설명하시오.",
+      "expected_sections": [
+        "article_1_1_1"
+      ],
+      "expected_answer_hint": "현대 산업 사회의 고도화는 인간의 생활 양식을 근본적으로 변화시켰다. 특히 학업, 사무 업무, 디지털 기기 사용의 증가로 인한 지속적인 좌식 생활의 보편화는 인체 근골격계에 심각한 스트레스를 가하고 있다. 장시간 고정된 자세는 척추의 자연스러운 만곡을 무너뜨리고, 척추 기립근 및 장요근의 긴장을 유발하며 신체 전반의 불균형을 초래한다. 이러한 생활 습관의 변화는 요추 추간판 탈출증, 흔히 디스크라고 이야기 되는 질병 뿐만 아니라 척추관 협착증과 같은 만성 퇴행성 질환의 급격한 증가로 이어지고 있다. 최근 건강보험심사평가원의 통계에 따르면, 요추 관련 질환은 고령층 뿐만 아니라 10대 ~ 30대의 젊은 연령층에서도 발병률이 꾸준히 상승하는 추세이며, 이는 더 이상 노화에 의한 자연스러운 현상이 아닌 사회적 질병으로 인식되어야 함을 시사한다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_064",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1.2 동적 보행 분석의 임상적 중요성에 대해 설명하시오.",
+      "expected_sections": [
+        "article_1_1_2"
+      ],
+      "expected_answer_hint": "요추는 인체의 중심 축으로서 골반 및 하지와 유기적인 운동 사슬을 형성한다. 따라서 요추의 병변은 필연적으로 보행 패턴의 변화, 특히 좌우 대칭성의 붕괴나 보행 리듬의 불규칙성을 유발한다. 기존의 X-ray나 MRI와 같은 정적 영상 의학적 검사는 해부학적 구조의 변형을 확인하는 데에는 탁월하나, 환자가 일상생활에서 실제로 겪는 기능적 제한이나 동적 움직임의 이상을 파악하는 데에는 한계성이 존재한다. 따라서 환자의 예후를 판단하고 치료 계획을 수립하기 위해서는, 정지된 영상 데이터와 더불어 움직이는 상태에서의 정량적 보행 데이터가 필수적으로 요구된다.",
+      "difficulty": "easy",
+      "category": "factual",
+      "question_id": "auto_065",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "웹:파이썬 프로그래밍 프로젝트 #6 보고서와(과) 1. 서론은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "document",
+        "chapter_1"
+      ],
+      "expected_answer_hint": "웹/파이썬 프로그래밍 프로젝트 #6 보고서: 딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템 (CDSS) 개발. 경희대학교 생체의공학과 이원석 (2025104184) 작성. 현대 사회의 생활 양식 변화와 근골격계 질환의 증가, 동적 보행 분석의 임상적 중요성, 임상 현장의 한계점(진단의 주관성, 전문 분석 장비의 낮은 접근성, 환자 소통의 어려움)을 제시하고, 이를 해결하기 위한 딥러닝 기반 임상 의사 결정 지원 시스템(CDSS) '워크핏'의 개발 목표와 가상 센서 기술, 설명 가능한 AI를 통한 진료 효율성 증대 방안을 소개한다.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_066",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1. 서론와(과) 1.1 연구 배경은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "chapter_1",
+        "section_1_1"
+      ],
+      "expected_answer_hint": "현대 사회의 생활 양식 변화와 근골격계 질환의 증가, 동적 보행 분석의 임상적 중요성, 임상 현장의 한계점(진단의 주관성, 전문 분석 장비의 낮은 접근성, 환자 소통의 어려움)을 제시하고, 이를 해결하기 위한 딥러닝 기반 임상 의사 결정 지원 시스템(CDSS) '워크핏'의 개발 목표와 가상 센서 기술, 설명 가능한 AI를 통한 진료 효율성 증대 방안을 소개한다. 현대 사회의 생활 양식 변화로 인한 근골격계 질환 증가와 요추 질환의 사회적 문제화, 그리고 기존 정적 영상 검사의 한계를 보완하는 동적 보행 분석의 임상적 중요성을 설명한다.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_067",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1.1 연구 배경와(과) 1.1.1 현대 사회의 생활 양식 변화와 근골격계 질환의 증가은(는) 어떻게 연관되는가?",
+      "expected_sections": [
+        "section_1_1",
+        "article_1_1_1"
+      ],
+      "expected_answer_hint": "현대 사회의 생활 양식 변화로 인한 근골격계 질환 증가와 요추 질환의 사회적 문제화, 그리고 기존 정적 영상 검사의 한계를 보완하는 동적 보행 분석의 임상적 중요성을 설명한다. 현대 산업 사회의 고도화는 인간의 생활 양식을 근본적으로 변화시켰다. 특히 학업, 사무 업무, 디지털 기기 사용의 증가로 인한 지속적인 좌식 생활의 보편화는 인체 근골격계에 심각한 스트레스를 가하고 있다. 장시간 고정된 자세는 척추의 자연스러운 만곡을 무너뜨리고, 척추 기립근 및 장요근의 긴장을 유발하며 신체 전반의 불균형을 초래한다. 이러한 생활 습관의 변화는 요추 추간판 탈출증, 흔히 디스크라고 이야기 되는 질병 뿐만 아니라 척추관 협착증과 같은 만성 퇴행성 질환의 급격한 증가로 이어지고 있다. 최근 건강보험심사평가원의 통계에 따르면, 요추 관련 질환은 고령층 뿐만 아니라 10대 ~ 30대의 젊은 연령층에서도 발병률이 꾸준히 상승하는 추세이며, 이는 더 이상 노화에 의한 자연스러운 현상이 아닌 사회적 질병으로 인식되어야 함을 시사한다.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "question_id": "auto_068",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "웹:파이썬 프로그래밍 프로젝트 #6 보고서와(과) 1.1 연구 배경의 차이점은 무엇인가?",
+      "expected_sections": [
+        "document",
+        "section_1_1"
+      ],
+      "expected_answer_hint": "웹/파이썬 프로그래밍 프로젝트 #6 보고서: 딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템 (CDSS) 개발. 경희대학교 생체의공학과 이원석 (2025104184) 작성. 현대 사회의 생활 양식 변화로 인한 근골격계 질환 증가와 요추 질환의 사회적 문제화, 그리고 기존 정적 영상 검사의 한계를 보완하는 동적 보행 분석의 임상적 중요성을 설명한다.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_069",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    },
+    {
+      "question": "1. 서론와(과) 1.1.1 현대 사회의 생활 양식 변화와 근골격계 질환의 증가의 차이점은 무엇인가?",
+      "expected_sections": [
+        "chapter_1",
+        "article_1_1_1"
+      ],
+      "expected_answer_hint": "현대 사회의 생활 양식 변화와 근골격계 질환의 증가, 동적 보행 분석의 임상적 중요성, 임상 현장의 한계점(진단의 주관성, 전문 분석 장비의 낮은 접근성, 환자 소통의 어려움)을 제시하고, 이를 해결하기 위한 딥러닝 기반 임상 의사 결정 지원 시스템(CDSS) '워크핏'의 개발 목표와 가상 센서 기술, 설명 가능한 AI를 통한 진료 효율성 증대 방안을 소개한다. 현대 산업 사회의 고도화는 인간의 생활 양식을 근본적으로 변화시켰다. 특히 학업, 사무 업무, 디지털 기기 사용의 증가로 인한 지속적인 좌식 생활의 보편화는 인체 근골격계에 심각한 스트레스를 가하고 있다. 장시간 고정된 자세는 척추의 자연스러운 만곡을 무너뜨리고, 척추 기립근 및 장요근의 긴장을 유발하며 신체 전반의 불균형을 초래한다. 이러한 생활 습관의 변화는 요추 추간판 탈출증, 흔히 디스크라고 이야기 되는 질병 뿐만 아니라 척추관 협착증과 같은 만성 퇴행성 질환의 급격한 증가로 이어지고 있다. 최근 건강보험심사평가원의 통계에 따르면, 요추 관련 질환은 고령층 뿐만 아니라 10대 ~ 30대의 젊은 연령층에서도 발병률이 꾸준히 상승하는 추세이며, 이는 더 이상 노화에 의한 자연스러운 현상이 아닌 사회적 질병으로 인식되어야 함을 시사한다.",
+      "difficulty": "medium",
+      "category": "comparative",
+      "question_id": "auto_070",
+      "document_id": "웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json"
+    }
+  ]
+}

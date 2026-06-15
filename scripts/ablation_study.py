@@ -362,23 +362,160 @@ def _format_metric_latex(metric: str) -> str:
     return replacements.get(metric, metric.replace("_", " ").title())
 
 
+
+# ======================================================================
+# PHASE D additions (KCI plan): new CLI entrypoint + helpers.
+# Original classes above are retained for backward compatibility.
+# ======================================================================
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+from typing import Any, Dict, List
+
+_PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
+from benchmarks.metrics.text_similarity import bertscore_f1, rouge_l_score
+from benchmarks.run_real_evaluation import (
+    DEFAULT_REPORT_DIR,
+    Evaluator,
+    detect_mode,
+    extractive_answer,
+    keyword_traversal,
+)
+
+CONFIGS = [
+    {"id": "cfg_base", "beam": False, "compress": False, "reference": False},
+    {"id": "cfg_beam", "beam": True, "compress": False, "reference": False},
+    {"id": "cfg_beam_compress", "beam": True, "compress": True, "reference": False},
+    {"id": "cfg_full", "beam": True, "compress": True, "reference": True},
+]
+
+
+def _run_config_offline(cfg: Dict[str, Any], q: str, doc_id: str, ev: Evaluator):
+    """Offline keyword approximation of a reasoner configuration."""
+    tree = ev.load_tree(doc_id)
+    if not cfg["beam"]:  # DFS
+        nodes = keyword_traversal(tree, q, k=3, prefer_shallow=True)
+    else:
+        nodes = keyword_traversal(tree, q, k=5, prefer_shallow=False)
+        if cfg["compress"]:  # contextual compression keeps the most relevant
+            nodes = nodes[:3]
+        if cfg["reference"]:  # reference resolver pulls in one related node
+            extra = [n for n in keyword_traversal(tree, q, k=4, prefer_shallow=False)
+                     if n not in nodes]
+            nodes = nodes + extra[:1]
+    return extractive_answer(nodes), nodes
+
+
+def _run_config_online(cfg: Dict[str, Any], q: str, doc_id: str, cache: Dict):
+    from src.core.reasoner import TreeRAGReasoner
+
+    key = cfg["id"] + "::" + doc_id
+    if key not in cache:
+        cache[key] = TreeRAGReasoner(
+            [doc_id],
+            traversal_algorithm="beam_search" if cfg["beam"] else "dfs",
+            enable_compression=cfg["compress"],
+            enable_reference_resolver=cfg["reference"],
+        )
+    answer, meta = cache[key].query(q, max_branches=3)
+    nodes = meta.get("nodes_selected", []) or []
+    return answer, [n if isinstance(n, dict) else {"id": n} for n in nodes]
+
+
+def run_ablation(dataset: Dict[str, Any], mode: str) -> List[Dict[str, Any]]:
+    ev = Evaluator(mode=mode, use_llm_judge=False)
+    online_cache: Dict[str, Any] = {}
+    questions = dataset["questions"]
+    rows: List[Dict[str, Any]] = []
+
+    for cfg in CONFIGS:
+        print(f"\n▶ {cfg['id']}: beam={cfg['beam']} compress={cfg['compress']} "
+              f"reference={cfg['reference']}  ({len(questions)} questions)")
+        rl, bs, lat, ctx = [], [], [], []
+        for q in questions:
+            expected = q.get("expected_answer_hint", "")
+            t0 = time.perf_counter()
+            try:
+                if mode == "online":
+                    answer, nodes = _run_config_online(cfg, q["question"], q["document_id"], online_cache)
+                else:
+                    answer, nodes = _run_config_offline(cfg, q["question"], q["document_id"], ev)
+            except Exception as exc:
+                answer, nodes = "", []
+                print(f"   ⚠️  {cfg['id']} failed on {q['question_id']}: {exc}")
+            lat.append(time.perf_counter() - t0)
+            context = extractive_answer(nodes)
+            ctx.append(int(len(context) / 4))
+            rl.append(rouge_l_score(answer, expected))
+            bs.append(bertscore_f1(answer, expected, lang="ko"))
+
+        def mean(xs):
+            return sum(xs) / len(xs) if xs else 0.0
+
+        rows.append(
+            {
+                **cfg,
+                "rouge_l": mean(rl),
+                "bertscore": mean(bs),
+                "latency": mean(lat),
+                "context_tokens": mean(ctx),
+                "n": len(questions),
+            }
+        )
+    return rows
+
+
+def add_deltas(rows: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    full = next(r for r in rows if r["id"] == "cfg_full")
+    for r in rows:
+        r["delta_rouge_l_vs_full"] = r["rouge_l"] - full["rouge_l"]
+        r["ctx_reduction_vs_full"] = (
+            (full["context_tokens"] - r["context_tokens"]) / full["context_tokens"]
+            if full["context_tokens"] else 0.0
+        )
+    return rows
+
+
+def print_table(rows: List[Dict[str, Any]]) -> None:
+    print("\n┌───────────────────┬─────────┬───────────┬──────────┬────────┬──────────┐")
+    print("│ Config            │ ROUGE-L │ BERTScore │ Latency  │ CTX(K) │ Δvs full │")
+    print("├───────────────────┼─────────┼───────────┼──────────┼────────┼──────────┤")
+    for r in rows:
+        print(
+            f"│ {r['id']:<17} │  {r['rouge_l']:.3f}  │   {r['bertscore']:.3f}   │"
+            f"  {r['latency']:.3f}s │ {r['context_tokens']/1000:>5.1f}  │"
+            f"  {r['delta_rouge_l_vs_full']:+.3f}  │"
+        )
+    print("└───────────────────┴─────────┴───────────┴──────────┴────────┴──────────┘")
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description="Ablation study (PHASE D-1)")
+    parser.add_argument("--dataset", default=str(_PROJECT_ROOT / "benchmarks/datasets/full_benchmark.json"))
+    parser.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
+    parser.add_argument("--output", default=str(DEFAULT_REPORT_DIR / "ablation_results.json"))
+    args = parser.parse_args(argv)
+
+    with open(args.dataset, "r", encoding="utf-8") as f:
+        dataset = json.load(f)
+
+    mode = detect_mode(args.mode)
+    print(f"Ablation mode: {mode.upper()}")
+    rows = add_deltas(run_ablation(dataset, mode))
+    print_table(rows)
+
+    out = Path(args.output)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with open(out, "w", encoding="utf-8") as f:
+        json.dump({"mode": mode, "configs": rows}, f, ensure_ascii=False, indent=2)
+    print(f"\n💾 Ablation results → {out}")
+    return 0
+
+
 if __name__ == "__main__":
-    config = AblationConfig(
-        targets=[
-            AblationTarget.HIERARCHICAL_INDEX,
-            AblationTarget.BEAM_SEARCH,
-            AblationTarget.SEMANTIC_EMBEDDINGS,
-            AblationTarget.CONTEXT_SUMMARIZATION,
-            AblationTarget.HALLUCINATION_DETECTOR
-        ],
-        num_queries=50,
-        num_runs=3
-    )
-    
-    runner = AblationStudyRunner(config)
-    result = runner.run()
-    print("\n" + "=" * 60)
-    print("LATEX REPORT SECTION")
-    print("=" * 60)
-    report = generate_ablation_report(result)
-    print(report)
+    raise SystemExit(main())

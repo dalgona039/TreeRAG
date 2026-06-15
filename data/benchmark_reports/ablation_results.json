@@ -1,0 +1,57 @@
+{
+  "mode": "offline",
+  "configs": [
+    {
+      "id": "cfg_base",
+      "beam": false,
+      "compress": false,
+      "reference": false,
+      "rouge_l": 0.49560946844797554,
+      "bertscore": 0.5379596458214824,
+      "latency": 0.0006526833142808235,
+      "context_tokens": 107.35714285714286,
+      "n": 70,
+      "delta_rouge_l_vs_full": 0.04703834946217783,
+      "ctx_reduction_vs_full": 0.22709040419623575
+    },
+    {
+      "id": "cfg_beam",
+      "beam": true,
+      "compress": false,
+      "reference": false,
+      "rouge_l": 0.39917789244815827,
+      "bertscore": 0.436754341668882,
+      "latency": 0.0006515457857403817,
+      "context_tokens": 170.52857142857144,
+      "n": 70,
+      "delta_rouge_l_vs_full": -0.049393226537639445,
+      "ctx_reduction_vs_full": -0.22770749768589943
+    },
+    {
+      "id": "cfg_beam_compress",
+      "beam": true,
+      "compress": true,
+      "reference": false,
+      "rouge_l": 0.49289871503293037,
+      "bertscore": 0.5341211599610673,
+      "latency": 0.0005790410000112647,
+      "context_tokens": 107.47142857142858,
+      "n": 70,
+      "delta_rouge_l_vs_full": 0.044327596047132656,
+      "ctx_reduction_vs_full": 0.22626761287668415
+    },
+    {
+      "id": "cfg_full",
+      "beam": true,
+      "compress": true,
+      "reference": true,
+      "rouge_l": 0.4485711189857977,
+      "bertscore": 0.488435370870115,
+      "latency": 0.0011343548285757217,
+      "context_tokens": 138.9,
+      "n": 70,
+      "delta_rouge_l_vs_full": 0.0,
+      "ctx_reduction_vs_full": 0.0
+    }
+  ]
+}
