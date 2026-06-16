@@ -407,6 +407,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--use-llm-judge", action="store_true")
     parser.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
     parser.add_argument("--domain", choices=["general", "medical"], default="general")
+    parser.add_argument("--limit", type=int, default=0,
+                        help="Evaluate only the first N questions (0 = all). "
+                             "Useful for a cheap online direction-check.")
+    parser.add_argument("--seed", type=int, default=0,
+                        help="If set with --limit, randomly sample N questions with this seed.")
     args = parser.parse_args(argv)
 
     systems = ALL_SYSTEMS if args.systems == "all" else [
@@ -417,6 +422,16 @@ def main(argv: Optional[List[str]] = None) -> int:
         parser.error(f"Unknown system(s): {unknown}. Choose from {ALL_SYSTEMS} or 'all'.")
 
     dataset = load_dataset(args.dataset)
+
+    if args.limit and args.limit > 0:
+        qs = dataset["questions"]
+        if args.seed:
+            import random as _rnd
+
+            qs = list(qs)
+            _rnd.Random(args.seed).shuffle(qs)
+        dataset["questions"] = qs[: args.limit]
+        dataset["total_questions"] = len(dataset["questions"])
 
     mode = detect_mode(args.mode)
     print(f"Evaluation mode : {mode.upper()}  "
