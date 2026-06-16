@@ -18,7 +18,7 @@ import re
 import string
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
-from typing import Callable, Dict, List
+from typing import Callable, Dict, List, Optional
 
 _PUNCT_RE = re.compile(r"[%s]" % re.escape(string.punctuation + "·、，。！？〈〉《》「」『』"))
 _WS_RE = re.compile(r"\s+")
@@ -139,6 +139,54 @@ _METRIC_FUNCS: Dict[str, Callable[[str, str], float]] = {
     "bertscore": bertscore_f1,
     "exact_match": exact_match,
 }
+
+
+# --------------------------------------------------------------------------- #
+# PHASE 3-3: medical entity recall
+# --------------------------------------------------------------------------- #
+MEDICAL_TERMS = [
+    # Anatomy / physiology
+    "cardiac", "pulmonary", "hepatic", "renal", "cerebral", "vascular",
+    "myocardial", "neural", "skeletal", "endocrine", "cardiovascular",
+    "musculoskeletal", "gait", "stroke volume", "heart rate",
+    # Common conditions
+    "hypertension", "diabetes", "myocardial infarction", "stroke", "sepsis",
+    "pneumonia", "arrhythmia", "fibrillation", "thrombosis", "embolism",
+    # Measurements / units
+    "mmhg", "bpm", "ml/min", "mg/dl", "mcg/kg", "iu/l", "khz", "mhz", "hz",
+    "decibel", "frequency", "wavelength", "amplitude",
+    # Imaging / biomedical engineering
+    "ultrasound", "doppler", "transducer", "piezoelectric", "impedance",
+    "electrode", "biosignal", "prosthetic", "scaffold", "biocompatibility",
+    "in vitro", "in vivo", "signal-to-noise", "attenuation", "reflection",
+    "acoustic", "echo", "b-mode", "sonar", "imaging", "diagnosis",
+    "resolution", "penetration", "probe", "gel", "tissue",
+    # Korean biomedical terms
+    "초음파", "압전", "감쇠", "임피던스", "주파수", "파장", "도플러",
+    "심장", "혈류", "진단", "영상", "전극", "생체", "조직", "반사",
+    "보행", "근골격계", "심박", "프로브", "탐촉자", "음향", "해상도",
+]
+
+
+def medical_entity_recall(hypothesis: str, reference: str, terms: Optional[List[str]] = None) -> float:
+    """Recall of medical entities present in the reference, found in hypothesis.
+
+    Deterministic keyword approach over :data:`MEDICAL_TERMS` (no external APIs).
+    Returns count_matched / count_in_reference, or 1.0 if the reference contains
+    no medical terms (vacuously complete).
+    """
+    vocab = [t.lower() for t in (terms if terms is not None else MEDICAL_TERMS)]
+    hyp = (hypothesis or "").lower()
+    ref = (reference or "").lower()
+    in_ref = [t for t in vocab if t in ref]
+    if not in_ref:
+        return 1.0
+    matched = sum(1 for t in in_ref if t in hyp)
+    return matched / len(in_ref)
+
+
+# Registered after definition (the dict is declared earlier in the module).
+_METRIC_FUNCS["medical_entity_recall"] = medical_entity_recall
 
 
 def batch_evaluate(

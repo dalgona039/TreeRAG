@@ -1,0 +1,41 @@
+% ACM paper tables (auto-generated; regenerate after ONLINE run).
+% Table 1: Main results (Full Benchmark + HotpotQA)
+\begin{table}[t]
+\centering
+\caption{Main Results on Full Benchmark and HotpotQA Multi-Hop Subset. Best per column in \textbf{bold}; $\dag$ denotes $p<0.05$ vs TreeRAG-Beam.}
+\label{tab:main_results}
+\begin{tabular}{lcccccc}
+\toprule
+\multirow{2}{*}{System} & \multicolumn{3}{c}{Full Benchmark} & \multicolumn{2}{c}{HotpotQA} & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-6}
+& ROUGE-L & BERTSc. & LLM-J & ROUGE-L & LLM-J & Lat.(s) \\
+\midrule
+BM25 & 0.399 & \textbf{0.449} & -- & 0.092 & -- & 0.005 \\
+Dense Retrieval & 0.350 & 0.384 & -- & -- & -- & \textbf{0.000} \\
+FlatRAG & 0.271 & 0.303 & -- & 0.057 & -- & 0.000 \\
+RAPTOR & 0.053 & 0.069 & -- & 0.059 & -- & 0.006 \\
+TreeRAG-DFS & \textbf{0.407} & 0.442 & -- & -- & -- & 0.000 \\
+\textbf{TreeRAG-Beam} & 0.298 & 0.328 & -- & \textbf{0.169} & -- & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Table 2: Medical domain results
+\begin{table}[t]
+\centering
+\caption{Medical Domain Results --- ROUGE-L, Medical Entity Recall, and Page-Citation Availability.}
+\label{tab:medical}
+\begin{tabular}{lccc}
+\toprule
+System & ROUGE-L & Entity Recall & Citation Avail. \\
+\midrule
+BM25 & 0.399 & \textbf{1.000} & 0.000 \\
+Dense Retrieval & 0.350 & 0.992 & 0.000 \\
+FlatRAG & 0.271 & 1.000 & \textbf{1.000} \\
+RAPTOR & 0.053 & 0.895 & 0.000 \\
+TreeRAG-DFS & \textbf{0.407} & 1.000 & 0.000 \\
+TreeRAG-Beam & 0.298 & 1.000 & 0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+

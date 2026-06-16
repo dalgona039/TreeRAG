@@ -1,0 +1,933 @@
+--- PAGE 1 ---
+Deep learning-based surrogate model for 3-D patient-speciﬁc
+computational ﬂuid dynamics
+Pan Dua, Xiaozhi Zhu b, Jian-Xun Wanga,∗
+aAerospace and Mechanical Engineering, University of Notre Dame, Notre Dame, IN
+bApplied and Computational Mathematics and Statistics, University of Notre Dame, Notre Dame, IN
+Abstract
+Optimization and uncertainty quantiﬁcation have been playing an increasingly important role
+in computational hemodynamics. However, existing methods based on principled modeling
+and classic numerical techniques have faced signiﬁcant challenges, particularly when it comes
+to complex 3D patient-speciﬁc shapes in the real world. First, it is notoriously challenging
+to parameterize the input space of arbitrarily complex 3-D geometries. Second, the process
+often involves massive forward simulations, which are extremely computationally demanding
+or even infeasible. We propose a novel deep learning surrogate modeling solution to address
+these challenges and enable rapid hemodynamic predictions. Speciﬁcally, a statistical gen-
+erative model for 3-D patient-speciﬁc shapes is developed based on a small set of baseline
+patient-speciﬁc geometries. An unsupervised shape correspondence solution is used to en-
+able geometric morphing and scalable shape synthesis statistically. Moreover, a simulation
+routine is developed for automatic data generation by automatic meshing, boundary setting,
+simulation, and post-processing. An eﬃcient supervised learning solution is proposed to map
+the geometric inputs to the hemodynamics predictions in latent spaces. Numerical studies
+on aortic ﬂows are conducted to demonstrate the eﬀectiveness and merit of the proposed
+techniques.
+Keywords: hemodynamics, machine learning, CFD, neural networks, cardiovascular
+biomechanics
+∗Corresponding author. Tel: +1 574-631-5302
+Email address: jwang33@nd.edu (Jian-Xun Wang)
+Preprint submitted to Journal of The Royal Society Interface April 20, 2022
+arXiv:2204.08939v1  [physics.med-ph]  11 Apr 2022
+--- PAGE 2 ---
+1. Introduction
+Cardiovascular disease (CVD) remains the ﬁrst leading cause of death and morbidity in
+the U.S., posing a major healthcare concern [1]. Although medical imaging techniques, e.g.,
+computed tomography (CT) and magnetic resonance imaging (MRI), have enabled the ac-
+quisition of exquisite anatomical information and revolutionized cardiovascular medicine [2],
+they are usually not able to provide hemodynamic information (e.g., ﬂow ﬁeld, pressure
+losses) on their own, which is believed to be more important to CVD diagnosis and progno-
+sis [3]. Computational models based on physical principles of cardiovascular systems, com-
+bined with medical imaging, enable the derivation of functional information inaccessible by
+medical images alone. In the past decade, image-based computational modeling has become
+a paradigm in cardiovascular research [4–6] and is pioneering new clinical applications [7–9].
+However, the ﬁrst-principle physics-based models are often computationally expensive since
+they involve solving a large-scale discrete partial diﬀerential equation (PDE) system using nu-
+merical techniques, e.g., ﬁnite volume or ﬁnite element methods (FVM/FEM). Particularly,
+when studying dynamics of blood ﬂows (i.e., hemodynamics), computational ﬂuid dynamics
+(CFD) or/and ﬂuid-structure interaction (FSI) models are needed, which are enormously
+time-consuming (requiring supercomputing clusters) and prone to numerical challenges (re-
+quiring signiﬁcant domain expertise). These roadblocks have primarily limited image-based
+CFD modeling in clinical applications that require timely feedback for further therapeu-
+tic assessment and treatment planning. For example, in the case of Heartﬂow (a medical
+company for precision heart care), image data must be sent outside the hospital to be pro-
+cessed by in-house supercomputers and results sent back to the hospital. Likewise, the high
+computational cost prohibits many-query simulations for, e.g., uncertainty quantiﬁcation,
+parameter estimation, design optimization, etc., which are becoming increasingly vital in
+advancing the utility of cardiovascular modeling to practical applications [10–15].
+As a more eﬃcient alternative to the principled CFD/FSI models, reduced-order modeling
+(ROM) has been an area of intense investigation for years. One class of ROM is constructed
+by simplifying the physics of cardiovascular systems, such as lumped parameter (LP) mod-
+2
+--- PAGE 3 ---
+els, one-dimensional (1-D) models, or hybrid 3-D/1-D/LP models [16–18], where the physical
+dimensions are reduced to diﬀerent levels. For example, LP models typically treat the hemo-
+dynamic system as an electric circuit, where the relations among pressure drop, viscous
+eﬀects, and ﬂow velocity are modeled as simpliﬁed ordinary diﬀerential equations (ODEs).
+Although LP/1D models are very cheap, they only can predict global information (integral
+quantities) instead of local ones (e.g., spatiotemporal ﬁelds of velocity or wall shear stresses),
+while the latter is more useful to advance cardiovascular research/healthcare. To preserve
+detailed hemodynamics information, the other class of ROM is built by projecting the full-
+order governing PDEs (e.g., Navier-Stokes equations) onto a reduced subspace spanned by a
+group of basis functions, such as proper orthogonal decomposition (POD) modes, known as
+POD-Galerkin projection, which has been developed for facilitating hemodynamics analysis
+in many 3-D patient-speciﬁc conﬁgurations [19–22]. However, the projection-based ROM
+is often less stable in parametric settings and highly code-intrusive, posing great challenges
+to leveraging legacy CFD/FSI solvers [23–25]. With the increasing data availability and
+recent advances in machine learning (ML), there has been growing interest in developing
+non-intrusive data-driven approaches for surrogate modeling of cardiovascular systems. In
+general, data-driven surrogate models aim to learn the mapping between modeling inputs
+(e.g., geometry, inlet/outlet, material properties, etc.) and computed outputs (e.g., re-
+solved ﬂow ﬁeld, pressure contour, wall shear stress distribution, etc.) based on full-ﬁdelity
+CFD/FSI simulation data. A well-trained surrogate model can predict detailed hemody-
+namics information rapidly, supporting real-time or many-query applications. For example,
+collocation-based polynomial chaos expansion (PCE) has been used to build non-intrusive
+surrogates of 3-D blood ﬂow simulations for UQ tasks [10, 11]. Gao et al. [14, 15] developed
+a bi-ﬁdelity surrogate model that leverages the eﬃciency and accuracy of the low- and high-
+ﬁdelity CFD simulations, respectively. Deep neural network (DNN) has become a popular
+surrogate modeling approach, renowned for their universal functional approximation capa-
+bility for high-dimensional system [26, 27]. Most recently, DNN-based surrogate models have
+been developed for cardiovascular applications and shown great potential [28–35].
+3
+--- PAGE 4 ---
+However, ML-based surrogate modeling for complex patient-speciﬁc hemodynamics still
+faces signiﬁcant challenges that existing techniques struggle to address simultaneously. First,
+the parameterization of the geometric space spanned by irregular 3-D patient-speciﬁc shapes
+is very challenging. As a result, most existing ML-based surrogate hemodynamic models
+focus on inlet/outlet parameterization or studying idealized geometries, which can be easily
+parameterized with a few descriptors (e.g., radius), and only a few studies dealt with 3-D
+patient-speciﬁc cases [34, 35]. Second, a well-performed ML surrogate model often requires
+a large number of training samples. However, patient-speciﬁc geometries are commonly
+obtained by segmentation from medical images (e.g., CT and MRA), which are often cum-
+bersome and time-consuming, leading to a prohibitive cost for data generation. To address
+the issue, it is necessary to eﬀectively synthesize numerous new samples from a small set of
+patient-speciﬁc geometries obtained by image segmentation.
+In this paper, we try to ﬁll the gaps and develop an ML-based surrogate modeling frame-
+work for rapid predictions of comprehensive hemodynamics information in 3-D patient-
+speciﬁc aortic geometries. In contrast to many ML-based surrogates that predict global
+hemodynamics information such as pressure loss, FFR, and mean wall shear stress (WSS),
+this work focuses on predicting local blood ﬂow information (e.g., velocity, pressure, and
+WSS ﬁelds), given irregular 3-D patient-speciﬁc shapes. The contributions of the current
+paper are summarized as follows. First, we developed a method to parameterize 3-D patient-
+speciﬁc aorta geometries based on stochastic shape modeling (SSM). Second, a generative
+model is proposed to synthesize a massive amount of 3-D geometries from a small patient-
+speciﬁc dataset. Third, an automatic simulation data generation routine is built, enabling
+automatic meshing, prescribing boundary conditions, solving, and post-processing. Lastly,
+an eﬃcient ML-based surrogate is developed by learning the functional map from geometries
+to hemodynamics in latent spaces, and the performance of using DNN and bi-ﬁdelity tech-
+nique is compared. The rest of the paper is organized as follows. The proposed framework
+is introduced in Section 2. Numerical results of the surrogate modeling are presented and
+discussed in Section 3, and Section 4 concludes the paper.
+4
+--- PAGE 5 ---
+2. Methodology
+The pipeline of the proposed ML-based surrogate modeling framework is summarized by
+Figure 1: (i) a small set of 3-D aorta geometries are reconstructed from anatomical images
+Figure 1: The schematic of the proposed ML-based surrogate modeling of patient-speciﬁc
+aortic ﬂows, with several components, including dataset generation (green box), network
+training (orange box), and DNN inference/prediction (blue box).
+acquired via CTA/MRI scans on real patients; (ii) the geometric space spanned by the
+group of real patient-speciﬁc geometries is parameterized based on statistical shape modeling
+(SSM), where the variation of aorta surfaces can be described mathematically; (iii) a large
+number of virtual 3-D aorta shapes are synthesized within the latent geometric space; (iv)
+a python-based simulation routine is developed for automating meshing, equation solving,
+and post-processing of aortic CFD simulations on the generated ensemble of 3-D synthetic
+shapes, and a large dataset of hemodynamics (e.g., pressure, velocity, and WSS ﬁelds) are
+obtained; (v) The 3-D vascular shape and hemodynamic ﬁelds of interest (FOI) of each aorta
+sample are encoded into latent spaces using Principal component analysis (PCA) or proper
+5
+--- PAGE 6 ---
+orthogonal decomposition (POD), and then a deep neural network (DNN) is constructed
+to learn the non-linear mapping within the latent space. Once the network is suﬃciently
+trained, the ML surrogate model will be able to predict the fully resolved 3-D hemodynamic
+ﬂow information within a split second, given a new aorta shape.
+2.1. Patient-speciﬁc aorta geometry parameterization
+2.1.1. Aorta dataset pre-processing
+Eight 3-D aorta geometries are reconstructed from MRI scans of patients with Coarcta-
+tion of the aorta (COA) conditions by the German Heart Institute Berlin [36]. Prior to the
+parameterization of the variation of aorta shapes, one crucial step is to build correspondence
+among them, which is very challenging since the deformation across diﬀerent patients is non-
+isometric, especially aortas with a complex topological structure (e.g. many branches). To
+reduce complexity, this work is focused on 3D aortic geometries with homeomorphisum. In
+particular, several branches of the original thoracic aorta geometries, including left subcla-
+vian artery (LSA), left carotid artery (LCA), right subclavian artery (RSA) and right carotid
+artery (RCA), are trimmed oﬀ, simplifying their structure to a single channel. Later, a point
+cloud of 4000 vertices is sampled from each aorta using voronoi clustering implemented via
+the pyacvd module in python, which is loosely based on Approximated Centroidal Voronoi
+Diagrams (ACVD) [37]. To regularize the position and the orientation of the aorta samples
+in the 3-D Cartesian coordinate system, rigid iterative closest points (ICP) algorithm [38] is
+adopted to align every aorta geometry to a template selected from the aorta dataset.
+2.1.2. Statistical shape modeling and virtual aorta synthesis
+With the aligned real aorta geometries, we establish an SSM framework to parameterize
+the complex 3-D patient-speciﬁc geometric input space and synthesize enormous virtual aorta
+geometries. The procedure is conducted in three phases: (1) building correspondence; (2)
+projection to latent space; (3) synthesizing virtual aortas.
+Building correspondence. Let{Ai}i=1,...,n denote the set of n original patient-speciﬁc
+aorta shapes, and each shape sample Ai∈ R3×p is represented by a point cloud of surfaces
+6
+--- PAGE 7 ---
+vertices Ai ={ai
+j}p
+j=1, where p is the total number of vertices. Given a template geome-
+try AS∈{ Ai}i=1,...,n selected from the set {Ai}i=1,...,n, we aim to build correspondence by
+deforming the template AS to all the other aorta shapes AT∈{ Ai}i̸=s, which are referred
+to as source geometry and target geometries, respectively. The diﬀeomprphism function
+AT = Φ(AS) : R3×p→ R3×p, describing the deformation from the template AS to each of the
+rest aorta samples{Ai}i̸=S, can be solved based on the controlled-point-based large deforma-
+tion diﬀeomorphic metric mapping (LDDMM) algorithm [39]. In LDDMM, the deformation
+is described as a “current” of surface, which is the ﬂux of a 3-D “velocity” vector ﬁeld over
+the template{aS
+i}p
+i=1,
+v(ai) =
+r∑
+j=1
+K(ai, qj)·µj, (1)
+where{qj}r
+1 and{µk}r
+1 represent a set ofr “control” points and corresponding “momentum”
+vectors, which are deﬁned on the source geometry As; K is a Gaussian kernel K(a, q) =
+exp(−||a−q||L2/σ2) withσ controlling the typical width of the deformation. The deformation
+is performed along the pseudo time axis τ, and the deformed point cloud locations at τ are
+denoted by As(τ), where As(t = 0) represents the initial state (i.e., the point cloud {as
+j}p
+j=1
+of template As). The point deformations are governed by the following ODEs,
+˙As(τ) = v
+(
+As(τ),τ
+)
+, (2)
+which can be solved using the second-order Runge-Kutta method, and meanwhile the control
+points and momentum vectors are updated based on the Hamiltonian dynamics,
+
+
+
+˙q(τ) = K
+(
+q(τ), q(τ)
+)
+µ(τ),
+˙µ(τ) =−1
+2∇qK
+(
+q(τ), q(τ)
+)
+µ(τ)⊤µ,
+(3a)
+(3b)
+where K represents the kernel matrix and
+(
+K(q(τ), q(τ))
+)
+i,j = K(qi(τ), qj(τ)). We force
+the deformed template ˜AS
+τ e at the ﬁnal step (i.e., τ = τe) to match the target geometry
+AT using the steepest gradient descent optimization algorithm. To deﬁne the loss function,
+a “distance” metric, evaluating the diﬀerence between the deformed template ˜AS
+τ e and the
+target geometryAT , is required. As the aorta geometries are composed of triangular meshes
+7
+--- PAGE 8 ---
+with grid centers{ci}m
+i=1 and edge normal vectors {ni}m
+i=1, the varifold distance metric d is
+deﬁned as,
+d
+({
+(nS
+i, cS
+i )
+}mS
+i=1
+,
+{
+(nT
+j, cT
+j )
+}mT
+j=1
+)
+=
+mS
+∑
+i
+mT
+∑
+j
+K(cS
+i, cT
+j )·
+(
+(nS
+i )⊤· nT
+j
+)2
+||nS
+i||·|| nT
+j|| . (4)
+The metric is calculable regardless of whether point-to-point correspondence exists between
+two geometries. Namely, the total amount of grids mS andmT for source and target geome-
+tries can be diﬀerent. Once the diﬀeomorphism functions are solved, all target geometries can
+be approximated by the deformations from the template, establishing a correspondence for
+the original shape dataset. The LDDMM algorithm has been implemented in Deformetrica,
+an open-source software designed for statistical analysis of meshes [40].
+Projection to latent space. To enable a concise parameterization of the input geomet-
+ric space, PCA is applied to encode the 3-D irregular shape onto the latent space. Speciﬁcally,
+{(xi
+j,yi
+j,zi
+j)}j=1,..,p, denoting the Cartesian coordinates of the point cloud on the aorta sample
+˜Ai, was ﬂattened into a vector ˜VVV
+i
+= (xi
+1,yi
+1,zi
+1,...,x i
+p,yi
+p,zi
+p). The entire 3-D shape dataset
+can be squeezed into a matrix AAA = ( ˜VVV
+⊤
+1,..., ˜VVV
+⊤
+N)⊤. Subsequently, PCA acting on A yields
+the eigenvectors{WWWi}i=1,...,z and eigenvalues{λi}i=1,...,z, where z is the truncation integer
+controlling the number of primary components needed. Each aorta shape can be decomposed
+as follow,
+˜AAAi≈AAAmean +
+z∑
+j=1
+αi
+j
+√
+λjWWWj, (5)
+where the coeﬃcient vector αααi = (αi
+1,...,α i
+z) represents the encoded shape, which, in other
+words, is the projection of sample Ai in the latent space. Let F and F−1 denote the PCA
+operator and its inverse, respectively. The reconstruction error Epca is deﬁned to evaluate
+the accuracy of the PCA transform,
+Epca =||F−1(F (AAA))−AAA||L2
+||AAA||L2
+. (6)
+Synthesizing virtual aorta geometries. Motivated by the need of suﬃcient training
+samples for data-driven ML surrogate modeling, we propose a shape synthesizing method for
+producing a large amount of synthetic 3-D aortas from a small set of original aorta shapes.
+8
+--- PAGE 9 ---
+The general idea is to sample from the latent geometric space spanned by the original aorta
+shapes and then synthesize new aortas by decoding the sampled latent shape vectors back to
+the Cartesian space, as illustrated in Figure 2, where the geometric space is spanned by three
+original aorta shapes. To synthesize new geometries within the geometric space, we propose
+Figure 2: Illustration of latent space distribution and visualization of generated synthetic
+aortas ( ) from 3 original aorta shapes ( ), where PC1 and PC2 represent the ﬁrst and
+second primary components of the latent geometric space, respectively.
+two diﬀerent methods: (1) random linear interpolation and (2) uniform PCA sampling. The
+random linear interpolation approach linearly combines the n original samples in the latent
+space with randomly assigned weights to generate new samples AAA∗,
+AAA∗ =F−1(
+n∑
+i=1
+ωiαiαiαi) =AAAmean +
+n∑
+i=1
+z∑
+j=1
+ωiαi
+j
+√
+λjWWWj, (7)
+where ωωω = [ω1,··· ,ωn]T is a randomly generated weight vector that satisﬁes ∑z
+i=1ωi = 1.
+As an alternative, uniform PCA sampling approach generates new samples by uniformly
+perturbing the PCA coeﬃcients within the ranges bounded by the original geometries,
+AAA∗ =AAAmean +
+z∑
+j=1
+˜α∗
+j
+√
+λjWWWj, (8)
+9
+--- PAGE 10 ---
+where ˜α∗˜α∗˜α∗ = [˜α∗
+1,··· , ˜α∗
+z]T is a randomly generated vector, and each dimension ˜α∗
+j is sampled
+from a uniform distribution U
+[
+min (αi
+j|n
+i=1), max (αi
+j|n
+i=1)
+]
+. Figure 3 plots a few generated
+samples within the 2-D latent space deﬁned by its ﬁrst (PC1) and second (PC2) primary
+components and the corresponding synthetic geometries. The synthetic geometries (blue)
+are scattered within the triangular region bounded by three original geometries (orange).
+2.2. Automatic CFD simulation routine
+To systematically generate massive CFD simulation data, we develop a python routine
+to automate tedious simulation procedures, including geometry pre-processing, meshing,
+boundary setting, simulation, and post-processing. As the ﬁrst step, pre-processing of the
+aorta geometries is needed in order to be suitable for CFD simulations. First, since the
+edges at the entry and the exit of the raw aorta channel could be jaggy, the entry is slightly
+extended to construct a circular rim at the inlet. Similarly, the exit of the aorta is also
+extended, which also avoids inverse ﬂows at the outlet. Second, the aorta surface is smoothed
+to reduce bumpiness while still preserving its geometric characteristics. Third, caps are added
+to seal nonphysical holes on the aorta geometry. Once the geometries pre-processing is done,
+3-D unstructured triangular meshes are generated accordingly and then converted into msh
+format suitable for subsequent CFD simulations. These operations are implemented based on
+the Vascular Modeling Toolkit (VMTK), which is an open-source module specialized in 3D
+reconstruction, geometric analysis and mesh generation. A python wrapper is implemented
+to automate the entire procedure in parallel for the ensemble setting.
+Subsequently, a large-size ensemble of CFD simulations are performed to obtain the
+corresponding FOIs for each sample of the generated dataset, based on the open-source
+CFD platform, OpenFOAM. As handling a massive set of cases can easily be cumbersome
+and time-consuming, a python subroutine coupled with OpenFOAM is established, such that
+the procedure of each simulation, including meshing, setting up cases, specifying boundary
+conditions, solving, and post-processing, is automatically executed and repeated through
+all samples in the dataset. This process can be conducted in parallel as well. During the
+post-processing step, the simulated ﬁeld data on CFD meshes are projected onto the surface
+10
+--- PAGE 11 ---
+or volumetric mesh grids where the correspondences are established. In particular, surface
+pressure and wall shear stress are projected onto surface vertices and velocity data are
+projected onto the volumetric nodes via the nearest-neighbor interpolation. The volumetric
+nodes are obtained by uniformly sampling points between the centerline and the surface
+vertices. Finally, a large number of input geometries and corresponding ﬂow solutions are
+obtained as the labeled dataset for surrogate modeling.
+2.3. ML-based surrogate model
+In order to build a fast forward map from the geometric space to the solution space of
+interest, we propose a supervised deep learning solution based on PCA encoding-decoding
+and fully-connected deep neural networks.
+2.3.1. Encoding-decoding formulation.
+Considering the signiﬁcantly high dimensions of 3-D shapes and solution ﬁelds in their
+discrete mesh forms, we adopt an encoding-decoding strategy to reduce the learning complex-
+ity. Speciﬁcally, the input geometries and output hemodynamic solution ﬁelds are encoded
+into low-dimensional latent spaces. To promote training eﬃciency, the encoder-decoder con-
+struction is decoupled with DNN-based surrogate training, and PCA (or POD) instead of
+DNN-based autoencoder is used for the encoding-decoding process. To balance the recon-
+struction accuracy and learning complexity, 100% of the PCA total variation is preserved
+for the input geometries, and over 95% is preserved for all output solution ﬁelds, resulting in
+reconstruction errors less than 1%. The relationship between the encoded shape and solution
+ﬁelds is learned by a multilayer perceptron (MLP), where Rectiﬁed Linear Unit (Relu) is
+used as the activation function.
+2.3.2. Learning architecture optimization.
+The DNN-based forward map is learned from the labeled dataset using the Adam opti-
+mizer, where the learning rate is adaptively changed based on the estimates of the moments.
+To achieve the best learning performance, we optimize the MLP architecture and other
+learning hyperparameters, including the number of layers, the number of neurons of each
+11
+--- PAGE 12 ---
+layer, batch size, and initial learning rate, using a Bayesian optimization algorithm. Specif-
+ically, RAY-tune [41], an open-source python module for scalable hyperparameter tuning, is
+adopted here to achieve this goal. The general idea is to construct a posterior distribution of
+functions based on Gaussian processes within the prescribed ranges of the hyperparameters
+to be optimized. During the optimization, the posterior of hyperparameters will be updated
+given more and more training data, leading to the best learning conﬁguration. The Bayesian
+optimization is superior to a brutal grid search method and can reach the optimized state in
+fewer iterations. During the optimization, the Asynchronous Successive Halving Algorithm
+(ASHA) is utilized to aggressively terminate non-ideal trials in advance in the interest of
+saving time, and more details can be found in [42].
+2.3.3. Evaluation of performance
+To evaluate the performance of the ML-based surrogate model, relative mean square error
+(RMSE) is used to calculate the diﬀerence between prediction and label, which is deﬁned as,
+RMSE =
+∑N
+i (xi−yi)2
+∑N
+i yi2
+× 100%, (9)
+whereXXX = (x1,...,x N) andYYY = (y1,...,y N) are predictions and labels of FOI onN vertices/-
+grids, respectively. For scalar ﬁelds such as pressure, RMSE is calculated directly upon the
+pressure ﬁeld. For vector ﬁelds like wall shear stress and velocity, an array ﬂattened from
+the N× 3 vector-matrix containing three directional components (x,y and z-direction) and
+the array of the vector magnitude are calculated to estimate the RMSE, referred to as vector
+RMSE and magnitude RMSE, respectively. When the error is evaluated upon a test dataset
+with multiple samples, the average of the RMSE of each sample is calculated.
+3. Results and Discussion
+3.1. Statistical shape analysis and synthesis
+We ﬁrst register the eight original patient-speciﬁc aorta geometries by solving seven dif-
+feomorphisms from a randomly chosen template to the rest of seven geometries. An example
+12
+--- PAGE 13 ---
+of such diﬀeomorphism is demonstrated in Figure 3. The template A1 is ﬁrstly sampled with
+4000 points P1 and so is the target geometry A2 with P2. The shape deformation A(τ) is
+solved with the boundary condition of A(τ = 0) = P1 and A(τ = 1) = P2. Several interme-
+diate states of the function A are shown in the middle, among which the point clouds near
+the left side resemble P1 and, likewise, point clouds near the right side resemble P2. In ad-
+dition, the intermediate states can be used to “interpolate” between 3-D irregular, showing
+geometric morphing from aorta A1 to aorta A2.
+intermediate aorta
+A1 A2
+P1 P2
+② ② ② ②
+① ③ ③③ ①
+Figure 3: Building correspondence: Step 1○, sample vertices from surface; Step 2○, solve
+the diﬀeomorphism function; Step 3○, reconstruct intermediate aorta
+Based on the set of eight original aorta geometries, a large number of virtual aortas
+are synthesized by sampling the geometric space spanned by the original shapes. Both the
+uniform PCA sampling and random interpolation methods are implemented, and the sample
+distributions of them are plotted in Figure 4 to compare their coverage of the input space.
+The 1,000 synthetic shapes are scattered in the coordinate plane of their PCA latent space
+with the ﬁrst (PC1) and second (PC2) primary components. The synthetic samples obtained
+by the uniform PCA sampling are much more spread out over the coordinate plane than those
+from the random interpolation method, indicating a better coverage of the input space and
+13
+--- PAGE 14 ---
+400
+ 200
+ 0 200 400
+PC1
+200
+100
+0
+100
+200
+PC2
+(a) Uniform PCA sampling
+400
+ 200
+ 0 200 400
+PC1
+200
+100
+0
+100
+200
+PC2
+synthetic
+original (b) Random interpolation sampling
+Figure 4: Latent space distribution of synthetic ( ) and original ( ) samples for diﬀerent
+synthesizing method: (a) uniform PCA sampling, (b) random interpolation sampling
+hence adopted for the data generation in this work. Part of the synthetic geometries and the
+eight original geometries are shown in Figure 5. The uniform sampling method successfully
+explores the input topological space and the synthetic geometries, though virtual, possess
+geometric characteristics of biological shapes of real aortas and fully displays the variation
+of the aorta shapes.
+3.2. Surrogate CFD modeling using deep learning
+Once the aorta geometry dataset is built, ensemble CFD simulations are conducted to
+generate labeled hemodynamics data, which will be used to train an ML-based surrogate.
+Numerical setup. In this work, we made the following assumptions: 1) the blood ﬂow is
+Newtonian and governed by the steady-state incompressible Navier-Stokes equations; 2) the
+vessel walls are rigid; 3) the inlet velocity has a parabolic proﬁle with a maximum magnitude
+of 1 m/s, which is close to the peak blood ﬂow velocity during one cardiac cycle in a human
+body. A zero-gradient boundary condition is applied at the inlet for pressure and a constant
+reference pressure is set at the outlet. The OpenFOAM, an open-source C++ library for
+FVM, is used for CFD simulations. In particular, the Semi-Implicit Method for Pressure
+Linked Equations (SIMPLE) algorithms [43] were used for solving the incompressible Navier-
+Stokes equations, and the Rhie and Chow interpolation with collocated grids was employed
+14
+--- PAGE 15 ---
+400
+ 200
+ 0 200 400
+PC1
+200
+100
+0
+100
+200
+PC2
+synthetic
+original
+Figure 5: Latent space distribution (top) and visualization (bottom) of synthetic ( ) and
+original ( ) aorta samples
+to prevent the pressure–velocity decoupling [44]. All CFD simulations were run in parallel
+(4 CPUs per case), and each simulation takes around 1 .2× 103 s to reach the convergence.
+Three decoupled MLPs are constructed to predict the velocity, surface pressure, and WSS
+ﬁelds separately. The network architectures and learning parameters are optimized using
+RAY-tune module, which is given in Table A.2. The DNNs are trained on an Nvidia RTX
+A6000 GPU with a minimum of 2,000 epochs to ensure convergence.
+Learning performance study. As a demonstration, we generated a dataset of Ntot =
+1, 000 aorta geometries and CFD simulated labels for training and validation study. The
+dataset is divided into a training set and testing set with the ratio of r = Ntrain/(Ntrain +
+Ntest), where Ntrain and Ntest denote the size of training set and test set, respectively. The
+learning-prediction performance of the trained DNN surrogates with diﬀerent training-testing
+ratios are reported in Table 1, where the averaged MSEs of the DNN-predicted surface pres-
+15
+--- PAGE 16 ---
+sure, velocity, and WSS ﬁelds are compared. Considering the randomness of the DNN
+initialization, the training processes for all DNNs are repeated by ten times with diﬀerent
+random initializations, and the averaged prediction errors over these trials are reported for
+a more rigorous assessment. It can be seen that the relative errors of the NN surrogate
+r = Ntrain
+Ntrain+Ntest
+ϵP ϵV ϵVM ϵWSS ϵWSSM
+r=60% 1.83% 0.735% 0.504% 1.88% 1.33%
+r=70% 1.81% 0.726% 0.5% 1.86% 1.31%
+r=80% 1.67% 0.734% 0.505% 1.86% 1.32%
+r=90% 1.48% 0.64% 0.434% 1.74% 1.26%
+Table 1: DNN prediction errors (averaged MSE) with diﬀerent training to testing size
+ratios for hemodynamics ﬁelds of interest, including surface pressure ( ϵP ), velocity vector
+(ϵV ), velocity magnitude (ϵVM ), wall shear stress (ϵW ), wall shear stress magnitude (ϵWM ).
+prediction are very low once the DNNs are suﬃciently trained. For velocity ﬁeld prediction,
+the prediction error is less than 1% even only 60% of the dataset is used for training. Com-
+pared to the velocity, the errors of surface ﬁeld predictions such as surface pressure and WSS
+ﬁelds are slightly higher, since they are more sensitive to the shape of vessel walls and the
+boundary layer conditions, which are not easy to capture well. Also, for vector-valued ﬂuid
+quantities like velocity and WSS, the magnitude errors are smaller than the vector errors by
+about 30%. Viewing the columns for each ﬂow quantity, the prediction accuracy increases
+as the training size grows, which is as expected. For example, the pressure error climbs from
+1.48% at r = 90% to 1.83% at r = 60% as r grows. In general, the prediction of the FOIs is
+accurate, indicating the great capability of the proposed DNN-based surrogate model.
+Predicting local hemodynamic information. In contrast to traditional surrogate
+model (e.g., GP models) or reduced-space model (e.g., LP/1D models), the proposed ML-
+based surrogate model is able to rapidly predict local hemodynamic information such as
+blood ﬂow pattern, surface pressure and WSS distributions over the vessel walls. For il-
+lustration, we randomly selected four test aorta geometries, and the hemodynamic ﬁelds
+16
+--- PAGE 17 ---
+predicted by the DNN surrogate (r = 80%) are compared with the CFD reference (referred
+to as ground truth), as shown in Figures 6 and 7. Besides, the absolute error contours are
+also plotted out by substracting the ground truth from the prediction. For pressures, the
+surrogate model yields very close surface distribution to the ground truth, yet slight diﬀer-
+ences exist at the stenosis of the descending aorta. From the error contours, this discrepancy
+is very mild on samples 1, 2 and 5, but notable on sample 3, where the severity of stenosis
+is much higher than other samples. This indicates that the surrogate model is slightly less
+accurate in capturing ﬂow features with large pressure gradients, since more ﬂow vortices
+are induced by sharp changes of surface curvatures complicating the ﬂow physics. Surrogate
+prediction of the WSS distribution is in a good agreement with the ground truth. The pat-
+tern and low/high WSS regions can be accurately captured. However, the surrogate model
+tends to smooth out the small WSS ﬂuctuations compared to the CFD reference. It appears
+that high-frequency components of the output are partially trimmed oﬀ when interpolating
+among neighboring training samples based on the non-linear relations learned by the neural
+network. Similar to pressure, notable inconsistency is also observed near the stenosis on
+the descending aorta for sample 3. The velocity contours on the cross-section and internal
+velocity vector ﬁelds are visualized in Figure 7. Again, the predicted velocity cross-section
+contours agree with the CFD ground truth very well and the overall velocity vector ﬁelds
+from the neural network and CFD are almost identical for all samples, though the error
+contours of planar velocity show slight prediction errors near the stenosis region for Sample
+3.
+17
+--- PAGE 18 ---
+Figure 6: ML surrogate predictions of pressure (top) and wall shear stress (bottom) are
+compared with the CFD ground truth: prediction (1st and 4th row), CFD ground truth
+(2nd and 5th row), prediction error (3rd and 6th row)
+18
+--- PAGE 19 ---
+Figure 7: Cross-section velocity magnitude (top) and velocity vector ﬁled (bottom) com-
+parison of prediction and CFD ground truth: prediction (1st and 4th row), ground truth
+(2nd and 5th row), error (3rd row)
+Training cost and prediction speedup. The mappings between shape input and FOIs,
+including pressure, velocity and WSS, are learned using separated neural networks, and each
+takes about two minutes to be fully trained on an Nvidia RTX-3090 GPU. The network
+inference for solution ﬁeld prediction takes less than 0.0012 seconds. In contrast, a full-
+19
+--- PAGE 20 ---
+resolution CFD simulation needs about 20 minutes to reach the steady state, not counting
+the overhead for mesh generation and case setup, which could also be time-consuming. As
+a result, the fully trained DNN surrogate model has 100 , 000x speedup over the full CFD
+simulation in the online inference phase. We should note that a fair comparison should also
+consider the oﬄine cost of constructing the surrogate, which includes the cost for network
+training and label generation. As for network training, the cost is negligible compared to
+that of a CFD simulation, thanks to the light DNN structure deﬁned in the latent space.
+However, the cost for data generation depends on the number of training labels required,
+which is determined by the desired trade-oﬀ between the eﬃciency and accuracy of the sur-
+rogate. For example, supposing 500 CFD labels are used for network training, the CFD data
+generation cost is 500× 20 minutes, which is signiﬁcantly greater than that of a single CFD
+simulation. Nonetheless, the surrogate model is built for many-query applications (e.g., opti-
+mization, uncertainty quantiﬁcation, inverse modeling, etc.), and the huge speedup of single
+model evaluation can be leveraged when a large number of model evaluations are required
+as the oﬄine cost is paid oﬀ at once. For example, Markov chain Monte Carlo (MCMC), as
+the gold standard Bayesian inference method for forward and inverse UQ, usually requires
+hundreds of thousands of model evaluations to reach convergence, which well justiﬁes the
+data generation at the cost of hundreds of full-order CFD evaluations. Moreover, it is worth
+noting that the training dataset size is application-dependent and the data generation cost
+can be signiﬁcantly reduced if one allocates the computational budget wisely. A compre-
+hensive study on the use of the proposed surrogate model in speciﬁc UQ or optimization
+applications is out of the scope of this work and will be conducted in the future.
+3.3. Comparison of DNN-based and bi-ﬁdelity surrogate models
+Lastly, we investigate how well the proposed DNN-based surrogate model performs com-
+pared to other state-of-art surrogate models that can provide full-ﬁeld hemodynamic pre-
+dictions. To enable the full-ﬁeld prediction capability with the same resolution as that of
+full-order CFD simulations, a multi-ﬁdelity strategy is often adopted for surrogate modeling.
+The multi-ﬁdelity paradigm is pioneered by Kennedy & O’Hagan [45] decades ago, origi-
+20
+--- PAGE 21 ---
+nally from a statistical point of view (e.g., GP-based multi-model approach). Very recently,
+multi-ﬁdelity strategy has been applied for surrogate modeling in inference and uncertainty
+quantiﬁcation (UQ) problems in cardiovascular biomechanics problems [14, 15, 46–48]. In
+particular, Gao et al. [14] developed a bi-ﬁdelity (BF) surrogate modeling approach for 3-D
+patient-speciﬁc hemodynamic simulations, which has been demonstrated eﬀective for both
+forward and inverse UQ problems [14, 15]. The theoretical backbone of the BF surrogate
+is based on the multi-ﬁdelity paradigm, which leverages the accuracy of high-ﬁdelity CFD
+solutions and the eﬃciency of low-ﬁdelity CFD solutions, largely reducing the total compu-
+tation cost compared with conventional full-order CFD simulations. Here we compared the
+proposed DNN-based surrogate with the state-of-the-art BF surrogate model, which are built
+with the same amount of training labels. It is worth noting that the training overhead and
+prediction cost of the BF surrogate are always higher than those of the DNN-based surrogate
+with the same amount of training data (i.e., high-ﬁdelity CFD labels), because low-ﬁdelity
+CFD simulations have to be performed for both training and inference. Speciﬁcally, to build
+the BF surrogate model, in addition to high-ﬁdelity (HF) CFD training data, another 1,000
+low-ﬁdelity (LF) CFD simulations are conducted on low-resolution meshes. As the low-res
+meshes are very coarse and the convergence criterion is set to be large, the LF simulation
+cost is much lower than that of a HF simulation. The LF data are used to explore the input
+geometric space to determine important points, where HF CFD simulations are performed
+for training. More details of the BF surrogate construction can be found in [14].
+To ﬁnd out how the prediction errors change with the training size, the training set size
+(TS) changes from 300 to 900, and the testing set is a ﬁxed group of 100 aortas randomly
+generated. The comparison of performance is shown in Figure 8. Both surrogate models have
+reasonably good predictions, but the proposed DNN-based surrogate model outperforms the
+BF surrogate model for all FOIs under all diﬀerent training scenarios. Both surrogate models
+reach their best accuracy at TS = 900 for all FOIs. The prediction error of the BF model
+quickly increases as the training sample size decreases, while this trend is less notable for the
+DNN-based model, particularly for velocity and WSS predictions, indicating a more robust
+21
+--- PAGE 22 ---
+300 600 900
+TS
+0.0%
+2.0%
+4.0%
+6.0%AMSE
+NN
+BF
+(a) Pressure
+300 600 900
+TS
+0.0%
+2.0%
+4.0%
+6.0%AMSE
+NN
+BF (b) Velocity
+300 600 900
+TS
+0.0%
+2.0%
+4.0%
+6.0%AMSE
+NN
+BF (c) Wall shear stress
+Figure 8: Comparison of neural network(NN) and bi-ﬁdelity model(BF): Y axis, averaged
+mean square error (AMSE); X axis, trainset size (TS)
+behavior in the small data regime. For both models, the learning performance for the 3-D
+velocity vector ﬁeld is slightly better than that of surface ﬁeld outputs, such as pressure
+and WSS, due to the fact that they are more sensitive to the local changes of the input
+geometries cross diﬀerence patients. Moreover, the BF prediction cost is higher than the
+DNN-based surrogate, since each BF prediction requires an LF CFD simulation. Therefore,
+the proposed DNN-based surrogate model is superior to the BF model in terms of accuracy
+and eﬃciency, though both models can predict all FOIs reasonably well.
+4. Conclusion
+In this study, we developed a statistical shape modeling (SSM) approach to parameterize
+the geometric space spanned by a set of 3-D patient aorta geometries and systematically syn-
+thesize a large number of virtual aorta geometries. The results show that the proposed SSM
+method successfully established correspondence among aorta geometries from diﬀerent pa-
+tients and the uniform PCA sampling algorithm suﬃciently explored the input space, gener-
+ating abundant synthetic aorta shapes that fully cover the geometric variation. Subsequently,
+an ML-based surrogate model is proposed to predict comprehensive local hemodynamic in-
+formation (e.g., surface pressure, velocity and WSS ﬁelds), where an encoding-decoding
+structure is built based on PCA and multiple MLPs are constructed to learn the non-linear
+mappings between the input geometries and ﬂow ﬁelds of interest within the latent spaces.
+22
+--- PAGE 23 ---
+The PCA encoder and decoders managed to reduce the dimension of the mesh-based 3-D
+aorta shapes and ﬁeld outputs to a large extent and maintained a reconstruction error as low
+as 1%. The MLPs are well optimized in terms of their hyperparameters and trained on diﬀer-
+ent sizes of sample sets. The testing results prove that the proposed surrogate model is able
+to yield hemodynamic ﬁeld predictions in a good agreement with the ground truth obtained
+from full-order CFD simulations, yet the accuracy is slightly lower near the stenosis of the
+descending aorta, where ﬂow features are more complicated due to sharp pressure gradients.
+The accuracy of the proposed model can be improved by increasing the size of training set.
+The proposed DNN-based surrogate is compared with the state-of-the-art bi-ﬁdelity (BF)
+surrogate model, and the DNN surrogate outperforms the BF surrogate in terms of both
+eﬃciency and accuracy for all FOIs under diﬀerent training scenarios. Furthermore, the pro-
+posed model exhibits a robust behavior when the number of samples drops whereas the BF
+model easily loses its accuracy, especially for surface pressure predictions. In conclusion, the
+proposed DNN-based surrogate model shows a great capability of approximating the non-
+linearity of the CFD simulations for cardiovascular ﬂows. Considering extremely low costs
+of DNN for inference, the trained DNN-based surrogate is able to provide high-resolution
+local hemodynamic information in split of second, showing a great potential for applications
+requires massive model queries, such model inference, optimization, and uncertainty quan-
+tiﬁcation problems. Although the current work focus on aortic ﬂows, the proposed methods
+can be applied to hemodynamic modeling for other anatomies in general.
+Acknowledgment
+The authors would like to acknowledge the funds from National Science Foundation under
+award numbers CMMI-1934300 and OAC-2047127, and startup funds from the College of
+Engineering at University of Notre Dame in supporting this study.
+Compliance with Ethical Standards
+Conﬂict of Interest: The authors declare that they have no conﬂict of interest.
+23
+--- PAGE 24 ---
+Appendix A. Optimized MLP structures and hyperparameters
+FOIFOIFOI DNN LayersDNN LayersDNN Layers In & Out featuresIn & Out featuresIn & Out features batch sizebatch sizebatch size learning ratelearning ratelearning rate
+Linear Layer (7,64)
+Relu -
+Linear Layer (64,8)
+Pressure Relu - 8 1 × 10−3
+Linear Layer (8,256)
+Relu -
+Linear Layer (265,10)
+Linear Layer (7,64)
+Relu -
+Linear Layer (64,512)
+Velocity Relu - 8 4 .07× 10−4
+Linear Layer (512,256)
+Relu -
+Linear Layer (265,10)
+Linear Layer (7,512)
+Relu -
+Linear Layer (512,16)
+Relu -
+Linear Layer (16,512)
+Relu -
+WSS Linear Layer (512,32) 8 2 .30× 10−4
+Relu -
+Linear Layer (32,16)
+Relu -
+Linear Layer (16,256)
+Relu -
+Linear Layer (256,10)
+Table A.2: The optimized MLP structure and hyperparameters based on Bayesian tuning
+References
+[1] D. Mozaﬀarian, E. J. Benjamin, A. S. Go, D. K. Arnett, M. J. Blaha, M. Cushman,
+S. De Ferranti, J.-P. Despr´ es, H. J. Fullerton, V. J. Howard, et al., Executive summary:
+24
+--- PAGE 25 ---
+heart disease and stroke statistics—2015 update: a report from the american heart
+association, Circulation 131 (4) (2015) 434–441.
+[2] K. S. Nayak, J.-F. Nielsen, M. A. Bernstein, M. Markl, P. D. Gatehouse, R. M. Botnar,
+D. Saloner, C. Lorenz, H. Wen, B. S. Hu, et al., Cardiovascular magnetic resonance
+phase contrast imaging, Journal of Cardiovascular Magnetic Resonance 17 (1) (2015)
+1–26.
+[3] C. A. Taylor, C. Figueroa, Patient-speciﬁc modeling of cardiovascular mechanics, An-
+nual review of biomedical engineering 11 (2009) 109–134.
+[4] D. A. Steinman, C. A. Taylor, Flow imaging and computing: large artery hemodynam-
+ics, Annals of biomedical engineering 33 (12) (2005) 1704–1709.
+[5] J. Xiang, L. Antiga, N. Varble, K. V. Snyder, E. I. Levy, A. H. Siddiqui, H. Meng, Aview:
+an image-based clinical computational tool for intracranial aneurysm ﬂow visualization
+and clinical management, Annals of biomedical engineering 44 (4) (2016) 1085–1096.
+[6] A. Quarteroni, A. Manzoni, C. Vergara, The cardiovascular system: mathematical mod-
+elling, numerical algorithms and clinical applications, Acta Numerica 26 (2017) 365–590.
+[7] C. A. Taylor, T. A. Fonte, J. K. Min, Computational ﬂuid dynamics applied to cardiac
+computed tomography for noninvasive quantiﬁcation of fractional ﬂow reserve: scientiﬁc
+basis, Journal of the American College of Cardiology 61 (22) (2013) 2233–2241.
+[8] K. M. Chinnaiyan, T. Akasaka, T. Amano, J. J. Bax, P. Blanke, B. De Bruyne,
+T. Kawasaki, J. Leipsic, H. Matsuo, Y. Morino, et al., Rationale, design and goals of
+the heartﬂow assessing diagnostic value of non-invasive ﬀrct in coronary care (advance)
+registry, Journal of Cardiovascular Computed Tomography 11 (1) (2017) 62–67.
+[9] T. W. Hokken, J. M. Ribeiro, P. P. De Jaegere, N. M. Van Mieghem, Precision medicine
+in interventional cardiology, Interventional Cardiology Review 15 (2020).
+25
+--- PAGE 26 ---
+[10] S. Sankaran, A. L. Marsden, A stochastic collocation method for uncertainty quantiﬁca-
+tion and propagation in cardiovascular simulations, Journal of biomechanical engineer-
+ing 133 (3) (2011).
+[11] S. Sankaran, A. L. Marsden, The impact of uncertainty on shape optimization of ideal-
+ized bypass graft models in unsteady ﬂow, Physics of ﬂuids 22 (12) (2010) 121902.
+[12] J. S. Tran, D. E. Schiavazzi, A. B. Ramachandra, A. M. Kahn, A. L. Marsden, Auto-
+mated tuning for parameter identiﬁcation and uncertainty quantiﬁcation in multi-scale
+coronary simulations, Computers & ﬂuids 142 (2017) 128–138.
+[13] D. Schiavazzi, A. Doostan, G. Iaccarino, A. Marsden, A generalized multi-resolution ex-
+pansion for uncertainty propagation with application to cardiovascular modeling, Com-
+puter methods in applied mechanics and engineering 314 (2017) 196–221.
+[14] H. Gao, J.-X. Wang, A bi-ﬁdelity ensemble kalman method for PDE-constrained inverse
+problems in computational mechanics, Computational Mechanics 67 (4) (2021) 1115–
+1131.
+[15] H. Gao, X. Zhu, J.-X. Wang, A bi-ﬁdelity surrogate modeling approach for uncertainty
+propagation in three-dimensional hemodynamic simulations, Computer Methods in Ap-
+plied Mechanics and Engineering 366 (2020) 113047.
+[16] M. Mirramezani, S. L. Diamond, H. I. Litt, S. C. Shadden, Reduced order models for
+transstenotic pressure drop in the coronary arteries, Journal of biomechanical engineer-
+ing 141 (3) (2019) 031005.
+[17] M. Mirramezani, S. C. Shadden, A distributed lumped parameter model of blood ﬂow,
+Annals of Biomedical Engineering 48 (12) (2020) 2870–2886.
+[18] M. R. Pfaller, J. Pham, A. Verma, N. M. Wilson, D. W. Parker, W. Yang, A. L.
+Marsden, Automated generation of 0d and 1d reduced-order models of patient-speciﬁc
+blood ﬂow, arXiv preprint arXiv:2111.04878 (2021).
+26
+--- PAGE 27 ---
+[19] A. Manzoni, A. Quarteroni, G. Rozza, Model reduction techniques for fast blood ﬂow
+simulation in parametrized geometries, International journal for numerical methods in
+biomedical engineering 28 (6-7) (2012) 604–625.
+[20] T. Lassila, A. Manzoni, A. Quarteroni, G. Rozza, A reduced computational and ge-
+ometrical framework for inverse problems in hemodynamics, International journal for
+numerical methods in biomedical engineering 29 (7) (2013) 741–776.
+[21] F. Ballarin, G. Rozza, Pod–galerkin monolithic reduced order models for parametrized
+ﬂuid-structure interaction problems, International Journal for Numerical Methods in
+Fluids 82 (12) (2016) 1010–1034.
+[22] F. Ballarin, E. Faggiano, S. Ippolito, A. Manzoni, A. Quarteroni, G. Rozza, R. Scrofani,
+Fast simulations of patient-speciﬁc haemodynamics of coronary artery bypass grafts
+based on a pod–galerkin method and a vascular shape parametrization, Journal of
+Computational Physics 315 (2016) 609–628.
+[23] T. Lassila, A. Manzoni, A. Quarteroni, G. Rozza, Model order reduction in ﬂuid dy-
+namics: challenges and perspectives, Reduced Order Methods for modeling and com-
+putational reduction (2014) 235–273.
+[24] S. Chaturantabut, D. C. Sorensen, Nonlinear model reduction via discrete empirical
+interpolation, SIAM Journal on Scientiﬁc Computing 32 (5) (2010) 2737–2764.
+[25] H. Gao, J.-X. Wang, M. J. Zahr, Non-intrusive model reduction of large-scale, nonlinear
+dynamical systems using deep learning, Physica D: Nonlinear Phenomena 412 (2020)
+132614.
+[26] F. Scarselli, A. C. Tsoi, Universal approximation using feedforward neural networks: A
+survey of some existing methods, and some new results, Neural networks 11 (1) (1998)
+15–37.
+27
+--- PAGE 28 ---
+[27] M. Hutzenthaler, A. Jentzen, T. Kruse, T. Anh Nguyen, P. von Wurstemberger,
+Overcoming the curse of dimensionality in the numerical approximation of semilinear
+parabolic partial diﬀerential equations, Proceedings of the Royal Society A 476 (2244)
+(2020) 20190630.
+[28] L. Liang, M. Liu, C. Martin, J. A. Elefteriades, W. Sun, A machine learning approach
+to investigate the relationship between shape features and numerically predicted risk
+of ascending aortic aneurysm, Biomechanics and modeling in mechanobiology 16 (5)
+(2017) 1519–1533.
+[29] L. Liang, M. Liu, C. Martin, W. Sun, A deep learning approach to estimate stress
+distribution: a fast and accurate surrogate of ﬁnite-element analysis, Journal of The
+Royal Society Interface 15 (138) (2018) 20170844.
+[30] A. Madani, A. Bakhaty, J. Kim, Y. Mubarak, M. R. Mofrad, Bridging ﬁnite element
+and machine learning modeling: stress prediction of arterial walls in atherosclerosis,
+Journal of biomechanical engineering 141 (8) (2019).
+[31] A. Balu, S. Nallagonda, F. Xu, A. Krishnamurthy, M.-C. Hsu, S. Sarkar, A deep learn-
+ing framework for design and analysis of surgical bioprosthetic heart valves, Scientiﬁc
+reports 9 (1) (2019) 1–12.
+[32] F. Sahli Costabal, Y. Yang, P. Perdikaris, D. E. Hurtado, E. Kuhl, Physics-informed
+neural networks for cardiac activation mapping, Frontiers in Physics 8 (2020) 42.
+[33] G. Kissas, Y. Yang, E. Hwuang, W. R. Witschey, J. A. Detre, P. Perdikaris, Machine
+learning in cardiovascular ﬂows modeling: Predicting arterial blood pressure from non-
+invasive 4d ﬂow mri data using physics-informed neural networks, Computer Methods
+in Applied Mechanics and Engineering 358 (2020) 112623.
+[34] L. Liang, W. Mao, W. Sun, A feasibility study of deep learning for predicting hemody-
+namics of human thoracic aorta, Journal of biomechanics 99 (2020) 109544.
+28
+--- PAGE 29 ---
+[35] G. Li, H. Wang, M. Zhang, S. Tupin, A. Qiao, Y. Liu, M. Ohta, H. Anzai, Prediction
+of 3d cardiovascular hemodynamics before and after coronary artery bypass surgery via
+deep learning, Communications biology 4 (1) (2021) 1–12.
+[36] J. Br¨ uning, F. Hellmeier, P. Yevtushenko, T. K¨ uhne, L. Goubergrits, Uncertainty quan-
+tiﬁcation for non-invasive assessment of pressure drop across a coarctation of the aorta
+using cfd, Cardiovascular engineering and technology 9 (4) (2018) 582–596.
+[37] S. Valette, J. Chassery, Approximated centroidal voronoi diagrams for uniform polygo-
+nal mesh coarsening, Computer Graphics Forum 23 (3) (2004) 381–389.
+[38] S. Bouaziz, A. Tagliasacchi, M. Pauly, Sparse iterative closest point, in: Computer
+graphics forum, Vol. 32, Wiley Online Library, 2013, pp. 113–123.
+[39] M. F. Beg, M. I. Miller, A. Trouv´ e, L. Younes, Computing large deformation metric
+mappings via geodesic ﬂows of diﬀeomorphisms, International journal of computer vision
+61 (2) (2005) 139–157.
+[40] S. Durrleman, M. Prastawa, N. Charon, J. R. Korenberg, S. Joshi, G. Gerig, A. Trouv´ e,
+Morphometry of anatomical shape complexes with dense deformations and sparse pa-
+rameters, NeuroImage 101 (2014) 35–49.
+[41] R. Liaw, E. Liang, R. Nishihara, P. Moritz, J. E. Gonzalez, I. Stoica, Tune: A research
+platform for distributed model selection and training, arXiv preprint arXiv:1807.05118
+(2018).
+[42] L. Li, et al., A system for massively parallel hyperparameter tuning, Proceedings of
+Machine Learning and Systems 2 (2020) 230–246.
+[43] R. H. Pletcher, J. C. Tannehill, D. Anderson, Computational ﬂuid mechanics and heat
+transfer, CRC press, 2012.
+[44] C. M. Rhie, W.-L. Chow, Numerical study of the turbulent ﬂow past an airfoil with
+trailing edge separation, AIAA journal 21 (11) (1983) 1525–1532.
+29
+--- PAGE 30 ---
+[45] A. O. M. C. Kennedy, Bayesian calibration of computer models, Journal of the Royal
+Statistical Society: Series B (Statistical Methodology) (63) (2001) 425–464.
+[46] J. Biehler, M. W. Gee, W. A. Wall, Towards eﬃcient uncertainty quantiﬁcation in com-
+plex and large-scale biomechanical problems based on a bayesian multi-ﬁdelity scheme,
+Biomechanics and modeling in mechanobiology 14 (3) (2015) 489–513.
+[47] J. Biehler, S. Kehl, M. W. Gee, F. Schmies, J. Pelisek, A. Maier, C. Reeps, H.-H. Eck-
+stein, W. A. Wall, Probabilistic noninvasive prediction of wall properties of abdominal
+aortic aneurysms using bayesian regression, Biomechanics and modeling in mechanobi-
+ology 16 (1) (2017) 45–61.
+[48] C. M. Fleeter, G. Geraci, D. E. Schiavazzi, A. M. Kahn, A. L. Marsden, Multilevel
+and multiﬁdelity uncertainty quantiﬁcation for cardiovascular hemodynamics, Com-
+puter methods in applied mechanics and engineering 365 (2020) 113030.
+30

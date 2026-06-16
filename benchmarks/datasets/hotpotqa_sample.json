@@ -1,0 +1,242 @@
+[
+  {
+    "_id": "hp_sample_001",
+    "type": "bridge",
+    "level": "hard",
+    "question": "What physical effect is used by the device that generates the high-frequency sound waves in ultrasound imaging?",
+    "answer": "The piezoelectric effect",
+    "supporting_facts": [["Ultrasound Imaging", 0], ["Ultrasound Transducer", 1]],
+    "context": [
+      ["Ultrasound Imaging", ["Ultrasound imaging uses high-frequency sound waves above 20 kHz to visualize internal anatomy.", "The waves are produced and received by a transducer probe."]],
+      ["Ultrasound Transducer", ["A transducer contains piezoelectric elements.", "The piezoelectric effect converts an applied voltage into mechanical vibration and vice versa."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_002",
+    "type": "comparison",
+    "level": "hard",
+    "question": "Which travels through tissue with greater attenuation, a higher-frequency or a lower-frequency ultrasound wave?",
+    "answer": "The higher-frequency wave",
+    "supporting_facts": [["Attenuation", 0], ["Frequency", 1]],
+    "context": [
+      ["Attenuation", ["Attenuation is the loss of acoustic energy as a wave travels through tissue.", "Attenuation increases with both distance and frequency."]],
+      ["Frequency", ["Higher-frequency probes give better resolution.", "Higher frequencies are absorbed more strongly, reducing penetration depth."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_003",
+    "type": "bridge",
+    "question": "What coupling medium is required because of the property that governs reflection at tissue boundaries in ultrasound?",
+    "answer": "Ultrasound gel",
+    "level": "hard",
+    "supporting_facts": [["Acoustic Impedance", 1], ["Coupling Gel", 0]],
+    "context": [
+      ["Acoustic Impedance", ["Reflection at a boundary is determined by the difference in acoustic impedance.", "A large impedance mismatch, such as tissue-to-air, reflects almost all energy."]],
+      ["Coupling Gel", ["Ultrasound gel is applied to the skin to remove the air gap.", "It matches impedance so the beam can enter the body."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_004",
+    "type": "comparison",
+    "question": "Which imaging mode shows blood-flow velocity, B-mode or Doppler mode?",
+    "answer": "Doppler mode",
+    "level": "medium",
+    "supporting_facts": [["B-mode", 0], ["Doppler", 0]],
+    "context": [
+      ["B-mode", ["B-mode produces a 2D grayscale image of anatomy from echo amplitude."]],
+      ["Doppler", ["Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_005",
+    "type": "bridge",
+    "question": "In which department's 2025 curriculum is the course that covers semiconductor device fabrication offered?",
+    "answer": "Department of Semiconductor Engineering",
+    "level": "medium",
+    "supporting_facts": [["Curriculum 2025", 0], ["Semiconductor Process", 1]],
+    "context": [
+      ["Curriculum 2025", ["The 2025 curriculum belongs to the Department of Semiconductor Engineering.", "It lists required and elective courses by year."]],
+      ["Semiconductor Process", ["Device fabrication covers deposition, lithography, and etching.", "It is a core course in the semiconductor curriculum."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_006",
+    "type": "comparison",
+    "question": "Which has more required credits for graduation, a required-course-heavy track or an elective-heavy track in the 2025 semiconductor curriculum?",
+    "answer": "The required-course-heavy track",
+    "level": "medium",
+    "supporting_facts": [["Required Credits", 0], ["Elective Credits", 0]],
+    "context": [
+      ["Required Credits", ["Required major courses account for the larger share of graduation credits."]],
+      ["Elective Credits", ["Elective major courses contribute fewer mandatory credits than required courses."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_007",
+    "type": "bridge",
+    "question": "What clinical problem motivates the dynamic gait-analysis system described in the biomedical report?",
+    "answer": "Musculoskeletal disorders",
+    "level": "hard",
+    "supporting_facts": [["Gait Analysis", 0], ["Motivation", 1]],
+    "context": [
+      ["Gait Analysis", ["Dynamic gait analysis assesses walking patterns for clinical diagnosis."]],
+      ["Motivation", ["Modern lifestyle changes have increased musculoskeletal disorders.", "This raises the clinical importance of objective gait measurement."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_008",
+    "type": "comparison",
+    "question": "Which is described as harder to access, professional gait-analysis equipment or a smartphone camera?",
+    "answer": "Professional gait-analysis equipment",
+    "level": "medium",
+    "supporting_facts": [["Equipment Access", 0], ["Smartphone", 0]],
+    "context": [
+      ["Equipment Access", ["Specialized gait-analysis equipment has low accessibility and high cost."]],
+      ["Smartphone", ["A smartphone camera is widely available and inexpensive for capturing motion."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_009",
+    "type": "bridge",
+    "question": "Which programming language is used for the project report that builds a data-processing program?",
+    "answer": "Python",
+    "level": "easy",
+    "supporting_facts": [["Project 6", 0], ["Language", 0]],
+    "context": [
+      ["Project 6", ["Programming Project #6 builds a small data-processing program."]],
+      ["Language", ["The project is implemented in the Python programming language."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_010",
+    "type": "comparison",
+    "question": "Between the introduction and the method section of the gait report, which one states the research background?",
+    "answer": "The introduction",
+    "level": "easy",
+    "supporting_facts": [["Introduction", 0], ["Method", 0]],
+    "context": [
+      ["Introduction", ["The introduction states the research background and clinical motivation."]],
+      ["Method", ["The method section describes the data-collection and analysis procedure."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_011",
+    "type": "bridge",
+    "question": "What quantity, equal to heart rate times stroke volume, describes the heart's pumping performance?",
+    "answer": "Cardiac output",
+    "level": "medium",
+    "supporting_facts": [["Heart", 0], ["Cardiac Output", 0]],
+    "context": [
+      ["Heart", ["The heart pumps blood through the cardiovascular system."]],
+      ["Cardiac Output", ["Cardiac output is the product of heart rate and stroke volume."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_012",
+    "type": "comparison",
+    "question": "Which frequency range is audible to humans, 20 Hz-20 kHz or above 20 kHz?",
+    "answer": "20 Hz to 20 kHz",
+    "level": "easy",
+    "supporting_facts": [["Audible Range", 0], ["Ultrasound Range", 0]],
+    "context": [
+      ["Audible Range", ["Humans can hear sound between 20 Hz and 20 kHz."]],
+      ["Ultrasound Range", ["Ultrasound refers to frequencies above 20 kHz, beyond human hearing."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_013",
+    "type": "bridge",
+    "question": "What discovery about bats in 1793 is cited as an early milestone in the history of ultrasound?",
+    "answer": "Bats' perception of ultrasound",
+    "level": "hard",
+    "supporting_facts": [["History", 0], ["Bats", 1]],
+    "context": [
+      ["History", ["The history of ultrasound spans the 18th to mid-20th century."]],
+      ["Bats", ["In 1793 Spallanzani studied bat navigation.", "This revealed bats' perception of ultrasound, an early milestone."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_014",
+    "type": "comparison",
+    "question": "Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound?",
+    "answer": "Sonar",
+    "level": "medium",
+    "supporting_facts": [["Sonar", 0], ["Diagnostic Ultrasound", 0]],
+    "context": [
+      ["Sonar", ["Sonar was developed for underwater detection before medical use."]],
+      ["Diagnostic Ultrasound", ["Diagnostic ultrasound systems were developed later for medical imaging."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_015",
+    "type": "bridge",
+    "question": "What property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam?",
+    "answer": "Acoustic impedance mismatch",
+    "level": "hard",
+    "supporting_facts": [["Boundary", 0], ["Impedance", 1]],
+    "context": [
+      ["Boundary", ["At a tissue-air boundary almost all of the beam is reflected."]],
+      ["Impedance", ["This is caused by the large acoustic impedance mismatch.", "Gel is used to reduce it."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_016",
+    "type": "comparison",
+    "question": "For deep abdominal imaging, is a low-frequency or high-frequency probe more suitable?",
+    "answer": "A low-frequency probe",
+    "level": "medium",
+    "supporting_facts": [["Penetration", 0], ["Resolution", 0]],
+    "context": [
+      ["Penetration", ["Low-frequency probes penetrate deeper, suiting abdominal imaging."]],
+      ["Resolution", ["High-frequency probes give higher resolution but shallow penetration."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_017",
+    "type": "bridge",
+    "question": "What 1880 discovery underlies the operation of the ultrasound transducer?",
+    "answer": "The piezoelectric effect",
+    "level": "hard",
+    "supporting_facts": [["1880", 0], ["Transducer", 0]],
+    "context": [
+      ["1880", ["The piezoelectric effect was discovered by the Curie brothers in 1880."]],
+      ["Transducer", ["The transducer relies on the piezoelectric effect to emit and detect waves."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_018",
+    "type": "comparison",
+    "question": "Which paper format is on arXiv, the 2204.08939 preprint or the biomedical course report?",
+    "answer": "The 2204.08939 preprint",
+    "level": "easy",
+    "supporting_facts": [["arXiv Preprint", 0], ["Course Report", 0]],
+    "context": [
+      ["arXiv Preprint", ["The document 2204.08939 is an arXiv preprint."]],
+      ["Course Report", ["The biomedical course report is a student assignment, not on arXiv."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_019",
+    "type": "bridge",
+    "question": "What journal published the reference paper with the identifier s41598-026-41649-2?",
+    "answer": "Scientific Reports",
+    "level": "medium",
+    "supporting_facts": [["Identifier", 0], ["Journal", 0]],
+    "context": [
+      ["Identifier", ["The identifier s41598 corresponds to Nature's Scientific Reports."]],
+      ["Journal", ["Scientific Reports is an open-access journal published by Nature."]]
+    ]
+  },
+  {
+    "_id": "hp_sample_020",
+    "type": "comparison",
+    "question": "Which describes energy loss in tissue, attenuation or reflection?",
+    "answer": "Attenuation",
+    "level": "easy",
+    "supporting_facts": [["Attenuation Def", 0], ["Reflection Def", 0]],
+    "context": [
+      ["Attenuation Def", ["Attenuation is the gradual loss of acoustic energy in tissue."]],
+      ["Reflection Def", ["Reflection is the return of part of the beam at an impedance boundary."]]
+    ]
+  }
+]

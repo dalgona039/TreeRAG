@@ -1,0 +1,15 @@
+{
+  "n_questions": 70,
+  "mean_rouge_l_diff": 0.293455176453841,
+  "mean_latency_diff": -0.0066365434285476765,
+  "treerag_win_rate": 1.0,
+  "category_win_rate": {
+    "comparative": 1.0,
+    "factual": 1.0,
+    "multi_hop": 1.0
+  },
+  "citation_rate": {
+    "treerag_beam": 0.0,
+    "raptor": 0.0
+  }
+}

@@ -364,6 +364,7 @@ LABELS = {
     "bm25": "BM25",
     "dense": "Dense Retrieval",
     "flatrag": "FlatRAG",
+    "raptor": "RAPTOR",
     "treerag_dfs": "TreeRAG-DFS",
     "treerag_beam": "TreeRAG-Beam",
 }
@@ -557,6 +558,110 @@ def main(argv=None) -> int:
     print(f"💾 LaTeX tables → {out}")
     print("\n" + "\n".join(blocks))
     return 0
+
+
+# ======================================================================
+# PHASE 5 additions (ACM): combined Table 1, medical Table 2.
+# ======================================================================
+import re as _re_acm
+
+
+def _citation_rate(rows):
+    """Fraction of answers containing a page citation like [doc, p.X]."""
+    pat = _re_acm.compile(r"\[[^\]]*p\.\s*\d+", _re_acm.IGNORECASE)
+    if not rows:
+        return 0.0
+    return sum(1 for r in rows if pat.search(r.get("answer", "") or "")) / len(rows)
+
+
+def table_main_combined(full_report, hotpot_report):
+    """ACM Table 1: Full Benchmark + HotpotQA multi-hop subset (multirow)."""
+    systems = full_report["systems"]
+    fs = full_report["summary"]
+    hs = (hotpot_report or {}).get("summary", {})
+
+    def col(metric, source, maximize=True, scale=1.0):
+        vals = [(source.get(s, {}) or {}).get(metric) for s in systems]
+        vals = [v * scale if v is not None else None for v in vals]
+        return vals, _best_index(vals, maximize)
+
+    f_rouge, f_rouge_b = col("rouge_l", fs)
+    f_bert, f_bert_b = col("bertscore", fs)
+    f_llm, f_llm_b = col("llm_judge", fs)
+    h_rouge, h_rouge_b = col("rouge_l", hs)
+    h_llm, h_llm_b = col("llm_judge", hs)
+    f_lat, f_lat_b = col("latency", fs, maximize=False)
+
+    lines = [
+        r"% Table 1: Main results (Full Benchmark + HotpotQA)",
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\caption{Main Results on Full Benchmark and HotpotQA Multi-Hop Subset. "
+        r"Best per column in \textbf{bold}; $\dag$ denotes $p<0.05$ vs TreeRAG-Beam.}",
+        r"\label{tab:main_results}",
+        r"\begin{tabular}{lcccccc}",
+        r"\toprule",
+        r"\multirow{2}{*}{System} & \multicolumn{3}{c}{Full Benchmark} & "
+        r"\multicolumn{2}{c}{HotpotQA} & \\",
+        r"\cmidrule(lr){2-4} \cmidrule(lr){5-6}",
+        r"& ROUGE-L & BERTSc. & LLM-J & ROUGE-L & LLM-J & Lat.(s) \\",
+        r"\midrule",
+    ]
+    for i, s in enumerate(systems):
+        cells = [
+            _esc(LABELS.get(s, s)),
+            _fmt(f_rouge[i], f_rouge_b == i, 3),
+            _fmt(f_bert[i], f_bert_b == i, 3),
+            _fmt(f_llm[i], f_llm_b == i, 2),
+            _fmt(h_rouge[i], h_rouge_b == i, 3),
+            _fmt(h_llm[i], h_llm_b == i, 2),
+            _fmt(f_lat[i], f_lat_b == i, 3),
+        ]
+        row = " & ".join(cells)
+        if s == "treerag_beam":
+            row = r"\textbf{" + _esc(LABELS.get(s, s)) + "} & " + " & ".join(cells[1:])
+        lines.append(row + r" \\")
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
+    return "\n".join(lines)
+
+
+def table_medical(medical_report):
+    """ACM Table 2: medical domain — ROUGE-L, Entity Recall, Citation availability."""
+    systems = medical_report["systems"]
+    ms = medical_report["summary"]
+    pq = medical_report.get("per_question", {})
+
+    rouge = [ms[s].get("rouge_l") for s in systems]
+    mer = [ms[s].get("medical_entity_recall") for s in systems]
+    cite = [_citation_rate(pq.get(s, [])) for s in systems]
+
+    b_rouge = _best_index(rouge, True)
+    b_mer = _best_index(mer, True)
+    b_cite = _best_index(cite, True)
+
+    lines = [
+        r"% Table 2: Medical domain results",
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\caption{Medical Domain Results --- ROUGE-L, Medical Entity Recall, "
+        r"and Page-Citation Availability.}",
+        r"\label{tab:medical}",
+        r"\begin{tabular}{lccc}",
+        r"\toprule",
+        r"System & ROUGE-L & Entity Recall & Citation Avail. \\",
+        r"\midrule",
+    ]
+    for i, s in enumerate(systems):
+        lines.append(
+            " & ".join([
+                _esc(LABELS.get(s, s)),
+                _fmt(rouge[i], b_rouge == i, 3),
+                _fmt(mer[i], b_mer == i, 3),
+                _fmt(cite[i], b_cite == i, 3),
+            ]) + r" \\"
+        )
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
+    return "\n".join(lines)
 
 
 if __name__ == "__main__":

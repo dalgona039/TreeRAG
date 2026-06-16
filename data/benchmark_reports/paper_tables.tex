@@ -9,14 +9,15 @@
 \toprule
 System & ROUGE-L & BERTScore & LLM-Judge & Latency (s) & CTX (K) \\
 \midrule
-BM25 & 0.488 & 0.526 & -- & 0.004 & 0.1 \\
+BM25 & 0.488 & 0.526 & -- & 0.003 & 0.1 \\
 Dense Retrieval & 0.379 & 0.422 & -- & \textbf{0.000} & 0.1 \\
 FlatRAG & 0.378 & 0.409 & -- & 0.000 & \textbf{0.0} \\
+RAPTOR & 0.106 & 0.137 & -- & 0.007 & 0.3 \\
 TreeRAG-DFS & \textbf{0.496} & \textbf{0.538} & -- & 0.001 & 0.1 \\
 TreeRAG-Beam & 0.399 & 0.437 & -- & 0.001 & 0.2 \\
 \bottomrule
 \end{tabular}
-\\[2pt]\footnotesize{Paired $t$-test vs TreeRAG-Beam (ROUGE-L). BM25: $p=0.0001$$^{*}$; Dense Retrieval: $p=0.3914$; FlatRAG: $p=0.2407$; TreeRAG-DFS: $p=0.0000$$^{*}$. $^{*}p<0.05$.}
+\\[2pt]\footnotesize{Paired $t$-test vs TreeRAG-Beam (ROUGE-L). BM25: $p=0.0001$$^{*}$; Dense Retrieval: $p=0.3914$; FlatRAG: $p=0.2407$; RAPTOR: $p=0.0000$$^{*}$; TreeRAG-DFS: $p=0.0000$$^{*}$. $^{*}p<0.05$.}
 \end{table}
 
 % Table 2: Ablation study

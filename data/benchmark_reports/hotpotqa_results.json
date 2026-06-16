@@ -1,0 +1,955 @@
+{
+  "timestamp": "20260615_180800",
+  "mode": "offline",
+  "dataset": "hotpotqa",
+  "systems": [
+    "bm25",
+    "flatrag",
+    "raptor",
+    "treerag_beam"
+  ],
+  "summary": {
+    "bm25": {
+      "rouge_l": 0.09173546249935581,
+      "bertscore": 0.09463645051701401,
+      "llm_judge": null,
+      "latency": 0.009693329349966006,
+      "context_tokens": 95.85,
+      "n": 20
+    },
+    "flatrag": {
+      "rouge_l": 0.05691382436981411,
+      "bertscore": 0.05691382436981411,
+      "llm_judge": null,
+      "latency": 0.0005408250999607844,
+      "context_tokens": 0.0,
+      "n": 20
+    },
+    "raptor": {
+      "rouge_l": 0.059246931011782036,
+      "bertscore": 0.06136339237796344,
+      "llm_judge": null,
+      "latency": 0.00036288530002366316,
+      "context_tokens": 163.7,
+      "n": 20
+    },
+    "treerag_beam": {
+      "rouge_l": 0.16917930965093464,
+      "bertscore": 0.17161833404117854,
+      "llm_judge": null,
+      "latency": 2.4512449954272597e-05,
+      "context_tokens": 48.2,
+      "n": 20
+    }
+  },
+  "significance": {
+    "bm25": {
+      "p_value": 0.0034591772608225553,
+      "significant": true,
+      "effect_size": 1.3581615588819054,
+      "mean_diff": 0.07744384715157883
+    },
+    "flatrag": {
+      "p_value": 0.002577701702927206,
+      "significant": true,
+      "effect_size": 2.119535399506415,
+      "mean_diff": 0.11226548528112049
+    },
+    "raptor": {
+      "p_value": 0.002756670806876376,
+      "significant": true,
+      "effect_size": 2.0697463074195306,
+      "mean_diff": 0.10993237863915262
+    }
+  },
+  "per_question": {
+    "bm25": [
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Which describes energy loss in tissue, attenuation or reflec: HotpotQA multi-hop context for: Which describes energy loss in tissue, attenuation or reflection? Attenuation Def: Attenuation is the gradual loss of acoustic energy in tissue. Reflection Def: Reflection is the return of part of the beam at an impedance boundary.",
+        "retrieved_count": 3,
+        "context_tokens": 81,
+        "latency": 0.1832858339998893,
+        "rouge_l": 0.0392156862745098,
+        "bertscore": 0.0392156862745098,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "Which has more required credits for graduation, a required-c: HotpotQA multi-hop context for: Which has more required credits for graduation, a required-course-heavy track or an elective-heavy track in the 2025 semiconductor curriculum? Required Credits: Required major courses account for the larger share of graduation credits. Elective Credits: Elective major courses contribute fewer mandatory credits than required courses.",
+        "retrieved_count": 3,
+        "context_tokens": 107,
+        "latency": 0.0008757499999774154,
+        "rouge_l": 0.11940298507462686,
+        "bertscore": 0.1492537313432836,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "What property mismatch at a tissue-air boundary causes nearl: HotpotQA multi-hop context for: What property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam? Boundary: At a tissue-air boundary almost all of the beam is reflected. Impedance: This is caused by the large acoustic impedance mismatch. Gel is used to reduce it.",
+        "retrieved_count": 3,
+        "context_tokens": 90,
+        "latency": 0.0006068339998819283,
+        "rouge_l": 0.09523809523809523,
+        "bertscore": 0.09523809523809523,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "In which department's 2025 curriculum is the course that cov: HotpotQA multi-hop context for: In which department's 2025 curriculum is the course that covers semiconductor device fabrication offered? Semiconductor Process: Device fabrication covers deposition, lithography, and etching. It is a core course in the semiconductor curriculum. Curriculum 2025: The 2025 curriculum belongs to the Department of Semiconductor Engineering. It lists required and elective courses by year.",
+        "retrieved_count": 3,
+        "context_tokens": 120,
+        "latency": 0.0005438339999273012,
+        "rouge_l": 0.1095890410958904,
+        "bertscore": 0.1095890410958904,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "Between the introduction and the method section of the gait : HotpotQA multi-hop context for: Between the introduction and the method section of the gait report, which one states the research background? Introduction: The introduction states the research background and clinical motivation. Method: The method section describes the data-collection and analysis procedure.",
+        "retrieved_count": 3,
+        "context_tokens": 92,
+        "latency": 0.0005488339998009906,
+        "rouge_l": 0.07272727272727272,
+        "bertscore": 0.07272727272727272,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Which was developed earlier as an application of acoustic de: HotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound? Sonar: Sonar was developed for underwater detection before medical use. Diagnostic Ultrasound: Diagnostic ultrasound systems were developed later for medical imaging.",
+        "retrieved_count": 3,
+        "context_tokens": 90,
+        "latency": 0.0005110000001877779,
+        "rouge_l": 0.0392156862745098,
+        "bertscore": 0.0392156862745098,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "For deep abdominal imaging, is a low-frequency or high-frequ: HotpotQA multi-hop context for: For deep abdominal imaging, is a low-frequency or high-frequency probe more suitable? Penetration: Low-frequency probes penetrate deeper, suiting abdominal imaging. Resolution: High-frequency probes give higher resolution but shallow penetration.",
+        "retrieved_count": 3,
+        "context_tokens": 85,
+        "latency": 0.0005090829999971902,
+        "rouge_l": 0.15094339622641506,
+        "bertscore": 0.15094339622641506,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "What journal published the reference paper with the identifi: HotpotQA multi-hop context for: What journal published the reference paper with the identifier s41598-026-41649-2? Identifier: The identifier s41598 corresponds to Nature's Scientific Reports. Journal: Scientific Reports is an open-access journal published by Nature.",
+        "retrieved_count": 3,
+        "context_tokens": 82,
+        "latency": 0.0004874589999417367,
+        "rouge_l": 0.07999999999999999,
+        "bertscore": 0.07999999999999999,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "What clinical problem motivates the dynamic gait-analysis sy: HotpotQA multi-hop context for: What clinical problem motivates the dynamic gait-analysis system described in the biomedical report? Gait Analysis: Dynamic gait analysis assesses walking patterns for clinical diagnosis. Motivation: Modern lifestyle changes have increased musculoskeletal disorders. This raises the clinical importance of objective gait measurement.",
+        "retrieved_count": 3,
+        "context_tokens": 106,
+        "latency": 0.000503999999637017,
+        "rouge_l": 0.0689655172413793,
+        "bertscore": 0.0689655172413793,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "What discovery about bats in 1793 is cited as an early miles: HotpotQA multi-hop context for: What discovery about bats in 1793 is cited as an early milestone in the history of ultrasound? Bats: In 1793 Spallanzani studied bat navigation. This revealed bats' perception of ultrasound, an early milestone. History: The history of ultrasound spans the 18th to mid-20th century.",
+        "retrieved_count": 3,
+        "context_tokens": 93,
+        "latency": 0.0005634169997392746,
+        "rouge_l": 0.12121212121212122,
+        "bertscore": 0.12121212121212122,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "Which paper format is on arXiv, the 2204.08939 preprint or t: HotpotQA multi-hop context for: Which paper format is on arXiv, the 2204.08939 preprint or the biomedical course report? arXiv Preprint: The document 2204.08939 is an arXiv preprint. Course Report: The biomedical course report is a student assignment, not on arXiv.",
+        "retrieved_count": 3,
+        "context_tokens": 81,
+        "latency": 0.0004987500001334411,
+        "rouge_l": 0.13559322033898305,
+        "bertscore": 0.13559322033898305,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "What quantity, equal to heart rate times stroke volume, desc: HotpotQA multi-hop context for: What quantity, equal to heart rate times stroke volume, describes the heart's pumping performance? Cardiac Output: Cardiac output is the product of heart rate and stroke volume. Heart: The heart pumps blood through the cardiovascular system.",
+        "retrieved_count": 3,
+        "context_tokens": 83,
+        "latency": 0.000597290999849065,
+        "rouge_l": 0.07407407407407407,
+        "bertscore": 0.07407407407407407,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Which travels through tissue with greater attenuation, a hig: HotpotQA multi-hop context for: Which travels through tissue with greater attenuation, a higher-frequency or a lower-frequency ultrasound wave? Attenuation: Attenuation is the loss of acoustic energy as a wave travels through tissue. Attenuation increases with both distance and frequency. Frequency: Higher-frequency probes give better resolution. Higher frequencies are absorbed more strongly, reducing penetration depth.",
+        "retrieved_count": 3,
+        "context_tokens": 121,
+        "latency": 0.0006963330001781287,
+        "rouge_l": 0.08450704225352113,
+        "bertscore": 0.11267605633802817,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Which frequency range is audible to humans, 20 Hz-20 kHz or : HotpotQA multi-hop context for: Which frequency range is audible to humans, 20 Hz-20 kHz or above 20 kHz? Audible Range: Humans can hear sound between 20 Hz and 20 kHz. Ultrasound Range: Ultrasound refers to frequencies above 20 kHz, beyond human hearing.",
+        "retrieved_count": 3,
+        "context_tokens": 79,
+        "latency": 0.0005402090000643511,
+        "rouge_l": 0.1639344262295082,
+        "bertscore": 0.1639344262295082,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "What coupling medium is required because of the property tha: HotpotQA multi-hop context for: What coupling medium is required because of the property that governs reflection at tissue boundaries in ultrasound? Acoustic Impedance: Reflection at a boundary is determined by the difference in acoustic impedance. A large impedance mismatch, such as tissue-to-air, reflects almost all energy. Coupling Gel: Ultrasound gel is applied to the skin to remove the air gap. It matches impedance so the beam can enter the body.",
+        "retrieved_count": 3,
+        "context_tokens": 129,
+        "latency": 0.000545749999673717,
+        "rouge_l": 0.047058823529411764,
+        "bertscore": 0.047058823529411764,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "What 1880 discovery underlies the operation of the ultrasoun: HotpotQA multi-hop context for: What 1880 discovery underlies the operation of the ultrasound transducer? 1880: The piezoelectric effect was discovered by the Curie brothers in 1880. Transducer: The transducer relies on the piezoelectric effect to emit and detect waves.",
+        "retrieved_count": 3,
+        "context_tokens": 83,
+        "latency": 0.0005003750002288143,
+        "rouge_l": 0.11538461538461538,
+        "bertscore": 0.11538461538461538,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "Which is described as harder to access, professional gait-an: HotpotQA multi-hop context for: Which is described as harder to access, professional gait-analysis equipment or a smartphone camera? Equipment Access: Specialized gait-analysis equipment has low accessibility and high cost. Smartphone: A smartphone camera is widely available and inexpensive for capturing motion.",
+        "retrieved_count": 3,
+        "context_tokens": 93,
+        "latency": 0.0005091250000077707,
+        "rouge_l": 0.13793103448275862,
+        "bertscore": 0.13793103448275862,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "Which programming language is used for the project report th: HotpotQA multi-hop context for: Which programming language is used for the project report that builds a data-processing program? Language: The project is implemented in the Python programming language. Project 6: Programming Project #6 builds a small data-processing program.",
+        "retrieved_count": 3,
+        "context_tokens": 84,
+        "latency": 0.0005061250003564055,
+        "rouge_l": 0.038461538461538464,
+        "bertscore": 0.038461538461538464,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "What physical effect is used by the device that generates th: HotpotQA multi-hop context for: What physical effect is used by the device that generates the high-frequency sound waves in ultrasound imaging? Ultrasound Imaging: Ultrasound imaging uses high-frequency sound waves above 20 kHz to visualize internal anatomy. The waves are produced and received by a transducer probe. Ultrasound Transducer: A transducer contains piezoelectric elements. The piezoelectric effect converts an applied voltage into mechanical vibration and vice versa.",
+        "retrieved_count": 3,
+        "context_tokens": 135,
+        "latency": 0.0005499169997165154,
+        "rouge_l": 0.07228915662650602,
+        "bertscore": 0.07228915662650602,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Which imaging mode shows blood-flow velocity, B-mode or Dopp: HotpotQA multi-hop context for: Which imaging mode shows blood-flow velocity, B-mode or Doppler mode? Doppler: Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity. B-mode: B-mode produces a 2D grayscale image of anatomy from echo amplitude.",
+        "retrieved_count": 3,
+        "context_tokens": 83,
+        "latency": 0.0004866670001320017,
+        "rouge_l": 0.0689655172413793,
+        "bertscore": 0.0689655172413793,
+        "llm_judge": null
+      }
+    ],
+    "flatrag": [
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which describes energy loss in tissue, attenuation or reflec (p.1-2)]\nHotpotQA multi-hop context for: Which describes energy loss in tissue, attenuation or reflection?\n\n[Document 2: Attenuation Def (p.1)]\nAttenuation is the gradual loss of acoustic energy in tissue.\n\n[Document 3: Reflection Def (p.2)]\nReflection is the return of part of the beam at an impedance boundary.\n\n\nAnswer: The documents discuss aspects related to: Which describes energy loss in tissue, attenuation or reflection",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0013835419999850274,
+        "rouge_l": 0.023529411764705882,
+        "bertscore": 0.023529411764705882,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which has more required credits for graduation, a required-c (p.1-2)]\nHotpotQA multi-hop context for: Which has more required credits for graduation, a required-course-heavy track or an elective-heavy track in the 2025 semiconductor curriculum?\n\n[Document 2: Required Credits (p.1)]\nRequired major courses account for the larger share of graduation credits.\n\n[Document 3: Elective Credits (p.2)]\nElective major courses contribute fewer mandatory credits than required courses.\n\n\nAnswer: The documents discuss aspects related to: Which has more required credits for graduation, a required-course-heavy track or an elective-heavy track in the 2025 semiconductor curriculum",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005054580001342401,
+        "rouge_l": 0.08771929824561404,
+        "bertscore": 0.08771929824561404,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What property mismatch at a tissue-air boundary causes nearl (p.1-2)]\nHotpotQA multi-hop context for: What property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam?\n\n[Document 2: Boundary (p.1)]\nAt a tissue-air boundary almost all of the beam is reflected.\n\n[Document 3: Impedance (p.2)]\nThis is caused by the large acoustic impedance mismatch. Gel is used to reduce it.\n\n\nAnswer: The documents discuss aspects related to: What property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005010830000173883,
+        "rouge_l": 0.05769230769230769,
+        "bertscore": 0.05769230769230769,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: In which department's 2025 curriculum is the course that cov (p.1-2)]\nHotpotQA multi-hop context for: In which department's 2025 curriculum is the course that covers semiconductor device fabrication offered?\n\n[Document 2: Semiconductor Process (p.2)]\nDevice fabrication covers deposition, lithography, and etching. It is a core course in the semiconductor curriculum.\n\n[Document 3: Curriculum 2025 (p.1)]\nThe 2025 curriculum belongs to the Department of Semiconductor Engineering. It lists required and elective courses by year.\n\n\nAnswer: The documents discuss aspects related to: In which department's 2025 curriculum is the course that covers semiconductor device fabrication offered",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005384159999266558,
+        "rouge_l": 0.07079646017699115,
+        "bertscore": 0.07079646017699115,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Between the introduction and the method section of the gait  (p.1-2)]\nHotpotQA multi-hop context for: Between the introduction and the method section of the gait report, which one states the research background?\n\n[Document 2: Introduction (p.1)]\nThe introduction states the research background and clinical motivation.\n\n[Document 3: Method (p.2)]\nThe method section describes the data-collection and analysis procedure.\n\n\nAnswer: The documents discuss aspects related to: Between the introduction and the method section of the gait report, which one states the research background",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.00047191600015139556,
+        "rouge_l": 0.041237113402061855,
+        "bertscore": 0.041237113402061855,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which was developed earlier as an application of acoustic de (p.1-2)]\nHotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound?\n\n[Document 2: Sonar (p.1)]\nSonar was developed for underwater detection before medical use.\n\n[Document 3: Diagnostic Ultrasound (p.2)]\nDiagnostic ultrasound systems were developed later for medical imaging.\n\n\nAnswer: The documents discuss aspects related to: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.00046037499987505726,
+        "rouge_l": 0.02222222222222222,
+        "bertscore": 0.02222222222222222,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: For deep abdominal imaging, is a low-frequency or high-frequ (p.1-2)]\nHotpotQA multi-hop context for: For deep abdominal imaging, is a low-frequency or high-frequency probe more suitable?\n\n[Document 2: Penetration (p.1)]\nLow-frequency probes penetrate deeper, suiting abdominal imaging.\n\n[Document 3: Resolution (p.2)]\nHigh-frequency probes give higher resolution but shallow penetration.\n\n\nAnswer: The documents discuss aspects related to: For deep abdominal imaging, is a low-frequency or high-frequency probe more suitable",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0004657089998545416,
+        "rouge_l": 0.08695652173913045,
+        "bertscore": 0.08695652173913045,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What journal published the reference paper with the identifi (p.1-2)]\nHotpotQA multi-hop context for: What journal published the reference paper with the identifier s41598-026-41649-2?\n\n[Document 2: Identifier (p.1)]\nThe identifier s41598 corresponds to Nature's Scientific Reports.\n\n[Document 3: Journal (p.2)]\nScientific Reports is an open-access journal published by Nature.\n\n\nAnswer: The documents discuss aspects related to: What journal published the reference paper with the identifier s41598-026-41649-2",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0004511669999374135,
+        "rouge_l": 0.04545454545454545,
+        "bertscore": 0.04545454545454545,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What clinical problem motivates the dynamic gait-analysis sy (p.1-2)]\nHotpotQA multi-hop context for: What clinical problem motivates the dynamic gait-analysis system described in the biomedical report?\n\n[Document 2: Gait Analysis (p.1)]\nDynamic gait analysis assesses walking patterns for clinical diagnosis.\n\n[Document 3: Motivation (p.2)]\nModern lifestyle changes have increased musculoskeletal disorders. This raises the clinical importance of objective gait measurement.\n\n\nAnswer: The documents discuss aspects related to: What clinical problem motivates the dynamic gait-analysis system described in the biomedical report",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005229170001257444,
+        "rouge_l": 0.041237113402061855,
+        "bertscore": 0.041237113402061855,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What discovery about bats in 1793 is cited as an early miles (p.1-2)]\nHotpotQA multi-hop context for: What discovery about bats in 1793 is cited as an early milestone in the history of ultrasound?\n\n[Document 2: Bats (p.2)]\nIn 1793 Spallanzani studied bat navigation. This revealed bats' perception of ultrasound, an early milestone.\n\n[Document 3: History (p.1)]\nThe history of ultrasound spans the 18th to mid-20th century.\n\n\nAnswer: The documents discuss aspects related to: What discovery about bats in 1793 is cited as an early milestone in the history of ultrasound",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005034589999013406,
+        "rouge_l": 0.07407407407407407,
+        "bertscore": 0.07407407407407407,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which paper format is on arXiv, the 2204.08939 preprint or t (p.1-2)]\nHotpotQA multi-hop context for: Which paper format is on arXiv, the 2204.08939 preprint or the biomedical course report?\n\n[Document 2: Course Report (p.2)]\nThe biomedical course report is a student assignment, not on arXiv.\n\n[Document 3: arXiv Preprint (p.1)]\nThe document 2204.08939 is an arXiv preprint.\n\n\nAnswer: The documents discuss aspects related to: Which paper format is on arXiv, the 2204.08939 preprint or the biomedical course report",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0004949589997522708,
+        "rouge_l": 0.08080808080808081,
+        "bertscore": 0.08080808080808081,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What quantity, equal to heart rate times stroke volume, desc (p.1-2)]\nHotpotQA multi-hop context for: What quantity, equal to heart rate times stroke volume, describes the heart's pumping performance?\n\n[Document 2: Cardiac Output (p.2)]\nCardiac output is the product of heart rate and stroke volume.\n\n[Document 3: Heart (p.1)]\nThe heart pumps blood through the cardiovascular system.\n\n\nAnswer: The documents discuss aspects related to: What quantity, equal to heart rate times stroke volume, describes the heart's pumping performance",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.000526916999660898,
+        "rouge_l": 0.042553191489361694,
+        "bertscore": 0.042553191489361694,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which travels through tissue with greater attenuation, a hig (p.1-2)]\nHotpotQA multi-hop context for: Which travels through tissue with greater attenuation, a higher-frequency or a lower-frequency ultrasound wave?\n\n[Document 2: Attenuation (p.1)]\nAttenuation is the loss of acoustic energy as a wave travels through tissue. Attenuation increases with both distance and frequency.\n\n[Document 3: Frequency (p.2)]\nHigher-frequency probes give better resolution. Higher frequencies are absorbed more strongly, reducing penetration depth.\n\n\nAnswer: The documents discuss aspects related to: Which travels through tissue with greater attenuation, a higher-frequency or a lower-frequency ultrasound wave",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005766669996773999,
+        "rouge_l": 0.07142857142857142,
+        "bertscore": 0.07142857142857142,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which frequency range is audible to humans, 20 Hz-20 kHz or  (p.1-2)]\nHotpotQA multi-hop context for: Which frequency range is audible to humans, 20 Hz-20 kHz or above 20 kHz?\n\n[Document 2: Audible Range (p.1)]\nHumans can hear sound between 20 Hz and 20 kHz.\n\n[Document 3: Ultrasound Range (p.2)]\nUltrasound refers to frequencies above 20 kHz, beyond human hearing.\n\n\nAnswer: The documents discuss aspects related to: Which frequency range is audible to humans, 20 Hz-20 kHz or above 20 kHz",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.000495792000037909,
+        "rouge_l": 0.09900990099009901,
+        "bertscore": 0.09900990099009901,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What coupling medium is required because of the property tha (p.1-2)]\nHotpotQA multi-hop context for: What coupling medium is required because of the property that governs reflection at tissue boundaries in ultrasound?\n\n[Document 2: Acoustic Impedance (p.1)]\nReflection at a boundary is determined by the difference in acoustic impedance. A large impedance mismatch, such as tissue-to-air, reflects almost all energy.\n\n[Document 3: Coupling Gel (p.2)]\nUltrasound gel is applied to the skin to remove the air gap. It matches impedance so the beam can enter the body.\n\n\nAnswer: The documents discuss aspects related to: What coupling medium is required because of the property that governs reflection at tissue boundaries in ultrasound",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005093750000924047,
+        "rouge_l": 0.031496062992125984,
+        "bertscore": 0.031496062992125984,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What 1880 discovery underlies the operation of the ultrasoun (p.1-2)]\nHotpotQA multi-hop context for: What 1880 discovery underlies the operation of the ultrasound transducer?\n\n[Document 2: 1880 (p.1)]\nThe piezoelectric effect was discovered by the Curie brothers in 1880.\n\n[Document 3: Transducer (p.2)]\nThe transducer relies on the piezoelectric effect to emit and detect waves.\n\n\nAnswer: The documents discuss aspects related to: What 1880 discovery underlies the operation of the ultrasound transducer",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0004953329998897971,
+        "rouge_l": 0.0689655172413793,
+        "bertscore": 0.0689655172413793,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which is described as harder to access, professional gait-an (p.1-2)]\nHotpotQA multi-hop context for: Which is described as harder to access, professional gait-analysis equipment or a smartphone camera?\n\n[Document 2: Equipment Access (p.1)]\nSpecialized gait-analysis equipment has low accessibility and high cost.\n\n[Document 3: Smartphone (p.2)]\nA smartphone camera is widely available and inexpensive for capturing motion.\n\n\nAnswer: The documents discuss aspects related to: Which is described as harder to access, professional gait-analysis equipment or a smartphone camera",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.00047591700013072114,
+        "rouge_l": 0.08163265306122448,
+        "bertscore": 0.08163265306122448,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which programming language is used for the project report th (p.1-2)]\nHotpotQA multi-hop context for: Which programming language is used for the project report that builds a data-processing program?\n\n[Document 2: Project 6 (p.1)]\nProgramming Project #6 builds a small data-processing program.\n\n[Document 3: Language (p.2)]\nThe project is implemented in the Python programming language.\n\n\nAnswer: The documents discuss aspects related to: Which programming language is used for the project report that builds a data-processing program",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.00046612500000264845,
+        "rouge_l": 0.02173913043478261,
+        "bertscore": 0.02173913043478261,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: What physical effect is used by the device that generates th (p.1-2)]\nHotpotQA multi-hop context for: What physical effect is used by the device that generates the high-frequency sound waves in ultrasound imaging?\n\n[Document 2: Ultrasound Imaging (p.1)]\nUltrasound imaging uses high-frequency sound waves above 20 kHz to visualize internal anatomy. The waves are produced and received by a transducer probe.\n\n[Document 3: Ultrasound Transducer (p.2)]\nA transducer contains piezoelectric elements. The piezoelectric effect converts an applied voltage into mechanical vibration and vice versa.\n\n\nAnswer: The documents discuss aspects related to: What physical effect is used by the device that generates the high-frequency sound waves in ultrasound imaging",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0005026250000810251,
+        "rouge_l": 0.047619047619047616,
+        "bertscore": 0.047619047619047616,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which imaging mode shows blood-flow velocity, B-mode or Dopp (p.1-2)]\nHotpotQA multi-hop context for: Which imaging mode shows blood-flow velocity, B-mode or Doppler mode?\n\n[Document 2: Doppler (p.2)]\nDoppler mode measures the frequency shift of echoes to estimate blood-flow velocity.\n\n[Document 3: B-mode (p.1)]\nB-mode produces a 2D grayscale image of anatomy from echo amplitude.\n\n\nAnswer: The documents discuss aspects related to: Which imaging mode shows blood-flow velocity, B-mode or Doppler mode",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 0.0004687499999818101,
+        "rouge_l": 0.04210526315789474,
+        "bertscore": 0.04210526315789474,
+        "llm_judge": null
+      }
+    ],
+    "raptor": [
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Which describes energy loss in tissue, attenuation or reflec HotpotQA multi-hop context for: Which describes energy loss in tissue, attenuation or reflection? Which describes energy loss in tissue, attenuation or reflec HotpotQA multi-hop  Attenuation Def Attenuation is the gradual loss of acoustic energy in tissue. Reflection Def Reflection is the return of part of the beam at an impedance boun Attenuation Def Attenuation is the gradual loss of acoustic energy in tissue. Reflection Def Reflection is the return of part of the beam at an impedance boundary.",
+        "retrieved_count": 4,
+        "context_tokens": 150,
+        "latency": 0.0011365840000507887,
+        "rouge_l": 0.02222222222222222,
+        "bertscore": 0.02222222222222222,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "Which has more required credits for graduation, a required-c HotpotQA multi-hop context for: Which has more required credits for graduation, a required-course-heavy track or an elective-heavy track in the 2025 semiconductor curriculum? Which has more required credits for graduation, a required-c HotpotQA multi-hop  Required Credits Required major courses account for the larger share of graduati Elective Credits Elective major courses contribute fewer mandatory credits than Required Credits Required major courses account for the larger share of graduation credits. Elective Credits Elective majo",
+        "retrieved_count": 4,
+        "context_tokens": 176,
+        "latency": 0.00034970800015798886,
+        "rouge_l": 0.0851063829787234,
+        "bertscore": 0.10638297872340426,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "What property mismatch at a tissue-air boundary causes nearl HotpotQA multi-hop context for: What property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam? What property mismatch at a tissue-air boundary causes nearl HotpotQA multi-hop  Boundary At a tissue-air boundary almost all of the beam is reflected. Impedance This is caused by the large acoustic impedance mismatch. Gel is used t Boundary At a tissue-air boundary almost all of the beam is reflected. Impedance This is caused by the large acoustic impedance mismatch. Gel is used to reduce it.",
+        "retrieved_count": 4,
+        "context_tokens": 157,
+        "latency": 0.00032575000022916356,
+        "rouge_l": 0.058252427184466014,
+        "bertscore": 0.058252427184466014,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "In which department's 2025 curriculum is the course that cov HotpotQA multi-hop context for: In which department's 2025 curriculum is the course that covers semiconductor device fabrication offered? In which department's 2025 curriculum is the course that cov HotpotQA multi-hop  Curriculum 2025 The 2025 curriculum belongs to the Department of Semiconductor E Semiconductor Process Device fabrication covers deposition, lithography, and etc Semiconductor Process Device fabrication covers deposition, lithography, and etching. It is a core course in the semiconductor curriculum. Curriculum 2025 The",
+        "retrieved_count": 4,
+        "context_tokens": 189,
+        "latency": 0.0003421659998821269,
+        "rouge_l": 0.06593406593406594,
+        "bertscore": 0.06593406593406594,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "Between the introduction and the method section of the gait  HotpotQA multi-hop context for: Between the introduction and the method section of the gait report, which one states the research background? Between the introduction and the method section of the gait  HotpotQA multi-hop  Introduction The introduction states the research background and clinical motiva Method The method section describes the data-collection and analysis procedure. Introduction The introduction states the research background and clinical motivation. Method The method section describes the data-collection and analysis",
+        "retrieved_count": 4,
+        "context_tokens": 162,
+        "latency": 0.00033195800006069476,
+        "rouge_l": 0.04545454545454545,
+        "bertscore": 0.04545454545454545,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Which was developed earlier as an application of acoustic de HotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound? Which was developed earlier as an application of acoustic de HotpotQA multi-hop  Sonar Sonar was developed for underwater detection before medical use. Diagnostic Ultrasound Diagnostic ultrasound systems were developed later for med Sonar Sonar was developed for underwater detection before medical use. Diagnostic Ultrasound Diagnostic ultrasound systems were developed later for medical imaging.",
+        "retrieved_count": 4,
+        "context_tokens": 157,
+        "latency": 0.00030437499981417204,
+        "rouge_l": 0.02380952380952381,
+        "bertscore": 0.02380952380952381,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "For deep abdominal imaging, is a low-frequency or high-frequ HotpotQA multi-hop context for: For deep abdominal imaging, is a low-frequency or high-frequency probe more suitable? Penetration Low-frequency probes penetrate deeper, suiting abdominal imaging. For deep abdominal imaging, is a low-frequency or high-frequ HotpotQA multi-hop  Penetration Low-frequency probes penetrate deeper, suiting abdominal imaging. Resolution High-frequency probes give higher resolution but shallow penetration. Resolution High-frequency probes give higher resolution but shallow penetration.",
+        "retrieved_count": 4,
+        "context_tokens": 153,
+        "latency": 0.0002828329998010304,
+        "rouge_l": 0.09302325581395349,
+        "bertscore": 0.09302325581395349,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "What journal published the reference paper with the identifi HotpotQA multi-hop context for: What journal published the reference paper with the identifier s41598-026-41649-2? What journal published the reference paper with the identifi HotpotQA multi-hop  Identifier The identifier s41598 corresponds to Nature's Scientific Reports. Journal Scientific Reports is an open-access journal published by Nature. Journal Scientific Reports is an open-access journal published by Nature. Identifier The identifier s41598 corresponds to Nature's Scientific Reports.",
+        "retrieved_count": 4,
+        "context_tokens": 149,
+        "latency": 0.0002997500000674336,
+        "rouge_l": 0.048192771084337345,
+        "bertscore": 0.048192771084337345,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "What clinical problem motivates the dynamic gait-analysis sy HotpotQA multi-hop context for: What clinical problem motivates the dynamic gait-analysis system described in the biomedical report? What clinical problem motivates the dynamic gait-analysis sy HotpotQA multi-hop  Gait Analysis Dynamic gait analysis assesses walking patterns for clinical diagn Motivation Modern lifestyle changes have increased musculoskeletal disorders. Th Gait Analysis Dynamic gait analysis assesses walking patterns for clinical diagnosis. Motivation Modern lifestyle changes have increased musculoskeletal disorders.",
+        "retrieved_count": 4,
+        "context_tokens": 176,
+        "latency": 0.00032329099985872745,
+        "rouge_l": 0.04938271604938272,
+        "bertscore": 0.04938271604938272,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "What discovery about bats in 1793 is cited as an early miles HotpotQA multi-hop context for: What discovery about bats in 1793 is cited as an early milestone in the history of ultrasound? What discovery about bats in 1793 is cited as an early miles HotpotQA multi-hop  History The history of ultrasound spans the 18th to mid-20th century. Bats In 1793 Spallanzani studied bat navigation. This revealed bats' perception Bats In 1793 Spallanzani studied bat navigation. This revealed bats' perception of ultrasound, an early milestone. History The history of ultrasound spans the 18th to mid-20th centu",
+        "retrieved_count": 4,
+        "context_tokens": 160,
+        "latency": 0.0003209999999853608,
+        "rouge_l": 0.07692307692307693,
+        "bertscore": 0.07692307692307693,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "Which paper format is on arXiv, the 2204.08939 preprint or t HotpotQA multi-hop context for: Which paper format is on arXiv, the 2204.08939 preprint or the biomedical course report? Which paper format is on arXiv, the 2204.08939 preprint or t HotpotQA multi-hop  arXiv Preprint The document 2204.08939 is an arXiv preprint. Course Report The biomedical course report is a student assignment, not on arXiv Course Report The biomedical course report is a student assignment, not on arXiv. arXiv Preprint The document 2204.08939 is an arXiv preprint.",
+        "retrieved_count": 4,
+        "context_tokens": 146,
+        "latency": 0.0003009580000252754,
+        "rouge_l": 0.08247422680412372,
+        "bertscore": 0.08247422680412372,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "What quantity, equal to heart rate times stroke volume, desc HotpotQA multi-hop context for: What quantity, equal to heart rate times stroke volume, describes the heart's pumping performance? What quantity, equal to heart rate times stroke volume, desc HotpotQA multi-hop  Heart The heart pumps blood through the cardiovascular system. Cardiac Output Cardiac output is the product of heart rate and stroke volume. Cardiac Output Cardiac output is the product of heart rate and stroke volume. Heart The heart pumps blood through the cardiovascular system.",
+        "retrieved_count": 4,
+        "context_tokens": 148,
+        "latency": 0.0003147920001538296,
+        "rouge_l": 0.0449438202247191,
+        "bertscore": 0.0449438202247191,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Which travels through tissue with greater attenuation, a hig HotpotQA multi-hop context for: Which travels through tissue with greater attenuation, a higher-frequency or a lower-frequency ultrasound wave? Which travels through tissue with greater attenuation, a hig HotpotQA multi-hop  Attenuation Attenuation is the loss of acoustic energy as a wave travels through Frequency Higher-frequency probes give better resolution. Higher frequencies are Attenuation Attenuation is the loss of acoustic energy as a wave travels through tissue. Attenuation increases with both distance and frequency. Frequen",
+        "retrieved_count": 4,
+        "context_tokens": 190,
+        "latency": 0.0003332500000396976,
+        "rouge_l": 0.08791208791208792,
+        "bertscore": 0.08791208791208792,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Which frequency range is audible to humans, 20 Hz-20 kHz or  HotpotQA multi-hop context for: Which frequency range is audible to humans, 20 Hz-20 kHz or above 20 kHz? Which frequency range is audible to humans, 20 Hz-20 kHz or  HotpotQA multi-hop  Audible Range Humans can hear sound between 20 Hz and 20 kHz. Ultrasound Range Ultrasound refers to frequencies above 20 kHz, beyond human hea Ultrasound Range Ultrasound refers to frequencies above 20 kHz, beyond human hearing. Audible Range Humans can hear sound between 20 Hz and 20 kHz.",
+        "retrieved_count": 4,
+        "context_tokens": 144,
+        "latency": 0.00033037499997590203,
+        "rouge_l": 0.1,
+        "bertscore": 0.1,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "What coupling medium is required because of the property tha HotpotQA multi-hop context for: What coupling medium is required because of the property that governs reflection at tissue boundaries in ultrasound? What coupling medium is required because of the property tha HotpotQA multi-hop  Acoustic Impedance Reflection at a boundary is determined by the difference in a Coupling Gel Ultrasound gel is applied to the skin to remove the air gap. It mat Acoustic Impedance Reflection at a boundary is determined by the difference in acoustic impedance. A large impedance mismatch, such as tissue-to-ai",
+        "retrieved_count": 4,
+        "context_tokens": 198,
+        "latency": 0.00037420800026666257,
+        "rouge_l": 0.04040404040404041,
+        "bertscore": 0.04040404040404041,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "What 1880 discovery underlies the operation of the ultrasoun HotpotQA multi-hop context for: What 1880 discovery underlies the operation of the ultrasound transducer? What 1880 discovery underlies the operation of the ultrasoun HotpotQA multi-hop  1880 The piezoelectric effect was discovered by the Curie brothers in 1880. Transducer The transducer relies on the piezoelectric effect to emit and detect Transducer The transducer relies on the piezoelectric effect to emit and detect waves. 1880 The piezoelectric effect was discovered by the Curie brothers in 1880.",
+        "retrieved_count": 4,
+        "context_tokens": 151,
+        "latency": 0.0003426250000302389,
+        "rouge_l": 0.06818181818181818,
+        "bertscore": 0.06818181818181818,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "Which is described as harder to access, professional gait-an HotpotQA multi-hop context for: Which is described as harder to access, professional gait-analysis equipment or a smartphone camera? Which is described as harder to access, professional gait-an HotpotQA multi-hop  Equipment Access Specialized gait-analysis equipment has low accessibility and h Smartphone A smartphone camera is widely available and inexpensive for capturing Equipment Access Specialized gait-analysis equipment has low accessibility and high cost. Smartphone A smartphone camera is widely available and inexpensive for ca",
+        "retrieved_count": 4,
+        "context_tokens": 163,
+        "latency": 0.00031504099979429157,
+        "rouge_l": 0.08695652173913045,
+        "bertscore": 0.08695652173913045,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "Which programming language is used for the project report th HotpotQA multi-hop context for: Which programming language is used for the project report that builds a data-processing program? Which programming language is used for the project report th HotpotQA multi-hop  Project 6 Programming Project #6 builds a small data-processing program. Language The project is implemented in the Python programming language. Project 6 Programming Project #6 builds a small data-processing program. Language The project is implemented in the Python programming language.",
+        "retrieved_count": 4,
+        "context_tokens": 149,
+        "latency": 0.0003008329999829584,
+        "rouge_l": 0.023255813953488372,
+        "bertscore": 0.023255813953488372,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "What physical effect is used by the device that generates th HotpotQA multi-hop context for: What physical effect is used by the device that generates the high-frequency sound waves in ultrasound imaging? What physical effect is used by the device that generates th HotpotQA multi-hop  Ultrasound Imaging Ultrasound imaging uses high-frequency sound waves above 20 k Ultrasound Transducer A transducer contains piezoelectric elements. The piezoele Ultrasound Imaging Ultrasound imaging uses high-frequency sound waves above 20 kHz to visualize internal anatomy. The waves are produced and received by",
+        "retrieved_count": 4,
+        "context_tokens": 205,
+        "latency": 0.00033483400011391495,
+        "rouge_l": 0.042105263157894736,
+        "bertscore": 0.06315789473684211,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Which imaging mode shows blood-flow velocity, B-mode or Dopp HotpotQA multi-hop context for: Which imaging mode shows blood-flow velocity, B-mode or Doppler mode? Which imaging mode shows blood-flow velocity, B-mode or Dopp HotpotQA multi-hop  B-mode B-mode produces a 2D grayscale image of anatomy from echo amplitude. Doppler Doppler mode measures the frequency shift of echoes to estimate blood-fl Doppler Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity. B-mode B-mode produces a 2D grayscale image of anatomy from echo amplitude.",
+        "retrieved_count": 4,
+        "context_tokens": 151,
+        "latency": 0.0002933750001830049,
+        "rouge_l": 0.04040404040404041,
+        "bertscore": 0.04040404040404041,
+        "llm_judge": null
+      }
+    ],
+    "treerag_beam": [
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Attenuation Def: Attenuation is the gradual loss of acoustic energy in tissue. Reflection Def: Reflection is the return of part of the beam at an impedance boundary.",
+        "retrieved_count": 2,
+        "context_tokens": 41,
+        "latency": 2.9416999950626632e-05,
+        "rouge_l": 0.07142857142857142,
+        "bertscore": 0.07142857142857142,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "Required Credits: Required major courses account for the larger share of graduation credits. Elective Credits: Elective major courses contribute fewer mandatory credits than required courses.",
+        "retrieved_count": 2,
+        "context_tokens": 47,
+        "latency": 2.9209000331320567e-05,
+        "rouge_l": 0.13333333333333333,
+        "bertscore": 0.13333333333333333,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "Boundary: At a tissue-air boundary almost all of the beam is reflected. Impedance: This is caused by the large acoustic impedance mismatch. Gel is used to reduce it.",
+        "retrieved_count": 2,
+        "context_tokens": 41,
+        "latency": 2.5499999992462108e-05,
+        "rouge_l": 0.1875,
+        "bertscore": 0.1875,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "Semiconductor Process: Device fabrication covers deposition, lithography, and etching. It is a core course in the semiconductor curriculum. Curriculum 2025: The 2025 curriculum belongs to the Department of Semiconductor Engineering. It lists required and elective courses by year.",
+        "retrieved_count": 2,
+        "context_tokens": 70,
+        "latency": 2.658299990798696e-05,
+        "rouge_l": 0.1904761904761905,
+        "bertscore": 0.1904761904761905,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "Introduction: The introduction states the research background and clinical motivation. Method: The method section describes the data-collection and analysis procedure.",
+        "retrieved_count": 2,
+        "context_tokens": 41,
+        "latency": 2.312499964318704e-05,
+        "rouge_l": 0.17391304347826084,
+        "bertscore": 0.17391304347826084,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Sonar: Sonar was developed for underwater detection before medical use. Diagnostic Ultrasound: Diagnostic ultrasound systems were developed later for medical imaging.",
+        "retrieved_count": 2,
+        "context_tokens": 41,
+        "latency": 2.1791999643028248e-05,
+        "rouge_l": 0.0909090909090909,
+        "bertscore": 0.0909090909090909,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "Penetration: Low-frequency probes penetrate deeper, suiting abdominal imaging. Resolution: High-frequency probes give higher resolution but shallow penetration.",
+        "retrieved_count": 2,
+        "context_tokens": 40,
+        "latency": 2.1041000309196534e-05,
+        "rouge_l": 0.17391304347826086,
+        "bertscore": 0.17391304347826086,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "Identifier: The identifier s41598 corresponds to Nature's Scientific Reports. Journal: Scientific Reports is an open-access journal published by Nature.",
+        "retrieved_count": 2,
+        "context_tokens": 38,
+        "latency": 2.074999974865932e-05,
+        "rouge_l": 0.17391304347826084,
+        "bertscore": 0.17391304347826084,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Gait Analysis: Dynamic gait analysis assesses walking patterns for clinical diagnosis. Motivation: Modern lifestyle changes have increased musculoskeletal disorders. This raises the clinical importance of objective gait measurement.",
+        "retrieved_count": 2,
+        "context_tokens": 58,
+        "latency": 2.2791999981564004e-05,
+        "rouge_l": 0.13333333333333333,
+        "bertscore": 0.13333333333333333,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Bats: In 1793 Spallanzani studied bat navigation. This revealed bats' perception of ultrasound, an early milestone. History: The history of ultrasound spans the 18th to mid-20th century.",
+        "retrieved_count": 2,
+        "context_tokens": 46,
+        "latency": 2.4415999632765306e-05,
+        "rouge_l": 0.25,
+        "bertscore": 0.25,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "Course Report: The biomedical course report is a student assignment, not on arXiv. arXiv Preprint: The document 2204.08939 is an arXiv preprint.",
+        "retrieved_count": 2,
+        "context_tokens": 36,
+        "latency": 2.9457999971782556e-05,
+        "rouge_l": 0.29629629629629634,
+        "bertscore": 0.29629629629629634,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Cardiac Output: Cardiac output is the product of heart rate and stroke volume. Heart: The heart pumps blood through the cardiovascular system.",
+        "retrieved_count": 2,
+        "context_tokens": 35,
+        "latency": 2.258299991808599e-05,
+        "rouge_l": 0.16666666666666669,
+        "bertscore": 0.16666666666666669,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Attenuation: Attenuation is the loss of acoustic energy as a wave travels through tissue. Attenuation increases with both distance and frequency. Frequency: Higher-frequency probes give better resolution. Higher frequencies are absorbed more strongly, reducing penetration depth.",
+        "retrieved_count": 2,
+        "context_tokens": 69,
+        "latency": 2.6833999982045498e-05,
+        "rouge_l": 0.14634146341463414,
+        "bertscore": 0.1951219512195122,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Audible Range: Humans can hear sound between 20 Hz and 20 kHz. Ultrasound Range: Ultrasound refers to frequencies above 20 kHz, beyond human hearing.",
+        "retrieved_count": 2,
+        "context_tokens": 37,
+        "latency": 2.2291999812296126e-05,
+        "rouge_l": 0.3448275862068966,
+        "bertscore": 0.3448275862068966,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Acoustic Impedance: Reflection at a boundary is determined by the difference in acoustic impedance. A large impedance mismatch, such as tissue-to-air, reflects almost all energy. Coupling Gel: Ultrasound gel is applied to the skin to remove the air gap. It matches impedance so the beam can enter the body.",
+        "retrieved_count": 2,
+        "context_tokens": 76,
+        "latency": 2.9625000024680048e-05,
+        "rouge_l": 0.07547169811320754,
+        "bertscore": 0.07547169811320754,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "1880: The piezoelectric effect was discovered by the Curie brothers in 1880. Transducer: The transducer relies on the piezoelectric effect to emit and detect waves.",
+        "retrieved_count": 2,
+        "context_tokens": 41,
+        "latency": 1.9291000171506312e-05,
+        "rouge_l": 0.21428571428571425,
+        "bertscore": 0.21428571428571425,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "Equipment Access: Specialized gait-analysis equipment has low accessibility and high cost. Smartphone: A smartphone camera is widely available and inexpensive for capturing motion.",
+        "retrieved_count": 2,
+        "context_tokens": 45,
+        "latency": 2.2415999865188496e-05,
+        "rouge_l": 0.21428571428571427,
+        "bertscore": 0.21428571428571427,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "Project 6: Programming Project #6 builds a small data-processing program. Language: The project is implemented in the Python programming language.",
+        "retrieved_count": 2,
+        "context_tokens": 36,
+        "latency": 2.1584000023722183e-05,
+        "rouge_l": 0.0909090909090909,
+        "bertscore": 0.0909090909090909,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "Ultrasound Imaging: Ultrasound imaging uses high-frequency sound waves above 20 kHz to visualize internal anatomy. The waves are produced and received by a transducer probe. Ultrasound Transducer: A transducer contains piezoelectric elements. The piezoelectric effect converts an applied voltage into mechanical vibration and vice versa.",
+        "retrieved_count": 2,
+        "context_tokens": 84,
+        "latency": 3.045799985557096e-05,
+        "rouge_l": 0.12244897959183672,
+        "bertscore": 0.12244897959183672,
+        "llm_judge": null
+      },
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler: Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity. B-mode: B-mode produces a 2D grayscale image of anatomy from echo amplitude.",
+        "retrieved_count": 2,
+        "context_tokens": 42,
+        "latency": 2.1083000319777057e-05,
+        "rouge_l": 0.13333333333333333,
+        "bertscore": 0.13333333333333333,
+        "llm_judge": null
+      }
+    ]
+  }
+}

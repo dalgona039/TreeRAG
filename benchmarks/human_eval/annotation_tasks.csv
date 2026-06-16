@@ -1,0 +1,301 @@
+task_id,question_id,question,source_excerpt,answer,faithfulness,relevance,citation_quality,notes
+T0011,auto_004,What is 2.1. Patient-speciﬁc aorta geometry parameterization?,Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.,"Based on the retrieved documents:
+
+[Document 1: 음파의 물리적 특성 (p.8-14)]
+음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리
+
+[Document 2: c7b780a9 생체의공학개론#11 (p.1-27)]
+의료영상 분야 중 초음파(Ultrasound)의 기본 원리, 역사, 물리적 특성, 발생 장치 및 다양한 진단 방식에 관한 강의 자료
+
+[Document 3: 음파의 기본 원리 및 변수 (p.8-10)]
+매질이 필요한 파동으로서의 음파 정의와 주파수, 주기, 파장, 전파속도 등 주요 음향 변수 설명
+
+
+Answer: The documents discuss aspects related to: 음파의 물리적 특성의 핵심 임상 내용은 무엇인가",,,,
+T0044,auto_039,머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발와(과) 의공학 분야의 AI 패러다임 전환의 차이점은 무엇인가?,"본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","Based on the retrieved documents:
+
+[Document 1: 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS (p.9-12)]
+Technical details on the sensor model, Viterbi detection, and memory management strategies.
+
+[Document 2: 3. HMM-BASED BASECALLER (p.8)]
+Theoretical framework for using Hidden Markov Models to decode noisy nanopore signals.
+
+[Document 3: Proposed Architecture (p.3-4)]
+Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.
+
+
+Answer: The documents discuss aspects related to: What distinguishes 3. HMM-BASED BASECALLER from 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS",,,,
+T0057,auto_005,What is 2.1.1. Aorta dataset pre-processing?,"Describes the initial steps for preparing 3D aorta geometries reconstructed from MRI scans. This includes trimming branches to simplify structures, sampling point clouds (4000 vertices) using voronoi clustering, and aligning geometries to a template using the rigid iterative closest points (ICP) algorithm to regularize position and orientation.","음파의 기본 원리 및 변수: 매질이 필요한 파동으로서의 음파 정의와 주파수, 주기, 파장, 전파속도 등 주요 음향 변수 설명 음파의 물리적 특성: 음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리 초음파의 개요 및 역사: 초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸 초음파의 발생 및 장치: 압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류 초음파 영상의 정의: 초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술",,,,
+T0023,auto_038,의공학 분야의 AI 패러다임 전환와(과) 엔드투엔드 딥러닝의 부상은(는) 어떻게 연관되는가?,"제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.","Based on the retrieved documents:
+
+[Document 1: Hardware Trade-offs (p.7)]
+The balance between power efficiency, accuracy, and throughput in existing hardware.
+
+[Document 2: Hardware Metrics (p.21-22)]
+Core area and power consumption data for the 130-nm TSMC implementation.
+
+[Document 3: 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS (p.9-12)]
+Technical details on the sensor model, Viterbi detection, and memory management strategies.
+
+
+Answer: The documents discuss aspects related to: What are the steps for performing Hardware Trade-offs",,,,
+T0046,auto_033,의공학 분야의 AI 패러다임 전환에 대해 설명하시오.,"제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","M basecalling operation in 9 clock cycles, the serial-parallel architecture requires 16 clock cycles to complete the same operation. This increase in processing time results from the sequential activation of computation blocks to minimize area usage.  While the serial-parallel structure sacrifices s more efficient method is to adopt an architecture that balances serial and parallel processing. In this paper, a serial- parallel structure is proposed for implementing the basecaller. The fundamental processing unit of the proposed architecture is based on a 16-state HMM structure. By incorporatin",,,,
+T0034,auto_040,서론와(과) 엔드투엔드 딥러닝의 부상의 차이점은 무엇인가?,"현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.","4. Hardware Implementation and Performance Considerations While software-based i tions are typically conducted using floating-point arithmetic, a 36-bit fixed-po [34] D. Deamer, M. Akeson, and D. Branton, ""Three decades of nanopore sequencing 4. Hardware Implementation and Performance Considerations While software-based implementations of HMM-based basecalling exist, they are often computationally demanding and require significant processing time. To enhance performance and efficiency, we explore an ASIC (Application-Specific Integrated This consistency confirms the reliability of the hardware",,,,
+T0021,auto_001,What is 0cbccdf9 2204.08939v1-2?,"This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques.","초음파의 개요 및 역사: 초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸 초음파의 발생 및 장치: 압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류 초음파의 역사: 박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정 초음파 영상의 정의: 초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술 음파의 물리적 특성: 음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리",,,,
+T0042,auto_037,서론와(과) 의공학 분야의 AI 패러다임 전환은(는) 어떻게 연관되는가?,"현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","State Transitions: Definition of stay, step, and skip transitions for the basecalling algorithm. Hardware Metrics: Core area and power consumption data for the 130-nm TSMC implementation. 8. FPGA/CHIP COMMUNICATION: Protocol for data transfer between the FPGA and the ASIC chip. Comparative Benchmarks: Analysis of previous works by Olson, Sharma, Hammad, Rashed, and Chen regarding power and accuracy. 5. BRUTE FORCE 64-STATE ARCHITECTURE: Description of the unrolled loop architecture for high-intensity HMM processing.",,,,
+T0015,auto_016,2025학년도 교육과정 반도체공학과와(과) 제 1 장 총 칙은(는) 어떻게 연관되는가?,"2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함.","모델 성능 및 임상적 의의: 비조영 CT 영상만으로 전문의보다 높은 민감도를 기록했으며, 실제 임상 데이터에서도 강건한 성능을 입증했습니다. 동시 수축 지수(CCI) 활용: 주동근과 길항근이 동시에 수축하는 FOG의 병리학적 특성을 반영한 CCI를 핵심 특징으로 추출하여 바이오마커로 활용했습니다. 예후 예측 및 ICD Risk Score: StepCox와 Random Survival Forest를 결합하여 핵심 유전자 시그니처를 추출하고, 면역 항암제 반응 가능성이 높은 하위 그룹을 선별했습니다. 핵심 시사점 및 전망: 대용량 데이터와 희소 데이터 각각에 맞는 접근법(딥러닝 vs 도메인 지식 융합)의 필요성과 정밀 의료 실현을 위한 의공학자의 역할을 제언합니다.",,,,
+T0047,auto_033,의공학 분야의 AI 패러다임 전환에 대해 설명하시오.,"제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","Based on the retrieved documents:
+
+[Document 1: Serial-Parallel Structure (p.4)]
+A method to scale up to 4096 states while optimizing resource utilization.
+
+[Document 2: 7. SERIAL-PARALLEL 64 STATES HMM (p.16-17)]
+Implementation of the main building block for the proposed serial-parallel architecture.
+
+[Document 3: Computational Blocks (p.12)]
+Parallel logem blocks, adders, and comparators used in the brute-force model.
+
+
+Answer: The documents discuss aspects related to: What is the key clinical content of Serial-Parallel Structure",,,,
+T0018,auto_019,2025학년도 교육과정 반도체공학과와(과) 제1조(교육목적)의 차이점은 무엇인가?,"2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.","보고서의 분석 방향: 데이터 가용성과 해석 가능성을 축으로, 제한된 데이터 환경에서의 하이브리드 접근과 대규모 데이터 환경에서의 엔드투엔드 딥러닝을 비교 분석합니다. 서론: 현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 모델 성능 및 임상적 의의: 비조영 CT 영상만으로 전문의보다 높은 민감도를 기록했으며, 실제 임상 데이터에서도 강건한 성능을 입증했습니다. 동시 수축 지수(CCI) 활용: 주동근과 길항근이 동시에 수축하는 FOG의 병리학적 특성을 반영한 CCI를 핵심 특징으로 추출하여 바이오마커로 활용했습니다. 예후 예측 및 ICD Risk Score: StepCox와 Random Survival Forest를 결합하여 핵심 유전자 시그니처를 추출하고, 면역 항암제 반응 가능성이 높은 하위 그룹을 선별했습니다.",,,,
+T0014,auto_016,2025학년도 교육과정 반도체공학과와(과) 제 1 장 총 칙은(는) 어떻게 연관되는가?,"2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함.","Based on the retrieved documents:
+
+[Document 1: 모델 성능 및 임상적 의의 (p.8-9)]
+비조영 CT 영상만으로 전문의보다 높은 민감도를 기록했으며, 실제 임상 데이터에서도 강건한 성능을 입증했습니다.
+
+[Document 2: 동시 수축 지수(CCI) 활용 (p.5)]
+주동근과 길항근이 동시에 수축하는 FOG의 병리학적 특성을 반영한 CCI를 핵심 특징으로 추출하여 바이오마커로 활용했습니다.
+
+[Document 3: 예후 예측 및 ICD Risk Score (p.7-8)]
+StepCox와 Random Survival Forest를 결합하여 핵심 유전자 시그니처를 추출하고, 면역 항암제 반응 가능성이 높은 하위 그룹을 선별했습니다.
+
+
+Answer: The documents discuss aspects related to: 서론의 핵심 임상 내용은 무엇인가",,,,
+T0022,auto_038,의공학 분야의 AI 패러다임 전환와(과) 엔드투엔드 딥러닝의 부상은(는) 어떻게 연관되는가?,"제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.","ons to provide greater performance without significantly increasing hardware complexity. ACCEPTED MANUSCRIPT ARTICLE IN PRESSARTICLE IN PRESS ll as scalability. This allows for a thorough evaluation of its performance, highlighting its benefits in terms of energy efficiency and hardware adaptability while also acknowledging the trade-offs in accuracy and throughput. 1. Accuracy As shown in Fig. 14, the accuracy of the proposed method is 9 than the proposed approach. It delivered a throughput of 8.5 M Bases/sec, making it a well-rounded choice for environments that require an equilibrium betwee",,,,
+T0001,auto_041,bd2f85ad 웹:파이썬 프로그래밍 프로젝트 #6 보고서에 대해 설명하시오.,"딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템(CDSS) 개발에 관한 연구 보고서로, 스마트 인솔 데이터를 활용한 골반 움직임 복원 및 의료진용 대시보드 구현 내용을 담고 있음.","4. Hardware Implementation and Performance Considerations While software-based i tions are typically conducted using floating-point arithmetic, a 36-bit fixed-po [34] D. Deamer, M. Akeson, and D. Branton, ""Three decades of nanopore sequencing 4. Hardware Implementation and Performance Considerations While software-based implementations of HMM-based basecalling exist, they are often computationally demanding and require significant processing time. To enhance performance and efficiency, we explore an ASIC (Application-Specific Integrated ate space consists of 4 3 = 64 possible sequences: A3 =",,,,
+T0056,auto_005,What is 2.1.1. Aorta dataset pre-processing?,"Describes the initial steps for preparing 3D aorta geometries reconstructed from MRI scans. This includes trimming branches to simplify structures, sampling point clouds (4000 vertices) using voronoi clustering, and aligning geometries to a template using the rigid iterative closest points (ICP) algorithm to regularize position and orientation.","Based on the retrieved documents:
+
+[Document 1: 음파의 기본 원리 및 변수 (p.8-10)]
+매질이 필요한 파동으로서의 음파 정의와 주파수, 주기, 파장, 전파속도 등 주요 음향 변수 설명
+
+[Document 2: 음파의 물리적 특성 (p.8-14)]
+음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리
+
+[Document 3: c7b780a9 생체의공학개론#11 (p.1-27)]
+의료영상 분야 중 초음파(Ultrasound)의 기본 원리, 역사, 물리적 특성, 발생 장치 및 다양한 진단 방식에 관한 강의 자료
+
+
+Answer: The documents discuss aspects related to: 음파의 기본 원리 및 변수의 핵심 임상 내용은 무엇인가",,,,
+T0052,auto_009,What are the differences between 0cbccdf9 2204.08939v1-2 and 2. Methodology?,"This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques. Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.","반사음을 받아 다시 전기적 에너지로 전환(수신) 초음파의 발생 Controller 전기적 신호 기계적 신호 Introduction to Biomedical Engineering                                           반사음을 받아 다시 전기적 에너지로 전환(수신) 초음파의 발생 Controller 전기적 신호 기계적 신호 반사파와입사파의주파수가같음 (2) 반사체가 움직이고 있고, 초음파 진동자에 접근하는 경우: 반사파의 파장이 짧아짐(주파수 올라감) (3) 반사체 이를 증폭하여 검출 • 초음파 펄스법(ultrasonic pulse method)을 이용함(가장 보편화된 방법) • 발생된 펄스와 펄스 사이 시간내에 생체로부터의 반사된 초음파를 수신 (의료용 초음파 영상) 초음파의 발신과 수신 펄스 발생기 고주파 발생기 압전소자 초음파발진 를이용(echogenicity) • Ultrasound A-mode: Amplitude mode (oldest & simplest) - 시간축(x-axis)에 초음파 발사 시간을, 종축(y-axis)에 반사된 초음파의 세기를 표기 하는 방법 Introduction to Biomedical En",,,,
+T0060,auto_017,제 1 장 총 칙와(과) 제1조(교육목적)은(는) 어떻게 연관되는가?,"반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.","의공학 분야의 AI 패러다임 전환: 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다. 서론: 현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발: 본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다. 모델 성능 및 임상적 의의: 비조영 CT 영상만으로 전문의보다 높은 민감도를 기록했으며, 실제 임상 데이터에서도 강건한 성능을 입증했습니다. 동시 수축 지수(CCI) 활용: 주동근과 길항근이 동시에 수축하는 FOG의 병리학적 특성을 반영한 CCI를 핵심 특징으로 추출하여 바이오마커로 활용했습니다.",,,,
+T0041,auto_037,서론와(과) 의공학 분야의 AI 패러다임 전환은(는) 어떻게 연관되는가?,"현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","Based on the retrieved documents:
+
+[Document 1: Comparative Benchmarks (p.6-7)]
+Analysis of previous works by Olson, Sharma, Hammad, Rashed, and Chen regarding power and accuracy.
+
+[Document 2: 9. SIMULATION RESULTS (p.19-27)]
+Comprehensive performance evaluation including accuracy, power, and throughput benchmarks.
+
+[Document 3: 8. FPGA/CHIP COMMUNICATION (p.17-19)]
+Protocol for data transfer between the FPGA and the ASIC chip.
+
+
+Answer: The documents discuss aspects related to: What are the steps for performing Comparative Benchmarks",,,,
+T0029,auto_014,제2조(일반원칙)에 대해 설명하시오.,"반도체공학 단일전공과정 적용 대상, 교과목 구분, 전공필수/선택 과목 개설 원칙, 선수과목 이수 체계 등을 규정함.","Based on the retrieved documents:
+
+[Document 1: 도플러 초음파(Doppler Ultrasonography) (p.23-25)]
+도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식
+
+[Document 2: 초음파 진단 방식 및 응용 (p.20-27)]
+A, B, M-mode 등 주요 진단 모드와 도플러 효과를 이용한 혈류 측정 및 기타 응용 분야
+
+[Document 3: c7b780a9 생체의공학개론#11 (p.1-27)]
+의료영상 분야 중 초음파(Ultrasound)의 기본 원리, 역사, 물리적 특성, 발생 장치 및 다양한 진단 방식에 관한 강의 자료
+
+
+Answer: The documents discuss aspects related to: 도플러 초음파(Doppler Ultrasonography)와 관련된 주의사항이나 금기사항은 무엇인가",,,,
+T0059,auto_017,제 1 장 총 칙와(과) 제1조(교육목적)은(는) 어떻게 연관되는가?,"반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.","Based on the retrieved documents:
+
+[Document 1: 의공학 분야의 AI 패러다임 전환 (p.2)]
+제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.
+
+[Document 2: 서론 (p.2)]
+현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다.
+
+[Document 3: 머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발 (p.1-10)]
+본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다.
+
+
+Answer: The documents discuss aspects related to: 의공학 분야의 AI 패러다임 전환의 핵심 임상 내용은 무엇인가",,,,
+T0009,auto_030,What are the differences between Technological Shift and Proposed Architecture?,Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.,"Technological Shift: Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. Signal Processing: The transformation of noisy time-series signals into readable genetic data. State Transitions: Definition of stay, step, and skip transitions for the basecalling algorithm. Probabilistic Modeling: Using the Viterbi algorithm to identify the most likely sequence of nucleotides. K-mer Influence: Addressing the overlapping influence of multiple bases on the sensor output.",,,,
+T0038,auto_013,제1조(교육목적)에 대해 설명하시오.,반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.,"Based on the retrieved documents:
+
+[Document 1: 초음파 진단 방식 및 응용 (p.20-27)]
+A, B, M-mode 등 주요 진단 모드와 도플러 효과를 이용한 혈류 측정 및 기타 응용 분야
+
+[Document 2: 주요 진단 모드 (A, B, M-mode) (p.20-22)]
+진폭을 표시하는 A-mode, 휘도 변조 단층상인 B-mode, 움직임을 기록하는 M-mode의 특징
+
+[Document 3: 도플러 초음파(Doppler Ultrasonography) (p.23-25)]
+도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식
+
+
+Answer: The documents discuss aspects related to: 주요 진단 모드 (A, B, M-mode)와(과) 도플러 초음파(Doppler Ultrasonography)의 차이점은 무엇인가",,,,
+T0020,auto_001,What is 0cbccdf9 2204.08939v1-2?,"This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques.","Based on the retrieved documents:
+
+[Document 1: 초음파의 개요 및 역사 (p.3-7)]
+초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸
+
+[Document 2: 초음파의 발생 및 장치 (p.15-19)]
+압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류
+
+[Document 3: 초음파의 역사 (p.6-7)]
+박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정
+
+
+Answer: The documents discuss aspects related to: 초음파의 개요 및 역사의 핵심 임상 내용은 무엇인가",,,,
+T0013,auto_016,2025학년도 교육과정 반도체공학과와(과) 제 1 장 총 칙은(는) 어떻게 연관되는가?,"2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함.","AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성이라는 두 가지 축을 중심으로 분석한다. 임상 데이터가 부족하거나 병리학적 기 길항근이 동시에 수축하는 동시 수축 현상이 발생하여, 이로 인해 다리 관절의 강직도가 심화되어 발이 지면에서 떨어지지 않게 된다.  본 연구에서 모델의 핵심 아키텍쳐는 ‘분할을 통한 검출’ 전략이다. 위 연구는 3D U-Net 변형 아키텍쳐를 사용하여 CT 영상의 3차원 공간 정보를 통쨰 우수한 성능을 보였다. StepCox는 통계적으로 유의미한 변수만을 남겨 모델의 복잡도를 낮추었고, Random Survival Forest는 비선형적인 유전자 간의 상호작용을 포착하여 예후 예측의 정확도를 높였다. 이를 통해서 수만 개의 유전자 중 ICD와 관련된 11개의 핵심 유전자 시그니처를 추출해 냈다. [9] 모델의 핵심 아키텍쳐는 ‘분할을 통한 검출’ 전략이다. 위 연구는 3D U-Net 변형 아키텍쳐를 사용하여 CT 영상의 3차원 공간 정보를 통쨰로 학습한다.  1. Coarse Segmentation: 먼저 저해상도에서 복부 전체를 스캔하여 췌장의 대략적인 위치를 찾는다. 2. Fine Segmentation: 찾아낸",,,,
+T0031,auto_026,How does 1. INTRODUCTION relate to Technological Shift?,"Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator. Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.","NN-LSTM 하이브리드 모델 설계, 그리고 모델 성능 극대화를 위한 KerasTuner 기반 하이퍼 파라미터 최적화 전략을 중심으로 논의한다. [그림1] CNN-LSTM 모델의 학습 곡선 모델의 학습 과정 시각화 결과([그림 1]), Epoch이 진행됨에 따라 Training Loss는 지속적으로 0에 수렴하였으나, Validation Loss는 특정 시점 이후 감소폭이 둔화되거나 정체되는 경향을 보였다. 이는 모델이 훈련 데이터에만 지나치게 최적화되는 과적합의 전조 증상이다. 이를 해결하기 위해 본 연구에서는 검증 오차가 더 이상 개선되지 않을 때 학습을 조기 종료하는 Early Stopping 기법을 도입하였다. 이를 통해 불필요한 연산 자원 소모를 줄이는 동시에, 테 NN-LSTM 하이브리드 모델 설계, 그리고 모델 성능 극대화를 위한 KerasTuner 기반 하이퍼 파라미터 최적화 전략을 중심으로 논의한다. CCI 기반의 특징 추출과 클래스 가중치 전략의 유효성을 검증하기 위해서, 일반화 모델을 대신하여 환자 맞춤형 모델링 전략으로 실험 전략을 수정 적용하기 어렵다는 데이터 의존성 문제는 여전히 과제로 남는다. 결론 본 보고서는 급변하는 의공학 분야",,,,
+T0016,auto_019,2025학년도 교육과정 반도체공학과와(과) 제1조(교육목적)의 차이점은 무엇인가?,"2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.","AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성이라는 두 가지 축을 중심으로 분석한다. 임상 데이터가 부족하거나 병리학적 기 길항근이 동시에 수축하는 동시 수축 현상이 발생하여, 이로 인해 다리 관절의 강직도가 심화되어 발이 지면에서 떨어지지 않게 된다.  본 연구에서 모델의 핵심 아키텍쳐는 ‘분할을 통한 검출’ 전략이다. 위 연구는 3D U-Net 변형 아키텍쳐를 사용하여 CT 영상의 3차원 공간 정보를 통쨰 우수한 성능을 보였다. StepCox는 통계적으로 유의미한 변수만을 남겨 모델의 복잡도를 낮추었고, Random Survival Forest는 비선형적인 유전자 간의 상호작용을 포착하여 예후 예측의 정확도를 높였다. 이를 통해서 수만 개의 유전자 중 ICD와 관련된 11개의 핵심 유전자 시그니처를 추출해 냈다. [9] 모델의 핵심 아키텍쳐는 ‘분할을 통한 검출’ 전략이다. 위 연구는 3D U-Net 변형 아키텍쳐를 사용하여 CT 영상의 3차원 공간 정보를 통쨰로 학습한다.  1. Coarse Segmentation: 먼저 저해상도에서 복부 전체를 스캔하여 췌장의 대략적인 위치를 찾는다. 2. Fine Segmentation: 찾아낸",,,,
+T0027,auto_010,What are the differences between 1. Introduction and 2.1. Patient-speciﬁc aorta geometry parameterization?,"Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems. Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.","압전 효과(Piezoelectric Effect): 압전 소자에 전압을 가해 기계적 진동을 만들거나 반대로 반사음을 전기 신호로 변환하는 원리 초음파의 역사: 박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정 초음파의 발생 및 장치: 압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류",,,,
+T0017,auto_019,2025학년도 교육과정 반도체공학과와(과) 제1조(교육목적)의 차이점은 무엇인가?,"2025학년도 반도체공학과 교육과정 시행세칙에 대한 문서로, 교육목표, 이수학점, 전공과정, 기타 규정 및 각종 별표를 포함합니다. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.","Based on the retrieved documents:
+
+[Document 1: 서론 (p.2)]
+현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다.
+
+[Document 2: 보고서의 분석 방향 (p.2)]
+데이터 가용성과 해석 가능성을 축으로, 제한된 데이터 환경에서의 하이브리드 접근과 대규모 데이터 환경에서의 엔드투엔드 딥러닝을 비교 분석합니다.
+
+[Document 3: 모델 성능 및 임상적 의의 (p.8-9)]
+비조영 CT 영상만으로 전문의보다 높은 민감도를 기록했으며, 실제 임상 데이터에서도 강건한 성능을 입증했습니다.
+
+
+Answer: The documents discuss aspects related to: 보고서의 분석 방향의 핵심 임상 내용은 무엇인가",,,,
+T0006,auto_028,How does Basecalling Process relate to Proposed Architecture?,"The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T). Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.","학습 곡선과 조기 종료(Early Stopping): Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다. 연구 결과 및 검증: 모델의 학습 곡선 분석과 Early Stopping 기법을 통한 과적합 방지 및 성능 확보 결과를 제시합니다. 보행 신호의 임상적 가치: 보행은 신경계 및 근골격계 건강을 반영하며, 파킨슨병이나 뇌졸중 등의 조기 징후를 파악하는 데 중요한 지표입니다. 미래 의공학의 가치: 기술적 진보는 환자 맞춤형 정밀 의료를 앞당기고, 질병의 조기 진단 및 삶의 질 개선에 기여할 것입니다. 본론 4: 의료 영상 기반 췌장 종양 진단을 위한 엔드투엔드 딥러닝: 조기 발견이 어려운 췌장암(PDAC) 진단을 위해 비조영 CT 영상 기반의 엔드투엔드 딥러닝 모델(PANDA)을 활용한 혁신 사례를 다룹니다.",,,,
+T0035,auto_040,서론와(과) 엔드투엔드 딥러닝의 부상의 차이점은 무엇인가?,"현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.","Based on the retrieved documents:
+
+[Document 1: 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS (p.9-12)]
+Technical details on the sensor model, Viterbi detection, and memory management strategies.
+
+[Document 2: Probabilistic Modeling (p.8)]
+Using the Viterbi algorithm to identify the most likely sequence of nucleotides.
+
+[Document 3: Hardware Metrics (p.21-22)]
+Core area and power consumption data for the 130-nm TSMC implementation.
+
+
+Answer: The documents discuss aspects related to: What distinguishes Probabilistic Modeling from 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS",,,,
+T0005,auto_028,How does Basecalling Process relate to Proposed Architecture?,"The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T). Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.","Based on the retrieved documents:
+
+[Document 1: 학습 곡선과 조기 종료(Early Stopping) (p.4)]
+Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다.
+
+[Document 2: 연구 결과 및 검증 (p.4)]
+모델의 학습 곡선 분석과 Early Stopping 기법을 통한 과적합 방지 및 성능 확보 결과를 제시합니다.
+
+[Document 3: 본론 4: 의료 영상 기반 췌장 종양 진단을 위한 엔드투엔드 딥러닝 (p.8-9)]
+조기 발견이 어려운 췌장암(PDAC) 진단을 위해 비조영 CT 영상 기반의 엔드투엔드 딥러닝 모델(PANDA)을 활용한 혁신 사례를 다룹니다.
+
+
+Answer: The documents discuss aspects related to: 학습 곡선과 조기 종료(Early Stopping)와 관련된 주의사항이나 금기사항은 무엇인가",,,,
+T0025,auto_010,What are the differences between 1. Introduction and 2.1. Patient-speciﬁc aorta geometry parameterization?,"Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems. Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.","Introduction to Biomedical Engineering                                           수정 결정의 양면에 전하가 생기는현상(Piezoelectric effect)을 최초발견함 • 압전효과를 갖는 결정에 압력을 가했을 때 전압이 발 Introduction to Biomedical Engineering 수정 결정의 양면에 전하가 생기는현상(Piezoelectric effect)을 최초발견함 • 압전효과를 갖는 결정에 압력을 가했을 때 전압이 발생되고, 이들 물질에 전압이 가해지면 체적변화를 일으킴 • 초음파트랜스듀서소자는압전효과를 이용하고있음 압전효과 - Piezoelectric effect 진동자 재료 주파수 범위 [MHz] 변환효율 [%] 수정 0.5 ~ 20 10~20 황산리튬 1 ~ 15 40 티탄산바륨 0.3 ~ 2 50~60 PZT 0.3 ~ 2 70 ss. The basis of modern ultrasound application. • 1826 A Swiss physicist, Jean-Daniel Colladon, experimentally measured the speed of soun",,,,
+T0008,auto_030,What are the differences between Technological Shift and Proposed Architecture?,Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.,"Based on the retrieved documents:
+
+[Document 1: Technological Shift (p.3)]
+Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.
+
+[Document 2: 5. BRUTE FORCE 64-STATE ARCHITECTURE (p.12-13)]
+Description of the unrolled loop architecture for high-intensity HMM processing.
+
+[Document 3: 7. SERIAL-PARALLEL 64 STATES HMM (p.16-17)]
+Implementation of the main building block for the proposed serial-parallel architecture.
+
+
+Answer: The documents discuss aspects related to: What is the key clinical content of Technological Shift",,,,
+T0050,auto_027,How does Technological Shift relate to Basecalling Process?,"Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).","Based on the retrieved documents:
+
+[Document 1: 학습 곡선과 조기 종료(Early Stopping) (p.4)]
+Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다.
+
+[Document 2: 연구 결과 및 검증 (p.4)]
+모델의 학습 곡선 분석과 Early Stopping 기법을 통한 과적합 방지 및 성능 확보 결과를 제시합니다.
+
+[Document 3: 본론 4: 의료 영상 기반 췌장 종양 진단을 위한 엔드투엔드 딥러닝 (p.8-9)]
+조기 발견이 어려운 췌장암(PDAC) 진단을 위해 비조영 CT 영상 기반의 엔드투엔드 딥러닝 모델(PANDA)을 활용한 혁신 사례를 다룹니다.
+
+
+Answer: The documents discuss aspects related to: 연구 결과 및 검증와(과) 학습 곡선과 조기 종료(Early Stopping)의 차이점은 무엇인가",,,,
+T0004,auto_028,How does Basecalling Process relate to Proposed Architecture?,"The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T). Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.","[그림1] CNN-LSTM 모델의 학습 곡선 모델의 학습 과정 시각화 결과([그림 1]), Epoch이 진행됨에 따라 Training Loss는 지속적으로 0에 수렴하였으나, Validation Loss는 특정 시점 이후 감소폭이 둔화되거나 정체되는 경향을 보였다. 이는 모델이 훈련 데이터에만 지나치게 최적화되는 과적합의 전조 증상이다. 이를 해결하기 위해 본 연구에서는 검증 오차가 더 이상 개선되지 않을 때 학습을 조기 종료하는 Early Stopping 기법을 도입하였다. 이를 통해 불필요한 연산 자원 소모를 줄이는 동시에, 테 우수한 성능을 보였다. StepCox는 통계적으로 유의미한 변수만을 남겨 모델의 복잡도를 낮추었고, Random Survival Forest는 비선형적인 유전자 간의 상호작용을 포착하여 예후 예측의 정확도를 높였다. 이를 통해서 수만 개의 유전자 중 ICD와 관련된 11개의 핵심 유전자 시그니처를 추출해 냈다. [9] [그림1] CNN-LSTM 모델의 학습 곡선 모델의 학습 과정 시각화 결과([그림 1]), Epoch이 진행됨에 따라 Training Loss는 이 종양 주위를 둘러싸고 있어 면역 항암제가 내부로 침투하지 못하는 환",,,,
+T0012,auto_004,What is 2.1. Patient-speciﬁc aorta geometry parameterization?,Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.,"음파의 물리적 특성: 음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리 음파의 기본 원리 및 변수: 매질이 필요한 파동으로서의 음파 정의와 주파수, 주기, 파장, 전파속도 등 주요 음향 변수 설명",,,,
+T0026,auto_010,What are the differences between 1. Introduction and 2.1. Patient-speciﬁc aorta geometry parameterization?,"Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems. Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.","Based on the retrieved documents:
+
+[Document 1: 압전 효과(Piezoelectric Effect) (p.15-17)]
+압전 소자에 전압을 가해 기계적 진동을 만들거나 반대로 반사음을 전기 신호로 변환하는 원리
+
+[Document 2: 초음파의 역사 (p.6-7)]
+박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정
+
+[Document 3: 초음파의 발생 및 장치 (p.15-19)]
+압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류
+
+
+Answer: The retrieved documents contain information about: 압전 효과(Piezoelectric Effect)의 수행 절차를 단계별로 설명하시오.",,,,
+T0053,auto_009,What are the differences between 0cbccdf9 2204.08939v1-2 and 2. Methodology?,"This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques. Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.","Based on the retrieved documents:
+
+[Document 1: 초음파의 발생 및 장치 (p.15-19)]
+압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류
+
+[Document 2: c7b780a9 생체의공학개론#11 (p.1-27)]
+의료영상 분야 중 초음파(Ultrasound)의 기본 원리, 역사, 물리적 특성, 발생 장치 및 다양한 진단 방식에 관한 강의 자료
+
+[Document 3: 초음파의 개요 및 역사 (p.3-7)]
+초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸
+
+
+Answer: The retrieved documents contain information about: 초음파의 발생 및 장치의 수행 절차를 단계별로 설명하시오.",,,,
+T0036,auto_040,서론와(과) 엔드투엔드 딥러닝의 부상의 차이점은 무엇인가?,"현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.","4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS: Technical details on the sensor model, Viterbi detection, and memory management strategies. Hardware Metrics: Core area and power consumption data for the 130-nm TSMC implementation. Comparative Performance: Comparison against Nanocall, Meta-Align, DeepNano, and Bonito. 9. SIMULATION RESULTS: Comprehensive performance evaluation including accuracy, power, and throughput benchmarks. Hardware Trade-offs: The balance between power efficiency, accuracy, and throughput in existing hardware.",,,,
+T0040,auto_037,서론와(과) 의공학 분야의 AI 패러다임 전환은(는) 어떻게 연관되는가?,"현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","sembly—are performed to ensure accuracy and reconstruct longer genome sequences. d for the 64-input comparator in the new serial-parallel architecture is shown i ESS mulation and comparative performance results for the proposed designs, and final rce 64 states HMM basecaller ACCEPTED MANUSCRIPT ARTICLE IN PRESSARTICLE IN PRES between power consumption, accuracy, and throughput across different hardware-ba mulation and comparative performance results for the proposed designs, and finally, Section IX summarizes the main findings, highlights the contributions, and suggests directions for future r",,,,
+T0054,auto_009,What are the differences between 0cbccdf9 2204.08939v1-2 and 2. Methodology?,"This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques. Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.","초음파의 발생 및 장치: 압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류 초음파의 개요 및 역사: 초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸 초음파의 역사: 박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정 초음파 영상의 정의: 초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술 음파의 물리적 특성: 음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리",,,,
+T0037,auto_013,제1조(교육목적)에 대해 설명하시오.,반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.,"표시 - M-mode는 심장 판막 움직임의 기록등 심장 진단에 주로 이용, Ultrasound Cardiogram (UCG) Introduction to Biomedical Engineering                                                                          Ki Joo Pahk 23 초음파영상 (Ultrasound Image) 초음파 진단방식 • Doppler ultrasonography(도플러초음파검사): 도플러 효과(Doppler effect)를 이용하여 심장이나 심장 판막의 운동, 혈액 유량등을 측정 초음파 진동자에서 발사된 음파가 반사체에 반사 될때 (1) 반사체가정지되어있는상태: Introduction to Biomedical Engineering                                           높은 주파수를 갖는 소리 = 초음파 (Ultrasound) 초음파(ultrasound) Image result for 가청범위 표시 - M-mode는 심장 판막 움직임의 기록등 심장 진단에 주로 이용, Ultrasound Cardiogram (UCG) 높은 주파수를",,,,
+T0028,auto_014,제2조(일반원칙)에 대해 설명하시오.,"반도체공학 단일전공과정 적용 대상, 교과목 구분, 전공필수/선택 과목 개설 원칙, 선수과목 이수 체계 등을 규정함.","Introduction to Biomedical Engineering                                                                          Ki Joo Pahk 23 초음파영상 (Ultrasound Image) 초음파 진단방식 • Doppler ultrasonography(도플러초음파검사): 도플러 효과(Doppler effect)를 이용하여 심장이나 심장 판막의 운동, 혈액 유량등을 측정 초음파 진동자에서 발사된 음파가 반사체에 반사 될때 (1) 반사체가정지되어있는상태: 높은 주파수를 갖는 소리 = 초음파 (Ultrasound) 초음파(ultrasound) Image result for 가청범위 표시 - M-mode는 심장 판막 움직임의 기록등 심장 진단에 주로 이용, Ultrasound Cardiogram (UCG) Introduction to Biomedical Engineering                                                                          Ki Joo Pahk 2 금일 강의 내용 • 초음파(Ultrasound) • 초음파",,,,
+T0033,auto_026,How does 1. INTRODUCTION relate to Technological Shift?,"Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator. Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.","학습 곡선과 조기 종료(Early Stopping): Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다. CNN-LSTM 하이브리드 모델 및 최적화: 공간적 특징(CNN)과 시간적 흐름(LSTM)을 학습하는 모델을 설계하고, KerasTuner의 Hyperband 알고리즘으로 하이퍼 파라미터를 최적화했습니다. 연구 방법론 및 기술적 접근: DuckDB를 활용한 데이터 처리, CNN-LSTM 모델 설계, KerasTuner를 이용한 최적화 전략을 제시합니다. 연구 결과 및 검증: 모델의 학습 곡선 분석과 Early Stopping 기법을 통한 과적합 방지 및 성능 확보 결과를 제시합니다. 본론 1: 딥러닝 기반 신호 분석 및 예측 연구: 대용량 보행 신호 데이터를 효율적으로 처리하고, CNN-LSTM 하이브리드 모델과 하이퍼 파라미터 최적화를 통해 보행 특성을 정밀하게 분석 및 예측하는 연구를 다룹니다.",,,,
+T0002,auto_041,bd2f85ad 웹:파이썬 프로그래밍 프로젝트 #6 보고서에 대해 설명하시오.,"딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템(CDSS) 개발에 관한 연구 보고서로, 스마트 인솔 데이터를 활용한 골반 움직임 복원 및 의료진용 대시보드 구현 내용을 담고 있음.","Based on the retrieved documents:
+
+[Document 1: 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS (p.9-12)]
+Technical details on the sensor model, Viterbi detection, and memory management strategies.
+
+[Document 2: K-mer Influence (p.8)]
+Addressing the overlapping influence of multiple bases on the sensor output.
+
+[Document 3: Hardware Metrics (p.21-22)]
+Core area and power consumption data for the 130-nm TSMC implementation.
+
+
+Answer: The documents discuss aspects related to: What distinguishes K-mer Influence from 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS",,,,
+T0048,auto_033,의공학 분야의 AI 패러다임 전환에 대해 설명하시오.,"제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","7. SERIAL-PARALLEL 64 STATES HMM: Implementation of the main building block for the proposed serial-parallel architecture. Serial-Parallel Structure: A method to scale up to 4096 states while optimizing resource utilization. Signal Processing: The transformation of noisy time-series signals into readable genetic data. State Transitions: Definition of stay, step, and skip transitions for the basecalling algorithm. Probabilistic Modeling: Using the Viterbi algorithm to identify the most likely sequence of nucleotides.",,,,
+T0032,auto_026,How does 1. INTRODUCTION relate to Technological Shift?,"Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator. Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.","Based on the retrieved documents:
+
+[Document 1: 학습 곡선과 조기 종료(Early Stopping) (p.4)]
+Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다.
+
+[Document 2: 연구 결과 및 검증 (p.4)]
+모델의 학습 곡선 분석과 Early Stopping 기법을 통한 과적합 방지 및 성능 확보 결과를 제시합니다.
+
+[Document 3: CNN-LSTM 하이브리드 모델 및 최적화 (p.3)]
+공간적 특징(CNN)과 시간적 흐름(LSTM)을 학습하는 모델을 설계하고, KerasTuner의 Hyperband 알고리즘으로 하이퍼 파라미터를 최적화했습니다.
+
+
+Answer: The documents discuss aspects related to: CNN-LSTM 하이브리드 모델 및 최적화와(과) 학습 곡선과 조기 종료(Early Stopping)의 차이점은 무엇인가",,,,
+T0039,auto_013,제1조(교육목적)에 대해 설명하시오.,반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.,"초음파 진단 방식 및 응용: A, B, M-mode 등 주요 진단 모드와 도플러 효과를 이용한 혈류 측정 및 기타 응용 분야 주요 진단 모드 (A, B, M-mode): 진폭을 표시하는 A-mode, 휘도 변조 단층상인 B-mode, 움직임을 기록하는 M-mode의 특징 도플러 초음파(Doppler Ultrasonography): 도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식 초음파 영상의 정의: 초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술 초음파의 역사: 박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정",,,,
+T0055,auto_005,What is 2.1.1. Aorta dataset pre-processing?,"Describes the initial steps for preparing 3D aorta geometries reconstructed from MRI scans. This includes trimming branches to simplify structures, sampling point clouds (4000 vertices) using voronoi clustering, and aligning geometries to a template using the rigid iterative closest points (ICP) algorithm to regularize position and orientation.","반사음을 받아 다시 전기적 에너지로 전환(수신) 초음파의 발생 Controller 전기적 신호 기계적 신호 를이용(echogenicity) • Ultrasound A-mode: Amplitude mode (oldest & simplest) - 시간축(x-axis)에 초음파 발사 시간을, 종축(y-axis)에 반사된 초음파의 세기를 표기 하는 방법 이를 증폭하여 검출 • 초음파 펄스법(ultrasonic pulse method)을 이용함(가장 보편화된 방법) • 발생된 펄스와 펄스 사이 시간내에 생체로부터의 반사된 초음파를 수신 (의료용 초음파 영상) 초음파의 발신과 수신 펄스 발생기 고주파 발생기 압전소자 초음파발진 Introduction to Biomedical Engineering                                           반사음을 받아 다시 전기적 에너지로 전환(수신) 초음파의 발생 Controller 전기적 신호 기계적 신호 반사파와입사파의주파수가같음 (2) 반사체가 움직이고 있고, 초음파 진동자에 접근하는 경우: 반사파의 파장이 짧아짐(주파수 올라감) (3) 반사체 표시 - M-mode는 심장 판막 움직임의 기록등 심",,,,
+T0007,auto_030,What are the differences between Technological Shift and Proposed Architecture?,Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.,"1. INTRODUCTION The smallest DNA sequencers available on the market today are palm-sized devices that can continuously process a stream of DNA molecules and generate corresponding electronic measurements in real time [1, 2]. The fundamental technological shift underlying these devices, compared to t 1619 Abstract Basecalling is a crucial step in DNA sequencing that converts raw  kip, Step, Stay) are allocated per segment. To prevent memory contention, we use t in accuracy is due to the improved computational pipeline of the serial-parall The proposed architecture has been synthesized, placed,",,,,
+T0051,auto_027,How does Technological Shift relate to Basecalling Process?,"Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).","학습 곡선과 조기 종료(Early Stopping): Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다. 연구 결과 및 검증: 모델의 학습 곡선 분석과 Early Stopping 기법을 통한 과적합 방지 및 성능 확보 결과를 제시합니다. 본론 2: 도메인 지식 융합 기반 이상 보행 탐지 및 분류 연구: 파킨슨병 환자의 보행 동결(FOG) 현상을 탐지하기 위해 도메인 지식(CCI)과 머신러닝을 융합하여 데이터 불균형과 개인차 문제를 해결한 연구입니다. 연구 방법론 및 기술적 접근: DuckDB를 활용한 데이터 처리, CNN-LSTM 모델 설계, KerasTuner를 이용한 최적화 전략을 제시합니다. 보행 신호의 임상적 가치: 보행은 신경계 및 근골격계 건강을 반영하며, 파킨슨병이나 뇌졸중 등의 조기 징후를 파악하는 데 중요한 지표입니다.",,,,
+T0058,auto_017,제 1 장 총 칙와(과) 제1조(교육목적)은(는) 어떻게 연관되는가?,"반도체공학과 교육과정의 목적, 일반원칙, 이수학점, 학위명 등 기본적인 사항을 규정함. 반도체공학 교육과정은 기초학문 습득 및 반도체공학 전문/융합 능력 배양을 목적으로 함.","서론 현대 공학 분야 전체는 딥러닝과 머신러닝 기술의 급속한 발전과 함께 거대한 패러다임의 전환을 맞이하고 있다. 제조, 통신, 자율주행 시스템에서부터 복잡한 과학적 시뮬레이션에 이르기까지, AI는 방대한 데이터를 분석하고 최적의 해법을 도출하는 핵심 동력으로 자리 잡았다.  이러한 혁신의 흐름 속에서, 의공학 분야는 AI 기술의 가장 도전적인 시험대가 되고 있다. 복잡한 생체 신호를 실시간으로 해석하고, 방대한 의료 데이터를 통합적으로 분석하여 질병을 예측하고 진단하는 의료 AI의 중요성은 그 어느 때보다 강조되고 있다. 특히, 전통적인 머신러닝 기법을 넘어 대규모 AI 모델과 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있다. 엔드투엔드(end-to-end) 딥러닝 노이즈 특성을 학습하게 하여 일반화 성능을 저하시키는 결과를 초래하였다. 이 실패 사례는 의공학 분야에서의 AI 연구에서 질병의 병리학적 메커니 은 영상의 미세한 비선형적 패턴을 모두 포착하기 어렵다. 이에 최근 연구는 인간의 개입을 최소화하고, 원시 영상 데이터로부터 특징 추출 및 진단 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성이라는 두 가지 축을 중심으로 분석한",,,,
+T0043,auto_039,머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발와(과) 의공학 분야의 AI 패러다임 전환의 차이점은 무엇인가?,"본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","4. Hardware Implementation and Performance Considerations While software-based implementations of HMM-based basecalling exist, they are often computationally demanding and require significant processing time. To enhance performance and efficiency, we explore an ASIC (Application-Specific Integrated 4. Hardware Implementation and Performance Considerations While software-based i tions are typically conducted using floating-point arithmetic, a 36-bit fixed-po [34] D. Deamer, M. Akeson, and D. Branton, ""Three decades of nanopore sequencing This consistency confirms the reliability of the hardware",,,,
+T0024,auto_038,의공학 분야의 AI 패러다임 전환와(과) 엔드투엔드 딥러닝의 부상은(는) 어떻게 연관되는가?,"제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다. 전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.","Hardware Trade-offs: The balance between power efficiency, accuracy, and throughput in existing hardware. Hardware Metrics: Core area and power consumption data for the 130-nm TSMC implementation. State Transitions: Definition of stay, step, and skip transitions for the basecalling algorithm. 8. FPGA/CHIP COMMUNICATION: Protocol for data transfer between the FPGA and the ASIC chip. 5. BRUTE FORCE 64-STATE ARCHITECTURE: Description of the unrolled loop architecture for high-intensity HMM processing.",,,,
+T0030,auto_014,제2조(일반원칙)에 대해 설명하시오.,"반도체공학 단일전공과정 적용 대상, 교과목 구분, 전공필수/선택 과목 개설 원칙, 선수과목 이수 체계 등을 규정함.","도플러 초음파(Doppler Ultrasonography): 도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식 초음파 진단 방식 및 응용: A, B, M-mode 등 주요 진단 모드와 도플러 효과를 이용한 혈류 측정 및 기타 응용 분야 초음파의 개요 및 역사: 초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸 초음파의 발생 및 장치: 압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류 초음파 프로브(Probe): 검사 목적에 따른 Linear, Convex, Transvaginal, Sector, 3D 프로브의 형태와 용도",,,,
+T0010,auto_004,What is 2.1. Patient-speciﬁc aorta geometry parameterization?,Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.,"반사음을 받아 다시 전기적 에너지로 전환(수신) 초음파의 발생 Controller 전기적 신호 기계적 신호 여 단층면 영상 구현 - 1개단소자 프로브를 물리적으로 이동시키는 수동 스캔법 - 프로브에 여러 개의 진동자를 조합시켜 전기적으로 순차 이동시키는 전자스캔법(실시간영상획득가능) 를이용(echogenicity) • Ultrasound A-mode: Amplitude mode (oldest & simplest) - 시간축(x-axis)에 초음파 발사 시간을, 종축(y-axis)에 반사된 초음파의 세기를 표기 하는 방법 이를 증폭하여 검출 • 초음파 펄스법(ultrasonic pulse method)을 이용함(가장 보편화된 방법) • 발생된 펄스와 펄스 사이 시간내에 생체로부터의 반사된 초음파를 수신 (의료용 초음파 영상) 초음파의 발신과 수신 펄스 발생기 고주파 발생기 압전소자 초음파발진 Introduction to Biomedical Engineering                                           반사음을 받아 다시 전기적 에너지로 전환(수신) 초음파의 발생 Controller 전기적 신호 기계적 신호 반사파와입사파의주파수",,,,
+T0049,auto_027,How does Technological Shift relate to Basecalling Process?,"Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential. The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).","[그림1] CNN-LSTM 모델의 학습 곡선 모델의 학습 과정 시각화 결과([그림 1]), Epoch이 진행됨에 따라 Training Loss는 지속적으로 0에 수렴하였으나, Validation Loss는 특정 시점 이후 감소폭이 둔화되거나 정체되는 경향을 보였다. 이는 모델이 훈련 데이터에만 지나치게 최적화되는 과적합의 전조 증상이다. 이를 해결하기 위해 본 연구에서는 검증 오차가 더 이상 개선되지 않을 때 학습을 조기 종료하는 Early Stopping 기법을 도입하였다. 이를 통해 불필요한 연산 자원 소모를 줄이는 동시에, 테 [그림1] CNN-LSTM 모델의 학습 곡선 모델의 학습 과정 시각화 결과([그림 1]), Epoch이 진행됨에 따라 Training Loss는 이 종양 주위를 둘러싸고 있어 면역 항암제가 내부로 침투하지 못하는 환경임을 밝혀냈다. 이는 단순한 유전자 유무를 넘어, 수천 개의 유전자 발현 . 2004;19(12):1386-1393. doi: 10.1002/mds.20231. [8] Guinney J, Dienstmann R, Wa 구는 보행 주기 예측 모델의 성능이 학습률, 커널 크기 등의 하이퍼 파라미터에 따라 크게 변동될 수",,,,
+T0045,auto_039,머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발와(과) 의공학 분야의 AI 패러다임 전환의 차이점은 무엇인가?,"본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다. 제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.","4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS: Technical details on the sensor model, Viterbi detection, and memory management strategies. 3. HMM-BASED BASECALLER: Theoretical framework for using Hidden Markov Models to decode noisy nanopore signals. Sensor Model and State Space: Construction of HMM states based on k-mer labels and radix-4 number systems. Hardware Metrics: Core area and power consumption data for the 130-nm TSMC implementation. Proposed Architecture: Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.",,,,
+T0019,auto_001,What is 0cbccdf9 2204.08939v1-2?,"This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques.","반사음을 받아 다시 전기적 에너지로 전환(수신) 초음파의 발생 Controller 전기적 신호 기계적 신호 를이용(echogenicity) • Ultrasound A-mode: Amplitude mode (oldest & simplest) - 시간축(x-axis)에 초음파 발사 시간을, 종축(y-axis)에 반사된 초음파의 세기를 표기 하는 방법 이를 증폭하여 검출 • 초음파 펄스법(ultrasonic pulse method)을 이용함(가장 보편화된 방법) • 발생된 펄스와 펄스 사이 시간내에 생체로부터의 반사된 초음파를 수신 (의료용 초음파 영상) 초음파의 발신과 수신 펄스 발생기 고주파 발생기 압전소자 초음파발진 Introduction to Biomedical Engineering                                                                          Ki Joo Pahk 2 금일 강의 내용 • 초음파(Ultrasound) • 초음파작동원리 Introduction to Biomedical Engineering                                           반사음을 받아",,,,
+T0003,auto_041,bd2f85ad 웹:파이썬 프로그래밍 프로젝트 #6 보고서에 대해 설명하시오.,"딥러닝 기반 가상 센서 기술을 활용한 요추 질환 임상 의사결정 지원 시스템(CDSS) 개발에 관한 연구 보고서로, 스마트 인솔 데이터를 활용한 골반 움직임 복원 및 의료진용 대시보드 구현 내용을 담고 있음.","4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS: Technical details on the sensor model, Viterbi detection, and memory management strategies. Sensor Model and State Space: Construction of HMM states based on k-mer labels and radix-4 number systems. K-mer Influence: Addressing the overlapping influence of multiple bases on the sensor output. Hardware Metrics: Core area and power consumption data for the 130-nm TSMC implementation. Comparative Performance: Comparison against Nanocall, Meta-Align, DeepNano, and Bonito.",,,,

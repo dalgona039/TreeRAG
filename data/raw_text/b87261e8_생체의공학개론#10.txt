@@ -1,0 +1,526 @@
+--- PAGE 1 ---
+Introduction to Biomedical Engineering Ki Joo Pahk
+1
+Introduction to Biomedical Engineering
+BME 101
+박 기 주 교수
+경희대학교 생체의공학과
+의료영상 1
+--- PAGE 2 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+2
+금일 강의 내용
+• 의료영상
+• 방사선 (X-ray, CT, 핵의학)
+• 자기공명영상(MRI)
+• 내시경
+• 의료영상처리
+--- PAGE 3 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+3
+의료영상 (Medical Image)
+• 오랫동안 인류는 질병의 정확한 진단을 위해 인체내부구조를
+비침습적으로 들여다보고자 함
+• 1895년 독일의 물리학자 W.C. Röntgen이 x-ray를 발견한 이래
+의료영상 기기는 질병의 진단과 치료에 매우 중요한 역할을
+해오고있음
+• 일정한 에너지를 인체에 투과→ 생체조직 및 장기의 밀도와
+성질에 따라 입사, 반사, 굴절 또는 투과됨
+• 이러한 특징을 이용하여 인체 내부 영상 획득
+• X선영상 ~70%
+• 초음파진단 ~11%
+• CT ~8%
+• MRI ~5%
+• 핵의학영상 ~3%
+개념 및 정의
+--- PAGE 4 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+4
+의료영상 (Medical Image)
+물리적 특성에 따른 의료영상
+물리적 특성 의료영상
+인체를 통과하는 X-선 이용
+X-ray(X선영상 기술)
+- 각 부위 조직의 투과된 X선의 감쇄 특성을 이용하여
+평면형광판이나 필름에 생체 내부 구조를 영상화
+CT(전산화 단층 촬영 기술, Computed Tomography)
+- 인체의 단면 주위를 돌면서 X-선을 투사하고 X선이
+인체를 통과하면서 감쇄되는 양을 측정하여 내부 구
+조를 영상화
+인체 내에서반사된
+초음파 이용
+Ultrasound (초음파영상 진단 기술)
+- 생체 조직에서 반사된 초음파를 수신하여 반사되어
+온 초음파의 영상화를 통해 내부구조 이미징
+자기장 이용 MRI(자기공명영상 진단 기술, Magnetic Resonance 
+Imaging)
+- 고주파 자기장(자력)을 발생시켜 인체의 모든 부분
+의 단층 영상을 얻음
+인체 내에 주입된 방사성동위
+원소에서 방출하는 감마선
+이용
+PET(양전자 방출 단층 촬영기술, Positron Emission 
+Tomography)
+- 감마선을 측정하여 영상화
+--- PAGE 5 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+5
+의료영상 (Medical Image)
+• 모든 물질은 아주 작은 분자(molecules)또는 원자들의(atoms)조합으로 구성
+• 원자는 원자핵과 전자로 구성
+• 원자핵 = 양전하를 띠는 양성자와 전기적으로 중성인 중성자로 이루어짐
+• 양성자와중성자의비율에따라 안정적인원자핵또는 불안정한원자핵으로구분
+방사선(Radiation)?
+원자핵 주위에 전자가 발견될 확률
+분포를구름과 같은모양으로 나타냄
+--- PAGE 6 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+6
+의료영상 (Medical Image)
+• 불안정한 상태의 원자핵은 특정한 입자나 빛을 방출하면서 안정적인 상태로
+바뀌려는 성질이 있음 → 이때 나오는 입자나 빛이 방사선임
+• 입자형태의 방사선(전리 방사선, ionizing radiation) 또는 빛이나 전파로 존재
+하는 방사선(비전리 방사선, non-ionizing radiation) 으로 나뉨
+• 일반적으로 전리방사선을 방사선이라고 함
+방사선(Radiation)?
+전리방사선
+전자파 고속입자선
+• 감마선, X선 • 알파선, 베타선, 양성
+자선, 중성자선 등
+비전리방사선
+• 적외선, 자외선, 가시광선 등
+--- PAGE 7 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+7
+의료영상 (Medical Image)
+• 자연방사선(Natural radiation)
+- 자연에존재하는방사성원소의붕괴에서발생하는에너지의전달 과정
+- 땅속의 광물질, 우주, 음식물(K-40, 칼슘-40)등
+방사선(Radiation)?
+• 땅속 방사선 (terrestrial radiation)
+- 땅 속에 있는 주요 자연방사선 원소는 지구 생성 당시에
+땅 속에 축적된 칼륨, 우라늄, 토륨 임.
+- 지구 생성 이후 지속적으로 감소하고 있음 (우라늄 동위
+원소의 반감기는 45억년, 지구 생성 당시에 비해 반 밖에
+존재하지 않음)
+• 우주 방사선 (cosmic radiation)
+- 다양한종류의우주선(cosmic ray)에 의한우주방사선
+- 고도에 따라 차이가 많이 나며, 고도가 높아 질수록 에너지가 높은 우주선에 직
+접 노출된 확률이 높음
+• 동식물에 흡수되어 호흡이나 먹이사슬을 통해 인체에 흡수
+--- PAGE 8 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+8
+의료영상 (Medical Image)
+• 인공방사선(Artificial radiation)
+- 인위적인행위에의해발생되는 방사선
+1. 병원에서 검사를 위해 사용되는 진단방사선
+2. 치료를 위해 사용되는 치료방사선
+3. 공항에서 보안검색대에서 사용되는 방사선 등
+방사선(Radiation)?
+--- PAGE 9 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+9
+의료영상 (Medical Image)
+방사선(Radiation)?
+• 방사선은 종류에 따라 물질을 투과하는 투과력이 각각 다름
+• 질량이 클수록 투과력이 낮아짐 → 물질을 통과하면서 에너지가 물질에 더 많이 흡수됨
+→ 투과하는 물질에 많은 에너지를 전달 할 수 있음
+• 알파선 – 양성자 2개와 중성자 2개로 이루어진 알파입자(헬륨)의 흐름이며, 질량이 높아
+종이 한 장 또는 인체의 피부조직으로도 충분히 차폐가 가능함. 
+• 베타선 – 고속으로 움직이는 양전자의 흐름으로 알파선에 비해 무게가 적고 투과력도
+알파선보다는 큼. 얇은 금속판 정도의 두께만으로도 베타선을 막을 수 있음 
+• 감마선 – 파장이 10-9 ~ 10-10 cm 정도의 강한 전자기파로, 투과력이 매우 강하며 외부
+피폭의 경우에도 인체내부 장기에 손상을 줄 수 있음. 벽 두께 정도의 콘크리트로 차폐
+가능
+• X-선 – 파장이 10-8 cm로, 감마선보다 투과력이 약함
+• 중성자선 – 중성자의 흐름으로 전기적으로 중성이고, 투과력이 매우 큼
+--- PAGE 10 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+10
+의료영상 (Medical Image)
+• 방사능(Radioactivity) = 방사선을 방출할 수 있는 능력
+• 베크렐(Bq) = 방사성물질에서 방사선이 얼마나 나오고 있는 단위로 방사능의 강도
+• 생활 속 K-40(칼륨-40)의 방사능
+방사선 관련 단위
+• 시버트(Sv) = 방사선이 인체에 미치는 영향의 정도를 나타내는 단위
+• 같은 베크렐 수치여도 방사선과 조직의 종류에 따라 인체가 받는 영향이 매우 다름
+*1 Bq = 1초에 한번 붕괴 발생
+--- PAGE 11 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+11
+의료영상 (Medical Image)
+• 방사선은 물질을 구성하는 원자나 분자의 결합에 영향을 주어 물질의 구조나 성질을 바
+꿀 수 있음.
+• 인체에 조사된 방사선 에너지가 인체를 구성하는 원자, 분자 조성에 변화를 일으킴
+• 세포 기능장해, 증식저지, 사멸등이 일어나도 세포조직이 파괴됨.
+• 방사선 피폭(radiation exposure) = 방사선에 노출되어 피해를 입는 것, 
+• 방사선의 위험도는 인체의 미치는 영향의 정도를 나타내는 단위인 Sv에 의해 평가
+• 인체에 해로운 영향을 나타낼 수 있는 양 100 mSv.
+• 세계보건기구는 평상시 인체허용기준을 연간 1 mSv(일반인), 50 mSv(방사선 관련 직업)
+로 권고 (자연, 의료방사선 제외)
+• 외부피폭
+- 신체 외부에 있는 방사선원으로부터 방출된 방사선에 의한 피폭
+• 내부피폭
+- 체내에 들어온 방사선원에 의한 피폭(예, 오염된 음식물을 통한 섭취)
+- 방사능물질에 오염된 음식이나 물을 섭취하거나 오염된 공기를 흡입하여 체내로 들어오
+는 경우
+- 오랜 기간 동안 방사능물질이 몸에 남아 있으면서 계속해서 인체에 영향을 줄 수 있음
+방사선이 인체에 미치는 영향
+--- PAGE 12 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+12
+의료영상 (Medical Image)
+방사성 붕괴(감쇄)와 반감기
+• 반감기 = 방사선의 세기가 처음의 절반이 걸리는 기간
+• 물리적 반감기: 자연 상태에서 붕괴를 통해 그 세기가 절반으로 감소하는 기간
+• 생물학적 반감기: 몸 안으로 들어온 방사성물질이 소화 등 대사나 배설작용으로 세기가
+반으로 줄어들기까지 걸리는 시간
+• 유효 반감기: 물리적 반감기와 생물학적 반감기를 모두 고려한 수치 (우리 몸에 실제로 미
+치는 영향)
+--- PAGE 13 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+13
+의료영상 (Medical Image)
+• 흉부 CT = 10~15 mSv (1회)
+• 치과 CT, X-ray = 0.01~0.09 mSv
+• PET-CT = 20~30 mSv
+--- PAGE 14 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+14
+의료영상 (Medical Image)
+• 초고속의 전자가 금속원자의 영향으로 급속하게 감속되거나 또는 정지하는 경우, 원래의
+전자가 가지고 있던 운동에너지가 전자기파의 형태로 변환됨 → X선 발생 → 인체에 투과
+뼈, 근육, 조직등 구성 원자에 따라 각기 다른 흡수나 산란이 일어남
+• 뼈는 연부조직보다 밀도가 높아 X선 감쇠계수가 상대적으로 큼
+• 이러한 X선 감쇄를 필름이나 검출기로 측정하여 X선 영상을 획득
+• 장점 – 단시간 검사, 개략적인 파악, 영상의학과 의사가 아니더라도 임상의사가 판단 가능
+• 단점 – 방사선 사용, 연부조직 평가 제한(근육, 건, 인대등)
+• 강점 – 뼈(골절, 종양등), 폐(염증, 종양등), 치아 등
+진단 방사선 - X선 촬영, CT 촬영
+--- PAGE 15 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+15
+의료영상 (Medical Image)
+진단 방사선 - X선 촬영, CT 촬영
+https://www.youtube.com/watch?v=MfCCy1SRF9A
+--- PAGE 16 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+진단 방사선 - X선 촬영, CT 촬영 – Computed Tomography
+• 1972년 4월 영국 EMI사의 G. N. Hounsfield는 X선 장치에 컴퓨터를 조합시켜
+생체의 단층을(횡단면) 촬영하는 새로운 영상기술인 CT의 발명을 발표함 (X선
+영상으로는 인체의 단층상 획득 못함)
+• 피사체를 서로 다른 각도에서 X선 조사 하여 각조직의 투영데이터를 검출기
+로 수집→ 컴퓨터 연산처리로영상을재구성
+• 촬영장치 겐트리는(Gantry) 360도를 회전하면서 각각의 방향마다 1차원의 X
+선 흡수도 분포를 컴퓨터에 보냄
+• 여러 개의 1차원 자료를 이용하여 2차원의인체영상으로 재구성
+• 2차원의단면 영상을 쌓아 3차원영상 재구성
+• 장점 – MRI 보다 검사 시간이 짧음. 주요 장기 평가 가능
+• 단점 – 연부조직 평가 제한(근육, 건, 인대등)
+• 강점– 골격계, 혈관계(조영제이용), 흉부, 뇌종양
+16
+--- PAGE 17 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+진단 방사선 - X선 촬영, CT 촬영 – Computed Tomography
+17
+--- PAGE 18 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+진단 방사선 - X선 촬영, CT 촬영 – Computed Tomography
+18
+X-ray CT
+--- PAGE 19 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+핵의학 영상 시스템
+19
+• 핵의학(nuclear medicine)은 방사성동위원소를 이용하여 질병의 진단 및 치료 가능
+• 동위원소 = 원자번호는 같지만 질량수가 다른 원소를 의미
+• 방사성동위원소 = 방사선을 내뿜는 동위원소
+• 특정 방사성동위원소를 체내에 주입하여 추적자(tracer)로 사용함으로써 인체에 대한 형
+태학적, 생물학적, 기능적인 정보를 얻을 수 있음.
+• 주입된 방사성동위원소에서 방출되는 감마선의 위치 및 양적정보를 감마카메라를(섬광
+카메라) 이용하여 영상화 하는 방법
+• 핵의학영상은 내부선원을 이용하기 때문에(내부선원의 위치 모름) 카메라에 입사되는 감
+마선만을 검출하기 위한 조준기를 필수적으로 사용해야함
+• 단일광자단층촬영(Single photon emission computed tomography, SPECT)
+: 방사성동위원소의 인체내에서의 상대적인 농도차이 측정
+• 병이 발전되는 정도를 진단하기 위해서는 생화학적 변화를 정량화 하는것이 매우 중요함
+• 양전자단층촬영(Positron Emission Tomography, PET)
+: 방사성동위원소의 인체내에서의 절대적인 농도 및 농도변화 측정 → 특정 세포의 대사 변
+화를 영상화 할 수 있는 기술
+--- PAGE 20 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+핵의학 영상 시스템
+20
+• 암 세포는  정상 조직보다 포도당을 아주 많이 소비함→포도당 유도체인 18F-
+Fluorodeoxyglucose(FDG)를 투여→암세포 근처에 모여 방사성 신호를 보냄
+• 암의 해부학적 변화(크기 변화 등)가 있기 이전에 이미 기능적(대사의 항진)변화는 이루
+어져 있음. 기능적 변화를 측정하게 되면 해부학적 변화보다(MRI 영상) 조기 발견이 가
+능함 → 암전이 여부등을 알아볼 때 매우 유용함
+• PET-CT 많이 활용 – 세포의 대사 측정(기능적 변화, PET) + 해부학적 구조 측정(형태학
+적 변화, CT)
+--- PAGE 21 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+핵의학 영상 시스템
+21
+암 진단을 위한 F-18 FDG PET/CT
+--- PAGE 22 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+핵의학 영상 시스템
+22
+https://www.youtube.com/watch?v=yrTy03O0gWw
+--- PAGE 23 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+방사선치료(radiotherapy)
+23
+• 3대암치료 = 수술, 항암화학 요법, 방사선치료
+• X선, 감마선(광자선), 전자선, 양성자선, 중입자선 등 사용 
+• 암세포에 방사선을 조사하여 암세포 사멸 유도 및 주변으로 전이를 막기 위
+한 암 치료 방법
+• 국소적으로방사선을조사하여정상세포의 손상은최소화를목표
+Marx, 2014, Nature
+--- PAGE 24 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+24
+• MRI는 NMR현상과 컴퓨터 응용기술이 결합하여 이룩한 영상기법으로, 영상의학분야에
+서 가장 혁신적인 발전이라 일컬어지고 있음
+• 1946년 미국의 Bloch와 Purcell에 의하여 각각 연구된 NMR (nuclear magnetic 
+resonance) 현상이란 , 원자핵이 자기장 내에서 특정 주파수의 전자기파와 공명
+(resonance)하는 현상임. 각각의 원자가 가지고 있는 핵 스핀의 강도가 다르기 때문에, 
+같은 세기의 자기장을 걸어 줘도 흡수하는 주파수가 다름.
+• NMR에서 흡수하는 주파수를 측정 및 분석함으로써, 어떤 원자가 존재하는지 추론할
+수 있음
+--- PAGE 25 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+25
+• 공명상태에서 고주파(radio wave) 펄스를 끊으면, 고에너지 상태의 원자핵들은 흡수하
+였던 고주파 에너지를 외부로 방출하면서 원래의 상태로 돌아가는데 이를 이완
+(relaxation)이라고 함
+• 이때 방출하는 고주파에너지가 MR 신호가 되며(인체부위마다 신호강도 다름), 전자파
+가 방출된 원자핵의 위치를 추적해 영상화 할 수 있음
+--- PAGE 26 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+26
+• 자기공명영상이란?
+: 강력한 자기장을 발생하는 커다란 자석통 속에 인체를 들어가게 한 후 고주파를 발생시
+켜 몸에 있는 수소원자핵을(인체 60% 물) 공명시켜 각 조직에서 나오는 신호의 차이를 측
+정하여 컴퓨터를 통해 재구성하여 영상화 하는 기술임
+• MRI는 자기장의 세기가 셀수록 영상신호의 크기가 증가하여 화면에 영상이 선명하게
+보여짐 – 1T MRI, 1.5T MRI, 3.0T MRI (T = 테슬라, Tesla, 자기장의 세기)
+--- PAGE 27 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+27
+장점
+• X선, CT, PET와 달리방사선이 없음
+• 뛰어난 해상도와 높은 조직대조도로 연부 조직이나 뇌질환 평가에 유리(근육, 인대, 뇌
+신경계, 종양 등)
+단점
+• 촬영 시간이 보통 20~30분 이상
+• 폐쇄공포증이 있는 환자에게 시행하기 어려움
+• 강한 자기장을 이용하기 때문에, 적은 양의 금속성 인공치아나 척추 보형물 등도 진단
+에 방해가 될 수 있음
+• 인공 속귀(전자달팽이관), 인공심박동기 등의 작동에 장애 초래 가능
+--- PAGE 28 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+28
+https://www.youtube.com/watch?v=nFkBhUYynUw
+--- PAGE 29 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+29
+Functional MRI (fMRI) – 기능적 자기공명영상
+• 혈류와 관련된 변화를 감지하여 뇌 활동을 측정하는 기술
+• 뇌의 어떤 부위가 사용될 때 그 영역으로 가는 혈류의 양도 따라서 증가한다는 사실을
+이용하여 뇌의 어떤 부위의 신경이 활성화 되었는지를 측정하는 기술
+--- PAGE 30 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+30
+Functional MRI (fMRI) – 기능적 자기공명영상
+조기습득자
+한글 영어
+--- PAGE 31 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+자 기 공 명 영 상 (Magnetic Resonance Imaging, MRI) 또는 핵 자 기 공 명
+(Nuclear Magnetic Resonance, NMR)
+31
+MR thermometry 
+• MR신호를 이용하여 온도 측정가능
+• 온도 변화에 따른 수소원자핵의 공명 주파수의 변화를 측정
+• 온도 증가 → 공명 주파수 감소
+• 열적 삭마 치료 유도 (thermal ablation therapies) – laser, microwave, radiofrequency, 
+HIFU thermal ablation 치료 등
+--- PAGE 32 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+CT vs. MRI
+32
+CT MRI
+에너지원 X-ray 전자기력
+영상 단면, 3차원 단면, 3차원
+공간해상도 높음 낮음
+조직 대조도(다양한
+연부조직 구별 능력)
+낮음
+조영제 사용
+높음
+검사시간 1~3분 20~60분
+장점 석회화, 골병변
+폐병변, 장 천공
+연부조직 종양
+뇌경색 등
+--- PAGE 33 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+내시경 (Endoscope)
+33
+• 생체 체강내를 외과적인 수술에 의하지 않고 가시광으로 관찰하는 기구
+• 거의 모든 소화기관 내벽 관찰 가능하며 체강내를 육안으로 볼 수 있음(간접적인 영상X)
+• 굴곡되지 않는 경성 내시경 (rigid endoscope) (여러 개의 오목 렌즈와 볼록렌즈로 구성)
+장점: 직경이 크기때문에 관찰시야가 넓고흡인 배출력이 좋음
+단점: 마취에 따른 문제, 삽입의 어려움, 천공의 위험등이 많음
+• 굴곡되는 연성 내시경 (flexible endoscope): 주로 이용
+rigid endoscope flexible endoscope
+ 위내시경
+--- PAGE 34 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+34
+연성내시경
+• 광섬유로 만들어진 관과 관의 끝에 소형 카메라가 달려있음
+• 광학유리섬유(optical glass fiber)는 직경이 20~200마이크론 유리섬유로 한쪽 단면에 빛
+을 입사시키면 빛은유리의 내벽을 전반사하면서 계속진행하여 다른쪽 단면에 도달
+• 2개의 광섬유 다발이 들어 있음 (장기 내부에 빛을 비추는용, 내부의 모습을 관과 연결된
+화면에 보여주는용 - 영상경로)   
+내시경 (Endoscope)
+--- PAGE 35 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상 (Medical Image)
+35
+캡슐내시경
+• 캡슐안에 카메라를 담아 신체 내부를 촬영 (크기 11 mm x 27 mm, 무게 3.7 g)
+• 소장, 대장의 연동운동에 의해 우리 몸 소화기관을 돌아다니면서 초당 2장씩 7~8시간
+동안 5만 여장을 촬영하여 무선 송신기를 통해 몸 밖에 있는 수신기에 송신→모니터로
+영상을 보면서 진단 → 대변을 통해 배출
+• 일반 내시경으로 관찰하기 어려운 소장(6~8m, 연동 운동이 빠름) 관찰 가능.
+내시경 (Endoscope)
+--- PAGE 36 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상정보처리
+36
+• 여러가지 연산이나 정보처리를 하여 특정 정보 추출
+• 사진 또는 그림 등을 디지털화 하여 컴퓨터에서 이를 처리
+• 낡고 훼손된 영상을 복원, 영상 내에 포함된 잡음을 제거, 색상과 영상의 질 개
+선 또는저하
+영상처리(Image processing)
+• 인체 내부의 조직이나 기관을 포함하여 의학적으로 유용한 모든 생체정보를
+영상화
+• 이로부터 진단이나 치료에 소용되는 임상정보를 추출하고 처리하는 모든 기술
+을 총칭
+의료영상처리(Medical Image processing)
+--- PAGE 37 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상정보처리
+37
+• 화질의 향상(Image enhancement)
+• 영상 측정 정밀도의 향상 및 정량화(quantification)
+• 패턴인식(pattern recognition)등에의한 영상측정의 자동화
+영상정보처리의 목적 – 해석용이
+• 영상정보를 디지털 전기신호로 변환(가공, 편집, 전송, 저장 용이) - 영상을 1과
+0의조합으로 표현
+• 이를 위해서 영상을 픽셀(pixel)들로매트릭스 처리(matrix) – e.g., 320 x 320
+• 1 픽셀 = 위치 (x, y 좌표), 농도, 색조, 시간등의 요소로 구성
+컴퓨터를 통한 영상의 디지털화
+--- PAGE 38 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상정보처리
+38
+영상획득 영상변환 영상분할 특징선택 영상분류
+Image 
+acquisition
+Image 
+transformation
+Image 
+segmentation
+feature 
+selection
+Image 
+classification
+Digitized image
+- 영상복원(필터링)
+- 영상강조
+측정할대상을 위한분할
+- 기하학적특징
+- 픽셀강도(intensity)
+- 픽셀색깔 특징  
+영상처리 단계
+--- PAGE 39 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상정보처리
+39
+해상도(Resolution)
+64 x 64
+• 2차원공간 영역에서표본화된화소들의 x, y축 개수의비율
+• 해상도가 어느정도 dpi(dot per inch) 이하로 내려가면 의미 있는 정보내용이
+사라지게 됨
+128 x 128 256 x 256
+--- PAGE 40 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상정보처리
+40
+영상 정합(image registration)
+• 하나의 장면이나 대상을 다른 시간이나 관점에서 촬영할 경우, 영상은 서로 다
+른 좌표계에서 얻어짐
+• 영상 정합은 이와 같은 서로 다른 영상을 변형하여 하나의 좌표계에 나타내는
+처리기법임
+Not registered Registered
+ CT PET CT+PET
+--- PAGE 41 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상정보처리
+41
+의료영상저장전송시스템 PACS (Picture Archiving and Communication System)
+• PACS는 의학용 영상 정보의 저장, 판독, 검색 기능 등의 수행을 통합적으로 처
+리하는 시스템을 말함
+• 의료영상 (특히 방사선 진단영상 )을 디지털 형태로 획득한후 (in DICOM
+format), 네트워크를 통하여 전송 및 저장 → 임상의사들이 모니터등을 통해
+환자를진료 (필름 사용 X)
+--- PAGE 42 ---
+Introduction to Biomedical Engineering                                                                          Ki Joo Pahk
+의료영상정보처리
+42
+DICOM(Digital Imaging and Communications in Medicine)
+• 의료용 디지털 영상의 저장, 출력 및 전송에 사용되는 여러가지 표준을 총칭 – 
+의료영상의 저장형식과 통신방법 규정
+• 1990년대 북미영상의학회 (RSNA)에서 정한 국제표준 포맷 (international 
+standard for medical images) 
+• 계속 업데이트 되는중 
+DICOM 도입 전 DICOM 도입 후

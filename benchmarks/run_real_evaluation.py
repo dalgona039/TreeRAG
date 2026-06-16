@@ -42,15 +42,17 @@ from benchmarks.metrics.text_similarity import bertscore_f1, rouge_l_score, _tok
 from benchmarks.metrics.statistical_tests import StatisticalTests
 from src.config import Config
 
-ALL_SYSTEMS = ["bm25", "dense", "flatrag", "treerag_dfs", "treerag_beam"]
+ALL_SYSTEMS = ["bm25", "dense", "flatrag", "raptor", "treerag_dfs", "treerag_beam"]
 SYSTEM_LABELS = {
     "bm25": "BM25",
     "dense": "Dense Retrieval",
     "flatrag": "FlatRAG",
+    "raptor": "RAPTOR",
     "treerag_dfs": "TreeRAG-DFS",
     "treerag_beam": "TreeRAG-Beam",
 }
 DEFAULT_REPORT_DIR = _PROJECT_ROOT / "data" / "benchmark_reports"
+RAW_TEXT_DIR = _PROJECT_ROOT / "data" / "raw_text"
 
 
 # --------------------------------------------------------------------------- #
@@ -106,13 +108,15 @@ def keyword_traversal(
 # System adapters
 # --------------------------------------------------------------------------- #
 class Evaluator:
-    def __init__(self, mode: str, use_llm_judge: bool):
+    def __init__(self, mode: str, use_llm_judge: bool, domain: str = "general"):
         self.mode = mode  # "online" | "offline"
+        self.domain = domain
         self.use_llm_judge = use_llm_judge and mode == "online"
         self._index_cache: Dict[str, Any] = {}
         self._bm25_cache: Dict[str, Any] = {}
         self._dense_cache: Dict[str, Any] = {}
         self._reasoner_cache: Dict[Tuple[str, str], Any] = {}
+        self._raptor_cache: Dict[str, Any] = {}
         self._judge = None
         if self.use_llm_judge:
             from benchmarks.metrics.llm_judge import GeminiJudge
@@ -156,6 +160,46 @@ class Evaluator:
         nodes = [{"id": d} for d in meta.get("retrieved_docs", [])]
         return answer, nodes
 
+    def load_raw_text(self, doc_id: str) -> str:
+        """Resolve a doc_id (index filename) to its extracted plain text."""
+        stem = doc_id.replace("_index.json", "").replace(".json", "")
+        path = RAW_TEXT_DIR / (stem + ".txt")
+        if path.exists():
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    return f.read()
+            except Exception:
+                pass
+        # Fallback: synthesise pseudo-text from the index tree summaries so
+        # RAPTOR still has input even when raw text was not extracted.
+        tree = self.load_tree(doc_id)
+        flat: List[Tuple[Dict[str, Any], int]] = []
+
+        def _walk(node, depth):
+            if isinstance(node, dict):
+                flat.append((node, depth))
+                for c in node.get("children", []) or []:
+                    _walk(c, depth + 1)
+
+        _walk(tree, 0)
+        lines = []
+        for node, _ in flat:
+            page = node.get("page_ref", "")
+            if page:
+                lines.append("--- PAGE {0} ---".format(str(page).split("-")[0]))
+            lines.append("{0} {1}".format(node.get("title", ""), node.get("summary", "")).strip())
+        return "\n".join(lines)
+
+    def _run_raptor(self, q: str, doc_id: str, branches: int):
+        from src.core.raptor_baseline import RaptorBaseline
+
+        if doc_id not in self._raptor_cache:
+            self._raptor_cache[doc_id] = RaptorBaseline(
+                self.load_raw_text(doc_id), doc_id
+            )
+        result = self._raptor_cache[doc_id].answer(q, top_k=max(branches, 5))
+        return result["answer"], result["source_nodes"]
+
     def _run_treerag(self, q: str, doc_id: str, algo: str, branches: int):
         if self.mode == "online":
             from src.core.reasoner import TreeRAGReasoner
@@ -185,6 +229,8 @@ class Evaluator:
             return self._run_dense(q, doc_id, branches)
         if system == "flatrag":
             return self._run_flatrag(q, doc_id, branches)
+        if system == "raptor":
+            return self._run_raptor(q, doc_id, branches)
         if system == "treerag_dfs":
             return self._run_treerag(q, doc_id, "dfs", branches)
         if system == "treerag_beam":
@@ -198,6 +244,10 @@ class Evaluator:
             "bertscore": bertscore_f1(answer, expected, lang="ko"),
             "llm_judge": None,
         }
+        if self.domain == "medical":
+            from benchmarks.metrics.text_similarity import medical_entity_recall
+
+            out["medical_entity_recall"] = medical_entity_recall(answer, expected)
         if self._judge is not None:
             out["llm_judge"] = self._judge.score_average(
                 question, context, answer, expected
@@ -208,6 +258,25 @@ class Evaluator:
 # --------------------------------------------------------------------------- #
 # Orchestration
 # --------------------------------------------------------------------------- #
+def load_dataset(dataset_arg: str) -> Dict[str, Any]:
+    """Load a dataset by file path, or build a special benchmark by keyword.
+
+    Keywords: ``hotpotqa`` (multi-hop) and ``medical`` (clinical) build their
+    datasets on the fly; anything else is treated as a JSON file path.
+    """
+    key = str(dataset_arg).strip().lower()
+    if key == "hotpotqa":
+        from benchmarks.datasets.hotpotqa_loader import build_hotpotqa_dataset
+
+        return build_hotpotqa_dataset()
+    if key == "medical":
+        path = _PROJECT_ROOT / "benchmarks" / "datasets" / "medical_benchmark.json"
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    with open(dataset_arg, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 def detect_mode(requested: str) -> str:
     if requested in ("online", "offline"):
         return requested
@@ -270,6 +339,9 @@ def aggregate(per_system: Dict[str, List[Dict[str, Any]]]) -> Dict[str, Dict[str
             "context_tokens": _mean([r["context_tokens"] for r in rows]),
             "n": len(rows),
         }
+        mer = [r["medical_entity_recall"] for r in rows if "medical_entity_recall" in r]
+        if mer:
+            agg[system]["medical_entity_recall"] = _mean(mer)
     return agg
 
 
@@ -334,6 +406,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--output", default=None)
     parser.add_argument("--use-llm-judge", action="store_true")
     parser.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
+    parser.add_argument("--domain", choices=["general", "medical"], default="general")
     args = parser.parse_args(argv)
 
     systems = ALL_SYSTEMS if args.systems == "all" else [
@@ -343,8 +416,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     if unknown:
         parser.error(f"Unknown system(s): {unknown}. Choose from {ALL_SYSTEMS} or 'all'.")
 
-    with open(args.dataset, "r", encoding="utf-8") as f:
-        dataset = json.load(f)
+    dataset = load_dataset(args.dataset)
 
     mode = detect_mode(args.mode)
     print(f"Evaluation mode : {mode.upper()}  "
@@ -352,7 +424,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     print(f"Systems         : {', '.join(systems)}")
     print(f"Questions       : {dataset.get('total_questions', len(dataset['questions']))}")
 
-    evaluator = Evaluator(mode=mode, use_llm_judge=args.use_llm_judge)
+    evaluator = Evaluator(mode=mode, use_llm_judge=args.use_llm_judge, domain=args.domain)
     per_system = evaluate(dataset, systems, evaluator)
     agg = aggregate(per_system)
     sig = significance(per_system, systems)

@@ -1,0 +1,525 @@
+{
+  "version": "2.0",
+  "backend": "offline",
+  "total_questions": 42,
+  "documents": [
+    "c7b780a9_생체의공학개론#11_index.json",
+    "92928ecd_생체의공학개론_보고서_index.json",
+    "61dd7aa0_s41598-026-41649-2_reference_index.json"
+  ],
+  "questions": [
+    {
+      "question": "초음파의 개요 및 역사의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "CH1"
+      ],
+      "expected_answer_hint": "초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_001",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파 영상의 정의의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "SEC1.1"
+      ],
+      "expected_answer_hint": "초음파를 이용하여 인체 내부를 투시하고 반사 및 산란되는 파동을 시각화하는 진단 기술",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_002",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파의 역사의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "박쥐의 초음파 인지 발견(1793), 압전 효과 발견(1880), 소나 및 레이더 개발을 거쳐 진단 및 치료용 시스템으로 발전한 과정",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_003",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "음파의 물리적 특성의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "CH2"
+      ],
+      "expected_answer_hint": "음파의 정의, 매질에 따른 전파 속도, 감쇠 현상 및 경계면에서의 반사와 굴절 원리",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_004",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "음파의 기본 원리 및 변수의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "SEC2.1"
+      ],
+      "expected_answer_hint": "매질이 필요한 파동으로서의 음파 정의와 주파수, 주기, 파장, 전파속도 등 주요 음향 변수 설명",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_005",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "소리의 감쇠(Attenuation)의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "SEC2.2"
+      ],
+      "expected_answer_hint": "거리와 주파수 증가에 따른 에너지 손실 현상 및 매질의 점성에 따른 흡수 정도 차이",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_006",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "반사와 굴절 및 임피던스의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "SEC2.3"
+      ],
+      "expected_answer_hint": "음향 임피던스 차이에 의한 반사율 결정 및 피부 접촉 매질(Gel) 사용의 필요성",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_007",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "가청 주파수와 초음파의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "SEC2.4"
+      ],
+      "expected_answer_hint": "인간의 가청 범위(20Hz~20kHz)를 벗어난 20,000Hz 이상의 고주파 음파 정의",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_008",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파의 발생 및 장치의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "CH3"
+      ],
+      "expected_answer_hint": "압전 효과를 이용한 초음파 발생 원리와 검사 부위별 프로브의 종류",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_009",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "압전 효과(Piezoelectric Effect)의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "SEC3.1"
+      ],
+      "expected_answer_hint": "압전 소자에 전압을 가해 기계적 진동을 만들거나 반대로 반사음을 전기 신호로 변환하는 원리",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_010",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파 프로브(Probe)와(과) 도플러 초음파(Doppler Ultrasonography)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "SEC3.2",
+        "SEC4.2"
+      ],
+      "expected_answer_hint": "검사 목적에 따른 Linear, Convex, Transvaginal, Sector, 3D 프로브의 형태와 용도 도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "유사 조건/치료의 감별",
+      "question_id": "auto_011",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "초음파 진단 방식 및 응용와(과) 도플러 초음파(Doppler Ultrasonography)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "CH4",
+        "SEC4.2"
+      ],
+      "expected_answer_hint": "A, B, M-mode 등 주요 진단 모드와 도플러 효과를 이용한 혈류 측정 및 기타 응용 분야 도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "유사 조건/치료의 감별",
+      "question_id": "auto_012",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "주요 진단 모드 (A, B, M-mode)와(과) 도플러 초음파(Doppler Ultrasonography)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "SEC4.1",
+        "SEC4.2"
+      ],
+      "expected_answer_hint": "진폭을 표시하는 A-mode, 휘도 변조 단층상인 B-mode, 움직임을 기록하는 M-mode의 특징 도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "유사 조건/치료의 감별",
+      "question_id": "auto_013",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "도플러 초음파(Doppler Ultrasonography)와 관련된 주의사항이나 금기사항은 무엇인가?",
+      "expected_sections": [
+        "SEC4.2"
+      ],
+      "expected_answer_hint": "도플러 효과를 이용하여 혈액의 유량 및 심장 판막의 운동 속도를 측정하는 방식",
+      "difficulty": "medium",
+      "category": "safety",
+      "clinical_relevance": "환자 안전을 위한 금기/주의 확인",
+      "question_id": "auto_014",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json"
+    },
+    {
+      "question": "머신 러닝과 딥러닝 기반 의공학 솔루션: 다중 생체 신호 분석과 맞춤형 의료 모델 개발의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "DOC-2025104184"
+      ],
+      "expected_answer_hint": "본 보고서는 AI 기술이 의공학에 적용되는 방식을 데이터의 가용성과 해석 가능성을 중심으로 분석하며, 신호 처리 연구 사례와 최신 문헌 사례를 통해 공학적 최적화 전략과 자동화된 AI 모델링의 확장을 다룹니다.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_015",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "서론의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "CH-01"
+      ],
+      "expected_answer_hint": "현대 공학 및 의공학 분야에서 AI 기술의 중요성과 패러다임 전환을 설명하고, 본 보고서의 분석 방향인 데이터 가용성과 해석 가능성에 대해 소개합니다.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_016",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "의공학 분야의 AI 패러다임 전환의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "SEC-01-01"
+      ],
+      "expected_answer_hint": "제조, 통신 등 전 분야에 걸친 AI의 발전 속에서 의공학은 복잡한 생체 신호 해석과 질병 예측을 위한 도전적인 시험대가 되고 있습니다.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_017",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "엔드투엔드 딥러닝의 부상의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "ART-01-01-01"
+      ],
+      "expected_answer_hint": "전통적인 머신러닝을 넘어, 입력에서 출력까지 단일 신경망이 처리하는 엔드투엔드 딥러닝 방식에 대한 집중도가 증가하고 있습니다.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_018",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "보고서의 분석 방향의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "ART-01-01-02"
+      ],
+      "expected_answer_hint": "데이터 가용성과 해석 가능성을 축으로, 제한된 데이터 환경에서의 하이브리드 접근과 대규모 데이터 환경에서의 엔드투엔드 딥러닝을 비교 분석합니다.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_019",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "본론 1: 딥러닝 기반 신호 분석 및 예측 연구의 핵심 임상 내용은 무엇인가?",
+      "expected_sections": [
+        "CH-02"
+      ],
+      "expected_answer_hint": "대용량 보행 신호 데이터를 효율적으로 처리하고, CNN-LSTM 하이브리드 모델과 하이퍼 파라미터 최적화를 통해 보행 특성을 정밀하게 분석 및 예측하는 연구를 다룹니다.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "임상 판단에 필요한 핵심 사실 확인",
+      "question_id": "auto_020",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "보행 분석의 중요성과 데이터 처리의 난제의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "SEC-02-01"
+      ],
+      "expected_answer_hint": "보행 신호의 임상적 가치와 웨어러블 센서 도입에 따른 대용량 시계열 데이터 처리의 공학적 어려움을 설명합니다.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_021",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "보행 신호의 임상적 가치의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "ART-02-01-01"
+      ],
+      "expected_answer_hint": "보행은 신경계 및 근골격계 건강을 반영하며, 파킨슨병이나 뇌졸중 등의 조기 징후를 파악하는 데 중요한 지표입니다.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_022",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "웨어러블 센서 데이터의 특성의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "ART-02-01-02"
+      ],
+      "expected_answer_hint": "웨어러블 센서는 장기간 모니터링이 가능하나, 대용량, 고차원, 노이즈가 포함된 시계열 데이터를 생성하여 처리의 복잡성을 높입니다.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_023",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "연구 방법론 및 기술적 접근의 수행 절차를 단계별로 설명하시오.",
+      "expected_sections": [
+        "SEC-02-02"
+      ],
+      "expected_answer_hint": "DuckDB를 활용한 데이터 처리, CNN-LSTM 모델 설계, KerasTuner를 이용한 최적화 전략을 제시합니다.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "시술/절차의 정확한 수행 순서 확인",
+      "question_id": "auto_024",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "DuckDB를 활용한 대용량 데이터 처리와(과) 학습 곡선과 조기 종료(Early Stopping)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "ART-02-02-01",
+        "ART-02-03-01"
+      ],
+      "expected_answer_hint": "메모리 병목 현상을 해결하기 위해 DuckDB를 사용하여 SQL 기반의 고속 분석과 데이터베이스 내부 Z-SCORE 변환을 수행했습니다. Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다.",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "유사 조건/치료의 감별",
+      "question_id": "auto_025",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "CNN-LSTM 하이브리드 모델 및 최적화와(과) 학습 곡선과 조기 종료(Early Stopping)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "ART-02-02-02",
+        "ART-02-03-01"
+      ],
+      "expected_answer_hint": "공간적 특징(CNN)과 시간적 흐름(LSTM)을 학습하는 모델을 설계하고, KerasTuner의 Hyperband 알고리즘으로 하이퍼 파라미터를 최적화했습니다. Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다.",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "유사 조건/치료의 감별",
+      "question_id": "auto_026",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "연구 결과 및 검증와(과) 학습 곡선과 조기 종료(Early Stopping)의 차이점은 무엇인가?",
+      "expected_sections": [
+        "SEC-02-03",
+        "ART-02-03-01"
+      ],
+      "expected_answer_hint": "모델의 학습 곡선 분석과 Early Stopping 기법을 통한 과적합 방지 및 성능 확보 결과를 제시합니다. Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다.",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "유사 조건/치료의 감별",
+      "question_id": "auto_027",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "학습 곡선과 조기 종료(Early Stopping)와 관련된 주의사항이나 금기사항은 무엇인가?",
+      "expected_sections": [
+        "ART-02-03-01"
+      ],
+      "expected_answer_hint": "Validation Loss의 정체 구간에서 학습을 조기 종료하여 과적합을 방지하고 일반화 성능을 확보했습니다.",
+      "difficulty": "medium",
+      "category": "safety",
+      "clinical_relevance": "환자 안전을 위한 금기/주의 확인",
+      "question_id": "auto_028",
+      "document_id": "92928ecd_생체의공학개론_보고서_index.json"
+    },
+    {
+      "question": "What is the key clinical content of 1. INTRODUCTION?",
+      "expected_sections": [
+        "CH1"
+      ],
+      "expected_answer_hint": "Overview of third-generation DNA sequencing, the computational challenges of basecalling, and the motivation for an ASIC-based HMM accelerator.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "Confirms a key clinical fact needed for decisions",
+      "question_id": "auto_029",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is the key clinical content of Technological Shift?",
+      "expected_sections": [
+        "SEC1.1"
+      ],
+      "expected_answer_hint": "Classification of palm-sized sequencers as third-generation devices and their medical/industrial potential.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "Confirms a key clinical fact needed for decisions",
+      "question_id": "auto_030",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is the key clinical content of Basecalling Process?",
+      "expected_sections": [
+        "ART1.1.1"
+      ],
+      "expected_answer_hint": "The conversion of electronic current fluctuations into nucleotide sequences (A, C, G, T).",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "Confirms a key clinical fact needed for decisions",
+      "question_id": "auto_031",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is the key clinical content of Proposed Architecture?",
+      "expected_sections": [
+        "SEC1.2"
+      ],
+      "expected_answer_hint": "Introduction of a 130-nm CMOS DNA basecaller balancing accuracy and hardware feasibility.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "Confirms a key clinical fact needed for decisions",
+      "question_id": "auto_032",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is the key clinical content of Serial-Parallel Structure?",
+      "expected_sections": [
+        "ART1.2.1"
+      ],
+      "expected_answer_hint": "A method to scale up to 4096 states while optimizing resource utilization.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "Confirms a key clinical fact needed for decisions",
+      "question_id": "auto_033",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What is the key clinical content of 2. ADVANCES IN HARDWARE-BASED DNA SEQUENCING BASECALLERS?",
+      "expected_sections": [
+        "CH2"
+      ],
+      "expected_answer_hint": "Historical context and comparative analysis of existing FPGA and ASIC-based sequencing accelerators.",
+      "difficulty": "easy",
+      "category": "clinical_fact",
+      "clinical_relevance": "Confirms a key clinical fact needed for decisions",
+      "question_id": "auto_034",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What are the steps for performing Nanopore Sensing Mechanism?",
+      "expected_sections": [
+        "SEC2.1"
+      ],
+      "expected_answer_hint": "Description of ion flow through nanoscale pores and current fluctuations caused by DNA translocation.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "Verifies the correct order of a clinical procedure",
+      "question_id": "auto_035",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What are the steps for performing Signal Processing?",
+      "expected_sections": [
+        "ART2.1.1"
+      ],
+      "expected_answer_hint": "The transformation of noisy time-series signals into readable genetic data.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "Verifies the correct order of a clinical procedure",
+      "question_id": "auto_036",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What are the steps for performing Comparative Benchmarks?",
+      "expected_sections": [
+        "SEC2.2"
+      ],
+      "expected_answer_hint": "Analysis of previous works by Olson, Sharma, Hammad, Rashed, and Chen regarding power and accuracy.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "Verifies the correct order of a clinical procedure",
+      "question_id": "auto_037",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What are the steps for performing Hardware Trade-offs?",
+      "expected_sections": [
+        "ART2.2.1"
+      ],
+      "expected_answer_hint": "The balance between power efficiency, accuracy, and throughput in existing hardware.",
+      "difficulty": "medium",
+      "category": "procedure",
+      "clinical_relevance": "Verifies the correct order of a clinical procedure",
+      "question_id": "auto_038",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What distinguishes 3. HMM-BASED BASECALLER from 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS?",
+      "expected_sections": [
+        "CH3",
+        "CH4"
+      ],
+      "expected_answer_hint": "Theoretical framework for using Hidden Markov Models to decode noisy nanopore signals. Technical details on the sensor model, Viterbi detection, and memory management strategies.",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "Differentiates similar conditions or treatments",
+      "question_id": "auto_039",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What distinguishes Probabilistic Modeling from 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS?",
+      "expected_sections": [
+        "SEC3.1",
+        "CH4"
+      ],
+      "expected_answer_hint": "Using the Viterbi algorithm to identify the most likely sequence of nucleotides. Technical details on the sensor model, Viterbi detection, and memory management strategies.",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "Differentiates similar conditions or treatments",
+      "question_id": "auto_040",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What distinguishes K-mer Influence from 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS?",
+      "expected_sections": [
+        "ART3.1.1",
+        "CH4"
+      ],
+      "expected_answer_hint": "Addressing the overlapping influence of multiple bases on the sensor output. Technical details on the sensor model, Viterbi detection, and memory management strategies.",
+      "difficulty": "hard",
+      "category": "comparison",
+      "clinical_relevance": "Differentiates similar conditions or treatments",
+      "question_id": "auto_041",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    },
+    {
+      "question": "What are the contraindications or warnings for 4. HARDWARE IMPLEMENTATION AND PERFORMANCE CONSIDERATIONS?",
+      "expected_sections": [
+        "CH4"
+      ],
+      "expected_answer_hint": "Technical details on the sensor model, Viterbi detection, and memory management strategies.",
+      "difficulty": "medium",
+      "category": "safety",
+      "clinical_relevance": "Checks contraindications for patient safety",
+      "question_id": "auto_042",
+      "document_id": "61dd7aa0_s41598-026-41649-2_reference_index.json"
+    }
+  ]
+}

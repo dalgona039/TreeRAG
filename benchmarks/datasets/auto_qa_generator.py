@@ -236,6 +236,133 @@ def _gemini_available() -> bool:
 
 
 # --------------------------------------------------------------------------- #
+# PHASE 3-2: medical-domain generation
+# --------------------------------------------------------------------------- #
+# Index files of the medical/biomedical documents in this corpus.
+MEDICAL_DOCS = [
+    "c7b780a9_생체의공학개론#11_index.json",
+    "92928ecd_생체의공학개론_보고서_index.json",
+    "61dd7aa0_s41598-026-41649-2_reference_index.json",
+]
+
+MEDICAL_QA_PROMPT = """
+You are a medical QA dataset creator for evaluating clinical document RAG.
+Generate {n} questions that a clinician would realistically ask when
+consulting this document.
+
+Document tree:
+{tree_json}
+
+Question types to generate:
+- clinical_fact (4): Specific clinical values, dosages, criteria
+  e.g. "What is the recommended dosage of X for condition Y?"
+- procedure (3): Step-by-step clinical procedures
+  e.g. "What are the steps for performing X?"
+- comparison (2): Comparing conditions/treatments
+  e.g. "What distinguishes condition A from condition B?"
+- safety (1): Contraindications, warnings, side effects
+  e.g. "What are the contraindications for X?"
+
+For each question:
+- question: the clinical question
+- expected_sections: relevant node IDs
+- expected_answer_hint: expected answer in 1-2 sentences
+- difficulty: "easy" | "medium" | "hard"
+- category: one of the four types above
+- clinical_relevance: why a clinician would ask this
+
+JSON only: {{"questions": [...]}}
+"""
+
+# Default per-category counts for medical generation (sums to 14 -> 40+ over 3 docs).
+_MED_COUNTS = [("clinical_fact", 6), ("procedure", 4), ("comparison", 3), ("safety", 1)]
+
+
+def generate_offline_medical_questions(tree: Dict[str, Any], n: int = 14) -> List[Dict[str, Any]]:
+    """Deterministic medical Q&A from a tree (clinical_fact/procedure/comparison/safety)."""
+    nodes = _content_nodes(flatten_tree(tree))
+    if not nodes:
+        return []
+    ko = _is_korean(" ".join(nd["title"] + nd["summary"] for nd in nodes))
+    out: List[Dict[str, Any]] = []
+    idx = 0
+
+    def take(count):
+        nonlocal idx
+        chosen = []
+        for _ in range(count):
+            chosen.append(nodes[idx % len(nodes)])
+            idx += 1
+        return chosen
+
+    for category, count in _MED_COUNTS:
+        for node in take(count):
+            if category == "clinical_fact":
+                q = ("{0}의 핵심 임상 내용은 무엇인가?" if ko else "What is the key clinical content of {0}?").format(node["title"])
+                rel = "임상 판단에 필요한 핵심 사실 확인" if ko else "Confirms a key clinical fact needed for decisions"
+                diff = "easy"
+            elif category == "procedure":
+                q = ("{0}의 수행 절차를 단계별로 설명하시오." if ko else "What are the steps for performing {0}?").format(node["title"])
+                rel = "시술/절차의 정확한 수행 순서 확인" if ko else "Verifies the correct order of a clinical procedure"
+                diff = "medium"
+            elif category == "comparison":
+                other = nodes[(idx) % len(nodes)]
+                idx_pair = other
+                q = ("{0}와(과) {1}의 차이점은 무엇인가?" if ko else "What distinguishes {0} from {1}?").format(node["title"], idx_pair["title"])
+                rel = "유사 조건/치료의 감별" if ko else "Differentiates similar conditions or treatments"
+                diff = "hard"
+                out.append({
+                    "question": q,
+                    "expected_sections": [node["id"], idx_pair["id"]],
+                    "expected_answer_hint": ("{0} {1}".format(node["summary"], idx_pair["summary"])).strip(),
+                    "difficulty": diff,
+                    "category": category,
+                    "clinical_relevance": rel,
+                })
+                continue
+            else:  # safety
+                q = ("{0}와 관련된 주의사항이나 금기사항은 무엇인가?" if ko else "What are the contraindications or warnings for {0}?").format(node["title"])
+                rel = "환자 안전을 위한 금기/주의 확인" if ko else "Checks contraindications for patient safety"
+                diff = "medium"
+            out.append({
+                "question": q,
+                "expected_sections": [node["id"]],
+                "expected_answer_hint": node["summary"],
+                "difficulty": diff,
+                "category": category,
+                "clinical_relevance": rel,
+            })
+    return out[:n]
+
+
+def generate_gemini_medical_questions(tree: Dict[str, Any], n: int = 14) -> List[Dict[str, Any]]:
+    """Medical Q&A via Gemini (clinical prompt). Raises on API/parse failure."""
+    from src.config import Config
+
+    prompt = MEDICAL_QA_PROMPT.format(n=n, tree_json=json.dumps(tree, ensure_ascii=False))
+    response = Config.CLIENT.models.generate_content(
+        model=Config.MODEL_NAME, contents=prompt, config=Config.get_generation_config()
+    )
+    text = (response.text or "").strip()
+    if text.startswith("```"):
+        text = text.split("```", 2)[-1] if text.count("```") >= 2 else text.strip("`")
+        text = text.replace("json", "", 1).strip() if text.lstrip().startswith("json") else text
+    data = json.loads(text)
+    raw = data.get("questions", []) if isinstance(data, dict) else data
+    cleaned = []
+    for item in raw:
+        cleaned.append({
+            "question": item.get("question", "").strip(),
+            "expected_sections": list(item.get("expected_sections", []) or []),
+            "expected_answer_hint": item.get("expected_answer_hint", "").strip(),
+            "difficulty": item.get("difficulty", "medium"),
+            "category": item.get("category", "clinical_fact"),
+            "clinical_relevance": item.get("clinical_relevance", ""),
+        })
+    return cleaned
+
+
+# --------------------------------------------------------------------------- #
 # Orchestration
 # --------------------------------------------------------------------------- #
 def list_index_files(index_dir: Path = DEFAULT_INDEX_DIR) -> List[Path]:
@@ -246,13 +373,27 @@ def build_benchmark(
     index_dir: Path = DEFAULT_INDEX_DIR,
     backend: str = "auto",
     per_doc: int = 10,
+    domain: str = "general",
+    files: Optional[List[Path]] = None,
 ) -> Dict[str, Any]:
-    """Generate questions across every index file and merge into one dataset."""
+    """Generate questions across every index file and merge into one dataset.
+
+    ``domain="medical"`` uses the clinical prompt / offline medical generator
+    and the four medical categories (clinical_fact, procedure, comparison,
+    safety). ``files`` overrides which index files are used.
+    """
     if backend == "auto":
         backend = "gemini" if _gemini_available() else "offline"
-    gen = generate_gemini_questions if backend == "gemini" else generate_offline_questions
 
-    files = list_index_files(index_dir)
+    if domain == "medical":
+        gemini_gen = generate_gemini_medical_questions
+        offline_gen = generate_offline_medical_questions
+    else:
+        gemini_gen = generate_gemini_questions
+        offline_gen = generate_offline_questions
+    gen = gemini_gen if backend == "gemini" else offline_gen
+
+    files = list(files) if files is not None else list_index_files(index_dir)
     documents: List[str] = []
     questions: List[Dict[str, Any]] = []
     summary: List[Dict[str, Any]] = []
@@ -265,8 +406,8 @@ def build_benchmark(
         try:
             doc_questions = gen(tree, n=per_doc)
         except Exception as exc:  # pragma: no cover - network failure path
-            print(f"  ⚠️  {backend} generation failed for {doc_id}: {exc}; using offline")
-            doc_questions = generate_offline_questions(tree, n=per_doc)
+            print("  WARN {0} generation failed for {1}: {2}; using offline".format(backend, doc_id, exc))
+            doc_questions = offline_gen(tree, n=per_doc)
 
         cats: Dict[str, int] = {}
         for q in doc_questions:
@@ -322,12 +463,17 @@ def validate_dataset(
             errors.append(f"Duplicate question in {key[0]}: {key[1]!r}")
         seen.add(key)
 
-    available = {p.name for p in index_dir.glob("*.json")}
-    available |= {p.stem for p in index_dir.glob("*.json")}
+    import unicodedata
+
+    def _nfc(s):
+        return unicodedata.normalize("NFC", s)
+
+    available = {_nfc(p.name) for p in index_dir.glob("*.json")}
+    available |= {_nfc(p.stem) for p in index_dir.glob("*.json")}
     for q in questions:
-        doc = q.get("document_id", "")
-        if doc not in available and f"{doc}.json" not in available:
-            errors.append(f"Unresolvable document_id: {doc!r} (q={q.get('question_id')})")
+        doc = _nfc(q.get("document_id", ""))
+        if doc not in available and _nfc("{0}.json".format(doc)) not in available:
+            errors.append("Unresolvable document_id: {0!r} (q={1})".format(doc, q.get("question_id")))
 
     for q in questions:
         for field in REQUIRED_FIELDS:
@@ -356,12 +502,17 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--backend", choices=["auto", "gemini", "offline"], default="auto")
     parser.add_argument("--index-dir", default=str(DEFAULT_INDEX_DIR))
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
-    parser.add_argument("--per-doc", type=int, default=10)
+    parser.add_argument("--per-doc", type=int, default=0, help="0 = domain default")
+    parser.add_argument("--domain", choices=["general", "medical"], default="general")
     parser.add_argument("--validate-only", action="store_true")
     args = parser.parse_args(argv)
 
     index_dir = Path(args.index_dir)
+    medical = args.domain == "medical"
+    per_doc = args.per_doc or (14 if medical else 10)
     out_path = Path(args.output)
+    if medical and args.output == str(DEFAULT_OUTPUT):
+        out_path = DEFAULT_OUTPUT.parent / "medical_benchmark.json"
 
     if args.validate_only:
         with open(out_path, "r", encoding="utf-8") as f:
@@ -369,7 +520,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         result = validate_dataset(dataset, index_dir)
         return 0 if result["passed"] else 1
 
-    dataset = build_benchmark(index_dir, backend=args.backend, per_doc=args.per_doc)
+    files = None
+    if medical:
+        files = [index_dir / name for name in MEDICAL_DOCS if (index_dir / name).exists()]
+    dataset = build_benchmark(index_dir, backend=args.backend, per_doc=per_doc,
+                              domain=args.domain, files=files)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(dataset, f, ensure_ascii=False, indent=2)

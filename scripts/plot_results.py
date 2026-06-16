@@ -539,5 +539,117 @@ def main(argv=None) -> int:
     return 0
 
 
+# ======================================================================
+# PHASE 5 additions (ACM): 4 paper figures, colorblind-safe palette.
+# ======================================================================
+# Wong (2011) colorblind-safe palette.
+CB_PALETTE = ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9", "#F0E442"]
+_ACM_LABELS = {
+    "bm25": "BM25", "dense": "Dense", "flatrag": "FlatRAG", "raptor": "RAPTOR",
+    "treerag_dfs": "TreeRAG-DFS", "treerag_beam": "TreeRAG-Beam",
+}
+
+
+def figure_architecture(out_dir=None):
+    """Figure 1: TreeRAG architecture diagram, rendered to PDF/PNG."""
+    out_dir = Path(out_dir) if out_dir else FIG_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
+    fig, ax = plt.subplots(figsize=(9, 4.5))
+    ax.axis("off")
+    stages = [
+        ("PDF\nDocument", 0.06, CB_PALETTE[0]),
+        ("LLM Tree\nIndexer", 0.27, CB_PALETTE[1]),
+        ("Hierarchical\nPageIndex Tree", 0.50, CB_PALETTE[2]),
+        ("Beam/DFS\nTraversal", 0.72, CB_PALETTE[3]),
+        ("Grounded Answer\n+ [doc, p.X]", 0.92, CB_PALETTE[4]),
+    ]
+    for label, x, color in stages:
+        ax.add_patch(plt.Rectangle((x - 0.085, 0.4), 0.17, 0.2, facecolor=color,
+                                   edgecolor="black", alpha=0.85, transform=ax.transAxes))
+        ax.text(x, 0.5, label, ha="center", va="center", fontsize=9,
+                color="white", fontweight="bold", transform=ax.transAxes)
+    for i in range(len(stages) - 1):
+        x0 = stages[i][1] + 0.085
+        x1 = stages[i + 1][1] - 0.085
+        ax.annotate("", xy=(x1, 0.5), xytext=(x0, 0.5), xycoords=ax.transAxes,
+                    textcoords=ax.transAxes, arrowprops=dict(arrowstyle="-|>", color="black"))
+    ax.set_title("TreeRAG: top-down structure-preserving retrieval pipeline")
+    for ext in ("pdf", "png"):
+        fig.savefig(out_dir / "figure_1_architecture.{0}".format(ext), dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print("  ✓ figure_1_architecture.pdf / .png")
+
+
+def figure_main_bars(report, out_dir=None):
+    """Figure 2: all systems × {ROUGE-L, BERTScore} grouped bars."""
+    out_dir = Path(out_dir) if out_dir else FIG_DIR
+    systems = report["systems"]
+    labels = [_ACM_LABELS.get(s, s) for s in systems]
+    rouge = [report["summary"][s]["rouge_l"] for s in systems]
+    bert = [report["summary"][s]["bertscore"] for s in systems]
+    x = range(len(systems))
+    w = 0.38
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.bar([i - w / 2 for i in x], rouge, w, label="ROUGE-L", color=CB_PALETTE[0])
+    ax.bar([i + w / 2 for i in x], bert, w, label="BERTScore", color=CB_PALETTE[1])
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(labels, rotation=20, ha="right")
+    ax.set_ylabel("Score")
+    ax.set_title("Main results: ROUGE-L and BERTScore by system")
+    ax.legend()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for ext in ("pdf", "png"):
+        fig.savefig(out_dir / "figure_2_main_results.{0}".format(ext), dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print("  ✓ figure_2_main_results.pdf / .png")
+
+
+def figure_multihop(full_report, hotpot_report, out_dir=None):
+    """Figure 3: Full-benchmark vs HotpotQA ROUGE-L (advantage grows on multi-hop)."""
+    out_dir = Path(out_dir) if out_dir else FIG_DIR
+    systems = [s for s in full_report["systems"] if s in hotpot_report.get("summary", {})]
+    labels = [_ACM_LABELS.get(s, s) for s in systems]
+    full = [full_report["summary"][s]["rouge_l"] for s in systems]
+    hot = [hotpot_report["summary"][s]["rouge_l"] for s in systems]
+    x = range(len(systems))
+    w = 0.38
+    fig, ax = plt.subplots(figsize=(9, 5))
+    ax.bar([i - w / 2 for i in x], full, w, label="Full benchmark", color=CB_PALETTE[2])
+    ax.bar([i + w / 2 for i in x], hot, w, label="HotpotQA multi-hop", color=CB_PALETTE[3])
+    ax.set_xticks(list(x))
+    ax.set_xticklabels(labels, rotation=20, ha="right")
+    ax.set_ylabel("ROUGE-L")
+    ax.set_title("Multi-hop performance: full benchmark vs HotpotQA subset")
+    ax.legend()
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for ext in ("pdf", "png"):
+        fig.savefig(out_dir / "figure_3_multihop.{0}".format(ext), dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print("  ✓ figure_3_multihop.pdf / .png")
+
+
+def figure_context_reduction(report, out_dir=None):
+    """Figure 4: accuracy (ROUGE-L) vs context size — TreeRAG Pareto frontier."""
+    out_dir = Path(out_dir) if out_dir else FIG_DIR
+    systems = report["systems"]
+    fig, ax = plt.subplots(figsize=(9, 5))
+    for i, s in enumerate(systems):
+        a = report["summary"][s]
+        marker = "*" if s.startswith("treerag") else "o"
+        size = 320 if s.startswith("treerag") else 130
+        ax.scatter(a["context_tokens"], a["rouge_l"], s=size, marker=marker,
+                   color=CB_PALETTE[i % len(CB_PALETTE)], edgecolors="black",
+                   alpha=0.85, label=_ACM_LABELS.get(s, s))
+    ax.set_xlabel("Context size (tokens)")
+    ax.set_ylabel("ROUGE-L (accuracy)")
+    ax.set_title("Accuracy vs context size (upper-left Pareto-dominates)")
+    ax.legend(fontsize=8)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for ext in ("pdf", "png"):
+        fig.savefig(out_dir / "figure_4_context_reduction.{0}".format(ext), dpi=300, bbox_inches="tight")
+    plt.close(fig)
+    print("  ✓ figure_4_context_reduction.pdf / .png")
+
+
 if __name__ == "__main__":
     raise SystemExit(main())

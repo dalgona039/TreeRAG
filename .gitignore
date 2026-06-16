@@ -131,3 +131,12 @@ RESEARCH_OVERVIEW.md
 
 # Dense retrieval embedding caches (PHASE B-2, regenerable)
 data/indices/*_dense_index.pkl
+
+# Generated HotpotQA pseudo-indices (PHASE 2, regenerable)
+data/indices/hotpotqa_*_index.json
+
+# Downloaded medical PDFs (PHASE 3, regenerable)
+data/raw/medical/
+
+# Generated human-eval demo artifacts (PHASE 4)
+benchmarks/human_eval/annotations_filled.csv
