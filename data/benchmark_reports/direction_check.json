@@ -1,5 +1,5 @@
 {
-  "timestamp": "20260616_180236",
+  "timestamp": "20260616_182700",
   "mode": "online",
   "dataset": "full_benchmark.json",
   "systems": [
@@ -9,42 +9,42 @@
   ],
   "summary": {
     "bm25": {
-      "rouge_l": 0.48238295618840576,
-      "bertscore": 0.48238295618840576,
+      "rouge_l": 0.5340973580410201,
+      "bertscore": 0.5340973580410201,
       "llm_judge": null,
-      "latency": 0.703843341988977,
-      "context_tokens": 320.8,
-      "n": 5
+      "latency": 0.10563579166773707,
+      "context_tokens": 338.0,
+      "n": 3
     },
     "flatrag": {
-      "rouge_l": 0.42954754237940895,
-      "bertscore": 0.42954754237940895,
+      "rouge_l": 0.48213739047616794,
+      "bertscore": 0.48213739047616794,
       "llm_judge": null,
-      "latency": 0.001628216600511223,
+      "latency": 0.0006361806493562957,
       "context_tokens": 0.0,
-      "n": 5
+      "n": 3
     },
     "treerag_beam": {
-      "rouge_l": 0.0,
-      "bertscore": 0.0,
+      "rouge_l": 0.006600660066006601,
+      "bertscore": 0.006600660066006601,
       "llm_judge": null,
-      "latency": 0.6772154999896884,
-      "context_tokens": 0.0,
-      "n": 5
+      "latency": 137.0949887500028,
+      "context_tokens": 31.666666666666668,
+      "n": 3
     }
   },
   "significance": {
     "bm25": {
-      "p_value": 0.0025508747444532454,
+      "p_value": 0.00363260708386781,
       "significant": true,
-      "effect_size": 7.7842222433961314,
-      "mean_diff": -0.48238295618840576
+      "effect_size": 11.407649403287627,
+      "mean_diff": -0.5274966979750134
     },
     "flatrag": {
-      "p_value": 0.00333549728772826,
+      "p_value": 0.004317533387401988,
       "significant": true,
-      "effect_size": 6.807372216981667,
-      "mean_diff": -0.42954754237940895
+      "effect_size": 10.457936531384119,
+      "mean_diff": -0.47553673041016137
     }
   },
   "per_question": {
@@ -55,7 +55,7 @@
         "answer": "0cbccdf9 2204.08939v1-2: This paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques. 2.3.3. Evaluation of performance: Defines the Relative Mean Square Error (RMSE) as the metric for evaluating the performance of the ML-based surrogate model. It specifies how RMSE is calculated for scalar fields (pressure) and vector fields (wall shear stress, velocity), including both vector and magnitude errors, and how it's averaged across multiple samples in a test dataset. 2.3.1. Encoding-decoding formulation.: Explains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space.",
         "retrieved_count": 3,
         "context_tokens": 367,
-        "latency": 3.517455249966588,
+        "latency": 0.31670708302408457,
         "rouge_l": 0.5844155844155845,
         "bertscore": 0.5844155844155845,
         "llm_judge": null
@@ -66,7 +66,7 @@
         "answer": "2.3.1. Encoding-decoding formulation.: Explains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space. 1. Introduction: Discusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems. 2.3.3. Evaluation of performance: Defines the Relative Mean Square Error (RMSE) as the metric for evaluating the performance of the ML-based surrogate model. It specifies how RMSE is calculated for scalar fields (pressure) and vector fields (wall shear stress, velocity), including both vector and magnitude errors, and how it's averaged across multiple samples in a test dataset.",
         "retrieved_count": 3,
         "context_tokens": 344,
-        "latency": 0.0006158340256661177,
+        "latency": 8.012499893084168e-05,
         "rouge_l": 0.5563380281690141,
         "bertscore": 0.5563380281690141,
         "llm_judge": null
@@ -77,31 +77,9 @@
         "answer": "2. Methodology: Outlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions. 2.3.3. Evaluation of performance: Defines the Relative Mean Square Error (RMSE) as the metric for evaluating the performance of the ML-based surrogate model. It specifies how RMSE is calculated for scalar fields (pressure) and vector fields (wall shear stress, velocity), including both vector and magnitude errors, and how it's averaged across multiple samples in a test dataset. 2.3.1. Encoding-decoding formulation.: Explains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space.",
         "retrieved_count": 3,
         "context_tokens": 303,
-        "latency": 0.00010437495075166225,
+        "latency": 0.00012016698019579053,
         "rouge_l": 0.4615384615384615,
         "bertscore": 0.4615384615384615,
-        "llm_judge": null
-      },
-      {
-        "question_id": "auto_004",
-        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
-        "answer": "2.1. Patient-speciﬁc aorta geometry parameterization: Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries. 2.1.2. Statistical shape modeling and virtual aorta synthesis: Explains the three-phase process for statistical shape modeling (SSM) and virtual aorta synthesis: (1) building correspondence among original shapes using the LDDMM algorithm, (2) projecting shapes to a latent space via PCA for concise parameterization, and (3) synthesizing new virtual aortas using random linear interpolation or uniform PCA sampling to generate a large dataset. 2.3.1. Encoding-decoding formulation.: Explains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space.",
-        "retrieved_count": 3,
-        "context_tokens": 296,
-        "latency": 0.00047308398643508554,
-        "rouge_l": 0.37037037037037035,
-        "bertscore": 0.37037037037037035,
-        "llm_judge": null
-      },
-      {
-        "question_id": "auto_005",
-        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
-        "answer": "2.1.1. Aorta dataset pre-processing: Describes the initial steps for preparing 3D aorta geometries reconstructed from MRI scans. This includes trimming branches to simplify structures, sampling point clouds (4000 vertices) using voronoi clustering, and aligning geometries to a template using the rigid iterative closest points (ICP) algorithm to regularize position and orientation. 2.1. Patient-speciﬁc aorta geometry parameterization: Details the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries. 2.1.2. Statistical shape modeling and virtual aorta synthesis: Explains the three-phase process for statistical shape modeling (SSM) and virtual aorta synthesis: (1) building correspondence among original shapes using the LDDMM algorithm, (2) projecting shapes to a latent space via PCA for concise parameterization, and (3) synthesizing new virtual aortas using random linear interpolation or uniform PCA sampling to generate a large dataset.",
-        "retrieved_count": 3,
-        "context_tokens": 294,
-        "latency": 0.0005681670154444873,
-        "rouge_l": 0.43925233644859807,
-        "bertscore": 0.43925233644859807,
         "llm_judge": null
       }
     ],
@@ -112,7 +90,7 @@
         "answer": "Based on the retrieved documents:\n\n[Document 1: 0cbccdf9 2204.08939v1-2 (p.1-30)]\nThis paper proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics. It addresses challenges in parameterizing complex 3D geometries and the computational cost of massive forward simulations by developing a statistical generative model for shapes, an unsupervised shape correspondence solution, an automatic simulation routine for data generation, and an efficient supervised learning solution to map geometric inputs to hemodynamics predictions in latent spaces. Numerical studies on aortic flows are conducted to demonstrate the effectiveness and merit of the proposed techniques.\n\n[Document 2: 2.3.3. Evaluation of performance (p.12)]\nDefines the Relative Mean Square Error (RMSE) as the metric for evaluating the performance of the ML-based surrogate model. It specifies how RMSE is calculated for scalar fields (pressure) and vector fields (wall shear stress, velocity), including both vector and magnitude errors, and how it's averaged across multiple samples in a test dataset.\n\n[Document 3: 2.3.1. Encoding-decoding formulation. (p.11)]\nExplains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space.\n\n\nAnswer: The documents discuss aspects related to: What is 0cbccdf9 2204.08939v1-2",
         "retrieved_count": 3,
         "context_tokens": 0,
-        "latency": 0.005917917005717754,
+        "latency": 0.0017297499580308795,
         "rouge_l": 0.5309734513274336,
         "bertscore": 0.5309734513274336,
         "llm_judge": null
@@ -123,7 +101,7 @@
         "answer": "Based on the retrieved documents:\n\n[Document 1: 1. Introduction (p.2-4)]\nDiscusses the critical role of hemodynamics in cardiovascular disease (CVD) diagnosis and prognosis, highlighting the limitations of medical imaging alone. It introduces image-based computational modeling (CFD/FSI) but points out its high computational cost and numerical challenges. The chapter then explores reduced-order modeling (ROM) as an alternative, detailing its types (LP, 1D, POD-Galerkin) and their limitations, before introducing data-driven machine learning (ML) approaches, particularly deep neural networks (DNNs), as promising surrogate models for cardiovascular systems.\n\n[Document 2: 2.3.3. Evaluation of performance (p.12)]\nDefines the Relative Mean Square Error (RMSE) as the metric for evaluating the performance of the ML-based surrogate model. It specifies how RMSE is calculated for scalar fields (pressure) and vector fields (wall shear stress, velocity), including both vector and magnitude errors, and how it's averaged across multiple samples in a test dataset.\n\n[Document 3: 2.3.1. Encoding-decoding formulation. (p.11)]\nExplains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space.\n\n\nAnswer: The documents discuss aspects related to: What is 1. Introduction",
         "retrieved_count": 3,
         "context_tokens": 0,
-        "latency": 0.000342042010743171,
+        "latency": 9.416701504960656e-05,
         "rouge_l": 0.5047923322683706,
         "bertscore": 0.5047923322683706,
         "llm_judge": null
@@ -134,31 +112,9 @@
         "answer": "Based on the retrieved documents:\n\n[Document 1: 2. Methodology (p.5-12)]\nOutlines the proposed ML-based surrogate modeling framework pipeline. This includes reconstructing 3D aorta geometries, parameterizing the geometric space using statistical shape modeling (SSM), synthesizing virtual aorta shapes, automating CFD simulation data generation, and encoding vascular shapes and hemodynamic fields into latent spaces for deep neural network (DNN) training to enable rapid hemodynamic predictions.\n\n[Document 2: 2.3.3. Evaluation of performance (p.12)]\nDefines the Relative Mean Square Error (RMSE) as the metric for evaluating the performance of the ML-based surrogate model. It specifies how RMSE is calculated for scalar fields (pressure) and vector fields (wall shear stress, velocity), including both vector and magnitude errors, and how it's averaged across multiple samples in a test dataset.\n\n[Document 3: 2.3.1. Encoding-decoding formulation. (p.11)]\nExplains the use of PCA (or POD) for encoding 3D shapes and solution fields into low-dimensional latent spaces to manage high dimensionality. It notes that 100% of PCA total variation is preserved for input geometries and over 95% for output fields, resulting in reconstruction errors less than 1%, with MLPs learning relationships in this latent space.\n\n\nAnswer: The documents discuss aspects related to: What is 2. Methodology",
         "retrieved_count": 3,
         "context_tokens": 0,
-        "latency": 0.00036645802902057767,
+        "latency": 8.462497498840094e-05,
         "rouge_l": 0.41064638783269963,
         "bertscore": 0.41064638783269963,
-        "llm_judge": null
-      },
-      {
-        "question_id": "auto_004",
-        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
-        "answer": "Based on the retrieved documents:\n\n[Document 1: 2.1. Patient-speciﬁc aorta geometry parameterization (p.5-10)]\nDetails the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.\n\n[Document 2: 2.1.2. Statistical shape modeling and virtual aorta synthesis (p.6-10)]\nExplains the three-phase process for statistical shape modeling (SSM) and virtual aorta synthesis: (1) building correspondence among original shapes using the LDDMM algorithm, (2) projecting shapes to a latent space via PCA for concise parameterization, and (3) synthesizing new virtual aortas using random linear interpolation or uniform PCA sampling to generate a large dataset.\n\n[Document 3: 4. Conclusion (p.22-23)]\nSummarizes the successful development of a statistical shape modeling (SSM) approach for parameterizing and synthesizing 3D patient aorta geometries, and an ML-based surrogate model for predicting comprehensive local hemodynamic information. It highlights the model's accuracy, efficiency (100,000x speedup), and superior performance compared to bi-fidelity models, emphasizing its potential for applications requiring massive model queries and its general applicability to other anatomies.\n\n\nAnswer: The documents discuss aspects related to: What is 2.1. Patient-speciﬁc aorta geometry parameterization",
-        "retrieved_count": 3,
-        "context_tokens": 0,
-        "latency": 0.0008438749937340617,
-        "rouge_l": 0.311284046692607,
-        "bertscore": 0.311284046692607,
-        "llm_judge": null
-      },
-      {
-        "question_id": "auto_005",
-        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
-        "answer": "Based on the retrieved documents:\n\n[Document 1: 2.1.1. Aorta dataset pre-processing (p.6)]\nDescribes the initial steps for preparing 3D aorta geometries reconstructed from MRI scans. This includes trimming branches to simplify structures, sampling point clouds (4000 vertices) using voronoi clustering, and aligning geometries to a template using the rigid iterative closest points (ICP) algorithm to regularize position and orientation.\n\n[Document 2: 2.1. Patient-speciﬁc aorta geometry parameterization (p.5-10)]\nDetails the process of parameterizing 3D patient-specific aorta geometries. This involves pre-processing steps for real aorta datasets and establishing a statistical shape modeling (SSM) framework to parameterize the complex geometric input space and synthesize numerous virtual aorta geometries.\n\n[Document 3: 2.2. Automatic CFD simulation routine (p.10-11)]\nDetails the Python routine developed to automate the tedious procedures of CFD simulations. This includes geometry pre-processing (extending entry/exit, smoothing, adding caps using VMTK), generating 3D unstructured triangular meshes, setting boundary conditions, performing simulations with OpenFOAM (using SIMPLE algorithm), and post-processing by projecting simulated field data onto meshes.\n\n\nAnswer: The documents discuss aspects related to: What is 2.1.1. Aorta dataset pre-processing",
-        "retrieved_count": 3,
-        "context_tokens": 0,
-        "latency": 0.0006707909633405507,
-        "rouge_l": 0.3900414937759336,
-        "bertscore": 0.3900414937759336,
         "llm_judge": null
       }
     ],
@@ -166,12 +122,12 @@
       {
         "question_id": "auto_001",
         "document_id": "0cbccdf9_2204.08939v1-2_index.json",
-        "answer": "",
-        "retrieved_count": 0,
-        "context_tokens": 0,
-        "latency": 0.9951612079748884,
-        "rouge_l": 0.0,
-        "bertscore": 0.0,
+        "answer": "The index does not contain information about \"0cbccdf9 2204.08939v1-2\".",
+        "retrieved_count": 10,
+        "context_tokens": 95,
+        "latency": 74.90419229102554,
+        "rouge_l": 0.019801980198019802,
+        "bertscore": 0.019801980198019802,
         "llm_judge": null
       },
       {
@@ -180,7 +136,7 @@
         "answer": "",
         "retrieved_count": 0,
         "context_tokens": 0,
-        "latency": 0.70610949996626,
+        "latency": 57.13949729199521,
         "rouge_l": 0.0,
         "bertscore": 0.0,
         "llm_judge": null
@@ -191,29 +147,7 @@
         "answer": "",
         "retrieved_count": 0,
         "context_tokens": 0,
-        "latency": 0.6250046250061132,
-        "rouge_l": 0.0,
-        "bertscore": 0.0,
-        "llm_judge": null
-      },
-      {
-        "question_id": "auto_004",
-        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
-        "answer": "",
-        "retrieved_count": 0,
-        "context_tokens": 0,
-        "latency": 0.549298917001579,
-        "rouge_l": 0.0,
-        "bertscore": 0.0,
-        "llm_judge": null
-      },
-      {
-        "question_id": "auto_005",
-        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
-        "answer": "",
-        "retrieved_count": 0,
-        "context_tokens": 0,
-        "latency": 0.5105032499996014,
+        "latency": 279.2412766669877,
         "rouge_l": 0.0,
         "bertscore": 0.0,
         "llm_judge": null
