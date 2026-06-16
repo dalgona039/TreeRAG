@@ -20,9 +20,97 @@ except Exception as e:
     logger.error(f"Failed to initialize API client: {type(e).__name__}")
     raise ValueError("Configuration error: Failed to initialize API client") from None
 
+
+# --------------------------------------------------------------------------- #
+# Resilient client wrapper: rate-limit throttle + 429/quota retry-with-backoff.
+#
+# Free-tier Gemini keys are limited to a few requests/minute. A single TreeRAG
+# query fires many calls (beam node scoring + answer generation), so without
+# this wrapper the run hits 429 RESOURCE_EXHAUSTED and produces empty answers.
+#
+# Tunable via env (no behaviour change unless set):
+#   GEMINI_MIN_INTERVAL_S : minimum seconds between calls (default 0 = off).
+#                           Set to 13 to stay under a 5 requests/minute quota.
+#   GEMINI_MAX_RETRIES    : retries on 429/quota errors (default 5).
+# --------------------------------------------------------------------------- #
+import time as _time
+import re as _re
+import random as _random
+
+_GEMINI_MIN_INTERVAL_S = float(os.getenv("GEMINI_MIN_INTERVAL_S", "0") or 0)
+_GEMINI_MAX_RETRIES = int(os.getenv("GEMINI_MAX_RETRIES", "5") or 5)
+_last_call = [0.0]
+
+
+def _is_rate_limit_error(msg: str) -> bool:
+    low = (msg or "").lower()
+    return (
+        "429" in msg
+        or "resource_exhausted" in low
+        or "quota" in low
+        or "rate limit" in low
+        or "ratelimit" in low
+    )
+
+
+def _retry_delay_seconds(msg: str):
+    """Parse a server-suggested retry delay (e.g. retryDelay: '30s') if present."""
+    m = _re.search(r"retry[_ ]?delay['\"]?\s*[:=]\s*['\"]?(\d+(?:\.\d+)?)\s*s", msg or "", _re.IGNORECASE)
+    if m:
+        try:
+            return float(m.group(1))
+        except ValueError:
+            return None
+    return None
+
+
+class _ResilientModels:
+    def __init__(self, inner):
+        self._inner = inner
+
+    def generate_content(self, *args, **kwargs):
+        if _GEMINI_MIN_INTERVAL_S > 0:
+            wait = _GEMINI_MIN_INTERVAL_S - (_time.time() - _last_call[0])
+            if wait > 0:
+                _time.sleep(wait)
+        backoff = 2.0
+        for attempt in range(_GEMINI_MAX_RETRIES + 1):
+            try:
+                resp = self._inner.generate_content(*args, **kwargs)
+                _last_call[0] = _time.time()
+                return resp
+            except Exception as exc:
+                msg = str(exc)
+                if not _is_rate_limit_error(msg) or attempt == _GEMINI_MAX_RETRIES:
+                    raise
+                delay = _retry_delay_seconds(msg) or backoff
+                logger.warning(
+                    "Gemini rate-limited (attempt %d/%d); sleeping %.1fs",
+                    attempt + 1, _GEMINI_MAX_RETRIES, delay,
+                )
+                _time.sleep(delay + _random.uniform(0, 1.0))
+                backoff = min(backoff * 2, 60.0)
+                _last_call[0] = _time.time()
+
+    def __getattr__(self, name):
+        return getattr(self._inner, name)
+
+
+class _ResilientClient:
+    def __init__(self, inner):
+        self._inner = inner
+        self.models = _ResilientModels(inner.models)
+
+    def __getattr__(self, name):
+        return getattr(self._inner, name)
+
+
+client = _ResilientClient(client)
+
+
 class Config:
     CLIENT = client
-    MODEL_NAME = "gemini-3.1-pro-preview"
+    MODEL_NAME = "gemini-2.5-flash"
     AFC_MAX_REMOTE_CALLS = 50
     
     GENERATION_CONFIG = types.GenerateContentConfig(
