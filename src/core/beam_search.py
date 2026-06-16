@@ -249,7 +249,14 @@ class BeamSearchNavigator:
         """
         if len(node_infos) == 0:
             return {}
-        
+
+        # Quota-saver: skip LLM node scoring entirely (keyword + structure only).
+        # Cuts a TreeRAG query from ~6 Gemini calls to 1 (final answer). Opt-in
+        # via env so default behaviour is unchanged.
+        import os as _os
+        if _os.getenv("TREERAG_DISABLE_LLM_SCORING", "").strip().lower() in ("1", "true", "yes", "on"):
+            return {}
+
         # 배치 크기 제한 (너무 크면 토큰 초과)
         MAX_BATCH = 10
         
