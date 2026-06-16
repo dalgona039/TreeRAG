@@ -1,0 +1,54 @@
+{
+  "version": "direction-check-1.0",
+  "backend": "manual",
+  "note": "Hand-written, content-rich questions over the ultrasound lecture (c7b780a9 생체의공학개론#11) for a FAIR online direction check. Each has a substantive reference answer grounded in a real section.",
+  "total_questions": 5,
+  "documents": ["c7b780a9_생체의공학개론#11_index.json"],
+  "questions": [
+    {
+      "question_id": "dc_001",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json",
+      "question": "초음파 탐촉자에서 초음파를 발생시키는 압전 효과의 원리는 무엇인가?",
+      "expected_sections": ["SEC3.1"],
+      "expected_answer_hint": "압전 소자에 전압을 가하면 기계적 진동이 발생해 초음파를 만들고, 반대로 반사되어 돌아온 초음파는 전기 신호로 변환된다.",
+      "difficulty": "medium",
+      "category": "factual"
+    },
+    {
+      "question_id": "dc_002",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json",
+      "question": "초음파의 감쇠(attenuation)는 어떤 요인에 따라 증가하는가?",
+      "expected_sections": ["SEC2.2"],
+      "expected_answer_hint": "거리와 주파수가 증가할수록 에너지 손실인 감쇠가 커지며, 매질의 점성에 따라 흡수 정도가 달라진다.",
+      "difficulty": "medium",
+      "category": "factual"
+    },
+    {
+      "question_id": "dc_003",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json",
+      "question": "초음파 검사 시 피부에 젤(gel)을 바르는 이유는 무엇인가?",
+      "expected_sections": ["SEC2.3"],
+      "expected_answer_hint": "피부와 공기 사이의 큰 음향 임피던스 차이로 인한 반사를 줄여 초음파가 인체 내부로 잘 전달되도록 하기 위해 접촉 매질인 젤을 사용한다.",
+      "difficulty": "medium",
+      "category": "factual"
+    },
+    {
+      "question_id": "dc_004",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json",
+      "question": "초음파는 주파수를 기준으로 어떻게 정의되는가?",
+      "expected_sections": ["SEC2.4"],
+      "expected_answer_hint": "인간의 가청 범위인 20Hz~20kHz를 벗어난 20,000Hz 이상의 고주파 음파를 초음파라고 한다.",
+      "difficulty": "easy",
+      "category": "factual"
+    },
+    {
+      "question_id": "dc_005",
+      "document_id": "c7b780a9_생체의공학개론#11_index.json",
+      "question": "검사 목적에 따라 사용되는 초음파 프로브에는 어떤 종류가 있는가?",
+      "expected_sections": ["SEC3.2"],
+      "expected_answer_hint": "Linear, Convex, Transvaginal, Sector, 3D 프로브 등이 검사 부위와 목적에 따라 선택되어 사용된다.",
+      "difficulty": "easy",
+      "category": "factual"
+    }
+  ]
+}
