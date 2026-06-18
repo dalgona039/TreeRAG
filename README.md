@@ -1,3 +1,5 @@
+[DeepL Translation of dalgona039/TreeRAG]
+
 # TreeRAG
 
 TreeRAG is a hierarchical RAG system that indexes PDF documents into tree-structured JSON and answers questions with page-traceable citations.
