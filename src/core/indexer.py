@@ -117,7 +117,7 @@ class RegulatoryIndexer:
         
         for attempt in range(max_retries):
             try:
-                response = Config.CLIENT.models.generate_content(
+                response = Config.get_client("indexing").models.generate_content(
                     model=Config.MODEL_NAME,
                     contents=prompt,
                     config=self.generation_config

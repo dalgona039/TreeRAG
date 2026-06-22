@@ -9,16 +9,62 @@ load_dotenv()
 
 logger = logging.getLogger(__name__)
 
-api_key = os.getenv("GOOGLE_API_KEY")
-if not api_key:
+# --------------------------------------------------------------------------- #
+# Multi-key support: 케이스별로 다른 Google API key를 사용할 수 있습니다.
+#
+# 사용 가능한 케이스:
+#   GOOGLE_API_KEY_INDEXING   - indexer.py (PDF → JSON 트리 변환)
+#   GOOGLE_API_KEY_TRAVERSAL  - tree_traversal.py, beam_search.py
+#   GOOGLE_API_KEY_REASONING  - reasoner.py, document_router_service.py
+#   GOOGLE_API_KEY_GRAPH      - reasoning_graph.py
+#   GOOGLE_API_KEY_BENCHMARK  - domain_benchmark.py
+#   GOOGLE_API_KEY            - 위 케이스 키가 없을 때 fallback (필수)
+#
+# 원하는 케이스만 별도 키를 지정하고 나머지는 GOOGLE_API_KEY로 fallback됩니다.
+# --------------------------------------------------------------------------- #
+
+_CASE_ENV_VARS = {
+    "indexing":  "GOOGLE_API_KEY_INDEXING",
+    "traversal": "GOOGLE_API_KEY_TRAVERSAL",
+    "reasoning": "GOOGLE_API_KEY_REASONING",
+    "graph":     "GOOGLE_API_KEY_GRAPH",
+    "benchmark": "GOOGLE_API_KEY_BENCHMARK",
+}
+
+_default_api_key = os.getenv("GOOGLE_API_KEY")
+if not _default_api_key:
     logger.error("Missing required environment variable for API authentication")
     raise ValueError("Configuration error: Missing required environment variable")
 
+def _make_client(api_key: str) -> genai.Client:
+    try:
+        return genai.Client(api_key=api_key)
+    except Exception as e:
+        logger.error(f"Failed to initialize API client: {type(e).__name__}")
+        raise ValueError("Configuration error: Failed to initialize API client") from None
+
+# 기본 클라이언트 (fallback용)
+api_key = _default_api_key
 try:
     client = genai.Client(api_key=api_key)
 except Exception as e:
     logger.error(f"Failed to initialize API client: {type(e).__name__}")
     raise ValueError("Configuration error: Failed to initialize API client") from None
+
+# 케이스별 클라이언트 캐시
+_case_clients: dict[str, genai.Client] = {}
+
+def _get_or_create_client(case: str) -> genai.Client:
+    """케이스에 맞는 API 클라이언트를 반환. 없으면 기본 클라이언트 사용."""
+    if case not in _case_clients:
+        env_var = _CASE_ENV_VARS.get(case)
+        key = (os.getenv(env_var) if env_var else None) or _default_api_key
+        _case_clients[case] = _make_client(key)
+        if env_var and os.getenv(env_var):
+            logger.info(f"Using dedicated API key for case '{case}' ({env_var})")
+        else:
+            logger.debug(f"No dedicated key for case '{case}', using default GOOGLE_API_KEY")
+    return _case_clients[case]
 
 
 # --------------------------------------------------------------------------- #
@@ -107,6 +153,9 @@ class _ResilientClient:
 
 client = _ResilientClient(client)
 
+# 케이스별 resilient 클라이언트 캐시
+_resilient_case_clients: dict[str, "_ResilientClient"] = {}
+
 
 class Config:
     CLIENT = client
@@ -156,9 +205,26 @@ class Config:
 
         return types.GenerateContentConfig(**base_config)
 
+    @classmethod
+    def get_client(cls, case: str = "default") -> "_ResilientClient":
+        """케이스별 API 클라이언트 반환.
+
+        case 값:
+            "indexing"  - GOOGLE_API_KEY_INDEXING 사용
+            "traversal" - GOOGLE_API_KEY_TRAVERSAL 사용
+            "reasoning" - GOOGLE_API_KEY_REASONING 사용
+            "graph"     - GOOGLE_API_KEY_GRAPH 사용
+            "benchmark" - GOOGLE_API_KEY_BENCHMARK 사용
+            기타/미지정 - GOOGLE_API_KEY (기본) 사용
+        """
+        if case not in _resilient_case_clients:
+            raw = _get_or_create_client(case)
+            _resilient_case_clients[case] = _ResilientClient(raw)
+        return _resilient_case_clients[case]
+
     RAW_DATA_DIR = "data/raw"
     INDEX_DIR = "data/indices"
-    
+
     USE_DEEP_TRAVERSAL = True
     MAX_TRAVERSAL_DEPTH = 5
     MAX_BRANCHES_PER_LEVEL = 3

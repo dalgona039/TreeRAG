@@ -313,7 +313,7 @@ class TreeRAGReasoner:
 """
 
         try:
-            response = Config.CLIENT.models.generate_content(
+            response = Config.get_client("reasoning").models.generate_content(
                 model=Config.MODEL_NAME,
                 contents=prompt,
                 config=Config.get_generation_config()
