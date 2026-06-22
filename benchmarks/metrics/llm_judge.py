@@ -106,3 +106,64 @@ Respond in JSON only:
         if any(v is None for v in values):
             return None
         return sum(values) / len(values)
+
+
+class LocalJudge:
+    """LLM-as-Judge using a local Ollama model (no API key required)."""
+
+    JUDGE_PROMPT = GeminiJudge.JUDGE_PROMPT
+
+    def __init__(self, model: str = "llama3.1:8b", base_url: str = "http://localhost:11434"):
+        import urllib.request as _urllib
+        self.model = model
+        self.url = f"{base_url}/api/generate"
+        # quick connectivity check
+        try:
+            _urllib.urlopen(f"{base_url}/api/tags", timeout=3)
+        except Exception as e:
+            raise RuntimeError(f"Ollama not reachable at {base_url}: {e}")
+
+    def _empty_result(self, reasoning: str = "") -> Dict[str, Any]:
+        result: Dict[str, Any] = {axis: None for axis in _AXES}
+        result["reasoning"] = reasoning
+        return result
+
+    def score(self, question: str, context: str, answer: str, expected: str) -> Dict[str, Any]:
+        import json as _json
+        import urllib.request as _urllib
+        import urllib.error as _urlerr
+
+        prompt = self.JUDGE_PROMPT.format(
+            question=question, context=context, answer=answer, expected=expected
+        )
+        payload = _json.dumps({
+            "model": self.model,
+            "prompt": prompt,
+            "stream": False,
+            "format": "json",
+        }).encode()
+        try:
+            req = _urllib.Request(self.url, data=payload, headers={"Content-Type": "application/json"})
+            with _urllib.urlopen(req, timeout=120) as resp:
+                data = _json.loads(resp.read())
+            text = data.get("response", "")
+            parsed = GeminiJudge._extract_json(text)
+        except (_urlerr.URLError, _json.JSONDecodeError, Exception) as exc:
+            return self._empty_result(f"local_judge_error: {type(exc).__name__}")
+
+        result: Dict[str, Any] = {}
+        try:
+            for axis in _AXES:
+                raw = float(parsed[axis])
+                result[axis] = max(0.0, min(1.0, raw / 5.0))
+        except (KeyError, TypeError, ValueError):
+            return self._empty_result("missing_or_invalid_scores")
+        result["reasoning"] = str(parsed.get("reasoning", "")).strip()
+        return result
+
+    def score_average(self, question: str, context: str, answer: str, expected: str) -> Optional[float]:
+        scores = self.score(question, context, answer, expected)
+        values = [scores[a] for a in _AXES]
+        if any(v is None for v in values):
+            return None
+        return sum(values) / len(values)

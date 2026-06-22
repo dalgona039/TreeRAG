@@ -108,10 +108,10 @@ def keyword_traversal(
 # System adapters
 # --------------------------------------------------------------------------- #
 class Evaluator:
-    def __init__(self, mode: str, use_llm_judge: bool, domain: str = "general"):
+    def __init__(self, mode: str, use_llm_judge: bool, domain: str = "general", local_judge: bool = False, local_judge_model: str = "llama3.1:8b"):
         self.mode = mode  # "online" | "offline"
         self.domain = domain
-        self.use_llm_judge = use_llm_judge and mode == "online"
+        self.use_llm_judge = use_llm_judge and (mode == "online" or local_judge)
         self._index_cache: Dict[str, Any] = {}
         self._bm25_cache: Dict[str, Any] = {}
         self._dense_cache: Dict[str, Any] = {}
@@ -119,9 +119,12 @@ class Evaluator:
         self._raptor_cache: Dict[str, Any] = {}
         self._judge = None
         if self.use_llm_judge:
-            from benchmarks.metrics.llm_judge import GeminiJudge
-
-            self._judge = GeminiJudge()
+            if local_judge:
+                from benchmarks.metrics.llm_judge import LocalJudge
+                self._judge = LocalJudge(model=local_judge_model)
+            else:
+                from benchmarks.metrics.llm_judge import GeminiJudge
+                self._judge = GeminiJudge()
 
     def load_tree(self, doc_id: str) -> Dict[str, Any]:
         if doc_id not in self._index_cache:
@@ -405,6 +408,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--systems", default="all")
     parser.add_argument("--output", default=None)
     parser.add_argument("--use-llm-judge", action="store_true")
+    parser.add_argument("--local-judge", action="store_true",
+                        help="Use local Ollama model as judge (no API key needed)")
+    parser.add_argument("--local-judge-model", default="llama3.1:8b",
+                        help="Ollama model name for local judge (default: llama3.1:8b)")
     parser.add_argument("--mode", choices=["auto", "online", "offline"], default="auto")
     parser.add_argument("--domain", choices=["general", "medical"], default="general")
     parser.add_argument("--limit", type=int, default=0,
@@ -439,7 +446,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     print(f"Systems         : {', '.join(systems)}")
     print(f"Questions       : {dataset.get('total_questions', len(dataset['questions']))}")
 
-    evaluator = Evaluator(mode=mode, use_llm_judge=args.use_llm_judge, domain=args.domain)
+    evaluator = Evaluator(mode=mode, use_llm_judge=args.use_llm_judge, domain=args.domain,
+                          local_judge=args.local_judge, local_judge_model=args.local_judge_model)
     per_system = evaluate(dataset, systems, evaluator)
     agg = aggregate(per_system)
     sig = significance(per_system, systems)

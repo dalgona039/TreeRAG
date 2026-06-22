@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "backend": "offline",
+  "backend": "gemini",
   "total_questions": 42,
   "documents": [
     "c7b780a9_생체의공학개론#11_index.json",
