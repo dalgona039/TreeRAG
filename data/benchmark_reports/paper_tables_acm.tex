@@ -10,10 +10,12 @@
 \cmidrule(lr){2-4} \cmidrule(lr){5-6}
 & ROUGE-L & BERTSc. & LLM-J & ROUGE-L & LLM-J & Lat.(s) \\
 \midrule
-BM25 & 0.092 & 0.095 & -- & 0.092 & -- & 0.018 \\
-FlatRAG & 0.057 & 0.057 & -- & 0.057 & -- & 0.000 \\
-RAPTOR & 0.059 & 0.061 & -- & 0.059 & -- & 0.000 \\
-\textbf{TreeRAG-Beam} & \textbf{0.169} & \textbf{0.172} & -- & \textbf{0.169} & -- & \textbf{0.000} \\
+BM25 & 0.324 & 0.373 & 0.69 & 0.092 & -- & 0.004 \\
+Dense Retrieval & 0.290 & 0.337 & 0.64 & -- & -- & 0.002 \\
+FlatRAG & 0.248 & 0.294 & \textbf{0.81} & 0.057 & -- & 0.002 \\
+RAPTOR & 0.194 & 0.219 & 0.67 & 0.059 & -- & 0.008 \\
+TreeRAG-DFS & \textbf{0.451} & \textbf{0.521} & 0.69 & -- & -- & 0.001 \\
+\textbf{TreeRAG-Beam} & 0.428 & 0.498 & 0.70 & \textbf{0.169} & -- & \textbf{0.001} \\
 \bottomrule
 \end{tabular}
 \end{table}

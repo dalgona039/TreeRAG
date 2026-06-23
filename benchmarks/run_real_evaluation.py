@@ -78,8 +78,17 @@ def extractive_answer(nodes: List[Dict[str, Any]]) -> str:
     for n in nodes:
         title = n.get("title", "")
         summary = n.get("summary", "")
-        parts.append(f"{title}: {summary}".strip(": ").strip())
+        page_ref = n.get("page_ref", "")
+        entry = f"{title}: {summary}".strip(": ").strip()
+        if page_ref:
+            entry += f" [p.{page_ref}]"
+        parts.append(entry)
     return " ".join(parts)
+
+
+def nodes_have_page_citation(nodes: List[Dict[str, Any]]) -> bool:
+    """Return True if any retrieved node carries a page reference."""
+    return any(bool(n.get("page_ref", "")) for n in nodes)
 
 
 def keyword_traversal(
