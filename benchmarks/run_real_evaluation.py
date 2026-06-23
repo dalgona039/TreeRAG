@@ -478,10 +478,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     }
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
-    # Stable copy for downstream table/figure generation.
-    latest = DEFAULT_REPORT_DIR / "evaluation_latest.json"
-    with open(latest, "w", encoding="utf-8") as f:
-        json.dump(report, f, ensure_ascii=False, indent=2)
+    # Only update the stable copy when no explicit --output was given.
+    if not args.output:
+        latest = DEFAULT_REPORT_DIR / "evaluation_latest.json"
+        with open(latest, "w", encoding="utf-8") as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
     print(f"\n💾 Report → {out_path}")
     return 0
 
