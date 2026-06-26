@@ -29,7 +29,7 @@ Retrieval-Augmented Generation (RAG) has emerged as a dominant paradigm for grou
 
 ## 1. Introduction
 
-Large language models (LLMs) excel at reasoning but are prone to hallucination—generating plausible yet factually incorrect text—when operating beyond their training data [CITE]. Retrieval-Augmented Generation (RAG) addresses this by injecting retrieved document passages into the LLM context at inference time [Lewis et al., 2020]. The dominant RAG pipeline chunks source documents into fixed-length text windows, embeds each chunk with a dense encoder, and retrieves the top-K nearest neighbors to a given query [CITE].
+Large language models (LLMs) excel at reasoning but are prone to hallucination—generating plausible yet factually incorrect text—when operating beyond their training data [Huang et al., 2025a]. Retrieval-Augmented Generation (RAG) addresses this by injecting retrieved document passages into the LLM context at inference time [Lewis et al., 2020]. The dominant RAG pipeline chunks source documents into fixed-length text windows, embeds each chunk with a dense encoder, and retrieves the top-K nearest neighbors to a given query [Gao et al., 2024].
 
 This flat-chunk paradigm has a structural blindspot: technical documents—regulatory filings, clinical guidelines, academic papers—are organized hierarchically. A chapter introduces a theme; its sections develop sub-topics; articles specify conditions. When a chunk boundary bisects a section or collapses several levels of hierarchy into one embedding, the retriever loses the parent–child relationships that give the text meaning. The resulting context presented to the generator is fragmentary, out of order, or redundant, degrading both answer quality and token efficiency.
 
@@ -51,17 +51,17 @@ The remainder of this paper is organized as follows. Section 2 reviews related w
 
 ### 2.1 Retrieval-Augmented Generation
 
-RAG was formally introduced by Lewis et al. [2020] as a sequence-to-sequence architecture that conditions generation on retrieved Wikipedia passages. Subsequent work scaled dense retrieval with FAISS [Johnson et al., 2019] and improved passage encoding with DPR [Karpukhin et al., 2020]. Hybrid retrievers combining sparse BM25 [Robertson & Zaragoza, 2009] with dense vectors showed consistent gains over either approach alone [Ma et al., 2021]. Despite this progress, all these systems operate on flat passage chunks, treating documents as bags of text rather than structured hierarchies.
+RAG was formally introduced by Lewis et al. [2020] as a sequence-to-sequence architecture that conditions generation on retrieved Wikipedia passages. Subsequent work scaled dense retrieval with FAISS [Johnson et al., 2019] and improved passage encoding with DPR [Karpukhin et al., 2020]. Hybrid retrievers combining sparse BM25 [Robertson & Zaragoza, 2009] with dense vectors showed consistent gains over either approach alone [Ma et al., 2021]. Despite this progress, all these systems operate on flat passage chunks, treating documents as bags of text rather than structured hierarchies [Gao et al., 2024].
 
 ### 2.2 Hierarchical and Structure-Aware Retrieval
 
 LlamaIndex [Liu, 2022] constructs a tree of progressively coarser summaries and navigates it top-down, retrieving leaf nodes for generation. Its retrieval is embedding-based, requiring a vector store. RAPTOR [Sarthi et al., 2024] takes the opposite direction: it recursively clusters leaf chunks and summarizes each cluster, building a bottom-up tree. At query time it retrieves at the most informative tree level. Unlike TreeRAG, RAPTOR's tree reflects embedding-cluster geography rather than the document's own section hierarchy, and it lacks traversal algorithm selection or compression.
 
-HiRAG [CITE] and HGTRAG [CITE] explore graph-based hierarchies but require pre-built knowledge graphs and domain-specific schema engineering. TreeRAG requires only a raw PDF and a Gemini API key.
+HiRAG [Huang et al., 2025b] explores graph-based hierarchies but requires pre-built knowledge graphs and domain-specific schema engineering. TreeRAG requires only a raw PDF and a Gemini API key.
 
 ### 2.3 Multi-Hop and Cross-Document Reasoning
 
-Multi-hop reasoning—answering questions that require evidence synthesis across multiple passages or documents—remains a challenge for flat RAG. HotpotQA [Yang et al., 2018] benchmarks this capability. IRCoT [Trivedi et al., 2022] interleaves retrieval and chain-of-thought reasoning steps. TreeRAG's hierarchical structure naturally supports multi-hop queries: the tree encodes which sections are siblings (sharing a parent), enabling the traversal algorithm to follow cross-sectional reasoning paths without additional orchestration.
+Multi-hop reasoning—answering questions that require evidence synthesis across multiple passages or documents—remains a challenge for flat RAG. HotpotQA [Yang et al., 2018] benchmarks this capability. IRCoT [Trivedi et al., 2023] interleaves retrieval and chain-of-thought [Wei et al., 2022] reasoning steps. TreeRAG's hierarchical structure naturally supports multi-hop queries: the tree encodes which sections are siblings (sharing a parent), enabling the traversal algorithm to follow cross-sectional reasoning paths without additional orchestration.
 
 ### 2.4 Hallucination in RAG Systems
 
@@ -87,7 +87,7 @@ The root represents the entire document. Depth-1 nodes correspond to chapters or
 
 **Extraction.** The `RegulatoryIndexer` reads the PDF page by page using a streaming generator to minimize memory footprint (critical for documents > 100 pages). Page text is extracted with pypdf and tagged with page numbers.
 
-**Prompting.** We submit the extracted text to Gemini in chunks of up to 100 pages with a zero-shot prompt that instructs the model to:
+**Prompting.** We submit the extracted text to Gemini in chunks of up to 100 pages with a structured zero-shot prompt [Brown et al., 2020; Kojima et al., 2022] that instructs the model to:
 
 1. Identify the document's hierarchical structure (chapters → sections → articles).
 2. Assign each node a title, a brief summary, and the page range it spans.
@@ -159,7 +159,7 @@ DFS is recommended for precision-critical queries (regulatory compliance, medica
 
 ### 3.4 Contextual Compression
 
-Post-traversal, the selected node set may still exceed the LLM context limit or contain redundant passages. The `ContextualCompressor` pipeline:
+Post-traversal, the selected node set may still exceed the LLM context limit or contain redundant passages. Long contexts can degrade LLM performance, especially when relevant information appears in the middle of the input [Liu et al., 2023]. The `ContextualCompressor` pipeline:
 
 1. **Tokenization.** Each node's content is tokenized (whitespace-based proxy) and assigned a token count.
 2. **Relevance Scoring.** TF-IDF cosine similarity is computed between each node and the query. Nodes below `MIN_CHUNK_RELEVANCE = 0.2` are pruned.
@@ -395,35 +395,49 @@ Future work will pursue: (1) online LLM-evaluated benchmarks at scale; (2) Graph
 
 ## References
 
-> **[TBD — populate with actual citations in camera-ready]**
+[Brown et al., 2020] Brown, T.B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., Agarwal, S., Herbert-Voss, A., Krueger, G., Henighan, T., Child, R., Ramesh, A., Ziegler, D.M., Wu, J., Winter, C., Hesse, C., Chen, M., Sigler, E., Litwin, M., Gray, S., Chess, B., Clark, J., Berner, C., McCandlish, S., Radford, A., Sutskever, I., & Amodei, D. 2020. Language Models are Few-Shot Learners. In *Advances in Neural Information Processing Systems (NeurIPS 2020)*, vol. 33, pp. 1877–1901. arXiv:2005.14165.
 
-[Lewis et al., 2020] Lewis, P., et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. *NeurIPS 2020*.
+[Es et al., 2023] Es, S., James, J., Espinosa-Anke, L., & Schockaert, S. 2023. Ragas: Automated Evaluation of Retrieval Augmented Generation. arXiv:2309.15217.
 
-[Karpukhin et al., 2020] Karpukhin, V., et al. Dense Passage Retrieval for Open-Domain Question Answering. *EMNLP 2020*.
+[Gao et al., 2024] Gao, Y., Xiong, Y., Gao, X., Jia, K., Pan, J., Bi, Y., Dai, Y., Sun, J., Wang, M., & Wang, H. 2024. Retrieval-Augmented Generation for Large Language Models: A Survey. arXiv:2312.10997.
 
-[Robertson & Zaragoza, 2009] Robertson, S., & Zaragoza, H. The Probabilistic Relevance Framework: BM25 and Beyond. *Foundations and Trends in Information Retrieval*.
+[Huang et al., 2025a] Huang, L., Yu, W., Ma, W., Zhong, W., Feng, Z., Wang, H., Chen, Q., Peng, W., Feng, X., Qin, B., & Liu, T. 2025. A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions. *ACM Transactions on Information Systems*, 43(2), Article 42. doi:10.1145/3703155.
 
-[Liu, 2022] Liu, J. LlamaIndex. GitHub. https://github.com/run-llama/llama_index
+[Huang et al., 2025b] Huang, H., Huang, Y., Yang, J., Pan, Z., Chen, Y., Ma, K., Chen, H., & Cheng, J. 2025. Retrieval-Augmented Generation with Hierarchical Knowledge. arXiv:2503.10150.
 
-[Sarthi et al., 2024] Sarthi, P., et al. RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval. *ICLR 2024*.
+[Johnson et al., 2019] Johnson, J., Douze, M., & Jégou, H. 2019. Billion-scale Similarity Search with GPUs. *IEEE Transactions on Big Data*, 7(3), 535–547. arXiv:1702.08734.
 
-[Yang et al., 2018] Yang, Z., et al. HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering. *EMNLP 2018*.
+[Karpukhin et al., 2020] Karpukhin, V., Oğuz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., & Yih, W. 2020. Dense Passage Retrieval for Open-Domain Question Answering. In *Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP 2020)*, pp. 6769–6781.
 
-[Zhang et al., 2020] Zhang, T., et al. BERTScore: Evaluating Text Generation with BERT. *ICLR 2020*.
+[Khattab et al., 2024] Khattab, O., Singhvi, A., Maheshwari, P., Zhang, Z., Santhanam, K., Vardhamanan, S., Haq, S., Sharma, A., Joshi, T.T., Moazam, H., Miller, H., Zaharia, M., & Potts, C. 2024. DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines. In *Proceedings of ICLR 2024*. arXiv:2310.03714.
 
-[Lin, 2004] Lin, C.-Y. ROUGE: A Package for Automatic Evaluation of Summaries. *ACL Workshop 2004*.
+[Kojima et al., 2022] Kojima, T., Gu, S.S., Reid, M., Matsuo, Y., & Iwasawa, Y. 2022. Large Language Models are Zero-Shot Reasoners. In *Advances in Neural Information Processing Systems (NeurIPS 2022)*, vol. 35. arXiv:2205.11916.
 
-[Johnson et al., 2019] Johnson, J., et al. Billion-scale Similarity Search with GPUs. *IEEE Trans. Big Data*.
+[Lewis et al., 2020] Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., & Kiela, D. 2020. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. In *Advances in Neural Information Processing Systems (NeurIPS 2020)*, vol. 33, pp. 9459–9474. arXiv:2005.11401.
 
-[Min et al., 2023] Min, S., et al. FActScoring: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation. *ACL 2023*.
+[Lin, 2004] Lin, C.-Y. 2004. ROUGE: A Package for Automatic Evaluation of Summaries. In *Proceedings of the ACL Workshop on Text Summarization Branches Out*, pp. 74–81.
 
-[Es et al., 2023] Es, S., et al. RAGAS: Automated Evaluation of Retrieval Augmented Generation. *arXiv:2309.15217*.
+[Liu, 2022] Liu, J. 2022. LlamaIndex. GitHub. https://github.com/run-llama/llama_index.
 
-[Shuster et al., 2021] Shuster, K., et al. Retrieval Augmentation Reduces Hallucination in Conversation. *EMNLP Findings 2021*.
+[Liu et al., 2023] Liu, N.F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., & Liang, P. 2024. Lost in the Middle: How Language Models Use Long Contexts. *Transactions of the Association for Computational Linguistics*, 12, 157–173. arXiv:2307.03172.
 
-[Khattab et al., 2023] Khattab, O., et al. DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines. *arXiv:2310.03714*.
+[Ma et al., 2021] Ma, X., Sun, R., Pradeep, R., & Lin, J. 2021. A Replication Study of Dense Passage Retrieval for Open-Domain Question Answering. arXiv:2104.05740.
 
-[Ma et al., 2021] Ma, X., et al. A Replication Study of Dense Passage Retrieval for Open-Domain Question Answering. *arXiv:2104.05740*.
+[Min et al., 2023] Min, S., Krishna, K., Lyu, X., Lewis, M., Yih, W., Koh, P.W., Iyyer, M., Zettlemoyer, L., & Hajishirzi, H. 2023. FActScoring: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation. In *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP 2023)*. arXiv:2305.14251.
+
+[Robertson & Zaragoza, 2009] Robertson, S., & Zaragoza, H. 2009. The Probabilistic Relevance Framework: BM25 and Beyond. *Foundations and Trends in Information Retrieval*, 3(4), 333–389.
+
+[Sarthi et al., 2024] Sarthi, P., Abdullah, S., Tuli, A., Khanna, S., Goldie, A., & Manning, C.D. 2024. RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval. In *Proceedings of ICLR 2024*. arXiv:2401.18059.
+
+[Shuster et al., 2021] Shuster, K., Poff, S., Chen, M., Kiela, D., & Weston, J. 2021. Retrieval Augmentation Reduces Hallucination in Conversation. In *Findings of the Association for Computational Linguistics: EMNLP 2021*, pp. 3784–3803. arXiv:2104.07567.
+
+[Trivedi et al., 2023] Trivedi, H., Balasubramanian, N., Khot, T., & Sabharwal, A. 2023. Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions. In *Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (ACL 2023)*, pp. 10014–10037. arXiv:2212.10509.
+
+[Wei et al., 2022] Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., & Zhou, D. 2022. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. In *Advances in Neural Information Processing Systems (NeurIPS 2022)*, vol. 35. 
+
+[Yang et al., 2018] Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W., Salakhutdinov, R., & Manning, C.D. 2018. HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering. In *Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing (EMNLP 2018)*, pp. 2369–2380. arXiv:1809.09600.
+
+[Zhang et al., 2020] Zhang, T., Kishore, V., Wu, F., Weinberger, K.Q., & Artzi, Y. 2020. BERTScore: Evaluating Text Generation with BERT. In *Proceedings of the International Conference on Learning Representations (ICLR 2020)*. arXiv:1904.09675.
 
 ---
 
