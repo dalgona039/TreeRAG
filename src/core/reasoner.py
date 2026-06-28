@@ -59,32 +59,83 @@ LANGUAGE_INSTRUCTIONS = {
 class TreeRAGReasoner:
     PROMPT_CACHE_VERSION = "2026-03-01-v3"
 
+    # Simple prompt used for local LLM backends (avoids multi-step JSON scaffold
+    # that small models cannot reliably complete).
+    _SIMPLE_PROMPT = (
+        "{domain_prompt}\n\n"
+        "{language_instruction}\n\n"
+        "아래 컨텍스트를 바탕으로 질문에 답하세요. "
+        "컨텍스트에 없는 내용은 추측하지 마세요.\n\n"
+        "### 컨텍스트:\n{context}\n\n"
+        "### 질문:\n{question}\n\n"
+        "### 답변:"
+    )
+    # Separate cache-version tag so simple-prompt results don't mix with
+    # the complex-prompt cache written by the Gemini path.
+    PROMPT_CACHE_VERSION_SIMPLE = "2026-06-28-simple-v2"
+
     @staticmethod
     def _normalize_model_answer(answer_text: str) -> str:
+        """Extract a clean answer string from the model's raw output.
+
+        Handles:
+        - Plain text (simple prompt path) — returned as-is after whitespace cleanup.
+        - JSON-wrapped answers ``{"answer": "..."}`` or similar.
+        - Truncated / malformed JSON — extracts the longest string value found,
+          or falls back to the raw text so the answer is never empty.
+        """
         text = (answer_text or "").strip()
         if not text:
             return text
 
-        if text.startswith("```json") and text.endswith("```"):
-            text = text.replace("```json", "", 1).rsplit("```", 1)[0].strip()
-        elif text.startswith("```") and text.endswith("```"):
-            text = text.replace("```", "", 1).rsplit("```", 1)[0].strip()
+        # Strip markdown code fences
+        if text.startswith("```"):
+            inner = text[7:] if text.startswith("```json") else text[3:]
+            if "```" in inner:
+                text = inner.rsplit("```", 1)[0].strip()
 
+        # Unescape common escape sequences before JSON attempts
+        def _unescape(s: str) -> str:
+            return s.replace("\\n", "\n").replace("\\t", "\t")
+
+        # --- Attempt 1: full JSON parse ---
         try:
             parsed = json.loads(text)
-            if isinstance(parsed, dict) and isinstance(parsed.get("answer"), str):
-                text = parsed["answer"].strip()
+            if isinstance(parsed, dict):
+                # Prefer "answer" key, then common Korean/English alternatives
+                for key in ("answer", "답변", "response", "content", "result", "text"):
+                    if isinstance(parsed.get(key), str) and parsed[key].strip():
+                        return _unescape(parsed[key].strip())
+                # Last resort: join all non-empty string values
+                parts = [v for v in parsed.values() if isinstance(v, str) and v.strip()]
+                if parts:
+                    return _unescape(" ".join(parts))
             elif isinstance(parsed, str):
-                text = parsed.strip()
-        except Exception:
+                return _unescape(parsed.strip())
+        except (json.JSONDecodeError, ValueError):
             pass
 
-        if "\\n" in text:
-            text = text.replace("\\n", "\n")
-        if "\\t" in text:
-            text = text.replace("\\t", "\t")
+        # --- Attempt 2: partial / truncated JSON — regex extraction ---
+        if text.lstrip().startswith("{"):
+            for pattern in (
+                r'"answer"\s*:\s*"((?:[^"\\]|\\.){10,})"',
+                r'"답변"\s*:\s*"((?:[^"\\]|\\.){10,})"',
+                r'"response"\s*:\s*"((?:[^"\\]|\\.){10,})"',
+                r'"content"\s*:\s*"((?:[^"\\]|\\.){10,})"',
+                # any key whose value is at least 20 chars
+                r'"\w+"\s*:\s*"((?:[^"\\]|\\.){20,})"',
+            ):
+                m = re.search(pattern, text)
+                if m:
+                    return _unescape(m.group(1).strip())
 
-        return text.strip()
+            # Strip leading JSON punctuation and return what's left
+            stripped = re.sub(r'^[\{\[":\s\w]*', "", text).strip()
+            if len(stripped) > 15:
+                return _unescape(stripped)
+
+        # --- Fallback: return original text with unescape ---
+        return _unescape(text)
 
     def __init__(
         self, 
@@ -150,13 +201,19 @@ class TreeRAGReasoner:
             "📚 Reference Pages: None"
         )
 
-    def query(self, user_question: str, enable_comparison: bool = True, max_depth: int = 5, max_branches: int = 3, domain_template: str = "general", language: Optional[str] = "auto", node_context: Optional[dict] = None) -> tuple[str, dict]:
+    def query(self, user_question: str, enable_comparison: bool = True, max_depth: int = 5, max_branches: int = 3, domain_template: str = "general", language: Optional[str] = "auto", node_context: Optional[dict] = None, use_simple_prompt: bool = False) -> tuple[str, dict]:
         if not user_question or not user_question.strip():
             raise ValueError("user_question cannot be empty")
 
         language = self._resolve_language(user_question, language)
         cache_node_context = dict(node_context) if node_context else {}
-        cache_node_context["__prompt_cache_version"] = self.PROMPT_CACHE_VERSION
+        # Use a distinct cache-version for simple-prompt runs so they don't
+        # collide with (or return) complex-prompt / Gemini cached results.
+        cache_version = (
+            self.PROMPT_CACHE_VERSION_SIMPLE if use_simple_prompt
+            else self.PROMPT_CACHE_VERSION
+        )
+        cache_node_context["__prompt_cache_version"] = cache_version
         
         cache = get_cache()
         cached_response = cache.get(
@@ -254,10 +311,21 @@ class TreeRAGReasoner:
         comparison_template = "\n[문서 비교 분석: 공통점/차이점 표]" if is_multi_doc else ""
 
         domain_prompt = DOMAIN_PROMPTS.get(domain_template, DOMAIN_PROMPTS["general"])
-        
+
         language_instruction = LANGUAGE_INSTRUCTIONS.get(language, LANGUAGE_INSTRUCTIONS["ko"])
-        
-        prompt = f"""
+
+        # ------------------------------------------------------------------ #
+        # Prompt selection: simple (local models) vs complex scaffold (Gemini)
+        # ------------------------------------------------------------------ #
+        if use_simple_prompt:
+            prompt = self._SIMPLE_PROMPT.format(
+                domain_prompt=domain_prompt,
+                language_instruction=language_instruction,
+                context=context_str,
+                question=user_question,
+            )
+        else:
+            prompt = f"""
 {domain_prompt}
 
 {language_instruction}
@@ -313,17 +381,32 @@ class TreeRAGReasoner:
 """
 
         try:
+            from src.config import _client_override
+            if _client_override is not None and use_simple_prompt:
+                # Simple prompt → plain natural-language answer.
+                # Do NOT pass response_mime_type="application/json" — that forces
+                # the local model into JSON mode and corrupts the output.
+                gen_cfg = None
+            elif _client_override is not None:
+                gen_cfg = Config.get_generation_config(max_output_tokens=2048)
+            else:
+                gen_cfg = Config.get_generation_config()
+
             response = Config.get_client("reasoning").models.generate_content(
                 model=Config.MODEL_NAME,
                 contents=prompt,
-                config=Config.get_generation_config()
+                config=gen_cfg,
             )
             if not response.text:
                 raise ValueError("Empty response from model")
 
             answer_text = self._normalize_model_answer(response.text)
             if not answer_text:
-                raise ValueError("Empty normalized answer from model")
+                # If normalization stripped everything, return raw text
+                answer_text = (response.text or "").strip()
+            if len(answer_text) < 10:
+                print(f"⚠️ Very short answer ({len(answer_text)} chars): {answer_text!r} — using raw response")
+                answer_text = (response.text or "").strip() or answer_text
             
             if resolved_refs:
                 traversal_info["resolved_references"] = [
@@ -430,6 +513,7 @@ class TreeRAGReasoner:
                 all_visited.extend([f"{doc_name}: node_{i}" for i in range(trav_stats.get("nodes_visited", 0) if isinstance(trav_stats.get("nodes_visited"), int) else len(trav_stats.get("nodes_visited", [])))])
                 all_selected.extend([{
                     "document": doc_name,
+                    "id": node["node"].get("id", ""),
                     "title": node["node"].get("title", "Untitled"),
                     "page_ref": node["node"].get("page_ref", "N/A"),
                     "score": node.get("score", 0.0),
@@ -440,6 +524,7 @@ class TreeRAGReasoner:
                 all_visited.extend([f"{doc_name}: {title}" for title in trav_stats.get("visited_titles", [])])
                 all_selected.extend([{
                     "document": doc_name,
+                    "id": node["node"].get("id", ""),
                     "title": node["node"].get("title", "Untitled"),
                     "page_ref": node["node"].get("page_ref", "N/A"),
                     "content": node["node"].get("summary", "")

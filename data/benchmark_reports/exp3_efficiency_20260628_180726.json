@@ -1,0 +1,55 @@
+{
+  "source": "/Volumes/a3122a1/TreeRAG/data/benchmark_reports/online_local_llama_general_v2.json",
+  "systems": [
+    "bm25",
+    "dense",
+    "flatrag",
+    "raptor",
+    "treerag_dfs",
+    "treerag_beam"
+  ],
+  "efficiency": {
+    "bm25": {
+      "avg_context_tokens": 124.3,
+      "avg_llm_judge": 0.7783333333333333,
+      "avg_rouge_l": 0.30505836270395914,
+      "avg_latency": 6.643545879102748,
+      "n": 40
+    },
+    "dense": {
+      "avg_context_tokens": 124.25,
+      "avg_llm_judge": 0.7683333333333333,
+      "avg_rouge_l": 0.2867673465945165,
+      "avg_latency": 6.172294619830791,
+      "n": 40
+    },
+    "flatrag": {
+      "avg_context_tokens": 0.0,
+      "avg_llm_judge": 0.775,
+      "avg_rouge_l": 0.3855298504719606,
+      "avg_latency": 7.443041396949411,
+      "n": 40
+    },
+    "raptor": {
+      "avg_context_tokens": 257.525,
+      "avg_llm_judge": 0.7916666666666666,
+      "avg_rouge_l": 0.2575034569544988,
+      "avg_latency": 7.809839617678517,
+      "n": 40
+    },
+    "treerag_dfs": {
+      "avg_context_tokens": 8.6,
+      "avg_llm_judge": 0.7849999999999999,
+      "avg_rouge_l": 0.2520921731385763,
+      "avg_latency": 51.55460644159975,
+      "n": 40
+    },
+    "treerag_beam": {
+      "avg_context_tokens": 13.85,
+      "avg_llm_judge": 0.8266666666666665,
+      "avg_rouge_l": 0.2744649881345555,
+      "avg_latency": 21.519239715649018,
+      "n": 40
+    }
+  }
+}

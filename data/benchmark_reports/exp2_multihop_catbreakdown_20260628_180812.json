@@ -1,0 +1,101 @@
+{
+  "source_report": "/Volumes/a3122a1/TreeRAG/data/benchmark_reports/online_local_llama_general_v2.json",
+  "category_stats": {
+    "factual": {
+      "bm25": {
+        "n": 21,
+        "rouge_l": 0.45574687354922067,
+        "llm_judge": 0.7873015873015872
+      },
+      "dense": {
+        "n": 21,
+        "rouge_l": 0.4224070509290348,
+        "llm_judge": 0.8
+      },
+      "flatrag": {
+        "n": 21,
+        "rouge_l": 0.5660966186294074,
+        "llm_judge": 0.8031746031746032
+      },
+      "raptor": {
+        "n": 21,
+        "rouge_l": 0.3274757064026633,
+        "llm_judge": 0.7904761904761906
+      },
+      "treerag_dfs": {
+        "n": 21,
+        "rouge_l": 0.31618820867152725,
+        "llm_judge": 0.7968253968253969
+      },
+      "treerag_beam": {
+        "n": 21,
+        "rouge_l": 0.339429191302614,
+        "llm_judge": 0.8222222222222222
+      }
+    },
+    "multi_hop": {
+      "bm25": {
+        "n": 11,
+        "rouge_l": 0.11650646803205099,
+        "llm_judge": 0.7696969696969697
+      },
+      "dense": {
+        "n": 11,
+        "rouge_l": 0.16209939650756022,
+        "llm_judge": 0.7151515151515151
+      },
+      "flatrag": {
+        "n": 11,
+        "rouge_l": 0.23250051768271443,
+        "llm_judge": 0.7515151515151515
+      },
+      "raptor": {
+        "n": 11,
+        "rouge_l": 0.1979421394616903,
+        "llm_judge": 0.7757575757575758
+      },
+      "treerag_dfs": {
+        "n": 11,
+        "rouge_l": 0.19256458329630555,
+        "llm_judge": 0.8060606060606061
+      },
+      "treerag_beam": {
+        "n": 11,
+        "rouge_l": 0.20381999455171682,
+        "llm_judge": 0.8181818181818182
+      }
+    },
+    "comparative": {
+      "bm25": {
+        "n": 8,
+        "rouge_l": 0.16875987690902133,
+        "llm_judge": 0.7666666666666666
+      },
+      "dense": {
+        "n": 8,
+        "rouge_l": 0.10213155408597072,
+        "llm_judge": 0.7583333333333333
+      },
+      "flatrag": {
+        "n": 8,
+        "rouge_l": 0.12195741664387613,
+        "llm_judge": 0.7333333333333333
+      },
+      "raptor": {
+        "n": 8,
+        "rouge_l": 0.15572311370567843,
+        "llm_judge": 0.8166666666666667
+      },
+      "treerag_dfs": {
+        "n": 8,
+        "rouge_l": 0.16569051589770223,
+        "llm_judge": 0.725
+      },
+      "treerag_beam": {
+        "n": 8,
+        "rouge_l": 0.201070820994805,
+        "llm_judge": 0.85
+      }
+    }
+  }
+}

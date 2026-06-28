@@ -1,0 +1,309 @@
+{
+  "timestamp": "20260628_104549",
+  "mode": "online",
+  "gen_backend": "ollama",
+  "gen_model": "llama3.1:8b",
+  "dataset": "full_benchmark.json",
+  "systems": [
+    "bm25",
+    "dense",
+    "flatrag",
+    "raptor",
+    "treerag_dfs",
+    "treerag_beam"
+  ],
+  "summary": {
+    "bm25": {
+      "rouge_l": 0.25831615120274914,
+      "bertscore": 0.292680412371134,
+      "llm_judge": 0.7111111111111111,
+      "latency": 11.931087749670647,
+      "context_tokens": 202.0,
+      "n": 3
+    },
+    "dense": {
+      "rouge_l": 0.28050463236743545,
+      "bertscore": 0.3179578158880347,
+      "llm_judge": 0.8222222222222223,
+      "latency": 6.892630778000846,
+      "context_tokens": 162.66666666666666,
+      "n": 3
+    },
+    "flatrag": {
+      "rouge_l": 0.30705606792563317,
+      "bertscore": 0.41663006880398185,
+      "llm_judge": 0.6888888888888888,
+      "latency": 10.454927333329882,
+      "context_tokens": 0.0,
+      "n": 3
+    },
+    "raptor": {
+      "rouge_l": 0.37616883116883115,
+      "bertscore": 0.43850649350649346,
+      "llm_judge": 0.8666666666666666,
+      "latency": 9.81195548599741,
+      "context_tokens": 275.6666666666667,
+      "n": 3
+    },
+    "treerag_dfs": {
+      "rouge_l": 0.08333333333333333,
+      "bertscore": 0.10416666666666667,
+      "llm_judge": 0.7999999999999999,
+      "latency": 48.62069229167537,
+      "context_tokens": 9.333333333333334,
+      "n": 3
+    },
+    "treerag_beam": {
+      "rouge_l": 0.08333333333333333,
+      "bertscore": 0.10416666666666667,
+      "llm_judge": 0.8222222222222223,
+      "latency": 0.0019235416548326612,
+      "context_tokens": 9.333333333333334,
+      "n": 3
+    }
+  },
+  "significance": {
+    "bm25": {
+      "p_value": 0.31366926392528865,
+      "significant": false,
+      "effect_size": 0.7316511775580161,
+      "mean_diff": -0.1749828178694158
+    },
+    "dense": {
+      "p_value": 0.3374247481644216,
+      "significant": false,
+      "effect_size": 0.7217666085834457,
+      "mean_diff": -0.19717129903410213
+    },
+    "flatrag": {
+      "p_value": 0.036695447487178394,
+      "significant": true,
+      "effect_size": 1.9465851456957555,
+      "mean_diff": -0.22372273459229983
+    },
+    "raptor": {
+      "p_value": 0.31549035856263524,
+      "significant": false,
+      "effect_size": 0.9092090188219877,
+      "mean_diff": -0.2928354978354978
+    },
+    "treerag_dfs": {
+      "p_value": 0.5,
+      "significant": false,
+      "effect_size": 0.0,
+      "mean_diff": 0.0
+    }
+  },
+  "per_question": {
+    "bm25": [
+      {
+        "question_id": "auto_048",
+        "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json",
+        "answer": "임상 현장의 한계점을 극복하고 저비용으로 고효율이 가능한 딥러닝 기반 CDSS인 '워크핏' 개발을 목표로 함. 가상 센서 기술이 이를 지원하기 위한 역할을 한다.\n\n워크핏은 임상 현장에서 발생하는 문제를 개선하고, 더 나은 의료 결과를 제공하기 위해 설계되었음. 이에 따라 이러한 시스템의 구축을 통해, 환자의 건강 관리가 향상되고, 질병 예방 및 치료에 대한 새로운 방식의 접근이 가능해짐.",
+        "retrieved_count": 3,
+        "context_tokens": 54,
+        "latency": 20.534857541002566,
+        "rouge_l": 0.16494845360824742,
+        "bertscore": 0.2680412371134021,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "auto_079",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Higher-frequency probes provide better resolution but reduce the penetration depth due to increased absorption of acoustic energy as it travels through tissue.",
+        "retrieved_count": 3,
+        "context_tokens": 126,
+        "latency": 3.8996045000094455,
+        "rouge_l": 0.6,
+        "bertscore": 0.6,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "auto_006",
+        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
+        "answer": "0cbccdf9 2204.08939v1-2는 1. Introduction에서 소개하는 지질학적 학습기법 중 하나에 관한 논문입니다. 논문에서는 심장血류역학에 대한 ML 기반 서로서로 모델링 솔루션을 제안하고, 심전형 예측 및 진단에서 ML의 잠재력을 탐구합니다.",
+        "retrieved_count": 3,
+        "context_tokens": 426,
+        "latency": 11.358801207999932,
+        "rouge_l": 0.009999999999999998,
+        "bertscore": 0.009999999999999998,
+        "llm_judge": 0.39999999999999997
+      }
+    ],
+    "dense": [
+      {
+        "question_id": "auto_048",
+        "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json",
+        "answer": "임상 현장에서 진료실 내 정량적 분석을 간편하게 수행할 수 있는 딥러닝 기반 CDSS '워크핏'을 개발하는 목표가 있습니다. 이를 달성하기 위해 워크핏의 주요 기능으로는 시진에 대한 간편한 정량적 분석이 제공되며, 이러한 정량적인 분석 결과를 바탕으로 의사와 환자간의 상호작용에서 동작 분석과 같은 추가적인 정보 제공 또한 고려됩니다.",
+        "retrieved_count": 3,
+        "context_tokens": 55,
+        "latency": 11.527645624999423,
+        "rouge_l": 0.15730337078651688,
+        "bertscore": 0.2696629213483146,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "auto_079",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Higher-frequency ultrasound probes offer better resolution but have reduced penetration depth due to increased absorption of acoustic energy in tissue.",
+        "retrieved_count": 3,
+        "context_tokens": 126,
+        "latency": 2.251659458997892,
+        "rouge_l": 0.6842105263157895,
+        "bertscore": 0.6842105263157895,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "auto_006",
+        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
+        "answer": "관련이 없습니다.\n\n'0cbccdf9 2204.08939v1-2'은 위의 컨텍스트에서 언급되지 않았습니다.",
+        "retrieved_count": 3,
+        "context_tokens": 307,
+        "latency": 6.898587250005221,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "flatrag": [
+      {
+        "question_id": "auto_048",
+        "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json",
+        "answer": "임상 현장의 한계점을 극복하고 저비용 고효율의 Clinial Decision Support System(CDSS) '워크핏'을 개발하는 것이 목표입니다. 이를 달성하기 위해 가상 센서 기술이 제안됩니다.",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 8.460989749990404,
+        "rouge_l": 0.24242424242424243,
+        "bertscore": 0.30303030303030304,
+        "llm_judge": 0.46666666666666673
+      },
+      {
+        "question_id": "auto_079",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Higher-frequency probes give better resolution. However, they are absorbed more strongly by tissue, which reduces their penetration depth.",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 4.174261457985267,
+        "rouge_l": 0.3888888888888889,
+        "bertscore": 0.3888888888888889,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "auto_006",
+        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
+        "answer": "[Document 3: 1. Introduction (p.2-4)] discusses the limitations of medical imaging alone in cardiovascular disease diagnosis and prognosis, where it introduces computational modeling (CFD/FSI) as an alternative but points out its high computational cost and numerical challenges.\n\n[Document 1: 0cbccdf9 2204.08939v1-2] proposes a novel deep learning surrogate modeling solution for rapid hemodynamic predictions in 3D patient-specific computational fluid dynamics, addressing these very limitations by developing statistical generative models for shapes and efficient supervised learning solutions to map geometric inputs to hemodynamics predictions.\n\nSo the proposed solution (0cbccdf9 2204.08939v1-2) directly relates to addressing challenges mentioned in the introduction (Document 3).",
+        "retrieved_count": 3,
+        "context_tokens": 0,
+        "latency": 18.729530792013975,
+        "rouge_l": 0.2898550724637681,
+        "bertscore": 0.5579710144927535,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "raptor": [
+      {
+        "question_id": "auto_048",
+        "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json",
+        "answer": "본 연구는 상기한 임상 현장의 문제점을 해결하기 위해, ‘워크핏’이라 명명된 CDSS를 제안한다. 본 시스템의 목표는 별도의 고가 장비 없이도, 의사가 진료실 내에서 간편하게 환자의 보행을 정량적으로 분석하고 시각화할 수 있는 도구를 제공하는 것이다.",
+        "retrieved_count": 5,
+        "context_tokens": 302,
+        "latency": 11.024245999986306,
+        "rouge_l": 0.12987012987012986,
+        "bertscore": 0.2077922077922078,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "auto_079",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Higher-frequency probes provide better resolution but have reduced penetration depth due to stronger absorption.",
+        "retrieved_count": 4,
+        "context_tokens": 197,
+        "latency": 3.175543082994409,
+        "rouge_l": 0.8749999999999999,
+        "bertscore": 0.8749999999999999,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "auto_006",
+        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
+        "answer": "The arXiv ID \"2204.08939v1\" in the question corresponds to the publication date and ID in the given context as \"arXiv:2204.08939v1 [physics.med-ph] 11 Apr 2022\". This indicates that the question is asking about a specific relation between this arXiv ID and the Introduction section of the paper.\n\nBased on the provided context, it appears that the Introduction section discusses cardiovascular disease (CVD) as the leading cause of death. Therefore, I would answer:\n\nThe arXiv ID \"2204.08939v1-2\" is likely a reference or citation number in the Introduction section of the paper, possibly related to research on cardiovascular disease or its treatment.",
+        "retrieved_count": 5,
+        "context_tokens": 328,
+        "latency": 15.236077375011519,
+        "rouge_l": 0.12363636363636363,
+        "bertscore": 0.2327272727272727,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "treerag_dfs": [
+      {
+        "question_id": "auto_048",
+        "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json",
+        "answer": ",\n  \"answer\": \"\"\n}",
+        "retrieved_count": 3,
+        "context_tokens": 15,
+        "latency": 80.38188608302153,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "auto_079",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Resolution improves with increasing frequency, but the decrease in penetration depth is a significant drawback.",
+        "retrieved_count": 2,
+        "context_tokens": 8,
+        "latency": 21.574448250001296,
+        "rouge_l": 0.25,
+        "bertscore": 0.3125,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "auto_006",
+        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
+        "answer": "0cbccdf9 2204.08939v1-2는 어떤 내용을 다루고 있는지?",
+        "retrieved_count": 1,
+        "context_tokens": 5,
+        "latency": 43.90574254200328,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "treerag_beam": [
+      {
+        "question_id": "auto_048",
+        "document_id": "bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json",
+        "answer": ",\n  \"answer\": \"\"\n}",
+        "retrieved_count": 3,
+        "context_tokens": 15,
+        "latency": 0.0029650829965248704,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "auto_079",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Resolution improves with increasing frequency, but the decrease in penetration depth is a significant drawback.",
+        "retrieved_count": 2,
+        "context_tokens": 8,
+        "latency": 0.0015509999939240515,
+        "rouge_l": 0.25,
+        "bertscore": 0.3125,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "auto_006",
+        "document_id": "0cbccdf9_2204.08939v1-2_index.json",
+        "answer": "0cbccdf9 2204.08939v1-2는 어떤 내용을 다루고 있는지?",
+        "retrieved_count": 1,
+        "context_tokens": 5,
+        "latency": 0.0012545419740490615,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7333333333333334
+      }
+    ]
+  }
+}

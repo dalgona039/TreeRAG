@@ -33,8 +33,42 @@ _CASE_ENV_VARS = {
 
 _default_api_key = os.getenv("GOOGLE_API_KEY")
 if not _default_api_key:
-    logger.error("Missing required environment variable for API authentication")
-    raise ValueError("Configuration error: Missing required environment variable")
+    logger.warning("GOOGLE_API_KEY not set; Gemini features will be unavailable. "
+                   "Use set_client_override() to supply an alternative LLM client.")
+
+# --------------------------------------------------------------------------- #
+# Global client override: set via set_client_override() to route all
+# Config.get_client() calls to an alternative backend (e.g. Ollama).
+# --------------------------------------------------------------------------- #
+_client_override: Any = None
+
+
+def set_client_override(override_client: Any) -> None:
+    """Route all Config.get_client() calls to *override_client*.
+
+    The override object must expose a ``.models.generate_content()`` method
+    compatible with the google-genai client interface.
+    Call ``set_client_override(None)`` to restore normal behaviour.
+    """
+    global _client_override
+    _client_override = override_client
+
+
+class _NullClient:
+    """Placeholder used when GOOGLE_API_KEY is absent and no override is set."""
+    class _NullModels:
+        def generate_content(self, *args, **kwargs):
+            raise RuntimeError(
+                "Gemini API unavailable: GOOGLE_API_KEY not configured. "
+                "Call set_client_override() with an alternative LLM client."
+            )
+        def __getattr__(self, name):
+            raise RuntimeError("Gemini API not available: GOOGLE_API_KEY not configured")
+    def __init__(self):
+        self.models = self._NullModels()
+    def __getattr__(self, name):
+        raise RuntimeError("Gemini API not available: GOOGLE_API_KEY not configured")
+
 
 def _make_client(api_key: str) -> genai.Client:
     try:
@@ -45,11 +79,14 @@ def _make_client(api_key: str) -> genai.Client:
 
 # 기본 클라이언트 (fallback용)
 api_key = _default_api_key
-try:
-    client = genai.Client(api_key=api_key)
-except Exception as e:
-    logger.error(f"Failed to initialize API client: {type(e).__name__}")
-    raise ValueError("Configuration error: Failed to initialize API client") from None
+if api_key:
+    try:
+        client = genai.Client(api_key=api_key)
+    except Exception as e:
+        logger.error(f"Failed to initialize API client: {type(e).__name__}")
+        raise ValueError("Configuration error: Failed to initialize API client") from None
+else:
+    client = _NullClient()  # type: ignore[assignment]
 
 # 케이스별 클라이언트 캐시
 _case_clients: dict[str, genai.Client] = {}
@@ -151,14 +188,18 @@ class _ResilientClient:
         return getattr(self._inner, name)
 
 
-client = _ResilientClient(client)
+if isinstance(client, _NullClient):
+    _resilient_base = client  # keep as-is; no retries needed for the null sentinel
+else:
+    client = _ResilientClient(client)
+    _resilient_base = client
 
 # 케이스별 resilient 클라이언트 캐시
 _resilient_case_clients: dict[str, "_ResilientClient"] = {}
 
 
 class Config:
-    CLIENT = client
+    CLIENT = _resilient_base  # use _NullClient or _ResilientClient depending on API key
     MODEL_NAME = "gemini-2.5-flash"
     AFC_MAX_REMOTE_CALLS = 50
     
@@ -206,8 +247,12 @@ class Config:
         return types.GenerateContentConfig(**base_config)
 
     @classmethod
-    def get_client(cls, case: str = "default") -> "_ResilientClient":
+    def get_client(cls, case: str = "default") -> Any:
         """케이스별 API 클라이언트 반환.
+
+        When a global client override is active (set via ``set_client_override()``),
+        that override is returned for *all* cases, enabling full backend substitution
+        (e.g. local Ollama) without touching individual call sites.
 
         case 값:
             "indexing"  - GOOGLE_API_KEY_INDEXING 사용
@@ -217,6 +262,8 @@ class Config:
             "benchmark" - GOOGLE_API_KEY_BENCHMARK 사용
             기타/미지정 - GOOGLE_API_KEY (기본) 사용
         """
+        if _client_override is not None:
+            return _client_override
         if case not in _resilient_case_clients:
             raw = _get_or_create_client(case)
             _resilient_case_clients[case] = _ResilientClient(raw)

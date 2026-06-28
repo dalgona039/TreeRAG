@@ -17,11 +17,9 @@
 
 ---
 
----
-
 ## Abstract
 
-Retrieval-Augmented Generation (RAG) has emerged as a dominant paradigm for grounding large language model (LLM) outputs in external documents. However, conventional flat-chunk retrieval discards the inherent hierarchical structure of technical documents—chapters, sections, and articles—leading to context fragmentation and reduced answer fidelity. We present **TreeRAG**, a hierarchical document intelligence system that (1) converts raw PDFs into page-aware JSON trees using zero-shot LLM prompting, (2) traverses these trees with two complementary algorithms—Depth-First Search (DFS) and Beam Search—to retrieve only structurally relevant nodes, (3) applies TF-IDF and semantic contextual compression to reduce token overhead, and (4) validates generated answers with a five-signal hallucination detector. We evaluate TreeRAG on 204 general-domain questions, a 20-question HotpotQA multi-hop subset, and a 42-question medical domain benchmark against four baselines: BM25, Dense Retrieval, FlatRAG, and RAPTOR. TreeRAG-DFS achieves a ROUGE-L of 0.451 on the general benchmark (+39.5% over BM25, +81.9% over FlatRAG, +132.4% over RAPTOR; all p < 0.001), and TreeRAG-Beam yields a ROUGE-L of 0.169 on multi-hop HotpotQA (+84.4% over BM25, p < 0.001). Contextual compression reduces average context tokens by 37.5% versus BM25 without degrading retrieval quality. Code, datasets, and evaluation scripts are publicly available at https://github.com/dalgona039/TreeRAG.
+Retrieval-Augmented Generation (RAG) has emerged as a dominant paradigm for grounding large language model (LLM) outputs in external documents. However, conventional flat-chunk retrieval discards the inherent hierarchical structure of technical documents—chapters, sections, and articles—leading to context fragmentation and reduced answer fidelity. We present **TreeRAG**, a hierarchical document intelligence system that (1) converts raw PDFs into page-aware JSON trees using zero-shot LLM prompting, (2) traverses these trees with two complementary algorithms—Depth-First Search (DFS) and Beam Search—to retrieve only structurally relevant nodes, (3) applies TF-IDF and semantic contextual compression to reduce token overhead, and (4) validates generated answers with a five-signal hallucination detector. We evaluate TreeRAG on 204 general-domain questions, a 20-question HotpotQA multi-hop subset, and a 42-question medical domain benchmark against four baselines: BM25, Dense Retrieval, FlatRAG, and RAPTOR. TreeRAG-DFS achieves a ROUGE-L of 0.451 on the general benchmark (+39.5% over BM25, +81.9% over FlatRAG, +132.4% over RAPTOR; all p < 0.001), and TreeRAG-Beam yields a ROUGE-L of 0.169 on multi-hop HotpotQA (+84.4% over BM25, p < 0.001). TreeRAG-DFS uses 37.5% fewer average context tokens than BM25 without degrading retrieval quality, and our ablation shows contextual compression removes the redundant nodes introduced by wider traversal at no accuracy cost. Code, datasets, and evaluation scripts are publicly available at https://github.com/dalgona039/TreeRAG.
 
 **Keywords:** Retrieval-Augmented Generation, Hierarchical Indexing, Tree Traversal, Beam Search, Contextual Compression, Hallucination Detection
 
@@ -51,21 +49,23 @@ The remainder of this paper is organized as follows. Section 2 reviews related w
 
 ### 2.1 Retrieval-Augmented Generation
 
-RAG was formally introduced by Lewis et al. [2020] as a sequence-to-sequence architecture that conditions generation on retrieved Wikipedia passages. Subsequent work scaled dense retrieval with FAISS [Johnson et al., 2019] and improved passage encoding with DPR [Karpukhin et al., 2020]. Hybrid retrievers combining sparse BM25 [Robertson & Zaragoza, 2009] with dense vectors showed consistent gains over either approach alone [Ma et al., 2021]. Despite this progress, all these systems operate on flat passage chunks, treating documents as bags of text rather than structured hierarchies [Gao et al., 2024].
+RAG was formally introduced by Lewis et al. [2020] as a sequence-to-sequence architecture that conditions generation on retrieved Wikipedia passages. Subsequent work scaled dense retrieval with FAISS [Johnson et al., 2019] and improved passage encoding with DPR [Karpukhin et al., 2020]. Hybrid retrievers combining sparse BM25 [Robertson & Zaragoza, 2009] with dense vectors showed consistent gains over either approach alone [Ma et al., 2021]. A parallel line of work improves the retriever itself: late-interaction models such as ColBERT [Khattab & Zaharia, 2020] and its compressed successor ColBERTv2 [Santhanam et al., 2022] retain fine-grained token-level matching at scale, while learned sparse models such as SPLADE [Formal et al., 2021] and the efficiency-oriented SPLATE [Formal et al., 2024] reconcile neural ranking with inverted-index infrastructure. As recent surveys document, the RAG design space has expanded rapidly along retrieval, generation, and evaluation axes [Gao et al., 2024; Gupta et al., 2024]. Despite this progress, all these systems operate on flat passage chunks, treating documents as bags of text rather than structured hierarchies [Gao et al., 2024].
 
 ### 2.2 Hierarchical and Structure-Aware Retrieval
 
 LlamaIndex [Liu, 2022] constructs a tree of progressively coarser summaries and navigates it top-down, retrieving leaf nodes for generation. Its retrieval is embedding-based, requiring a vector store. RAPTOR [Sarthi et al., 2024] takes the opposite direction: it recursively clusters leaf chunks and summarizes each cluster, building a bottom-up tree. At query time it retrieves at the most informative tree level. Unlike TreeRAG, RAPTOR's tree reflects embedding-cluster geography rather than the document's own section hierarchy, and it lacks traversal algorithm selection or compression.
 
-HiRAG [Huang et al., 2025b] explores graph-based hierarchies but requires pre-built knowledge graphs and domain-specific schema engineering. TreeRAG requires only a raw PDF and a Gemini API key.
+HiRAG [Huang et al., 2025b] explores graph-based hierarchies but requires pre-built knowledge graphs and domain-specific schema engineering. Similarly, GraphRAG [Edge et al., 2025] builds entity knowledge graphs from source documents and generates community summaries for global query-focused summarization, but requires an entity extraction pipeline and does not preserve document section hierarchy. TreeRAG requires only a raw PDF and a Gemini API key.
+
+Self-RAG [Asai et al., 2024] takes a complementary adaptive approach: it trains an LM to decide on-demand whether to retrieve, and to critique retrieved passages via special reflection tokens. TreeRAG instead uses a fixed two-stage pipeline with query-time algorithm selection (DFS vs. Beam Search) without requiring fine-tuning.
 
 ### 2.3 Multi-Hop and Cross-Document Reasoning
 
-Multi-hop reasoning—answering questions that require evidence synthesis across multiple passages or documents—remains a challenge for flat RAG. HotpotQA [Yang et al., 2018] benchmarks this capability. IRCoT [Trivedi et al., 2023] interleaves retrieval and chain-of-thought [Wei et al., 2022] reasoning steps. TreeRAG's hierarchical structure naturally supports multi-hop queries: the tree encodes which sections are siblings (sharing a parent), enabling the traversal algorithm to follow cross-sectional reasoning paths without additional orchestration.
+Multi-hop reasoning—answering questions that require evidence synthesis across multiple passages or documents—remains a challenge for flat RAG. HotpotQA [Yang et al., 2018] benchmarks this capability. IRCoT [Trivedi et al., 2023] interleaves retrieval and chain-of-thought [Wei et al., 2022] reasoning steps. More recently, Zhang et al. [2024] propose a hierarchical RAG model with a "rethink" mechanism that iteratively revisits retrieved evidence for multi-hop QA; like TreeRAG it exploits hierarchy, but it adds an iterative re-retrieval loop rather than selecting a traversal algorithm at query time. TreeRAG's hierarchical structure naturally supports multi-hop queries: the tree encodes which sections are siblings (sharing a parent), enabling the traversal algorithm to follow cross-sectional reasoning paths without additional orchestration.
 
 ### 2.4 Hallucination in RAG Systems
 
-RAG substantially reduces hallucination by grounding generation in retrieved text, but does not eliminate it [Shuster et al., 2021]. FActScoring [Min et al., 2023] decomposes claims into atomic facts and verifies each against source passages. RAGAS [Es et al., 2023] defines faithfulness, answer relevance, and context recall as automatic metrics. TreeRAG's hallucination detector operates at sentence level using five lightweight overlap signals, providing a fast, LLM-free confidence estimate compatible with real-time serving.
+RAG substantially reduces hallucination by grounding generation in retrieved text, but does not eliminate it [Shuster et al., 2021]. The problem was studied earlier in abstractive summarization: Kryściński et al. [2020] train a weakly-supervised model (FactCC) to verify whether a generated sentence is factually consistent with its source and to extract supporting spans, while Nan et al. [2021] propose entity-level consistency metrics showing that models hallucinate entities absent from the source. These motivate TreeRAG's source-grounded signals, including its medical entity recall metric (Section 5.3). FActScore [Min et al., 2023] decomposes claims into atomic facts and verifies each against source passages. RAGAS [Es et al., 2023] defines faithfulness, answer relevance, and context recall as automatic metrics. As a recent review of faithfulness metrics observes, LLM-as-judge evaluators currently correlate best with human judgement but are computationally costly, motivating lightweight alternatives for real-time use [Malin et al., 2025]. TreeRAG's hallucination detector operates at sentence level using five lightweight overlap signals, providing a fast, LLM-free confidence estimate compatible with real-time serving.
 
 ---
 
@@ -159,7 +159,7 @@ DFS is recommended for precision-critical queries (regulatory compliance, medica
 
 ### 3.4 Contextual Compression
 
-Post-traversal, the selected node set may still exceed the LLM context limit or contain redundant passages. Long contexts can degrade LLM performance, especially when relevant information appears in the middle of the input [Liu et al., 2023]. The `ContextualCompressor` pipeline:
+Post-traversal, the selected node set may still exceed the LLM context limit or contain redundant passages. Long contexts can degrade LLM performance, especially when relevant information appears in the middle of the input [Liu et al., 2024]. Prompt-compression methods such as LLMLingua [Jiang et al., 2023] address this by dropping low-information tokens, achieving large compression ratios with little quality loss; TreeRAG instead compresses at the node level, pruning and deduplicating whole tree nodes by TF-IDF relevance so that page-level citations remain intact. The `ContextualCompressor` pipeline:
 
 1. **Tokenization.** Each node's content is tokenized (whitespace-based proxy) and assigned a token count.
 2. **Relevance Scoring.** TF-IDF cosine similarity is computed between each node and the query. Nodes below `MIN_CHUNK_RELEVANCE = 0.2` are pruned.
@@ -228,7 +228,7 @@ Frontend (Next.js 16 / React 19 / TypeScript)
 
 ### 4.3 Caching Strategy
 
-The cache key is a SHA-256 hash of (question, index filenames, traversal settings, domain template, language, prompt cache version). Cache hits return in ~100 ms vs. the 1.8–3.2 s of a cold LLM call. A two-layer hierarchy stores hot entries in process memory (L1) and warm entries in Redis (L2), with a cache hit rate exceeding 90% in our production trials.
+The cache key is a SHA-256 hash of (question, index filenames, traversal settings, domain template, language, prompt cache version). Cache hits return in ~100 ms vs. the 1.8–3.2 s of a cold LLM call. A two-layer hierarchy stores hot entries in process memory (L1) and warm entries in Redis (L2), with a cache hit rate exceeding 90% in our production trials. This application-layer caching complements inference-layer memory optimizations such as PagedAttention [Kwon et al., 2023], which manages GPU KV-cache during LLM decoding.
 
 ### 4.4 API and Frontend
 
@@ -253,7 +253,7 @@ We evaluate on three datasets:
 | System | Description |
 |--------|-------------|
 | BM25 | Okapi BM25 keyword retrieval over document chunks |
-| Dense Retrieval | Sentence-BERT embedding + cosine retrieval |
+| Dense Retrieval | Sentence-BERT [Reimers & Gurevych, 2019] embedding + cosine retrieval |
 | FlatRAG | Hybrid: BM25 (60%) + semantic (25%) + structural (15%) |
 | RAPTOR | Recursive abstractive processing of chunks into a tree [Sarthi et al., 2024] |
 | TreeRAG-DFS | Proposed system with DFS traversal |
@@ -263,7 +263,7 @@ We evaluate on three datasets:
 
 - **ROUGE-L** [Lin, 2004]: Longest common subsequence recall between generated and reference answers.
 - **BERTScore** [Zhang et al., 2020]: Contextual embedding precision between generated and reference tokens.
-- **LLM-as-Judge** (subset): Gemini evaluates answers on faithfulness, relevance, and completeness (0–1 scale).
+- **LLM-as-Judge** [Zheng et al., 2023] (subset): Gemini evaluates answers on faithfulness, relevance, and completeness (0–1 scale).
 - **Medical Entity Recall**: Fraction of medical terms in the reference answer recovered by the system.
 - **Latency**: Average wall-clock seconds per query.
 - **Context Tokens**: Average token count of the context passed to the LLM.
@@ -276,8 +276,8 @@ Table 1 reports results on the Full Benchmark and HotpotQA. Figure 2 visualizes 
 
 **Table 1: Main Results (n=204 / n=20).** Best per column in **bold**; all † comparisons have p < 0.001 vs. TreeRAG-Beam (paired t-test).
 
-| System | ROUGE-L | BERTScore | LLM-Judge | HotpotQA ROUGE-L | Latency (s) |
-|--------|---------|-----------|-----------|------------------|-------------|
+| System | ROUGE-L | BERTScore | LLM-Judge | HotpotQA ROUGE-L | Latency (ms, offline) |
+|--------|---------|-----------|-----------|------------------|------------------------|
 | BM25 | 0.324 † | 0.373 † | 0.69 | 0.092 † | 3.83 |
 | Dense Retrieval | 0.290 † | 0.337 † | 0.64 | — | 2.11 |
 | FlatRAG | 0.248 † | 0.294 † | **0.81** | 0.057 † | 2.04 |
@@ -305,6 +305,8 @@ Table 2 and Figure 7 present domain-specific results on the 42-question medical 
 | RAPTOR | 0.053 | 0.895 | 300.5 |
 | TreeRAG-DFS | **0.366** | **1.000** | 73.5 |
 | TreeRAG-Beam | 0.265 | 1.000 | 115.5 |
+
+‡ FlatRAG in offline mode uses no retrieved passage context (0 tokens); online mode retrieves hybrid chunks.
 
 TreeRAG-DFS achieves the highest ROUGE-L (0.366) while maintaining perfect medical entity recall (1.000) and the smallest non-zero context footprint (73.5 tokens). Critically, RAPTOR drops to ROUGE-L 0.053 (−85.5% vs. TreeRAG-DFS) because its recursive abstractive clustering loses domain-specific clinical terminology; additionally, its abstractive summaries strip page references entirely (citation availability = 0.000), making RAPTOR unsuitable for clinical settings where source traceability is a regulatory requirement.
 
@@ -380,7 +382,7 @@ Online evaluation with real Gemini generation is planned for the camera-ready ve
 
 - **LLM API dependency.** Indexing requires a Gemini API call per document. Rate limits on free tiers slow bulk indexing.
 - **Structural prompt brittleness.** Documents with inconsistent heading styles (e.g., scanned PDFs with OCR artifacts) may yield malformed index trees requiring manual correction.
-- **DSPy Optimization.** We attempted learned node scoring via DSPy [Khattab et al., 2023] with Groq Llama-3.3-70B. Optimization yielded no improvement (0.0% gain), likely due to insufficient training signal (< 100 labeled examples). We exclude this component from the main system.
+- **DSPy Optimization.** We attempted learned node scoring via DSPy [Khattab et al., 2024] with Groq Llama-3.3-70B. Optimization yielded no improvement (0.0% gain), likely due to insufficient training signal (< 100 labeled examples). We exclude this component from the main system.
 - **Evaluation dataset size.** The medical benchmark (n = 42) and HotpotQA subset (n = 20) are small. Larger-scale evaluation is needed to confirm findings.
 
 ---
@@ -389,29 +391,47 @@ Online evaluation with real Gemini generation is planned for the camera-ready ve
 
 We presented TreeRAG, a hierarchical document RAG system that indexes PDFs into page-referenced JSON trees using zero-shot LLM prompting, traverses them with DFS or Beam Search, compresses retrieved context, and validates generated answers with a lightweight five-signal hallucination detector. On a 204-question general benchmark, TreeRAG-DFS achieves ROUGE-L 0.451 (+39.5% over BM25, +81.9% over FlatRAG, +132.4% over RAPTOR; all p < 0.001, d = 0.483–1.205). On a 20-question multi-hop HotpotQA subset, TreeRAG-Beam achieves ROUGE-L 0.169 (+84.4% over BM25, p < 0.001, d = 1.358). TreeRAG-DFS uses 37.5% fewer context tokens than BM25 (65.5 vs. 104.8 avg tokens) while Pareto-dominating every baseline on the accuracy–context trade-off. On the 42-question medical benchmark, TreeRAG-DFS achieves ROUGE-L 0.366 with 100% medical entity recall and full page-citation availability—outperforming RAPTOR (ROUGE-L 0.053, entity recall 89.5%, 0% citations). The system provides page-level citations, domain-adaptive prompting for five domains, multilingual support (Korean, English, Japanese), and a production-ready API with caching, rate limiting, and async task queuing.
 
-Future work will pursue: (1) online LLM-evaluated benchmarks at scale; (2) Graph RAG integration for inter-document relationship modeling; (3) multi-modal indexing for figures and tables; (4) active learning for traversal policy optimization from user feedback signals.
+Future work will pursue: (1) online LLM-evaluated benchmarks at scale; (2) Graph RAG integration [Edge et al., 2025] for inter-document relationship modeling; (3) multi-modal indexing for figures and tables; (4) active learning for traversal policy optimization from user feedback signals.
 
 ---
 
 ## References
 
+[Asai et al., 2024] Asai, A., Wu, Z., Wang, Y., Sil, A., & Hajishirzi, H. 2024. Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection. In *Proceedings of ICLR 2024*. arXiv:2310.11511.
+
 [Brown et al., 2020] Brown, T.B., Mann, B., Ryder, N., Subbiah, M., Kaplan, J., Dhariwal, P., Neelakantan, A., Shyam, P., Sastry, G., Askell, A., Agarwal, S., Herbert-Voss, A., Krueger, G., Henighan, T., Child, R., Ramesh, A., Ziegler, D.M., Wu, J., Winter, C., Hesse, C., Chen, M., Sigler, E., Litwin, M., Gray, S., Chess, B., Clark, J., Berner, C., McCandlish, S., Radford, A., Sutskever, I., & Amodei, D. 2020. Language Models are Few-Shot Learners. In *Advances in Neural Information Processing Systems (NeurIPS 2020)*, vol. 33, pp. 1877–1901. arXiv:2005.14165.
+
+[Edge et al., 2025] Edge, D., Trinh, H., Cheng, N., Bradley, J., Chao, A., Mody, A., Truitt, S., Metropolitansky, D., Ness, R.O., & Larson, J. 2025. From Local to Global: A GraphRAG Approach to Query-Focused Summarization. arXiv:2404.16130.
 
 [Es et al., 2023] Es, S., James, J., Espinosa-Anke, L., & Schockaert, S. 2023. Ragas: Automated Evaluation of Retrieval Augmented Generation. arXiv:2309.15217.
 
+[Formal et al., 2021] Formal, T., Piwowarski, B., & Clinchant, S. 2021. SPLADE: Sparse Lexical and Expansion Model for First Stage Ranking. In *Proceedings of the 44th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2021)*, pp. 2288–2292. doi:10.1145/3404835.3463098.
+
+[Formal et al., 2024] Formal, T., Clinchant, S., Déjean, H., & Lassance, C. 2024. SPLATE: Sparse Late Interaction Retrieval. In *Proceedings of the 47th International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2024)*. arXiv:2404.13950.
+
 [Gao et al., 2024] Gao, Y., Xiong, Y., Gao, X., Jia, K., Pan, J., Bi, Y., Dai, Y., Sun, J., Wang, M., & Wang, H. 2024. Retrieval-Augmented Generation for Large Language Models: A Survey. arXiv:2312.10997.
+
+[Gupta et al., 2024] Gupta, S., Ranjan, R., & Singh, S.N. 2024. A Comprehensive Survey of Retrieval-Augmented Generation (RAG): Evolution, Current Landscape and Future Directions. arXiv:2410.12837.
 
 [Huang et al., 2025a] Huang, L., Yu, W., Ma, W., Zhong, W., Feng, Z., Wang, H., Chen, Q., Peng, W., Feng, X., Qin, B., & Liu, T. 2025. A Survey on Hallucination in Large Language Models: Principles, Taxonomy, Challenges, and Open Questions. *ACM Transactions on Information Systems*, 43(2), Article 42. doi:10.1145/3703155.
 
 [Huang et al., 2025b] Huang, H., Huang, Y., Yang, J., Pan, Z., Chen, Y., Ma, K., Chen, H., & Cheng, J. 2025. Retrieval-Augmented Generation with Hierarchical Knowledge. arXiv:2503.10150.
 
+[Jiang et al., 2023] Jiang, H., Wu, Q., Lin, C.-Y., Yang, Y., & Qiu, L. 2023. LLMLingua: Compressing Prompts for Accelerated Inference of Large Language Models. In *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP 2023)*, pp. 13358–13376. arXiv:2310.05736.
+
 [Johnson et al., 2019] Johnson, J., Douze, M., & Jégou, H. 2019. Billion-scale Similarity Search with GPUs. *IEEE Transactions on Big Data*, 7(3), 535–547. arXiv:1702.08734.
 
 [Karpukhin et al., 2020] Karpukhin, V., Oğuz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., & Yih, W. 2020. Dense Passage Retrieval for Open-Domain Question Answering. In *Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP 2020)*, pp. 6769–6781.
 
+[Khattab & Zaharia, 2020] Khattab, O., & Zaharia, M. 2020. ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction over BERT. In *Proceedings of the 43rd International ACM SIGIR Conference on Research and Development in Information Retrieval (SIGIR 2020)*, pp. 39–48. doi:10.1145/3397271.3401075.
+
 [Khattab et al., 2024] Khattab, O., Singhvi, A., Maheshwari, P., Zhang, Z., Santhanam, K., Vardhamanan, S., Haq, S., Sharma, A., Joshi, T.T., Moazam, H., Miller, H., Zaharia, M., & Potts, C. 2024. DSPy: Compiling Declarative Language Model Calls into Self-Improving Pipelines. In *Proceedings of ICLR 2024*. arXiv:2310.03714.
 
 [Kojima et al., 2022] Kojima, T., Gu, S.S., Reid, M., Matsuo, Y., & Iwasawa, Y. 2022. Large Language Models are Zero-Shot Reasoners. In *Advances in Neural Information Processing Systems (NeurIPS 2022)*, vol. 35. arXiv:2205.11916.
+
+[Kryściński et al., 2020] Kryściński, W., McCann, B., Xiong, C., & Socher, R. 2020. Evaluating the Factual Consistency of Abstractive Text Summarization. In *Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP 2020)*, pp. 9332–9346. arXiv:1910.12840.
+
+[Kwon et al., 2023] Kwon, W., Li, Z., Zhuang, S., Sheng, Y., Zheng, L., Yu, C.H., Gonzalez, J.E., Zhang, H., & Stoica, I. 2023. Efficient Memory Management for Large Language Model Serving with PagedAttention. In *Proceedings of the 29th Symposium on Operating Systems Principles (SOSP 2023)*, pp. 611–626. doi:10.1145/3600006.3613165.
 
 [Lewis et al., 2020] Lewis, P., Perez, E., Piktus, A., Petroni, F., Karpukhin, V., Goyal, N., Küttler, H., Lewis, M., Yih, W., Rocktäschel, T., Riedel, S., & Kiela, D. 2020. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. In *Advances in Neural Information Processing Systems (NeurIPS 2020)*, vol. 33, pp. 9459–9474. arXiv:2005.11401.
 
@@ -419,13 +439,21 @@ Future work will pursue: (1) online LLM-evaluated benchmarks at scale; (2) Graph
 
 [Liu, 2022] Liu, J. 2022. LlamaIndex. GitHub. https://github.com/run-llama/llama_index.
 
-[Liu et al., 2023] Liu, N.F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., & Liang, P. 2024. Lost in the Middle: How Language Models Use Long Contexts. *Transactions of the Association for Computational Linguistics*, 12, 157–173. arXiv:2307.03172.
+[Liu et al., 2024] Liu, N.F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., & Liang, P. 2024. Lost in the Middle: How Language Models Use Long Contexts. *Transactions of the Association for Computational Linguistics*, 12, 157–173. arXiv:2307.03172.
 
 [Ma et al., 2021] Ma, X., Sun, R., Pradeep, R., & Lin, J. 2021. A Replication Study of Dense Passage Retrieval for Open-Domain Question Answering. arXiv:2104.05740.
 
-[Min et al., 2023] Min, S., Krishna, K., Lyu, X., Lewis, M., Yih, W., Koh, P.W., Iyyer, M., Zettlemoyer, L., & Hajishirzi, H. 2023. FActScoring: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation. In *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP 2023)*. arXiv:2305.14251.
+[Malin et al., 2025] Malin, B., Kalganova, T., & Boulgouris, N. 2025. A Review of Faithfulness Metrics for Hallucination Assessment in Large Language Models. arXiv:2501.00269.
+
+[Min et al., 2023] Min, S., Krishna, K., Lyu, X., Lewis, M., Yih, W., Koh, P.W., Iyyer, M., Zettlemoyer, L., & Hajishirzi, H. 2023. FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation. In *Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP 2023)*. arXiv:2305.14251.
+
+[Nan et al., 2021] Nan, F., Nallapati, R., Wang, Z., dos Santos, C.N., Zhu, H., Zhang, D., McKeown, K., & Xiang, B. 2021. Entity-level Factual Consistency of Abstractive Text Summarization. In *Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics (EACL 2021)*, pp. 2727–2733. arXiv:2102.09130.
+
+[Reimers & Gurevych, 2019] Reimers, N., & Gurevych, I. 2019. Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks. In *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing (EMNLP 2019)*, pp. 3982–3992. arXiv:1908.10084.
 
 [Robertson & Zaragoza, 2009] Robertson, S., & Zaragoza, H. 2009. The Probabilistic Relevance Framework: BM25 and Beyond. *Foundations and Trends in Information Retrieval*, 3(4), 333–389.
+
+[Santhanam et al., 2022] Santhanam, K., Khattab, O., Saad-Falcon, J., Potts, C., & Zaharia, M. 2022. ColBERTv2: Effective and Efficient Retrieval via Lightweight Late Interaction. In *Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies (NAACL-HLT 2022)*, pp. 3715–3734. arXiv:2112.01488.
 
 [Sarthi et al., 2024] Sarthi, P., Abdullah, S., Tuli, A., Khanna, S., Goldie, A., & Manning, C.D. 2024. RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval. In *Proceedings of ICLR 2024*. arXiv:2401.18059.
 
@@ -433,11 +461,17 @@ Future work will pursue: (1) online LLM-evaluated benchmarks at scale; (2) Graph
 
 [Trivedi et al., 2023] Trivedi, H., Balasubramanian, N., Khot, T., & Sabharwal, A. 2023. Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions. In *Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (ACL 2023)*, pp. 10014–10037. arXiv:2212.10509.
 
-[Wei et al., 2022] Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., & Zhou, D. 2022. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. In *Advances in Neural Information Processing Systems (NeurIPS 2022)*, vol. 35. 
+[VectifyAI, 2023] Vectify AI. 2023. PageIndex: Reasoning-Based, Vectorless RAG via Document Tree Search. GitHub. https://github.com/VectifyAI/PageIndex.
+
+[Wei et al., 2022] Wei, J., Wang, X., Schuurmans, D., Bosma, M., Ichter, B., Xia, F., Chi, E., Le, Q., & Zhou, D. 2022. Chain-of-Thought Prompting Elicits Reasoning in Large Language Models. In *Advances in Neural Information Processing Systems (NeurIPS 2022)*, vol. 35. arXiv:2201.11903.
 
 [Yang et al., 2018] Yang, Z., Qi, P., Zhang, S., Bengio, Y., Cohen, W., Salakhutdinov, R., & Manning, C.D. 2018. HotpotQA: A Dataset for Diverse, Explainable Multi-hop Question Answering. In *Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing (EMNLP 2018)*, pp. 2369–2380. arXiv:1809.09600.
 
 [Zhang et al., 2020] Zhang, T., Kishore, V., Wu, F., Weinberger, K.Q., & Artzi, Y. 2020. BERTScore: Evaluating Text Generation with BERT. In *Proceedings of the International Conference on Learning Representations (ICLR 2020)*. arXiv:1904.09675.
+
+[Zhang et al., 2024] Zhang, X., Wang, M., Yang, X., Wang, D., Feng, S., & Zhang, Y. 2024. Hierarchical Retrieval-Augmented Generation Model with Rethink for Multi-hop Question Answering. arXiv:2408.11875.
+
+[Zheng et al., 2023] Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., Lin, Z., Li, Z., Li, D., Xing, E.P., Zhang, H., Gonzalez, J.E., & Stoica, I. 2023. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. In *Advances in Neural Information Processing Systems (NeurIPS 2023)*, Datasets and Benchmarks Track. arXiv:2306.05685.
 
 ---
 

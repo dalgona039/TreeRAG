@@ -117,9 +117,13 @@ def keyword_traversal(
 # System adapters
 # --------------------------------------------------------------------------- #
 class Evaluator:
-    def __init__(self, mode: str, use_llm_judge: bool, domain: str = "general", local_judge: bool = False, local_judge_model: str = "llama3.1:8b"):
+    def __init__(self, mode: str, use_llm_judge: bool, domain: str = "general",
+                 local_judge: bool = False, local_judge_model: str = "llama3.1:8b",
+                 gen_backend: str = "gemini", gen_model: str = "gemma4:12b"):
         self.mode = mode  # "online" | "offline"
         self.domain = domain
+        self.gen_backend = gen_backend
+        self.gen_model = gen_model
         self.use_llm_judge = use_llm_judge and (mode == "online" or local_judge)
         self._index_cache: Dict[str, Any] = {}
         self._bm25_cache: Dict[str, Any] = {}
@@ -144,6 +148,44 @@ class Evaluator:
                 self._index_cache[doc_id] = json.load(f)
         return self._index_cache[doc_id]
 
+    # -- shared LLM generation (used by all systems when gen_backend=ollama) ---
+    def _llm_generate(self, context: str, question: str) -> str:
+        """Generate an answer from context+question via the active LLM client.
+
+        Used to give every system the same generation backend so comparisons are
+        fair. Falls back to extractive context only if the LLM call fails.
+        """
+        import re as _re
+        from src.config import Config as _Config
+
+        lang_inst = (
+            "답변은 한국어로 작성하세요."
+            if _re.search(r"[가-힣]", question)
+            else "Answer in the same language as the question."
+        )
+        prompt = (
+            f"아래 컨텍스트를 참고하여 질문에 답하세요. {lang_inst} "
+            f"컨텍스트에 없는 내용은 추측하지 마세요.\n\n"
+            f"### 컨텍스트:\n{context}\n\n"
+            f"### 질문:\n{question}\n\n"
+            f"### 답변:"
+        )
+        try:
+            client = _Config.get_client()  # returns override when set
+            resp = client.models.generate_content(
+                model=None,   # OllamaClient ignores this
+                contents=prompt,
+                config=None,  # no JSON format: we want natural language
+            )
+            answer = (resp.text or "").strip()
+            if len(answer) < 10:
+                print(f"   ⚠️ LLM returned very short answer ({len(answer)} chars) — extractive fallback")
+                return context
+            return answer
+        except Exception as exc:
+            print(f"   ⚠️ LLM generation failed: {exc} — extractive fallback")
+            return context
+
     # -- individual systems -------------------------------------------------
     def _run_bm25(self, q: str, doc_id: str, branches: int):
         from src.core.bm25_baseline import BM25Retriever
@@ -151,7 +193,12 @@ class Evaluator:
         if doc_id not in self._bm25_cache:
             self._bm25_cache[doc_id] = BM25Retriever(self.load_tree(doc_id))
         nodes = self._bm25_cache[doc_id].retrieve(q, top_k=branches)
-        return extractive_answer(nodes), nodes
+        context = extractive_answer(nodes)
+        if self.gen_backend == "ollama":
+            answer = self._llm_generate(context, q)
+        else:
+            answer = context
+        return answer, nodes
 
     def _run_dense(self, q: str, doc_id: str, branches: int):
         from src.core.dense_retrieval_baseline import DenseRetriever
@@ -159,7 +206,12 @@ class Evaluator:
         if doc_id not in self._dense_cache:
             self._dense_cache[doc_id] = DenseRetriever(self.load_tree(doc_id))
         nodes = self._dense_cache[doc_id].retrieve(q, top_k=branches)
-        return extractive_answer(nodes), nodes
+        context = extractive_answer(nodes)
+        if self.gen_backend == "ollama":
+            answer = self._llm_generate(context, q)
+        else:
+            answer = context
+        return answer, nodes
 
     def _run_flatrag(self, q: str, doc_id: str, branches: int):
         from src.core.flat_rag_baseline import FlatRAGBaseline
@@ -168,8 +220,12 @@ class Evaluator:
         if key not in self._index_cache:
             self._index_cache[key] = FlatRAGBaseline([doc_id])
         baseline = self._index_cache[key]
-        answer, meta = baseline.query(q, max_branches=branches)
+        extractive, meta = baseline.query(q, max_branches=branches)
         nodes = [{"id": d} for d in meta.get("retrieved_docs", [])]
+        if self.gen_backend == "ollama":
+            answer = self._llm_generate(extractive, q)
+        else:
+            answer = extractive
         return answer, nodes
 
     def load_raw_text(self, doc_id: str) -> str:
@@ -210,11 +266,20 @@ class Evaluator:
                 self.load_raw_text(doc_id), doc_id
             )
         result = self._raptor_cache[doc_id].answer(q, top_k=max(branches, 5))
-        return result["answer"], result["source_nodes"]
+        extractive = result["answer"]
+        if self.gen_backend == "ollama":
+            answer = self._llm_generate(extractive, q)
+        else:
+            answer = extractive
+        return answer, result["source_nodes"]
 
     def _run_treerag(self, q: str, doc_id: str, algo: str, branches: int):
         if self.mode == "online":
             from src.core.reasoner import TreeRAGReasoner
+
+            # Use a simple prompt for local LLM backends to avoid JSON-scaffold
+            # truncation that corrupts answers with small models.
+            use_simple = (self.gen_backend == "ollama")
 
             key = (doc_id, algo)
             if key not in self._reasoner_cache:
@@ -223,7 +288,9 @@ class Evaluator:
                     traversal_algorithm="dfs" if algo == "dfs" else "beam_search",
                     enable_compression=True,
                 )
-            answer, meta = self._reasoner_cache[key].query(q, max_branches=branches)
+            answer, meta = self._reasoner_cache[key].query(
+                q, max_branches=branches, use_simple_prompt=use_simple
+            )
             nodes = meta.get("nodes_selected", []) or []
             nodes = [n if isinstance(n, dict) else {"id": n} for n in nodes]
             return answer, nodes
@@ -289,9 +356,12 @@ def load_dataset(dataset_arg: str) -> Dict[str, Any]:
         return json.load(f)
 
 
-def detect_mode(requested: str) -> str:
+def detect_mode(requested: str, gen_backend: str = "gemini") -> str:
     if requested in ("online", "offline"):
         return requested
+    # When using the Ollama backend, skip the Gemini ping (override is already set).
+    if gen_backend == "ollama":
+        return "online"
     try:
         Config.CLIENT.models.generate_content(model=Config.MODEL_NAME, contents="ping")
         return "online"
@@ -299,7 +369,8 @@ def detect_mode(requested: str) -> str:
         return "offline"
 
 
-def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator) -> Dict[str, Any]:
+def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator,
+             print_answers: bool = False) -> Dict[str, Any]:
     questions = dataset["questions"]
     per_system: Dict[str, List[Dict[str, Any]]] = {s: [] for s in systems}
 
@@ -317,6 +388,13 @@ def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator) 
                 answer, nodes = "", []
                 print(f"   ⚠️  {system} failed on {q['question_id']}: {exc}")
             latency = time.perf_counter() - t0
+
+            if print_answers:
+                print(f"\n   ── [{system}] Q: {q['question'][:100]}")
+                ans_preview = answer.replace("\n", " ")
+                print(f"   ── A ({len(answer)} chars, {latency:.2f}s): {ans_preview[:300]}")
+                if len(answer) < 10:
+                    print(f"   ── ⛔ ANSWER TOO SHORT — smoke check FAIL")
 
             context = extractive_answer(nodes)
             scores = evaluator.score_answer(q["question"], context, answer, expected)
@@ -410,6 +488,74 @@ def print_significance(sig: Dict[str, Any]) -> None:
         )
 
 
+def save_markdown_table(
+    agg: Dict[str, Dict[str, float]],
+    sig: Dict[str, Any],
+    systems: List[str],
+    path: Path,
+    meta: Optional[Dict[str, Any]] = None,
+) -> None:
+    """Write a GitHub-flavoured markdown results table to *path*."""
+    lines: List[str] = []
+    if meta:
+        lines.append(f"# Benchmark Results — {meta.get('gen_backend','?')} / {meta.get('gen_model','?')}")
+        lines.append(f"\n**Dataset**: {meta.get('dataset','')}  |  "
+                     f"**Questions**: {meta.get('n_questions','')}  |  "
+                     f"**Seed**: {meta.get('seed','')}  |  "
+                     f"**Date**: {meta.get('date','')}\n")
+
+    has_mer = any("medical_entity_recall" in agg.get(s, {}) for s in systems)
+    has_judge = any(agg.get(s, {}).get("llm_judge") is not None for s in systems)
+
+    header = "| System | ROUGE-L | BERTScore |"
+    sep    = "|--------|---------|-----------|"
+    if has_judge:
+        header += " LLM-Judge |"
+        sep    += "-----------|"
+    if has_mer:
+        header += " Med-Entity-Recall |"
+        sep    += "-----------------|"
+    header += " Latency(s) |"
+    sep    += "-----------|"
+    lines += [header, sep]
+
+    for s in systems:
+        a = agg.get(s, {})
+        row = (f"| {SYSTEM_LABELS.get(s, s)} "
+               f"| {a.get('rouge_l', 0):.3f} "
+               f"| {a.get('bertscore', 0):.3f} |")
+        if has_judge:
+            lj = a.get("llm_judge")
+            row += f" {lj:.3f} |" if lj is not None else " — |"
+        if has_mer:
+            mer = a.get("medical_entity_recall")
+            row += f" {mer:.3f} |" if mer is not None else " — |"
+        row += f" {a.get('latency', 0):.3f} |"
+        lines.append(row)
+
+    if sig:
+        lines += [
+            "",
+            "## Significance (TreeRAG-Beam vs baselines, ROUGE-L paired t-test)",
+            "",
+            "| vs System | p-value | Δ mean | Cohen's d | Sig? |",
+            "|-----------|---------|--------|-----------|------|",
+        ]
+        for system, r in sig.items():
+            star = "✓" if r["significant"] else "✗"
+            lines.append(
+                f"| {SYSTEM_LABELS.get(system, system)} "
+                f"| {r['p_value']:.4f} "
+                f"| {r['mean_diff']:+.3f} "
+                f"| {r['effect_size']:.2f} "
+                f"| {star} |"
+            )
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"📄 Markdown → {path}")
+
+
 # --------------------------------------------------------------------------- #
 def main(argv: Optional[List[str]] = None) -> int:
     parser = argparse.ArgumentParser(description="TreeRAG evaluation runner (PHASE C-3)")
@@ -428,6 +574,11 @@ def main(argv: Optional[List[str]] = None) -> int:
                              "Useful for a cheap online direction-check.")
     parser.add_argument("--seed", type=int, default=0,
                         help="If set with --limit, randomly sample N questions with this seed.")
+    parser.add_argument("--gen-backend", choices=["gemini", "ollama"], default="gemini",
+                        help="LLM backend for answer generation (default: gemini). "
+                             "Use 'ollama' for local generation via Ollama.")
+    parser.add_argument("--gen-model", default="llama3.1:8b",
+                        help="Model name for --gen-backend=ollama (default: llama3.1:8b).")
     args = parser.parse_args(argv)
 
     systems = ALL_SYSTEMS if args.systems == "all" else [
@@ -436,6 +587,27 @@ def main(argv: Optional[List[str]] = None) -> int:
     unknown = [s for s in systems if s not in ALL_SYSTEMS]
     if unknown:
         parser.error(f"Unknown system(s): {unknown}. Choose from {ALL_SYSTEMS} or 'all'.")
+
+    gen_backend: str = args.gen_backend
+    gen_model: str = args.gen_model
+
+    # ------------------------------------------------------------------ #
+    # Ollama backend initialisation — must happen BEFORE detect_mode() so
+    # the override is active for any test call detect_mode() might make.
+    # ------------------------------------------------------------------ #
+    if gen_backend == "ollama":
+        from src.core.ollama_client import OllamaClient
+        from src.config import set_client_override
+
+        print(f"Gen backend     : Ollama  (model={gen_model})")
+        try:
+            ollama_client = OllamaClient(model=gen_model)
+        except RuntimeError as exc:
+            print(f"\n❌ {exc}")
+            return 1
+        set_client_override(ollama_client)
+    else:
+        print(f"Gen backend     : Gemini  (model={Config.MODEL_NAME})")
 
     dataset = load_dataset(args.dataset)
 
@@ -449,15 +621,28 @@ def main(argv: Optional[List[str]] = None) -> int:
         dataset["questions"] = qs[: args.limit]
         dataset["total_questions"] = len(dataset["questions"])
 
-    mode = detect_mode(args.mode)
+    mode = detect_mode(args.mode, gen_backend=gen_backend)
+    gen_label = (f"Ollama {gen_model} reasoner"
+                 if gen_backend == "ollama" else "real Gemini reasoner+judge")
     print(f"Evaluation mode : {mode.upper()}  "
-          f"({'real Gemini reasoner+judge' if mode == 'online' else 'offline keyword+extractive fallback'})")
+          f"({'{}+'.format(gen_label) if mode == 'online' else 'offline keyword+extractive fallback'})")
     print(f"Systems         : {', '.join(systems)}")
     print(f"Questions       : {dataset.get('total_questions', len(dataset['questions']))}")
 
-    evaluator = Evaluator(mode=mode, use_llm_judge=args.use_llm_judge, domain=args.domain,
-                          local_judge=args.local_judge, local_judge_model=args.local_judge_model)
-    per_system = evaluate(dataset, systems, evaluator)
+    evaluator = Evaluator(
+        mode=mode,
+        use_llm_judge=args.use_llm_judge,
+        domain=args.domain,
+        local_judge=args.local_judge,
+        local_judge_model=args.local_judge_model,
+        gen_backend=gen_backend,
+        gen_model=gen_model,
+    )
+    # Print individual answers for small smoke runs (≤5 questions)
+    n_questions = dataset.get("total_questions", len(dataset["questions"]))
+    print_answers = bool(args.limit and args.limit <= 5)
+
+    per_system = evaluate(dataset, systems, evaluator, print_answers=print_answers)
     agg = aggregate(per_system)
     sig = significance(per_system, systems)
 
@@ -470,6 +655,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     report = {
         "timestamp": ts,
         "mode": mode,
+        "gen_backend": gen_backend,
+        "gen_model": gen_model if gen_backend == "ollama" else Config.MODEL_NAME,
         "dataset": os.path.basename(args.dataset),
         "systems": systems,
         "summary": agg,
@@ -484,6 +671,20 @@ def main(argv: Optional[List[str]] = None) -> int:
         with open(latest, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
     print(f"\n💾 Report → {out_path}")
+
+    # Save markdown table for paper use
+    md_path = out_path.with_suffix(".md")
+    save_markdown_table(
+        agg, sig, systems, md_path,
+        meta={
+            "gen_backend": gen_backend,
+            "gen_model": gen_model if gen_backend == "ollama" else Config.MODEL_NAME,
+            "dataset": os.path.basename(args.dataset),
+            "n_questions": dataset.get("total_questions", len(dataset["questions"])),
+            "seed": args.seed,
+            "date": ts,
+        },
+    )
     return 0
 
 

@@ -1,0 +1,400 @@
+{
+  "dataset": "hotpotqa",
+  "n_questions": 5,
+  "summary": {
+    "bm25": {
+      "rouge_l": 0.25510167992926613,
+      "bertscore": 0.25510167992926613,
+      "llm_judge": 0.7866666666666666,
+      "latency": 3.5591263414011336,
+      "context_tokens": 76.0,
+      "n": 5
+    },
+    "dense": {
+      "rouge_l": 0.49110707803992737,
+      "bertscore": 0.49110707803992737,
+      "llm_judge": 0.7733333333333332,
+      "latency": 1.96417004999239,
+      "context_tokens": 76.0,
+      "n": 5
+    },
+    "flatrag": {
+      "rouge_l": 0.42579782790309106,
+      "bertscore": 0.42579782790309106,
+      "llm_judge": 0.8533333333333333,
+      "latency": 2.8150878914108035,
+      "context_tokens": 0.0,
+      "n": 5
+    },
+    "raptor": {
+      "rouge_l": 0.384813653779171,
+      "bertscore": 0.384813653779171,
+      "llm_judge": 0.8133333333333332,
+      "latency": 3.9471971336053686,
+      "context_tokens": 156.0,
+      "n": 5
+    },
+    "treerag_dfs": {
+      "rouge_l": 0.15462151989288947,
+      "bertscore": 0.15462151989288947,
+      "llm_judge": 0.8266666666666665,
+      "latency": 23.078390558401587,
+      "context_tokens": 3.6,
+      "n": 5
+    },
+    "treerag_beam": {
+      "rouge_l": 0.15462151989288947,
+      "bertscore": 0.15462151989288947,
+      "llm_judge": 0.8799999999999999,
+      "latency": 0.002398991596419364,
+      "context_tokens": 3.6,
+      "n": 5
+    }
+  },
+  "significance": {
+    "bm25": {
+      "p_value": 0.16423744153629752,
+      "significant": false,
+      "effect_size": 0.5474821010022023,
+      "mean_diff": -0.10048016003637668
+    },
+    "dense": {
+      "p_value": 0.18685142145670142,
+      "significant": false,
+      "effect_size": 1.2061212119078444,
+      "mean_diff": -0.3364855581470379
+    },
+    "flatrag": {
+      "p_value": 0.26015494664830824,
+      "significant": false,
+      "effect_size": 0.9419799198036862,
+      "mean_diff": -0.27117630801020154
+    },
+    "raptor": {
+      "p_value": 0.29159550348439106,
+      "significant": false,
+      "effect_size": 0.7808056029414451,
+      "mean_diff": -0.2301921338862815
+    },
+    "treerag_dfs": {
+      "p_value": 0.5,
+      "significant": false,
+      "effect_size": 0.0,
+      "mean_diff": 0.0
+    }
+  },
+  "per_question": {
+    "bm25": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity.",
+        "latency": 5.510984082997311,
+        "context_tokens": 63,
+        "rouge_l": 0.2666666666666667,
+        "bertscore": 0.2666666666666667,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Which was developed earlier as an application of acoustic de: HotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound? [p.1-2] Sonar: Sonar was developed for underwater detection before medical use. [p.1] Diagnostic Ultrasound: Diagnostic ultrasound systems were developed later for medical imaging. [p.2]",
+        "latency": 1.5067121669999324,
+        "context_tokens": 67,
+        "rouge_l": 0.034482758620689655,
+        "bertscore": 0.034482758620689655,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Ultrasound gel is applied to the skin to remove the air gap. It matches impedance so the beam can enter the body.",
+        "latency": 3.8769024159992114,
+        "context_tokens": 105,
+        "rouge_l": 0.16666666666666669,
+        "bertscore": 0.16666666666666669,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 2.2030214999977034,
+        "context_tokens": 71,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Bats' perception of ultrasound is cited as an early milestone in the history of ultrasound. It was studied by Spallanzani in 1793.",
+        "latency": 4.69801154101151,
+        "context_tokens": 74,
+        "rouge_l": 0.3076923076923077,
+        "bertscore": 0.3076923076923077,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "dense": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode.",
+        "latency": 2.0466012499819044,
+        "context_tokens": 63,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Which was developed earlier as an application of acoustic de: HotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound? [p.1-2] Sonar: Sonar was developed for underwater detection before medical use. [p.1] Diagnostic Ultrasound: Diagnostic ultrasound systems were developed later for medical imaging. [p.2]",
+        "latency": 1.5809502500051167,
+        "context_tokens": 67,
+        "rouge_l": 0.034482758620689655,
+        "bertscore": 0.034482758620689655,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Coupling Gel.",
+        "latency": 1.673617958003888,
+        "context_tokens": 105,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 1.9602248329902068,
+        "context_tokens": 71,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "In 1793 Spallanzani studied bat navigation. This revealed bats' perception of ultrasound, an early milestone.",
+        "latency": 2.559455958980834,
+        "context_tokens": 74,
+        "rouge_l": 0.4210526315789474,
+        "bertscore": 0.4210526315789474,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "flatrag": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode.",
+        "latency": 1.9777272080245893,
+        "context_tokens": 0,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 1.0
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Based on the retrieved documents:\n\n[Document 1: Which was developed earlier as an application of acoustic de (p.1-2)]\nHotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound?\n\n[Document 2: Sonar (p.1)]\nSonar was developed for underwater detection before medical use.\n\n[Document 3: Diagnostic Ultrasound (p.2)]\nDiagnostic ultrasound systems were developed later for medical imaging.\n\n\nAnswer: The documents discuss aspects related to: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound",
+        "latency": 1.805304708017502,
+        "context_tokens": 0,
+        "rouge_l": 0.02222222222222222,
+        "bertscore": 0.02222222222222222,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Ultrasound gel. It matches impedance so the beam can enter the body.",
+        "latency": 3.049342084006639,
+        "context_tokens": 0,
+        "rouge_l": 0.2857142857142857,
+        "bertscore": 0.2857142857142857,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction (Document 2) states the research background.",
+        "latency": 3.0435941659961827,
+        "context_tokens": 0,
+        "rouge_l": 0.4,
+        "bertscore": 0.4,
+        "llm_judge": 1.0
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "In 1793 Spallanzani studied bat navigation. This revealed bats' perception of ultrasound, an early milestone.",
+        "latency": 4.199471291009104,
+        "context_tokens": 0,
+        "rouge_l": 0.4210526315789474,
+        "bertscore": 0.4210526315789474,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "raptor": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode.",
+        "latency": 2.291092125000432,
+        "context_tokens": 142,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Sonar was developed for underwater detection before medical use.",
+        "latency": 2.9562313340138644,
+        "context_tokens": 147,
+        "rouge_l": 0.19999999999999998,
+        "bertscore": 0.19999999999999998,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "A Coupling Gel Ultrasound gel is applied to the skin to remove the air gap. It may match or partially match the acoustic impedance of the body part being imaged, depending on the properties of the coupling medium and the properties of the surrounding tissues. The matching reduces reflection and improves image quality.",
+        "latency": 7.073713916994166,
+        "context_tokens": 189,
+        "rouge_l": 0.07272727272727272,
+        "bertscore": 0.07272727272727272,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction section states the research background.",
+        "latency": 2.3715449169976637,
+        "context_tokens": 152,
+        "rouge_l": 0.4444444444444445,
+        "bertscore": 0.4444444444444445,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Spallanzani studied bat navigation in 1793 and this revealed that bats use ultrasound. This is cited as an early milestone in the history of ultrasound.",
+        "latency": 5.043403375020716,
+        "context_tokens": 150,
+        "rouge_l": 0.20689655172413793,
+        "bertscore": 0.20689655172413793,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "treerag_dfs": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode. According to the context, Doppler mode \"measures the frequency shift of echoes to estimate blood-flow velocity.\" This indicates that Doppler mode is used to show blood-flow velocity. \n\nB-mode imaging, on the other hand, is not mentioned as being related to measuring blood-flow velocity. It is typically used for anatomical images.",
+        "latency": 24.925431625015335,
+        "context_tokens": 1,
+        "rouge_l": 0.0689655172413793,
+        "bertscore": 0.0689655172413793,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Sonar. \n\n페이지 [1]에 따르면 Sonar는 수중 탐지에 사용되기 전에 의료 용도로 개발되었다고 나와 있습니다. 페이지 [2]에 따르면 의학 이미지링을 위해 진단 초음파 시스템이 더 позд단에 개발되었다고 되어 있지만, 여기서 개발 순서는 Sonar가 먼저라고 됩니다.",
+        "latency": 22.17339079201338,
+        "context_tokens": 6,
+        "rouge_l": 0.05405405405405406,
+        "bertscore": 0.05405405405405406,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "The required coupling medium is Coupling Gel, which matches the impedance of the skin and allows the ultrasound beam to enter the body. This is necessary because air gaps can cause significant reflection at tissue boundaries due to the large difference in acoustic impedance between air and tissue. The Coupling Gel helps to eliminate this air gap and ensure a clear transmission of the ultrasound signal into the body.",
+        "latency": 23.878252416005125,
+        "context_tokens": 7,
+        "rouge_l": 0.05633802816901409,
+        "bertscore": 0.05633802816901409,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 18.332344958995236,
+        "context_tokens": 3,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "In 1793, Lazzaro Spallanzani discovered that bats use a form of sonar, or ultrasound, to navigate. This was considered an early milestone in the understanding and development of ultrasound technology. Specifically, his study revealed that bats emit high-frequency sounds that are beyond human hearing range and use the echoes to determine the location and distance of objects around them.",
+        "latency": 26.082532999978866,
+        "context_tokens": 1,
+        "rouge_l": 0.09375000000000001,
+        "bertscore": 0.09375000000000001,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "treerag_beam": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode. According to the context, Doppler mode \"measures the frequency shift of echoes to estimate blood-flow velocity.\" This indicates that Doppler mode is used to show blood-flow velocity. \n\nB-mode imaging, on the other hand, is not mentioned as being related to measuring blood-flow velocity. It is typically used for anatomical images.",
+        "latency": 0.003533540992066264,
+        "context_tokens": 1,
+        "rouge_l": 0.0689655172413793,
+        "bertscore": 0.0689655172413793,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Sonar. \n\n페이지 [1]에 따르면 Sonar는 수중 탐지에 사용되기 전에 의료 용도로 개발되었다고 나와 있습니다. 페이지 [2]에 따르면 의학 이미지링을 위해 진단 초음파 시스템이 더 позд단에 개발되었다고 되어 있지만, 여기서 개발 순서는 Sonar가 먼저라고 됩니다.",
+        "latency": 0.0022318330011330545,
+        "context_tokens": 6,
+        "rouge_l": 0.05405405405405406,
+        "bertscore": 0.05405405405405406,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "The required coupling medium is Coupling Gel, which matches the impedance of the skin and allows the ultrasound beam to enter the body. This is necessary because air gaps can cause significant reflection at tissue boundaries due to the large difference in acoustic impedance between air and tissue. The Coupling Gel helps to eliminate this air gap and ensure a clear transmission of the ultrasound signal into the body.",
+        "latency": 0.002315958001418039,
+        "context_tokens": 7,
+        "rouge_l": 0.05633802816901409,
+        "bertscore": 0.05633802816901409,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 0.0017326670058537275,
+        "context_tokens": 3,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "In 1793, Lazzaro Spallanzani discovered that bats use a form of sonar, or ultrasound, to navigate. This was considered an early milestone in the understanding and development of ultrasound technology. Specifically, his study revealed that bats emit high-frequency sounds that are beyond human hearing range and use the echoes to determine the location and distance of objects around them.",
+        "latency": 0.0021809589816257358,
+        "context_tokens": 1,
+        "rouge_l": 0.09375000000000001,
+        "bertscore": 0.09375000000000001,
+        "llm_judge": 0.9333333333333332
+      }
+    ]
+  }
+}
