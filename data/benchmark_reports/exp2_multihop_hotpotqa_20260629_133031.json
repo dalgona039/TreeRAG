@@ -1,0 +1,1300 @@
+{
+  "dataset": "hotpotqa",
+  "n_questions": 20,
+  "summary": {
+    "bm25": {
+      "rouge_l": 0.48141155835374905,
+      "bertscore": 0.48141155835374905,
+      "llm_judge": 0.8133333333333332,
+      "latency": 2.800167356195743,
+      "context_tokens": 73.45,
+      "n": 20
+    },
+    "dense": {
+      "rouge_l": 0.4980012475298259,
+      "bertscore": 0.5027631522917306,
+      "llm_judge": 0.8066666666666666,
+      "latency": 2.667126022953016,
+      "context_tokens": 73.45,
+      "n": 20
+    },
+    "flatrag": {
+      "rouge_l": 0.4681323768823769,
+      "bertscore": 0.4743823768823769,
+      "llm_judge": 0.8,
+      "latency": 3.5229002520034554,
+      "context_tokens": 0.0,
+      "n": 20
+    },
+    "raptor": {
+      "rouge_l": 0.5973015102481122,
+      "bertscore": 0.602063415010017,
+      "llm_judge": 0.74,
+      "latency": 2.290031537451432,
+      "context_tokens": 154.05,
+      "n": 20
+    },
+    "treerag_dfs": {
+      "rouge_l": 0.1478269634650196,
+      "bertscore": 0.15516029679835294,
+      "llm_judge": 0.7999999999999999,
+      "latency": 18.725136277003912,
+      "context_tokens": 5.35,
+      "n": 20
+    },
+    "treerag_beam": {
+      "rouge_l": 0.1478269634650196,
+      "bertscore": 0.15516029679835294,
+      "llm_judge": 0.8333333333333333,
+      "latency": 0.001894470902334433,
+      "context_tokens": 5.35,
+      "n": 20
+    }
+  },
+  "significance": {
+    "bm25": {
+      "p_value": 0.011212132544929782,
+      "significant": true,
+      "effect_size": 1.35740480903657,
+      "mean_diff": -0.3335845948887294
+    },
+    "dense": {
+      "p_value": 0.011466085173197672,
+      "significant": true,
+      "effect_size": 1.346298674274618,
+      "mean_diff": -0.3501742840648063
+    },
+    "flatrag": {
+      "p_value": 0.011743731980257069,
+      "significant": true,
+      "effect_size": 1.290115214487589,
+      "mean_diff": -0.32030541341735724
+    },
+    "raptor": {
+      "p_value": 0.007601099194617905,
+      "significant": true,
+      "effect_size": 1.6734273164386222,
+      "mean_diff": -0.4494745467830926
+    },
+    "treerag_dfs": {
+      "p_value": 0.5,
+      "significant": false,
+      "effect_size": 0.0,
+      "mean_diff": 0.0
+    }
+  },
+  "per_question": {
+    "bm25": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode.",
+        "latency": 8.050133624987211,
+        "context_tokens": 63,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Which was developed earlier as an application of acoustic de: HotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound? [p.1-2] Sonar: Sonar was developed for underwater detection before medical use. [p.1] Diagnostic Ultrasound: Diagnostic ultrasound systems were developed later for medical imaging. [p.2]",
+        "latency": 1.4068487079930492,
+        "context_tokens": 67,
+        "rouge_l": 0.034482758620689655,
+        "bertscore": 0.034482758620689655,
+        "llm_judge": 0.4666666666666666
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Ultrasound gel",
+        "latency": 1.951032250013668,
+        "context_tokens": 105,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 2.1279562919808086,
+        "context_tokens": 71,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Spallanzani studied bat navigation in 1793 and revealed bats' perception of ultrasound, which is cited as an early milestone in the history of ultrasound.",
+        "latency": 4.133192291978048,
+        "context_tokens": 74,
+        "rouge_l": 0.2857142857142857,
+        "bertscore": 0.2857142857142857,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Audible Range: Humans can hear sound between 20 Hz and 20 kHz.",
+        "latency": 3.3836956250015646,
+        "context_tokens": 55,
+        "rouge_l": 0.47058823529411764,
+        "bertscore": 0.47058823529411764,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "The piezoelectric effect was discovered by the Curie brothers in 1880.",
+        "latency": 2.7650147500098683,
+        "context_tokens": 63,
+        "rouge_l": 0.42857142857142855,
+        "bertscore": 0.42857142857142855,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "The physical effect used by the device that generates the high-frequency sound waves in ultrasound imaging is the piezoelectric effect.",
+        "latency": 3.5796186249936,
+        "context_tokens": 109,
+        "rouge_l": 0.25,
+        "bertscore": 0.25,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "Low-frequency probe는 더 깊은腹部 이미지를 위한 적합한 것입니다.",
+        "latency": 2.894226583011914,
+        "context_tokens": 63,
+        "rouge_l": 0.26666666666666666,
+        "bertscore": 0.26666666666666666,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "a higher-frequency ultrasound wave",
+        "latency": 1.9009538749814965,
+        "context_tokens": 99,
+        "rouge_l": 0.6666666666666665,
+        "bertscore": 0.6666666666666665,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "The project report that builds a data-processing program uses Python programming language.",
+        "latency": 2.3850310829875525,
+        "context_tokens": 63,
+        "rouge_l": 0.14285714285714288,
+        "bertscore": 0.14285714285714288,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "The document 2204.08939 is an arXiv preprint.",
+        "latency": 2.822515707986895,
+        "context_tokens": 58,
+        "rouge_l": 0.6666666666666666,
+        "bertscore": 0.6666666666666666,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "a required-course-heavy track",
+        "latency": 2.1613219580031,
+        "context_tokens": 82,
+        "rouge_l": 0.8000000000000002,
+        "bertscore": 0.8000000000000002,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Cardiac Output",
+        "latency": 1.4943249160132837,
+        "context_tokens": 62,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "What property mismatch at a tissue-air boundary causes nearl: HotpotQA multi-hop context for: What property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam? [p.1-2] Boundary: At a tissue-air boundary almost all of the beam is reflected. [p.1] Impedance: This is caused by the large acoustic impedance mismatch. Gel is used to reduce it. [p.2]",
+        "latency": 1.501150249998318,
+        "context_tokens": 69,
+        "rouge_l": 0.08571428571428572,
+        "bertscore": 0.08571428571428572,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "professional gait-analysis equipment",
+        "latency": 1.665653874981217,
+        "context_tokens": 70,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "Scientific Reports is an open-access journal published by Nature.",
+        "latency": 2.2263501249835826,
+        "context_tokens": 61,
+        "rouge_l": 0.33333333333333337,
+        "bertscore": 0.33333333333333337,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Modern lifestyle changes have led to an increase in musculoskeletal disorders, making it clinically important to have objective measurements for gait analysis.",
+        "latency": 3.458995333989151,
+        "context_tokens": 84,
+        "rouge_l": 0.16666666666666669,
+        "bertscore": 0.16666666666666669,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Attenuation. Attenuation is the gradual loss of acoustic energy in tissue.",
+        "latency": 2.8855817500152625,
+        "context_tokens": 57,
+        "rouge_l": 0.16666666666666669,
+        "bertscore": 0.16666666666666669,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "The course that covers semiconductor device fabrication is offered in the Department of Semiconductor Engineering's 2025 curriculum.",
+        "latency": 3.209749500005273,
+        "context_tokens": 94,
+        "rouge_l": 0.3636363636363636,
+        "bertscore": 0.3636363636363636,
+        "llm_judge": 0.7333333333333334
+      }
+    ],
+    "dense": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode. \n\n컨텍스트에서 Doppler mode가 B모드와 구분 지어지면서 Blood-Flow Velocity의 정보를 제공하는 방법이 설명되있기 때문입니다.",
+        "latency": 5.105213750008261,
+        "context_tokens": 63,
+        "rouge_l": 0.2222222222222222,
+        "bertscore": 0.2222222222222222,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Which was developed earlier as an application of acoustic de: HotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound? [p.1-2] Sonar: Sonar was developed for underwater detection before medical use. [p.1] Diagnostic Ultrasound: Diagnostic ultrasound systems were developed later for medical imaging. [p.2]",
+        "latency": 1.7622118330036756,
+        "context_tokens": 67,
+        "rouge_l": 0.034482758620689655,
+        "bertscore": 0.034482758620689655,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Coupling gel is applied to the skin. It matches impedance so the beam can enter the body.",
+        "latency": 2.8888855839904863,
+        "context_tokens": 105,
+        "rouge_l": 0.10526315789473684,
+        "bertscore": 0.10526315789473684,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 1.8258587919990532,
+        "context_tokens": 71,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Bats' perception of ultrasound.",
+        "latency": 0.8931448749790434,
+        "context_tokens": 74,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "20 Hz-20 kHz",
+        "latency": 1.6732183750136755,
+        "context_tokens": 55,
+        "rouge_l": 0.888888888888889,
+        "bertscore": 0.888888888888889,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "The piezoelectric effect was discovered by the Curie brothers in 1880. This discovery underlies the operation of the ultrasound transducer, which relies on the piezoelectric effect to emit and detect waves.",
+        "latency": 4.9156466250133235,
+        "context_tokens": 63,
+        "rouge_l": 0.17647058823529413,
+        "bertscore": 0.17647058823529413,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "piezoelectric 효과입니다.",
+        "latency": 0.8850952079810668,
+        "context_tokens": 109,
+        "rouge_l": 0.4,
+        "bertscore": 0.4,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "For deep abdominal imaging, a low-frequency probe is more suitable.",
+        "latency": 2.3014790000161156,
+        "context_tokens": 63,
+        "rouge_l": 0.5333333333333333,
+        "bertscore": 0.5333333333333333,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "lower-frequency ultrasound wave.",
+        "latency": 1.9090656249900348,
+        "context_tokens": 99,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "The project report that builds a data-processing program uses the Python programming language.",
+        "latency": 2.482078959001228,
+        "context_tokens": 63,
+        "rouge_l": 0.13333333333333333,
+        "bertscore": 0.13333333333333333,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "The document \"2204.08939\" is an arXiv preprint.",
+        "latency": 1.6878838330158032,
+        "context_tokens": 58,
+        "rouge_l": 0.6666666666666666,
+        "bertscore": 0.6666666666666666,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "a required-course-heavy track. \n\nrequired major courses account for the larger share of graduation credits.",
+        "latency": 3.0822153330082074,
+        "context_tokens": 82,
+        "rouge_l": 0.38095238095238093,
+        "bertscore": 0.47619047619047616,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Cardiac Output",
+        "latency": 1.7521378329838626,
+        "context_tokens": 62,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "Impedance. \n\n이전의 문제는 \"HotpotQA multi-hop context\"로, 두 개 이상의 문을 연결하는 컨텍스트입니다. 첫 번째 문에서 \"property mismatch\"라는 키워드가 등장했으며, 두 번째 문에서는 \"acoustic impedance mismatch\"라는 관련된 정보가 나옵니다. \n\n따라서 두 문을 연결하여 추론할 수 있습니다: \"what property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam?\"는 \"Impedance\"를 의미합니다.",
+        "latency": 10.72474350000266,
+        "context_tokens": 69,
+        "rouge_l": 0.0967741935483871,
+        "bertscore": 0.0967741935483871,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "Professional gait-analysis equipment",
+        "latency": 1.9147874590125866,
+        "context_tokens": 70,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "The journal that published the reference paper with the identifier s41598-026-41649-2 is Scientific Reports.",
+        "latency": 3.2258510410028975,
+        "context_tokens": 61,
+        "rouge_l": 0.21052631578947367,
+        "bertscore": 0.21052631578947367,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Modern lifestyle changes have increased musculoskeletal disorders, so an objective gait measurement is necessary for diagnosis.",
+        "latency": 2.016964917012956,
+        "context_tokens": 84,
+        "rouge_l": 0.2222222222222222,
+        "bertscore": 0.2222222222222222,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Attenuation",
+        "latency": 1.4846987920172978,
+        "context_tokens": 57,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "The Department of Semiconductor Engineering.",
+        "latency": 0.8113391250080895,
+        "context_tokens": 94,
+        "rouge_l": 0.888888888888889,
+        "bertscore": 0.888888888888889,
+        "llm_judge": 0.8666666666666667
+      }
+    ],
+    "flatrag": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode. \n\n이러한 결과는 Document 2에서 나온다는 것을 의미합니다. \"Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity.\"라고 쓰여 있습니다.",
+        "latency": 5.130837458011229,
+        "context_tokens": 0,
+        "rouge_l": 0.14814814814814814,
+        "bertscore": 0.14814814814814814,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Sonar was developed before diagnostic ultrasound.",
+        "latency": 2.166411749989493,
+        "context_tokens": 0,
+        "rouge_l": 0.2857142857142857,
+        "bertscore": 0.2857142857142857,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Ultrasound gel. It matches impedance so the beam can enter the body.",
+        "latency": 2.9915070420247503,
+        "context_tokens": 0,
+        "rouge_l": 0.2857142857142857,
+        "bertscore": 0.2857142857142857,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 2.3117210839991458,
+        "context_tokens": 0,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Bats' perception of ultrasound.",
+        "latency": 2.325117375003174,
+        "context_tokens": 0,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Humans can hear sound between 20 Hz and 20 kHz.",
+        "latency": 3.116081749991281,
+        "context_tokens": 0,
+        "rouge_l": 0.5333333333333333,
+        "bertscore": 0.5333333333333333,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "The discovery in 1880 that underlies the operation of the ultrasound transducer is the piezoelectric effect, which was discovered by the Curie brothers.",
+        "latency": 4.190592958009802,
+        "context_tokens": 0,
+        "rouge_l": 0.23076923076923078,
+        "bertscore": 0.23076923076923078,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "The piezoelectric effect.",
+        "latency": 2.352446750010131,
+        "context_tokens": 0,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "Low-frequency probe is more suitable for deep abdominal imaging.",
+        "latency": 2.925184874999104,
+        "context_tokens": 0,
+        "rouge_l": 0.4285714285714285,
+        "bertscore": 0.4285714285714285,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Attenuation은 적외선의 자체 에너지를 잃게 만드는 것을 말한다. Attenuation은 두께와 주파수에 따라 증가합니다. \n\n주파수가 높을수록 감쇄가 더 많이 일어나서, 심도 감소에 이어진다.",
+        "latency": 7.016133583005285,
+        "context_tokens": 0,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "Python입니다.\n\n[Document 3]에서 \"The project is implemented in the Python programming language.\"라는 문장이 있습니다. 따라서, Python은 문제와 관련된 언어로 추측이 가능합니다.",
+        "latency": 5.451073041011114,
+        "context_tokens": 0,
+        "rouge_l": 0.08333333333333333,
+        "bertscore": 0.08333333333333333,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "The document 2204.08939 is an arXiv preprint.",
+        "latency": 3.1017562499910127,
+        "context_tokens": 0,
+        "rouge_l": 0.6666666666666666,
+        "bertscore": 0.6666666666666666,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "Required-major-courses-account-for-the-larger-share-of-graduation-credits.",
+        "latency": 3.661372707982082,
+        "context_tokens": 0,
+        "rouge_l": 0.12500000000000003,
+        "bertscore": 0.25000000000000006,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Cardiac output",
+        "latency": 2.2609606249898206,
+        "context_tokens": 0,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "This is caused by the large acoustic impedance mismatch.",
+        "latency": 2.3218164580175653,
+        "context_tokens": 0,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "Specialized gait-analysis equipment.",
+        "latency": 2.0841300830070395,
+        "context_tokens": 0,
+        "rouge_l": 0.75,
+        "bertscore": 0.75,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "Nature's Scientific Reports.",
+        "latency": 1.917007417010609,
+        "context_tokens": 0,
+        "rouge_l": 0.6666666666666666,
+        "bertscore": 0.6666666666666666,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Modern lifestyle changes have increased musculoskeletal disorders. This raises the clinical importance of objective gait measurement.",
+        "latency": 3.2191740419948474,
+        "context_tokens": 0,
+        "rouge_l": 0.2222222222222222,
+        "bertscore": 0.2222222222222222,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Attenuation. \n\n그 이유는 Document 2에 따르면 Attenuation은 \"tissue\"에서 acoustic energy의 gradual loss을 의미하고, Document 3에서는 Reflection이 impedance boundary에서 beam의 part를 return 시키는 것을 말합니다. 이는 tissue에 대한 내용이 아니라 beam과 impedance boundary와 관련된 concept입니다.\n\n따라서, attenuation에 해당되는 answer가 정답인 것입니다.",
+        "latency": 9.155011708004167,
+        "context_tokens": 0,
+        "rouge_l": 0.047619047619047616,
+        "bertscore": 0.047619047619047616,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "The Department of Semiconductor Engineering.",
+        "latency": 2.759668083017459,
+        "context_tokens": 0,
+        "rouge_l": 0.888888888888889,
+        "bertscore": 0.888888888888889,
+        "llm_judge": 0.7333333333333334
+      }
+    ],
+    "raptor": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode.",
+        "latency": 1.9130560000194237,
+        "context_tokens": 142,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Which was developed earlier as an application of acoustic de HotpotQA multi-hop context for: Which was developed earlier as an application of acoustic detection, sonar or diagnostic ultrasound? Which was developed earlier as an application of acoustic de HotpotQA multi-hop  Sonar Sonar was developed for underwater detection before medical use. Diagnostic Ultrasound Diagnostic ultrasound systems were developed later for med Sonar Sonar was developed for underwater detection before medical use. Diagnostic Ultrasound Diagnostic ultrasound systems were developed later for medical imaging.",
+        "latency": 1.9140269580238964,
+        "context_tokens": 147,
+        "rouge_l": 0.02380952380952381,
+        "bertscore": 0.02380952380952381,
+        "llm_judge": 0.20000000000000004
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "Ultrasound gel.",
+        "latency": 1.9016312920139171,
+        "context_tokens": 189,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background.",
+        "latency": 2.0738822080020327,
+        "context_tokens": 152,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "bats' perception of ultrasound.",
+        "latency": 2.3267010410199873,
+        "context_tokens": 150,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "20 Hz-20 kHz.",
+        "latency": 2.4970429170061834,
+        "context_tokens": 134,
+        "rouge_l": 0.888888888888889,
+        "bertscore": 0.888888888888889,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "The piezoelectric effect was discovered by the Curie brothers in 1880.",
+        "latency": 3.0745204159757122,
+        "context_tokens": 141,
+        "rouge_l": 0.42857142857142855,
+        "bertscore": 0.42857142857142855,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "Piezoelectric effect, which is a physical phenomenon whereby an electric charge accumulates within certain solid materials in response to applied mechanical stress.",
+        "latency": 3.89325250001275,
+        "context_tokens": 195,
+        "rouge_l": 0.16,
+        "bertscore": 0.16,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "Low-frequency probe가 더 적합합니다.",
+        "latency": 2.4995031660073437,
+        "context_tokens": 144,
+        "rouge_l": 0.4444444444444445,
+        "bertscore": 0.4444444444444445,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "lower-frequency ultrasound wave",
+        "latency": 1.944752667011926,
+        "context_tokens": 181,
+        "rouge_l": 0.5,
+        "bertscore": 0.5,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "The project is implemented in the Python programming language.",
+        "latency": 2.1691372499917634,
+        "context_tokens": 140,
+        "rouge_l": 0.19999999999999998,
+        "bertscore": 0.19999999999999998,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "the biomedical course report is not on arXiv.",
+        "latency": 2.769430708984146,
+        "context_tokens": 136,
+        "rouge_l": 0.16666666666666666,
+        "bertscore": 0.16666666666666666,
+        "llm_judge": 0.6
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "A required-course-heavy track has more required credits for graduation in the 2025 semiconductor curriculum.",
+        "latency": 3.0876209589769132,
+        "context_tokens": 166,
+        "rouge_l": 0.38095238095238093,
+        "bertscore": 0.47619047619047616,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Cardiac Output",
+        "latency": 1.749548291991232,
+        "context_tokens": 138,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "What property mismatch at a tissue-air boundary causes nearl HotpotQA multi-hop context for: What property mismatch at a tissue-air boundary causes nearly total reflection of the ultrasound beam? What property mismatch at a tissue-air boundary causes nearl HotpotQA multi-hop  Boundary At a tissue-air boundary almost all of the beam is reflected. Impedance This is caused by the large acoustic impedance mismatch. Gel is used t Boundary At a tissue-air boundary almost all of the beam is reflected. Impedance This is caused by the large acoustic impedance mismatch. Gel is used to reduce it.",
+        "latency": 1.7613760830136016,
+        "context_tokens": 148,
+        "rouge_l": 0.058252427184466014,
+        "bertscore": 0.058252427184466014,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "Specialized gait-analysis equipment.",
+        "latency": 2.322820250003133,
+        "context_tokens": 153,
+        "rouge_l": 0.75,
+        "bertscore": 0.75,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "Scientific Reports",
+        "latency": 1.7551305829838384,
+        "context_tokens": 139,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Modern lifestyle changes have increased musculoskeletal disorders.",
+        "latency": 2.315559958020458,
+        "context_tokens": 166,
+        "rouge_l": 0.4444444444444445,
+        "bertscore": 0.4444444444444445,
+        "llm_judge": 0.5333333333333333
+      },
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Attenuation",
+        "latency": 1.9966147499799263,
+        "context_tokens": 140,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "Department of Semiconductor Engineering",
+        "latency": 1.8350227499904577,
+        "context_tokens": 180,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.7333333333333334
+      }
+    ],
+    "treerag_dfs": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode. \n\n페이지 [2]에서 \"Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity\"고 적혀있다.",
+        "latency": 18.918084208999062,
+        "context_tokens": 3,
+        "rouge_l": 0.18181818181818182,
+        "bertscore": 0.18181818181818182,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Sonar. According to section [1], Sonar was developed before its use in medicine.\n\n(Section [2] mentions that Diagnostic Ultrasound systems were developed later for medical imaging.)",
+        "latency": 18.63753129201359,
+        "context_tokens": 6,
+        "rouge_l": 0.07407407407407407,
+        "bertscore": 0.07407407407407407,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "The correct answer is \"Ultrasound gel\".\n\nAccording to the provided context, Coupling Gel (ultrasound gel) is applied to the skin to match impedance and allow the ultrasound beam to enter the body. This implies that a medium with matching impedance properties is required to minimize reflection at tissue boundaries in ultrasound.",
+        "latency": 19.63275245798286,
+        "context_tokens": 7,
+        "rouge_l": 0.07547169811320754,
+        "bertscore": 0.07547169811320754,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background. (페이지: 1)",
+        "latency": 17.77827525002067,
+        "context_tokens": 4,
+        "rouge_l": 0.4,
+        "bertscore": 0.4,
+        "llm_judge": 1.0
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Spallanzani가 1793년 배트의 항공 지휘에 대한 연구를 수행했으며, 이 연구는 배트가 초음파를 인식할 수 있는 것을 발견한 것으로 추정됩니다.",
+        "latency": 20.192138832993805,
+        "context_tokens": 1,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Humans can hear sound between 20 Hz and 20 kHz. Therefore, the correct answer is **20 Hz-20 kHz**.",
+        "latency": 17.148514875007095,
+        "context_tokens": 7,
+        "rouge_l": 0.3333333333333333,
+        "bertscore": 0.3333333333333333,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "The piezoelectric effect discovered by the Curie brothers in 1880 underlies the operation of the ultrasound transducer. The transducer relies on this effect to emit and detect waves, making it a crucial component in the functioning of ultrasound technology.",
+        "latency": 19.55581270798575,
+        "context_tokens": 3,
+        "rouge_l": 0.14285714285714288,
+        "bertscore": 0.14285714285714288,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "The piezoelectric effect is used to convert electrical energy into mechanical vibration, producing the high-frequency sound waves used in ultrasound imaging.\n\n(기반: [1] Ultrasound Imaging의 요약과 [2] Ultrasound Transducer의 요약을 참고로 함)",
+        "latency": 20.40156866601319,
+        "context_tokens": 10,
+        "rouge_l": 0.16666666666666669,
+        "bertscore": 0.16666666666666669,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "Deep abdominal imaging에 대하여, 저주파(LOW-FREQUENCY) 프로브가 더 적합합니다.\n\n(Penetration Low-frequency probes penetrate deeper, suiting abdominal imaging.)",
+        "latency": 18.126398249994963,
+        "context_tokens": 5,
+        "rouge_l": 0.17391304347826086,
+        "bertscore": 0.17391304347826086,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Higher-frequency ultrasound waves travel through tissue with greater attenuation.\n\nAccording to section [2] on page 2, \"Higher frequencies are absorbed more strongly, reducing penetration depth.\" This indicates that higher-frequency probes experience greater loss of acoustic energy as they pass through tissue. Therefore, a higher-frequency ultrasound wave travels through tissue with greater attenuation.",
+        "latency": 19.17812945798505,
+        "context_tokens": 5,
+        "rouge_l": 0.10169491525423728,
+        "bertscore": 0.10169491525423728,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "The programming language used for the project report that builds a small data-processing program is **Python**.",
+        "latency": 15.835748500016052,
+        "context_tokens": 4,
+        "rouge_l": 0.1111111111111111,
+        "bertscore": 0.1111111111111111,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "The answer to your question is that the 2204.08939 preprint is the paper format on arXiv. The biomedical course report is not related to this specific question as it's about a different document, but the 2204.08939 preprint is indeed an arXiv preprint.",
+        "latency": 20.014219000004232,
+        "context_tokens": 3,
+        "rouge_l": 0.163265306122449,
+        "bertscore": 0.163265306122449,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "Required-major-courses-track. According to the provided information, Required major courses account for the larger share of graduation credits.",
+        "latency": 16.712504082999658,
+        "context_tokens": 8,
+        "rouge_l": 0.16000000000000003,
+        "bertscore": 0.24,
+        "llm_judge": 0.6
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Based on the provided context, I will answer your question accurately.\n\nThe correct answer is **Cardiac Output**. According to section [2], Cardiac Output is indeed a quantity that equals heart rate times stroke volume, describing the heart's pumping performance.",
+        "latency": 20.139775041025132,
+        "context_tokens": 5,
+        "rouge_l": 0.09523809523809523,
+        "bertscore": 0.09523809523809523,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "The property mismatch at a tissue-air boundary that causes nearly total reflection of the ultrasound beam is the difference in acoustic impedance between tissues and air.",
+        "latency": 18.38828929202282,
+        "context_tokens": 4,
+        "rouge_l": 0.13333333333333333,
+        "bertscore": 0.19999999999999998,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "A smartphone camera. \n\nAccording to the provided context ([2]), it is stated that \"A smartphone camera is widely available and inexpensive for capturing motion.\" This implies that a smartphone camera is easier to access compared to specialized gait-analysis equipment, which has low accessibility and high cost (according to [1]).",
+        "latency": 17.918073084001662,
+        "context_tokens": 6,
+        "rouge_l": 0.1111111111111111,
+        "bertscore": 0.1111111111111111,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "Nature's Scientific Reports.\n\n(문서의 섹션 [1]에서 identifier s41598가 Nature의 Scientific Reports와 관련이 있다는 정보를 확인할 수 있습니다.)",
+        "latency": 16.983688708016416,
+        "context_tokens": 4,
+        "rouge_l": 0.1904761904761905,
+        "bertscore": 0.1904761904761905,
+        "llm_judge": 0.4666666666666666
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Gait Analysis 문서의 인덱스를 분석한 결과, 다음과 같은 정보가 추출됩니다.\n\n* Gait Analysis는 동적 경보 분석을 통해 클리닉 진단에 사용됩니다.\n* Dynamic Gait Analysis는 걸음 패턴을 평가하는 데 사용됩니다.\n\n따라서, 질문 \"What clinical problem motivates the dynamic gait-analysis system described in the biomedical report?\" 에 대한 답변은 다음과 같습니다.\n\nThe clinical problem that motivates the dynamic gait-analysis system is assessing walking patterns for clinical diagnosis.",
+        "latency": 22.524002500023926,
+        "context_tokens": 6,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Based on the context provided, I can answer your question accurately.\n\nThe correct answer is **attenuation**.\n\nAccording to section [1], \"Attenuation is the gradual loss of acoustic energy in tissue.\"\n\nTherefore, attenuation describes energy loss in tissue. Reflection, on the other hand, refers to the return of part of the beam at an impedance boundary (section [2]).",
+        "latency": 18.995608290977543,
+        "context_tokens": 7,
+        "rouge_l": 0.034482758620689655,
+        "bertscore": 0.034482758620689655,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "The course that covers semiconductor device fabrication is offered in the Department of Semiconductor Engineering. \n\n(인덱스 참고로 [2] 섹션과 Device Fabrication을 연결하였습니다.)",
+        "latency": 17.421611041994765,
+        "context_tokens": 9,
+        "rouge_l": 0.3076923076923077,
+        "bertscore": 0.3076923076923077,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "treerag_beam": [
+      {
+        "question_id": "hp_sample_004",
+        "document_id": "hotpotqa_hp_sample_004_index.json",
+        "answer": "Doppler mode. \n\n페이지 [2]에서 \"Doppler mode measures the frequency shift of echoes to estimate blood-flow velocity\"고 적혀있다.",
+        "latency": 0.0016386669885832816,
+        "context_tokens": 3,
+        "rouge_l": 0.18181818181818182,
+        "bertscore": 0.18181818181818182,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_014",
+        "document_id": "hotpotqa_hp_sample_014_index.json",
+        "answer": "Sonar. According to section [1], Sonar was developed before its use in medicine.\n\n(Section [2] mentions that Diagnostic Ultrasound systems were developed later for medical imaging.)",
+        "latency": 0.0031977079925127327,
+        "context_tokens": 6,
+        "rouge_l": 0.07407407407407407,
+        "bertscore": 0.07407407407407407,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_003",
+        "document_id": "hotpotqa_hp_sample_003_index.json",
+        "answer": "The correct answer is \"Ultrasound gel\".\n\nAccording to the provided context, Coupling Gel (ultrasound gel) is applied to the skin to match impedance and allow the ultrasound beam to enter the body. This implies that a medium with matching impedance properties is required to minimize reflection at tissue boundaries in ultrasound.",
+        "latency": 0.0012181670172140002,
+        "context_tokens": 7,
+        "rouge_l": 0.07547169811320754,
+        "bertscore": 0.07547169811320754,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_010",
+        "document_id": "hotpotqa_hp_sample_010_index.json",
+        "answer": "The introduction states the research background. (페이지: 1)",
+        "latency": 0.0017090420005843043,
+        "context_tokens": 4,
+        "rouge_l": 0.4,
+        "bertscore": 0.4,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_013",
+        "document_id": "hotpotqa_hp_sample_013_index.json",
+        "answer": "Spallanzani가 1793년 배트의 항공 지휘에 대한 연구를 수행했으며, 이 연구는 배트가 초음파를 인식할 수 있는 것을 발견한 것으로 추정됩니다.",
+        "latency": 0.003196999983629212,
+        "context_tokens": 1,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_012",
+        "document_id": "hotpotqa_hp_sample_012_index.json",
+        "answer": "Humans can hear sound between 20 Hz and 20 kHz. Therefore, the correct answer is **20 Hz-20 kHz**.",
+        "latency": 0.0014551659987773746,
+        "context_tokens": 7,
+        "rouge_l": 0.3333333333333333,
+        "bertscore": 0.3333333333333333,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_017",
+        "document_id": "hotpotqa_hp_sample_017_index.json",
+        "answer": "The piezoelectric effect discovered by the Curie brothers in 1880 underlies the operation of the ultrasound transducer. The transducer relies on this effect to emit and detect waves, making it a crucial component in the functioning of ultrasound technology.",
+        "latency": 0.0028380420117173344,
+        "context_tokens": 3,
+        "rouge_l": 0.14285714285714288,
+        "bertscore": 0.14285714285714288,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_001",
+        "document_id": "hotpotqa_hp_sample_001_index.json",
+        "answer": "The piezoelectric effect is used to convert electrical energy into mechanical vibration, producing the high-frequency sound waves used in ultrasound imaging.\n\n(기반: [1] Ultrasound Imaging의 요약과 [2] Ultrasound Transducer의 요약을 참고로 함)",
+        "latency": 0.001547459018183872,
+        "context_tokens": 10,
+        "rouge_l": 0.16666666666666669,
+        "bertscore": 0.16666666666666669,
+        "llm_judge": 1.0
+      },
+      {
+        "question_id": "hp_sample_016",
+        "document_id": "hotpotqa_hp_sample_016_index.json",
+        "answer": "Deep abdominal imaging에 대하여, 저주파(LOW-FREQUENCY) 프로브가 더 적합합니다.\n\n(Penetration Low-frequency probes penetrate deeper, suiting abdominal imaging.)",
+        "latency": 0.0014299589965958148,
+        "context_tokens": 5,
+        "rouge_l": 0.17391304347826086,
+        "bertscore": 0.17391304347826086,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_002",
+        "document_id": "hotpotqa_hp_sample_002_index.json",
+        "answer": "Higher-frequency ultrasound waves travel through tissue with greater attenuation.\n\nAccording to section [2] on page 2, \"Higher frequencies are absorbed more strongly, reducing penetration depth.\" This indicates that higher-frequency probes experience greater loss of acoustic energy as they pass through tissue. Therefore, a higher-frequency ultrasound wave travels through tissue with greater attenuation.",
+        "latency": 0.0016137909842655063,
+        "context_tokens": 5,
+        "rouge_l": 0.10169491525423728,
+        "bertscore": 0.10169491525423728,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_009",
+        "document_id": "hotpotqa_hp_sample_009_index.json",
+        "answer": "The programming language used for the project report that builds a small data-processing program is **Python**.",
+        "latency": 0.0017782089998945594,
+        "context_tokens": 4,
+        "rouge_l": 0.1111111111111111,
+        "bertscore": 0.1111111111111111,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "hp_sample_018",
+        "document_id": "hotpotqa_hp_sample_018_index.json",
+        "answer": "The answer to your question is that the 2204.08939 preprint is the paper format on arXiv. The biomedical course report is not related to this specific question as it's about a different document, but the 2204.08939 preprint is indeed an arXiv preprint.",
+        "latency": 0.001472083997214213,
+        "context_tokens": 3,
+        "rouge_l": 0.163265306122449,
+        "bertscore": 0.163265306122449,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_006",
+        "document_id": "hotpotqa_hp_sample_006_index.json",
+        "answer": "Required-major-courses-track. According to the provided information, Required major courses account for the larger share of graduation credits.",
+        "latency": 0.0011469590244814754,
+        "context_tokens": 8,
+        "rouge_l": 0.16000000000000003,
+        "bertscore": 0.24,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_011",
+        "document_id": "hotpotqa_hp_sample_011_index.json",
+        "answer": "Based on the provided context, I will answer your question accurately.\n\nThe correct answer is **Cardiac Output**. According to section [2], Cardiac Output is indeed a quantity that equals heart rate times stroke volume, describing the heart's pumping performance.",
+        "latency": 0.0031675409991294146,
+        "context_tokens": 5,
+        "rouge_l": 0.09523809523809523,
+        "bertscore": 0.09523809523809523,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "hp_sample_015",
+        "document_id": "hotpotqa_hp_sample_015_index.json",
+        "answer": "The property mismatch at a tissue-air boundary that causes nearly total reflection of the ultrasound beam is the difference in acoustic impedance between tissues and air.",
+        "latency": 0.0014528330066241324,
+        "context_tokens": 4,
+        "rouge_l": 0.13333333333333333,
+        "bertscore": 0.19999999999999998,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "hp_sample_008",
+        "document_id": "hotpotqa_hp_sample_008_index.json",
+        "answer": "A smartphone camera. \n\nAccording to the provided context ([2]), it is stated that \"A smartphone camera is widely available and inexpensive for capturing motion.\" This implies that a smartphone camera is easier to access compared to specialized gait-analysis equipment, which has low accessibility and high cost (according to [1]).",
+        "latency": 0.0018368750170338899,
+        "context_tokens": 6,
+        "rouge_l": 0.1111111111111111,
+        "bertscore": 0.1111111111111111,
+        "llm_judge": 0.5333333333333333
+      },
+      {
+        "question_id": "hp_sample_019",
+        "document_id": "hotpotqa_hp_sample_019_index.json",
+        "answer": "Nature's Scientific Reports.\n\n(문서의 섹션 [1]에서 identifier s41598가 Nature의 Scientific Reports와 관련이 있다는 정보를 확인할 수 있습니다.)",
+        "latency": 0.0016912920109461993,
+        "context_tokens": 4,
+        "rouge_l": 0.1904761904761905,
+        "bertscore": 0.1904761904761905,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "hp_sample_007",
+        "document_id": "hotpotqa_hp_sample_007_index.json",
+        "answer": "Gait Analysis 문서의 인덱스를 분석한 결과, 다음과 같은 정보가 추출됩니다.\n\n* Gait Analysis는 동적 경보 분석을 통해 클리닉 진단에 사용됩니다.\n* Dynamic Gait Analysis는 걸음 패턴을 평가하는 데 사용됩니다.\n\n따라서, 질문 \"What clinical problem motivates the dynamic gait-analysis system described in the biomedical report?\" 에 대한 답변은 다음과 같습니다.\n\nThe clinical problem that motivates the dynamic gait-analysis system is assessing walking patterns for clinical diagnosis.",
+        "latency": 0.0015332500042859465,
+        "context_tokens": 6,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_020",
+        "document_id": "hotpotqa_hp_sample_020_index.json",
+        "answer": "Based on the context provided, I can answer your question accurately.\n\nThe correct answer is **attenuation**.\n\nAccording to section [1], \"Attenuation is the gradual loss of acoustic energy in tissue.\"\n\nTherefore, attenuation describes energy loss in tissue. Reflection, on the other hand, refers to the return of part of the beam at an impedance boundary (section [2]).",
+        "latency": 0.0021795410139020532,
+        "context_tokens": 7,
+        "rouge_l": 0.034482758620689655,
+        "bertscore": 0.034482758620689655,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "hp_sample_005",
+        "document_id": "hotpotqa_hp_sample_005_index.json",
+        "answer": "The course that covers semiconductor device fabrication is offered in the Department of Semiconductor Engineering. \n\n(인덱스 참고로 [2] 섹션과 Device Fabrication을 연결하였습니다.)",
+        "latency": 0.0017858329811133444,
+        "context_tokens": 9,
+        "rouge_l": 0.3076923076923077,
+        "bertscore": 0.3076923076923077,
+        "llm_judge": 0.9333333333333332
+      }
+    ]
+  }
+}
