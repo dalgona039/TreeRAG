@@ -504,6 +504,7 @@ def figure_efficiency(report) -> None:
     summ = report["summary"]
     fig, ax = plt.subplots(figsize=(9, 5))
     cmap = plt.get_cmap("tab10")
+    pts = []
     for i, s in enumerate(systems):
         a = summ[s]
         ax.scatter(
@@ -514,9 +515,14 @@ def figure_efficiency(report) -> None:
         )
         ax.annotate(LABELS.get(s, s), (a["latency"], a["rouge_l"]),
                     xytext=(5, 5), textcoords="offset points", fontsize=8)
+        pts.append((a["latency"], a["rouge_l"], LABELS.get(s, s)))
+    frontier, pxs, pys = _pareto_frontier(pts)
+    if len(pxs) >= 2:
+        ax.plot(pxs, pys, color="crimson", linewidth=1.5, linestyle="--",
+                alpha=0.7, label="Pareto frontier")
     ax.set_xlabel("Latency (s)")
     ax.set_ylabel("ROUGE-L")
-    ax.set_title("Efficiency: Latency vs ROUGE-L (bubble = context size)")
+    ax.set_title("Efficiency: Latency vs ROUGE-L — Pareto frontier (upper-left dominates)")
     ax.legend(fontsize=8, loc="best")
     _save(fig, "figure_3_efficiency")
 
@@ -548,6 +554,31 @@ _ACM_LABELS = {
     "bm25": "BM25", "dense": "Dense", "flatrag": "FlatRAG", "raptor": "RAPTOR",
     "treerag_dfs": "TreeRAG-DFS", "treerag_beam": "TreeRAG-Beam",
 }
+
+
+def _pareto_frontier(points):
+    """Return non-dominated points and a staircase path for plotting.
+
+    Assumes lower x (cost) and higher y (quality) is better.
+    Returns (frontier_points, xs, ys) where xs/ys are the staircase coordinates.
+    """
+    sorted_pts = sorted(points, key=lambda p: (p[0], -p[1]))
+    frontier = []
+    best_y = float("-inf")
+    for x, y, label in sorted_pts:
+        if y >= best_y:
+            frontier.append((x, y, label))
+            best_y = y
+    if not frontier:
+        return frontier, [], []
+    xs, ys = [], []
+    for i, (x, y, _) in enumerate(frontier):
+        if i == 0:
+            xs.append(x); ys.append(y)
+        else:
+            xs.append(x); ys.append(frontier[i - 1][1])  # horizontal step
+            xs.append(x); ys.append(y)                    # vertical step
+    return frontier, xs, ys
 
 
 def figure_architecture(out_dir=None):
@@ -629,10 +660,11 @@ def figure_multihop(full_report, hotpot_report, out_dir=None):
 
 
 def figure_context_reduction(report, out_dir=None):
-    """Figure 4: accuracy (ROUGE-L) vs context size — TreeRAG Pareto frontier."""
+    """Figure 4 / Fig 8: accuracy (ROUGE-L) vs context size with Pareto frontier."""
     out_dir = Path(out_dir) if out_dir else FIG_DIR
     systems = report["systems"]
     fig, ax = plt.subplots(figsize=(9, 5))
+    pts = []
     for i, s in enumerate(systems):
         a = report["summary"][s]
         marker = "*" if s.startswith("treerag") else "o"
@@ -640,9 +672,14 @@ def figure_context_reduction(report, out_dir=None):
         ax.scatter(a["context_tokens"], a["rouge_l"], s=size, marker=marker,
                    color=CB_PALETTE[i % len(CB_PALETTE)], edgecolors="black",
                    alpha=0.85, label=_ACM_LABELS.get(s, s))
+        pts.append((a["context_tokens"], a["rouge_l"], _ACM_LABELS.get(s, s)))
+    frontier, pxs, pys = _pareto_frontier(pts)
+    if len(pxs) >= 2:
+        ax.plot(pxs, pys, color="crimson", linewidth=1.5, linestyle="--",
+                alpha=0.7, label="Pareto frontier")
     ax.set_xlabel("Context size (tokens)")
     ax.set_ylabel("ROUGE-L (accuracy)")
-    ax.set_title("Accuracy vs context size (upper-left Pareto-dominates)")
+    ax.set_title("Accuracy vs context size — Pareto frontier (upper-left dominates)")
     ax.legend(fontsize=8)
     out_dir.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
