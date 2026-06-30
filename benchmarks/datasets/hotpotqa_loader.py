@@ -23,8 +23,24 @@ from typing import Any, Dict, List
 _PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SAMPLE_PATH = _PROJECT_ROOT / "benchmarks" / "datasets" / "hotpotqa_sample.json"
 INDEX_DIR = _PROJECT_ROOT / "data" / "indices"
-HOTPOTQA_URL = "http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_fullwiki_v1.json"
 INDEX_PREFIX = "hotpotqa_"
+
+# Local copy of the HotpotQA dev set (download once, then re-use offline).
+# Override with env var HOTPOTQA_LOCAL=/abs/path/to/hotpot_dev_*.json
+LOCAL_DEV_PATH = Path(
+    os.environ.get(
+        "HOTPOTQA_LOCAL",
+        str(_PROJECT_ROOT / "data" / "hotpotqa" / "hotpot_dev_distractor_v1.json"),
+    )
+)
+# Remote mirrors tried in order. The original CMU host now returns HTTP 403 in
+# many environments; keep it first for backward compatibility, then mirrors.
+HOTPOTQA_URLS = [
+    "http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_distractor_v1.json",
+    "http://curtis.ml.cmu.edu/datasets/hotpot/hotpot_dev_fullwiki_v1.json",
+]
+# Back-compat alias (some callers import HOTPOTQA_URL).
+HOTPOTQA_URL = HOTPOTQA_URLS[0]
 
 
 def _normalize_item(raw: Dict[str, Any]) -> Dict[str, Any]:
@@ -56,18 +72,61 @@ def _load_sample() -> List[Dict[str, Any]]:
         return json.load(f)
 
 
+def _load_local_dev() -> List[Dict[str, Any]]:
+    """Load the full HotpotQA dev set from a local file, if present."""
+    if LOCAL_DEV_PATH.is_file():
+        with open(LOCAL_DEV_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
+
+
+def _download_dev() -> List[Dict[str, Any]]:
+    """Try each remote mirror in turn; return [] if all fail."""
+    for url in HOTPOTQA_URLS:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=30) as resp:  # nosec - public dataset
+                data = json.loads(resp.read().decode("utf-8"))
+                if data:
+                    # Cache locally for future offline runs.
+                    try:
+                        LOCAL_DEV_PATH.parent.mkdir(parents=True, exist_ok=True)
+                        with open(LOCAL_DEV_PATH, "w", encoding="utf-8") as f:
+                            json.dump(data, f)
+                    except Exception:
+                        pass
+                    return data
+        except Exception as exc:  # noqa: BLE001
+            print(f"  [hotpotqa_loader] mirror failed ({url[:48]}...): {exc}")
+    return []
+
+
 def load_hotpotqa_subset(n: int = 100, seed: int = 42) -> List[Dict[str, Any]]:
     """Load up to ``n`` multi-hop (comparison/bridge) questions.
 
-    Primary path downloads the official dev set; on any failure it falls back to
-    the bundled sample. Filters to comparison/bridge with answer < 100 chars.
+    Resolution order:
+      1. local dev file (``data/hotpotqa/hotpot_dev_distractor_v1.json`` or
+         ``$HOTPOTQA_LOCAL``) — preferred, works fully offline;
+      2. download from a remote mirror (cached locally on success);
+      3. bundled 20-question sample (``hotpotqa_sample.json``) as last resort.
+
+    Filters to comparison/bridge questions with answer < 100 chars. Emits a
+    clear warning when it has to fall back to the 20-question sample, so an
+    intended large-scale run is never silently truncated to n = 20.
     """
-    raw_items: List[Dict[str, Any]] = []
-    try:
-        with urllib.request.urlopen(HOTPOTQA_URL, timeout=20) as resp:  # nosec - public dataset
-            raw_items = json.loads(resp.read().decode("utf-8"))
-    except Exception:
+    raw_items = _load_local_dev()
+    source = "local file" if raw_items else None
+    if not raw_items:
+        raw_items = _download_dev()
+        source = "remote mirror" if raw_items else None
+    if not raw_items:
         raw_items = _load_sample()
+        source = "bundled 20q sample"
+        print(
+            "  [hotpotqa_loader] WARNING: using the bundled 20-question sample. "
+            "To run n>20, place the official dev set at "
+            f"'{LOCAL_DEV_PATH}' or set $HOTPOTQA_LOCAL."
+        )
 
     filtered = [
         _normalize_item(it)
@@ -78,7 +137,17 @@ def load_hotpotqa_subset(n: int = 100, seed: int = 42) -> List[Dict[str, Any]]:
 
     rng = random.Random(seed)
     rng.shuffle(filtered)
-    return filtered[:n]
+    selected = filtered[:n]
+    print(
+        f"  [hotpotqa_loader] source={source}; "
+        f"available={len(filtered)}, requested={n}, selected={len(selected)}"
+    )
+    if len(selected) < n:
+        print(
+            f"  [hotpotqa_loader] NOTE: only {len(selected)} questions available "
+            f"(< requested {n})."
+        )
+    return selected
 
 
 def _build_flat_tree(item: Dict[str, Any], doc_id: str) -> Dict[str, Any]:

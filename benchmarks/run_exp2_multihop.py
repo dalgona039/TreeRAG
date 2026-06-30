@@ -56,10 +56,18 @@ def _mean(vals: List[Any]) -> Optional[float]:
 # ---------------------------------------------------------------------------
 # Part A: HotpotQA evaluation
 # ---------------------------------------------------------------------------
-def run_hotpotqa(limit: int, seed: int, smoke: bool) -> Optional[Dict[str, Any]]:
-    """Run 6 systems on HotpotQA and return per_question dict."""
+def run_hotpotqa(n: int, seed: int, smoke: bool, limit: int = 0) -> Optional[Dict[str, Any]]:
+    """Run 6 systems on HotpotQA and return per_question dict.
+
+    Args:
+        n: Number of questions to build and evaluate (default 100).
+        seed: Random seed.
+        smoke: If True, print sample answers and validate.
+        limit: If >0, further sub-sample to this many (e.g. --limit 5 for smoke).
+    """
+    effective = min(limit, n) if limit else n
     print("\n" + "=" * 60)
-    print(f"Part A: HotpotQA evaluation (limit={limit or 'all'}, seed={seed})")
+    print(f"Part A: HotpotQA evaluation (n={effective}, seed={seed})")
     print("=" * 60)
 
     from benchmarks.datasets.hotpotqa_loader import build_hotpotqa_dataset
@@ -75,9 +83,9 @@ def run_hotpotqa(limit: int, seed: int, smoke: bool) -> Optional[Dict[str, Any]]
     client = OllamaClient(model="llama3.1:8b")
     set_client_override(client)
 
-    dataset = build_hotpotqa_dataset(n=100, seed=seed)
+    dataset = build_hotpotqa_dataset(n=n, seed=seed)
     questions = dataset["questions"]
-    if limit:
+    if limit and limit < len(questions):
         rng = random.Random(seed)
         rng.shuffle(questions)
         questions = questions[:limit]
@@ -299,8 +307,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Experiment 2: Multi-hop Quality")
     parser.add_argument("--smoke", action="store_true",
                         help="Smoke run: print sample answers, validate, skip full run")
+    parser.add_argument("--n", type=int, default=100,
+                        help="Number of HotpotQA questions to build and evaluate (default=100)")
     parser.add_argument("--limit", type=int, default=0,
-                        help="Limit for Part A HotpotQA questions (0=all 20)")
+                        help="Sub-sample to this many after building (0=use --n; useful for smoke --limit 5)")
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--skip-partA", action="store_true",
                         help="Skip HotpotQA evaluation (Part A)")
@@ -313,13 +323,12 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    limit = args.limit if (args.smoke or args.limit) else 0  # 0 = all for Part A
-
     if not args.skip_partA:
         result = run_hotpotqa(
-            limit=limit if limit else 20,  # HotpotQA sample has 20 q's
+            n=args.n,
             seed=args.seed,
             smoke=args.smoke,
+            limit=args.limit,
         )
         if args.smoke and result is None:
             sys.exit(1)
