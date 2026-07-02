@@ -370,11 +370,34 @@ def detect_mode(requested: str, gen_backend: str = "gemini") -> str:
 
 
 def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator,
-             print_answers: bool = False) -> Dict[str, Any]:
+             print_answers: bool = False,
+             checkpoint_path: Optional[str] = None) -> Dict[str, Any]:
+    """Evaluate all systems on the dataset.
+
+    If ``checkpoint_path`` is given, completed systems are saved there after
+    every system finishes. On restart with the same path, already-completed
+    systems are loaded from the checkpoint and skipped, so only the remaining
+    systems run.
+    """
     questions = dataset["questions"]
     per_system: Dict[str, List[Dict[str, Any]]] = {s: [] for s in systems}
 
+    # Load checkpoint if available — resume from where we left off.
+    ckpt = Path(checkpoint_path) if checkpoint_path else None
+    if ckpt and ckpt.is_file():
+        try:
+            saved = json.load(open(ckpt, encoding="utf-8")).get("per_question", {})
+            for s in systems:
+                if s in saved and len(saved[s]) == len(questions):
+                    per_system[s] = saved[s]
+                    print(f"  ✅ [checkpoint] {SYSTEM_LABELS.get(s, s)} — loaded {len(saved[s])} rows, skipping")
+        except Exception as exc:
+            print(f"  ⚠️  checkpoint load failed ({exc}), starting fresh")
+
     for system in systems:
+        if per_system[system]:  # already loaded from checkpoint
+            continue
+
         print(f"\n▶ Running system: {SYSTEM_LABELS.get(system, system)} "
               f"over {len(questions)} questions ...")
         for q in questions:
@@ -409,6 +432,14 @@ def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator,
                     **scores,
                 }
             )
+
+        # Save checkpoint after each system completes.
+        if ckpt:
+            ckpt.parent.mkdir(parents=True, exist_ok=True)
+            with open(ckpt, "w", encoding="utf-8") as f:
+                json.dump({"per_question": per_system}, f, ensure_ascii=False)
+            print(f"  💾 [checkpoint] saved after {SYSTEM_LABELS.get(system, system)} → {ckpt.name}")
+
     return per_system
 
 
@@ -642,7 +673,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     n_questions = dataset.get("total_questions", len(dataset["questions"]))
     print_answers = bool(args.limit and args.limit <= 5)
 
-    per_system = evaluate(dataset, systems, evaluator, print_answers=print_answers)
+    # Checkpoint path: <output_stem>.ckpt.json — survives kill/crash, auto-resumes.
+    ckpt_path = None
+    if args.output:
+        ckpt_path = str(Path(args.output).with_suffix(".ckpt.json"))
+    per_system = evaluate(dataset, systems, evaluator,
+                          print_answers=print_answers, checkpoint_path=ckpt_path)
     agg = aggregate(per_system)
     sig = significance(per_system, systems)
 
