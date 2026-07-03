@@ -1,4 +1,3 @@
-[DeepL Translation of dalgona039/TreeRAG]
 
 # TreeRAG
 
