@@ -26,23 +26,52 @@ sys.path.insert(0, str(ROOT))
 
 RESULTS_FILE = ROOT / "data/benchmark_reports/online_local_llama_general_v3_n100.json"
 BENCH_FILE   = ROOT / "benchmarks/datasets/full_benchmark.json"
+INDEX_DIR    = ROOT / "data/indices"
+
+
+def _flatten_tree(node, depth=0, out=None):
+    """Depth-first flatten of PageIndex tree into a list of text dicts."""
+    if out is None:
+        out = []
+    if not isinstance(node, dict):
+        return out
+    text = " ".join(filter(None, [
+        str(node.get("title", "") or ""),
+        str(node.get("content", "") or ""),
+        str(node.get("summary", "") or ""),
+        str(node.get("text", "") or ""),
+    ])).strip()
+    if text:
+        out.append({"text": text, "depth": depth})
+    for child in (node.get("children") or []):
+        _flatten_tree(child, depth + 1, out)
+    return out
+
+
+def _score_keyword(node_text: str, question: str) -> float:
+    """Simple keyword overlap score for rough relevance ranking."""
+    q_words = set(re.findall(r"\w+", question.lower()))
+    n_words = set(re.findall(r"\w+", node_text.lower()))
+    if not q_words:
+        return 0.0
+    return len(q_words & n_words) / len(q_words)
 
 
 def _load_source_nodes(doc_id: str, question: str, top_k: int = 3):
-    """BM25-retrieve source nodes from the document index for a question."""
+    """Load and keyword-rank source nodes from the PageIndex JSON directly.
+
+    Avoids importing through src.core.__init__ (which requires google.genai).
+    """
+    import re
+    index_path = INDEX_DIR / doc_id
+    if not index_path.exists():
+        return []
     try:
-        from src.core.bm25_baseline import BM25Retriever
-        from src.config import Config
-        index_path = Path(Config.INDEX_DIR) / doc_id
-        if not index_path.exists():
-            # Try without .json extension
-            index_path = Path(Config.INDEX_DIR) / (doc_id.replace(".json", "") + ".json")
-        if not index_path.exists():
-            return []
         index = json.load(open(index_path, encoding="utf-8"))
-        retriever = BM25Retriever(index)
-        return retriever.retrieve(question, top_k=top_k)
-    except Exception as exc:
+        nodes = _flatten_tree(index)
+        scored = sorted(nodes, key=lambda n: _score_keyword(n["text"], question), reverse=True)
+        return scored[:top_k]
+    except Exception:
         return []
 
 
@@ -72,9 +101,7 @@ def run(signals: int, results_path: Path, sample_size: int = 30, seed: int = 42)
     use_sem = (signals == 6)
     det = HallucinationDetector(use_semantic=use_sem)
 
-    data  = json.load(open(results_path, encoding="utf-8"))
-    bench = json.load(open(BENCH_FILE, encoding="utf-8"))
-    qmap  = {q["question_id"]: q for q in bench.get("questions", bench if isinstance(bench, list) else [])}
+    data = json.load(open(results_path, encoding="utf-8"))
 
     # Flatten rows
     rows_flat = []
@@ -83,8 +110,8 @@ def run(signals: int, results_path: Path, sample_size: int = 30, seed: int = 42)
             if r.get("llm_judge") is not None and r.get("answer"):
                 rows_flat.append({**r, "system": sys_name})
 
-    poor = [r for r in rows_flat if r["llm_judge"] <= 0.4]
-    good = [r for r in rows_flat if r["llm_judge"] > 0.7]
+    poor = [r for r in rows_flat if float(r["llm_judge"]) <= 0.4]
+    good = [r for r in rows_flat if float(r["llm_judge"]) > 0.7]
 
     rng = random.Random(seed)
     sample_poor = rng.sample(poor, min(sample_size, len(poor)))
@@ -95,9 +122,7 @@ def run(signals: int, results_path: Path, sample_size: int = 30, seed: int = 42)
     def _score_sample(rows_subset):
         confs = []
         for row in rows_subset:
-            qid = row.get("question_id", "")
-            q   = qmap.get(qid, {}).get("question", "")
-            nodes = _load_source_nodes(row["document_id"], q)
+            nodes = _load_source_nodes(row["document_id"], row.get("question_id", ""))
             result = det.detect(row["answer"], nodes)
             confs.append(result["overall_confidence"])
         return confs
@@ -105,11 +130,11 @@ def run(signals: int, results_path: Path, sample_size: int = 30, seed: int = 42)
     confs_poor = _score_sample(sample_poor)
     confs_good = _score_sample(sample_good)
 
-    # Full-dataset Spearman (no nodes — both detectors degrade equally here,
-    # but we include it for completeness)
+    # Spearman on full dataset (with nodes for each answer)
     all_confs, all_judges = [], []
     for row in rows_flat:
-        result = det.detect(row["answer"], [])
+        nodes = _load_source_nodes(row["document_id"], row.get("question_id", ""))
+        result = det.detect(row["answer"], nodes)
         all_confs.append(result["overall_confidence"])
         all_judges.append(float(row["llm_judge"]))
 
