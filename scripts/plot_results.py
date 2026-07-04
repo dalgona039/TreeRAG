@@ -438,9 +438,20 @@ import matplotlib.pyplot as plt
 try:
     import seaborn as sns
 
-    sns.set_theme(style="whitegrid")
+    sns.set_theme(style="white")
 except Exception:  # seaborn optional
-    plt.style.use("seaborn-v0_8-whitegrid") if "seaborn-v0_8-whitegrid" in plt.style.available else None
+    plt.style.use("seaborn-v0_8-white") if "seaborn-v0_8-white" in plt.style.available else None
+# UNIFIED_STYLE_INJECTED
+plt.rcParams.update({
+    "axes.grid": False,
+    "axes.spines.top": False, "axes.spines.right": False,
+    "axes.edgecolor": "#444444", "axes.linewidth": 1.0,
+    "axes.titlesize": 15, "axes.titleweight": "semibold",
+    "axes.labelsize": 14, "xtick.labelsize": 12, "ytick.labelsize": 12,
+    "font.size": 13, "font.family": "DejaVu Sans",
+    "legend.fontsize": 12, "legend.frameon": False,
+    "savefig.dpi": 300, "figure.dpi": 300,
+})
 
 _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPORT_DIR = _PROJECT_ROOT / "data" / "benchmark_reports"

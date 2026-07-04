@@ -50,6 +50,16 @@ def make_figure(data):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    # UNIFIED_STYLE_INJECTED
+    plt.rcParams.update({
+        "axes.grid": False, "axes.spines.top": False, "axes.spines.right": False,
+        "axes.edgecolor": "#444444", "axes.linewidth": 1.0,
+        "axes.titlesize": 15, "axes.titleweight": "semibold",
+        "axes.labelsize": 14, "xtick.labelsize": 12, "ytick.labelsize": 12,
+        "font.size": 13, "font.family": "DejaVu Sans",
+        "legend.fontsize": 12, "legend.frameon": False,
+        "savefig.dpi": 300, "figure.dpi": 300,
+    })
     from matplotlib.lines import Line2D
 
     labels = [LABELS[k] for k in ORDER]
