@@ -10,12 +10,48 @@ logger = logging.getLogger(__name__)
 
 
 def _load_embedder():
-    """Lazy-load the same embedder used by DenseRetriever — no new model dependency."""
+    """Return a text embedder for semantic similarity scoring.
+
+    Priority:
+    1. sentence-transformers (multilingual-e5-base or ko-sroberta-multitask) if available.
+    2. HashingEmbedder — deterministic bag-of-words projection, no dependencies.
+       Imported inline to bypass the google-genai import chain in src.core.__init__.
+    """
     try:
-        from src.core.dense_retrieval_baseline import _build_default_embedder
-        return _build_default_embedder()
+        from sentence_transformers import SentenceTransformer
+        import numpy as np
+        for name in ("intfloat/multilingual-e5-base", "jhgan/ko-sroberta-multitask"):
+            try:
+                model = SentenceTransformer(name)
+                return lambda texts: np.asarray(
+                    model.encode(list(texts), show_progress_bar=False), dtype="float32"
+                )
+            except Exception:
+                continue
     except Exception:
-        return None
+        pass
+
+    # Inline HashingEmbedder — mirrors src.core.dense_retrieval_baseline.HashingEmbedder
+    # (copied to avoid importing through src.core.__init__ which requires google.genai)
+    import hashlib as _hashlib
+    import re as _re
+    import numpy as np
+    _HASH_DIM = 256
+    _WORD_RE = _re.compile(r"[0-9A-Za-z가-힣]+|[一-鿿]")
+
+    class _HashingEmbedder:
+        def __init__(self, dim=_HASH_DIM):
+            self.dim = dim
+
+        def __call__(self, texts):
+            vecs = np.zeros((len(texts), self.dim), dtype="float32")
+            for i, text in enumerate(texts):
+                for tok in (t.lower() for t in _WORD_RE.findall(text or "")):
+                    h = int(_hashlib.md5(tok.encode("utf-8")).hexdigest(), 16)
+                    vecs[i, h % self.dim] += 1.0
+            return vecs
+
+    return _HashingEmbedder()
 
 
 class HallucinationDetector:
