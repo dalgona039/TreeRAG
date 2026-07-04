@@ -339,12 +339,12 @@ class ResultPlotter:
         
         ax.hist(flat_rag_tokens, bins=bins, alpha=0.7, label='Flat RAG',
                color=self.config.secondary_color)
-        ax.hist(tree_rag_tokens, bins=bins, alpha=0.7, label='TreeRAG',
+        ax.hist(tree_rag_tokens, bins=bins, alpha=0.7, label='PageTree-RAG',
                color=self.config.primary_color)
         ax.axvline(np.mean(flat_rag_tokens), color=self.config.secondary_color,
                   linestyle='--', linewidth=2, label=f'Flat RAG Mean: {np.mean(flat_rag_tokens):.0f}')
         ax.axvline(np.mean(tree_rag_tokens), color=self.config.primary_color,
-                  linestyle='--', linewidth=2, label=f'TreeRAG Mean: {np.mean(tree_rag_tokens):.0f}')
+                  linestyle='--', linewidth=2, label=f'PageTree-RAG Mean: {np.mean(tree_rag_tokens):.0f}')
         
         ax.set_xlabel('Token Count')
         ax.set_ylabel('Frequency')
@@ -397,7 +397,7 @@ def generate_all_plots(
         path = plotter.plot_performance_comparison(
             results["main_results"],
             metrics,
-            title="TreeRAG vs Baselines"
+            title="PageTree-RAG vs Baselines"
         )
         if path:
             saved_plots["performance_comparison"] = path
@@ -449,8 +449,8 @@ LABELS = {
     "bm25": "BM25",
     "dense": "Dense",
     "flatrag": "FlatRAG",
-    "treerag_dfs": "TreeRAG-DFS",
-    "treerag_beam": "TreeRAG-Beam",
+    "treerag_dfs": "PageTree-DFS",
+    "treerag_beam": "PageTree-Beam",
 }
 
 
@@ -500,31 +500,62 @@ def figure_ablation(ablation) -> None:
 
 
 def figure_efficiency(report) -> None:
+    """Efficiency: context tokens (x, lower=better) vs LLM-Judge (y, higher=better).
+    FlatRAG has context_tokens==0 (no retrieval context) — shown with annotation but
+    excluded from the Pareto frontier to avoid distortion.
+    Separate panel figure_3b_latency shows the latency cost honestly.
+    """
     systems = report["systems"]
     summ = report["summary"]
     fig, ax = plt.subplots(figsize=(9, 5))
     cmap = plt.get_cmap("tab10")
-    pts = []
+    pts_for_pareto = []
     for i, s in enumerate(systems):
         a = summ[s]
-        ax.scatter(
-            a["latency"], a["rouge_l"],
-            s=max(60, a["context_tokens"] * 4 + 60),
-            color=cmap(i % 10), alpha=0.7, edgecolors="k",
-            label=LABELS.get(s, s),
-        )
-        ax.annotate(LABELS.get(s, s), (a["latency"], a["rouge_l"]),
-                    xytext=(5, 5), textcoords="offset points", fontsize=8)
-        pts.append((a["latency"], a["rouge_l"], LABELS.get(s, s)))
-    frontier, pxs, pys = _pareto_frontier(pts)
+        ctx = a.get("context_tokens", 0)
+        judge = a.get("llm_judge")
+        if judge is None:
+            continue
+        label = LABELS.get(s, s)
+        is_flatrag = (ctx == 0)
+        marker = "*" if s.startswith("treerag") else ("s" if is_flatrag else "o")
+        ax.scatter(ctx, judge, s=180, marker=marker,
+                   color=cmap(i % 10), alpha=0.85, edgecolors="k",
+                   label=label + (" (no retrieval ctx)" if is_flatrag else ""))
+        ax.annotate(label, (ctx, judge), xytext=(5, 5),
+                    textcoords="offset points", fontsize=8)
+        if not is_flatrag:
+            pts_for_pareto.append((ctx, judge, label))
+    frontier, pxs, pys = _pareto_frontier(pts_for_pareto)
     if len(pxs) >= 2:
         ax.plot(pxs, pys, color="crimson", linewidth=1.5, linestyle="--",
                 alpha=0.7, label="Pareto frontier")
-    ax.set_xlabel("Latency (s)")
-    ax.set_ylabel("ROUGE-L")
-    ax.set_title("Efficiency: Latency vs ROUGE-L — Pareto frontier (upper-left dominates)")
+    ax.set_xlabel("Context tokens (fewer = more efficient)")
+    ax.set_ylabel("LLM-Judge score (higher = better)")
+    ax.set_title(
+        "Efficiency: context tokens vs LLM-Judge\n"
+        "fewer tokens, higher quality (upper-left dominates)"
+    )
     ax.legend(fontsize=8, loc="best")
     _save(fig, "figure_3_efficiency")
+
+    # Panel b: latency vs LLM-Judge (honest cost view)
+    fig2, ax2 = plt.subplots(figsize=(9, 5))
+    for i, s in enumerate(systems):
+        a = summ[s]
+        judge = a.get("llm_judge")
+        if judge is None:
+            continue
+        label = LABELS.get(s, s)
+        ax2.scatter(a.get("latency", 0), judge, s=150,
+                    color=cmap(i % 10), alpha=0.85, edgecolors="k", label=label)
+        ax2.annotate(label, (a.get("latency", 0), judge),
+                     xytext=(5, 5), textcoords="offset points", fontsize=8)
+    ax2.set_xlabel("Latency (s) — tree traversal cost")
+    ax2.set_ylabel("LLM-Judge score")
+    ax2.set_title("Latency vs quality (tree traversal incurs higher latency)")
+    ax2.legend(fontsize=8, loc="best")
+    _save(fig2, "figure_3b_latency")
 
 
 def main(argv=None) -> int:
@@ -542,6 +573,7 @@ def main(argv=None) -> int:
     figure_comparison(report)
     figure_ablation(ablation)
     figure_efficiency(report)
+    figure_architecture()
     return 0
 
 
@@ -552,7 +584,7 @@ def main(argv=None) -> int:
 CB_PALETTE = ["#0072B2", "#E69F00", "#009E73", "#D55E00", "#CC79A7", "#56B4E9", "#F0E442"]
 _ACM_LABELS = {
     "bm25": "BM25", "dense": "Dense", "flatrag": "FlatRAG", "raptor": "RAPTOR",
-    "treerag_dfs": "TreeRAG-DFS", "treerag_beam": "TreeRAG-Beam",
+    "treerag_dfs": "PageTree-RAG (DFS)", "treerag_beam": "PageTree-RAG (Beam)",
 }
 
 
@@ -582,29 +614,49 @@ def _pareto_frontier(points):
 
 
 def figure_architecture(out_dir=None):
-    """Figure 1: TreeRAG architecture diagram, rendered to PDF/PNG."""
+    """Figure 1: PageTree-RAG architecture diagram — 7 stages, rendered to PDF/PNG."""
     out_dir = Path(out_dir) if out_dir else FIG_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
-    fig, ax = plt.subplots(figsize=(9, 4.5))
+    fig, ax = plt.subplots(figsize=(14, 3.5))
     ax.axis("off")
+
+    # 7 stages evenly spaced across [0.04, 0.96]
     stages = [
-        ("PDF\nDocument", 0.06, CB_PALETTE[0]),
-        ("LLM Tree\nIndexer", 0.27, CB_PALETTE[1]),
-        ("Hierarchical\nPageIndex Tree", 0.50, CB_PALETTE[2]),
-        ("Beam/DFS\nTraversal", 0.72, CB_PALETTE[3]),
-        ("Grounded Answer\n+ [doc, p.X]", 0.92, CB_PALETTE[4]),
+        ("PDF\nDocument",               0.04, CB_PALETTE[0]),
+        ("Zero-shot LLM\nTree Indexer", 0.19, CB_PALETTE[1]),
+        ("Page-referenced\nTree Index", 0.34, CB_PALETTE[2]),
+        ("DFS / Beam\nTraversal",       0.50, CB_PALETTE[3]),
+        ("Contextual\nCompression",     0.65, CB_PALETTE[4]),
+        ("Generation\n(shared LLM)",    0.80, CB_PALETTE[0]),
+        ("Hallucination\nVerification", 0.96, CB_PALETTE[1]),
     ]
+
+    BOX_HW = 0.065   # half-width in axes-fraction
+    BOX_Y  = 0.30    # bottom of box
+    BOX_H  = 0.40    # box height
+    TEXT_Y = BOX_Y + BOX_H / 2
+
     for label, x, color in stages:
-        ax.add_patch(plt.Rectangle((x - 0.085, 0.4), 0.17, 0.2, facecolor=color,
-                                   edgecolor="black", alpha=0.85, transform=ax.transAxes))
-        ax.text(x, 0.5, label, ha="center", va="center", fontsize=9,
-                color="white", fontweight="bold", transform=ax.transAxes)
+        ax.add_patch(plt.Rectangle(
+            (x - BOX_HW, BOX_Y), BOX_HW * 2, BOX_H,
+            facecolor=color, edgecolor="black", alpha=0.88,
+            transform=ax.transAxes,
+        ))
+        ax.text(x, TEXT_Y, label, ha="center", va="center", fontsize=7.5,
+                color="white", fontweight="bold", transform=ax.transAxes,
+                wrap=True)
+
     for i in range(len(stages) - 1):
-        x0 = stages[i][1] + 0.085
-        x1 = stages[i + 1][1] - 0.085
-        ax.annotate("", xy=(x1, 0.5), xytext=(x0, 0.5), xycoords=ax.transAxes,
-                    textcoords=ax.transAxes, arrowprops=dict(arrowstyle="-|>", color="black"))
-    ax.set_title("TreeRAG: top-down structure-preserving retrieval pipeline")
+        x0 = stages[i][1] + BOX_HW
+        x1 = stages[i + 1][1] - BOX_HW
+        ax.annotate("", xy=(x1, TEXT_Y), xytext=(x0, TEXT_Y),
+                    xycoords=ax.transAxes, textcoords=ax.transAxes,
+                    arrowprops=dict(arrowstyle="-|>", color="black", lw=1.2))
+
+    ax.set_title(
+        "PageTree-RAG: structure-preserving, citation-grounded retrieval pipeline",
+        fontsize=11, pad=8,
+    )
     for ext in ("pdf", "png"):
         fig.savefig(out_dir / "figure_1_architecture.{0}".format(ext), dpi=300, bbox_inches="tight")
     plt.close(fig)
