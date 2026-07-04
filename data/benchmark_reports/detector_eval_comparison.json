@@ -1,0 +1,22 @@
+{
+  "5_signals": {
+    "signals": 5,
+    "n_poor_sample": 25,
+    "n_good_sample": 25,
+    "mean_conf_poor": 0.35,
+    "mean_conf_good": 0.35,
+    "delta_poor_minus_good": 0.0,
+    "spearman_rho_no_nodes": 0.3749,
+    "n_total": 599
+  },
+  "6_signals": {
+    "signals": 6,
+    "n_poor_sample": 25,
+    "n_good_sample": 25,
+    "mean_conf_poor": 0.35,
+    "mean_conf_good": 0.35,
+    "delta_poor_minus_good": 0.0,
+    "spearman_rho_no_nodes": 0.3749,
+    "n_total": 599
+  }
+}

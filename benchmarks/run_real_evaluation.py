@@ -154,22 +154,31 @@ class Evaluator:
 
         Used to give every system the same generation backend so comparisons are
         fair. Falls back to extractive context only if the LLM call fails.
+
+        Prompt skeleton language matches the question language so the local 8B
+        model does not drift to Korean when answering English benchmarks.
         """
         import re as _re
         from src.config import Config as _Config
 
-        lang_inst = (
-            "답변은 한국어로 작성하세요."
-            if _re.search(r"[가-힣]", question)
-            else "Answer in the same language as the question."
-        )
-        prompt = (
-            f"아래 컨텍스트를 참고하여 질문에 답하세요. {lang_inst} "
-            f"컨텍스트에 없는 내용은 추측하지 마세요.\n\n"
-            f"### 컨텍스트:\n{context}\n\n"
-            f"### 질문:\n{question}\n\n"
-            f"### 답변:"
-        )
+        is_korean = bool(_re.search(r"[가-힣]", question))
+        if is_korean:
+            prompt = (
+                f"아래 컨텍스트를 참고하여 질문에 한국어로 답하세요. "
+                f"컨텍스트에 없는 내용은 추측하지 마세요.\n\n"
+                f"### 컨텍스트:\n{context}\n\n"
+                f"### 질문:\n{question}\n\n"
+                f"### 답변:"
+            )
+        else:
+            prompt = (
+                f"Answer the question using ONLY the context below. "
+                f"Do NOT speculate beyond the context. "
+                f"Respond in English.\n\n"
+                f"### Context:\n{context}\n\n"
+                f"### Question:\n{question}\n\n"
+                f"### Answer:"
+            )
         try:
             client = _Config.get_client()  # returns override when set
             resp = client.models.generate_content(

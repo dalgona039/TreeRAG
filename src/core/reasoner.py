@@ -59,20 +59,41 @@ LANGUAGE_INSTRUCTIONS = {
 class TreeRAGReasoner:
     PROMPT_CACHE_VERSION = "2026-03-01-v3"
 
-    # Simple prompt used for local LLM backends (avoids multi-step JSON scaffold
-    # that small models cannot reliably complete).
-    _SIMPLE_PROMPT = (
+    # Simple prompts for local LLM backends — one per language so the skeleton
+    # language never contradicts the instruction (8B models drift to Korean when
+    # the surrounding markers are Korean even with an English language_instruction).
+    _SIMPLE_PROMPT_KO = (
         "{domain_prompt}\n\n"
         "{language_instruction}\n\n"
-        "아래 컨텍스트를 바탕으로 질문에 답하세요. "
+        "아래 컨텍스트를 바탕으로 질문에 한국어로 답하세요. "
         "컨텍스트에 없는 내용은 추측하지 마세요.\n\n"
         "### 컨텍스트:\n{context}\n\n"
         "### 질문:\n{question}\n\n"
         "### 답변:"
     )
+    _SIMPLE_PROMPT_EN = (
+        "{domain_prompt}\n\n"
+        "{language_instruction}\n\n"
+        "Answer the question using ONLY the context below. "
+        "Do NOT speculate beyond the context. Respond in English.\n\n"
+        "### Context:\n{context}\n\n"
+        "### Question:\n{question}\n\n"
+        "### Answer:"
+    )
+    _SIMPLE_PROMPT_JA = (
+        "{domain_prompt}\n\n"
+        "{language_instruction}\n\n"
+        "以下のコンテキストのみを使用して質問に答えてください。"
+        "コンテキストにない内容は推測しないでください。\n\n"
+        "### コンテキスト:\n{context}\n\n"
+        "### 質問:\n{question}\n\n"
+        "### 回答:"
+    )
+    # Fallback (legacy alias) — Korean kept for backward compat with cached results.
+    _SIMPLE_PROMPT = _SIMPLE_PROMPT_KO
     # Separate cache-version tag so simple-prompt results don't mix with
     # the complex-prompt cache written by the Gemini path.
-    PROMPT_CACHE_VERSION_SIMPLE = "2026-06-28-simple-v2"
+    PROMPT_CACHE_VERSION_SIMPLE = "2026-07-05-simple-v3"
 
     @staticmethod
     def _normalize_model_answer(answer_text: str) -> str:
@@ -318,7 +339,12 @@ class TreeRAGReasoner:
         # Prompt selection: simple (local models) vs complex scaffold (Gemini)
         # ------------------------------------------------------------------ #
         if use_simple_prompt:
-            prompt = self._SIMPLE_PROMPT.format(
+            _lang_templates = {
+                "ko": self._SIMPLE_PROMPT_KO,
+                "ja": self._SIMPLE_PROMPT_JA,
+            }
+            _tmpl = _lang_templates.get(language, self._SIMPLE_PROMPT_EN)
+            prompt = _tmpl.format(
                 domain_prompt=domain_prompt,
                 language_instruction=language_instruction,
                 context=context_str,

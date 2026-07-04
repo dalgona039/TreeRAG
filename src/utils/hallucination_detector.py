@@ -1,47 +1,113 @@
+from __future__ import annotations
+
 import re
 import logging
-from typing import List, Dict, Any, Tuple
+import threading
+from typing import List, Dict, Any, Tuple, Optional
 from difflib import SequenceMatcher
 
 logger = logging.getLogger(__name__)
 
 
+def _load_embedder():
+    """Lazy-load the same embedder used by DenseRetriever — no new model dependency."""
+    try:
+        from src.core.dense_retrieval_baseline import _build_default_embedder
+        return _build_default_embedder()
+    except Exception:
+        return None
+
+
 class HallucinationDetector:
-    
+
+    # Class-level singleton embedder shared across instances (loaded once).
+    _embedder = None
+    _embedder_lock = threading.Lock()
+
     def __init__(
         self,
         confidence_threshold: float = 0.5,
         sentence_threshold: float | None = None,
         overall_threshold: float | None = None,
+        use_semantic: bool = True,
     ):
         """
         Args:
             confidence_threshold: Backward-compatible default threshold
             sentence_threshold: Threshold for sentence-level grounding
             overall_threshold: Threshold for overall answer reliability
+            use_semantic: Enable 6th signal — max cosine similarity between
+                sentence and source node embeddings (reuses dense retrieval model).
         """
         self.sentence_threshold = sentence_threshold if sentence_threshold is not None else confidence_threshold
         self.overall_threshold = overall_threshold if overall_threshold is not None else confidence_threshold
         self.confidence_threshold = self.sentence_threshold
+        self.use_semantic = use_semantic
+
+    @classmethod
+    def _get_embedder(cls):
+        if cls._embedder is None:
+            with cls._embedder_lock:
+                if cls._embedder is None:
+                    cls._embedder = _load_embedder()
+        return cls._embedder
+
+    def _encode(self, texts: List[str]):
+        """Encode texts to unit-norm vectors; returns None on failure."""
+        embedder = self._get_embedder()
+        if embedder is None:
+            return None
+        try:
+            import numpy as np
+            vecs = embedder(texts)
+            norms = np.linalg.norm(vecs, axis=1, keepdims=True)
+            norms = np.where(norms < 1e-9, 1.0, norms)
+            return (vecs / norms).astype("float32")
+        except Exception as exc:
+            logger.debug("Semantic encode failed: %s", exc)
+            return None
+
+    def _semantic_score(self, sentence: str, src_vecs) -> Optional[float]:
+        """Max cosine similarity between sentence embedding and source node vecs."""
+        if src_vecs is None or len(src_vecs) == 0:
+            return None
+        try:
+            import numpy as np
+            s_vec = self._encode([sentence])
+            if s_vec is None:
+                return None
+            sims = src_vecs @ s_vec[0]  # already unit-norm → dot = cosine
+            return float(np.max(sims))
+        except Exception as exc:
+            logger.debug("Semantic score failed: %s", exc)
+            return None
     
     def detect(self, answer: str, source_nodes: List[Dict[str, Any]]) -> Dict[str, Any]:
         source_text = self._build_source_text(source_nodes)
-        
+
         logger.debug("Hallucination Detection:")
         logger.debug(f"  - Source nodes count: {len(source_nodes)}")
         logger.debug(f"  - Source text length: {len(source_text)} chars")
         logger.debug(f"  - Answer length: {len(answer)} chars")
         if len(source_text) > 0:
             logger.debug(f"  - Source text sample: {source_text[:200]}...")
-        
+
+        # Pre-compute source node embeddings once for signal 6 (semantic similarity).
+        src_vecs = None
+        if self.use_semantic:
+            node_texts = [self._build_source_text([n]) for n in source_nodes if n]
+            node_texts = [t for t in node_texts if t.strip()]
+            if node_texts:
+                src_vecs = self._encode(node_texts)
+
         sentences = self._split_sentences(answer)
-        
+
         sentence_scores = []
         for sentence in sentences:
             if len(sentence.strip()) < 10:  # Skip very short sentences
                 continue
-            
-            confidence = self._calculate_sentence_confidence(sentence, source_text)
+
+            confidence = self._calculate_sentence_confidence(sentence, source_text, src_vecs)
             sentence_scores.append({
                 "sentence": sentence,
                 "confidence": confidence,
@@ -95,7 +161,7 @@ class HallucinationDetector:
         sentences = re.split(r'[.!?]+\s+', text)
         return [s.strip() for s in sentences if s.strip()]
     
-    def _calculate_sentence_confidence(self, sentence: str, source_text: str) -> float:
+    def _calculate_sentence_confidence(self, sentence: str, source_text: str, src_vecs=None) -> float:
         sentence_lower = sentence.lower()
         source_lower = source_text.lower()
         
@@ -173,16 +239,21 @@ class HallucinationDetector:
             chunk_score = chunk_matches / len(chunks)
             if chunk_score > 0:
                 scores.append(chunk_score)
-        
-        # Calculate final confidence: use weighted average with baseline
+
+        # 6. Semantic similarity — max cosine similarity between sentence embedding
+        #    and source node embeddings (reuses dense retrieval model, no new dependency).
+        if src_vecs is not None:
+            sem = self._semantic_score(sentence, src_vecs)
+            if sem is not None and sem > 0.0:
+                # Semantic similarity is on [−1, 1]; clip to [0, 1] and weight strongly.
+                scores.append(max(0.0, sem) * 1.4)
+
+        # Calculate final confidence: weighted blend of max signal and average.
         if scores:
-            # Take the max of average and best signal (with weight)
             avg_score = sum(scores) / len(scores)
             max_score = max(scores)
-            # Blend: 60% max, 40% average for more balanced scoring
             confidence = 0.6 * max_score + 0.4 * avg_score
         else:
-            # No matches found, but set baseline to 0.3 instead of 0
             confidence = 0.3
         
         # Ensure minimum confidence of 0.35 for any response
