@@ -141,6 +141,7 @@ class LocalJudge:
             "prompt": prompt,
             "stream": False,
             "format": "json",
+            "think": False,  # disable thinking tokens (qwen3 etc.) so JSON parses cleanly
         }).encode()
         try:
             req = _urllib.Request(self.url, data=payload, headers={"Content-Type": "application/json"})

@@ -1,0 +1,30 @@
+{
+  "spearman_rho": NaN,
+  "p_value": NaN,
+  "system_scores": {
+    "bm25": {
+      "llama": 0.7813333333333332,
+      "qwen": null
+    },
+    "dense": {
+      "llama": 0.7853333333333333,
+      "qwen": null
+    },
+    "flatrag": {
+      "llama": 0.7859999999999999,
+      "qwen": null
+    },
+    "raptor": {
+      "llama": 0.7739999999999999,
+      "qwen": null
+    },
+    "treerag_dfs": {
+      "llama": 0.792,
+      "qwen": null
+    },
+    "treerag_beam": {
+      "llama": 0.8228956228956229,
+      "qwen": null
+    }
+  }
+}
