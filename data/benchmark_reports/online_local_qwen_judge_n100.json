@@ -105,7 +105,7 @@
         "latency": 20.89447008399293,
         "rouge_l": 0.1889763779527559,
         "bertscore": 0.2204724409448819,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_079",
@@ -116,7 +116,7 @@
         "latency": 8.278659458039328,
         "rouge_l": 0.6486486486486486,
         "bertscore": 0.6486486486486486,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_006",
@@ -127,7 +127,7 @@
         "latency": 20.65712737501599,
         "rouge_l": 0.22500000000000003,
         "bertscore": 0.2666666666666666,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_014",
@@ -138,7 +138,7 @@
         "latency": 10.359990834025666,
         "rouge_l": 0.0625,
         "bertscore": 0.0625,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_038",
@@ -149,7 +149,7 @@
         "latency": 41.03378979099216,
         "rouge_l": 0.01673640167364017,
         "bertscore": 0.01673640167364017,
-        "llm_judge": null
+        "llm_judge": 0.5333333333333333
       },
       {
         "question_id": "auto_160",
@@ -171,7 +171,7 @@
         "latency": 3.4402620409964584,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_131",
@@ -182,7 +182,7 @@
         "latency": 1.484145833994262,
         "rouge_l": 0.5714285714285715,
         "bertscore": 0.5714285714285715,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_070",
@@ -193,7 +193,7 @@
         "latency": 10.856650041998364,
         "rouge_l": 0.3114754098360656,
         "bertscore": 0.4426229508196721,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_165",
@@ -204,7 +204,7 @@
         "latency": 1.855784249957651,
         "rouge_l": 0.5882352941176471,
         "bertscore": 0.5882352941176471,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_111",
@@ -215,7 +215,7 @@
         "latency": 1.808282040990889,
         "rouge_l": 0.14285714285714288,
         "bertscore": 0.14285714285714288,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_086",
@@ -226,7 +226,7 @@
         "latency": 1.5147098330198787,
         "rouge_l": 0.3636363636363636,
         "bertscore": 0.3636363636363636,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_053",
@@ -237,7 +237,7 @@
         "latency": 5.439925124985166,
         "rouge_l": 0.888888888888889,
         "bertscore": 0.888888888888889,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_198",
@@ -248,7 +248,7 @@
         "latency": 17.49971770797856,
         "rouge_l": 0.3841059602649006,
         "bertscore": 0.3973509933774835,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_046",
@@ -259,7 +259,7 @@
         "latency": 9.405793917016126,
         "rouge_l": 0.1518987341772152,
         "bertscore": 0.1518987341772152,
-        "llm_judge": null
+        "llm_judge": 0.9
       },
       {
         "question_id": "auto_107",
@@ -270,7 +270,7 @@
         "latency": 2.448726166971028,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_194",
@@ -281,7 +281,7 @@
         "latency": 9.800681125023402,
         "rouge_l": 0.06666666666666667,
         "bertscore": 0.06666666666666667,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_031",
@@ -292,7 +292,7 @@
         "latency": 3.8028847080422565,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_166",
@@ -303,7 +303,7 @@
         "latency": 2.844959874986671,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 0.13333333333333333
       },
       {
         "question_id": "auto_003",
@@ -314,7 +314,7 @@
         "latency": 9.548756667005364,
         "rouge_l": 0.9719626168224299,
         "bertscore": 0.9719626168224299,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_126",
@@ -325,7 +325,7 @@
         "latency": 8.992995582986623,
         "rouge_l": 0.1111111111111111,
         "bertscore": 0.14814814814814814,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_197",
@@ -336,7 +336,7 @@
         "latency": 10.771988249965943,
         "rouge_l": 0.40625000000000006,
         "bertscore": 0.4375,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_148",
@@ -347,7 +347,7 @@
         "latency": 2.8665663330466487,
         "rouge_l": 0.8235294117647058,
         "bertscore": 0.8235294117647058,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_081",
@@ -358,7 +358,7 @@
         "latency": 3.916028708976228,
         "rouge_l": 0.058823529411764705,
         "bertscore": 0.058823529411764705,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_037",
@@ -369,7 +369,7 @@
         "latency": 5.623770999955013,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_139",
@@ -380,7 +380,7 @@
         "latency": 1.6824190419865772,
         "rouge_l": 0.4,
         "bertscore": 0.4,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_163",
@@ -391,7 +391,7 @@
         "latency": 5.137876458000392,
         "rouge_l": 0.36363636363636365,
         "bertscore": 0.5090909090909091,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_077",
@@ -402,7 +402,7 @@
         "latency": 7.941436416993383,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_004",
@@ -424,7 +424,7 @@
         "latency": 4.170666541031096,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_016",
@@ -435,7 +435,7 @@
         "latency": 5.977751541999169,
         "rouge_l": 0.43902439024390244,
         "bertscore": 0.43902439024390244,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_200",
@@ -446,7 +446,7 @@
         "latency": 8.98887887498131,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.4666666666666666
       },
       {
         "question_id": "auto_062",
@@ -457,7 +457,7 @@
         "latency": 2.5364103330066428,
         "rouge_l": 0.7368421052631579,
         "bertscore": 0.7368421052631579,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_085",
@@ -468,7 +468,7 @@
         "latency": 2.287855791975744,
         "rouge_l": 0.6666666666666666,
         "bertscore": 0.6666666666666666,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_112",
@@ -479,7 +479,7 @@
         "latency": 3.3863298749784008,
         "rouge_l": 0.6909090909090909,
         "bertscore": 0.6909090909090909,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_162",
@@ -490,7 +490,7 @@
         "latency": 1.98108608298935,
         "rouge_l": 0.13333333333333333,
         "bertscore": 0.13333333333333333,
-        "llm_judge": null
+        "llm_judge": 0.3
       },
       {
         "question_id": "auto_010",
@@ -501,7 +501,7 @@
         "latency": 16.214708583022002,
         "rouge_l": 0.04145077720207254,
         "bertscore": 0.04145077720207254,
-        "llm_judge": null
+        "llm_judge": 0.4666666666666666
       },
       {
         "question_id": "auto_013",
@@ -512,7 +512,7 @@
         "latency": 8.341569958021864,
         "rouge_l": 0.47619047619047616,
         "bertscore": 0.47619047619047616,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_043",
@@ -523,7 +523,7 @@
         "latency": 5.082918459025677,
         "rouge_l": 0.37499999999999994,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_204",
@@ -534,7 +534,7 @@
         "latency": 19.007383249991108,
         "rouge_l": 0.11914893617021276,
         "bertscore": 0.13617021276595745,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_153",
@@ -545,7 +545,7 @@
         "latency": 5.437805499997921,
         "rouge_l": 0.30000000000000004,
         "bertscore": 0.5333333333333333,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_074",
@@ -556,7 +556,7 @@
         "latency": 2.3748397089657374,
         "rouge_l": 0.7999999999999999,
         "bertscore": 0.7999999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_045",
@@ -567,7 +567,7 @@
         "latency": 10.483579625026323,
         "rouge_l": 0.2,
         "bertscore": 0.28,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_120",
@@ -578,7 +578,7 @@
         "latency": 4.651725125033408,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_065",
@@ -589,7 +589,7 @@
         "latency": 6.010458624979947,
         "rouge_l": 0.3870967741935483,
         "bertscore": 0.4516129032258065,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_017",
@@ -600,7 +600,7 @@
         "latency": 11.661767916986719,
         "rouge_l": 0.17391304347826086,
         "bertscore": 0.2608695652173913,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_001",
@@ -611,7 +611,7 @@
         "latency": 7.310852749971673,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.4166666666666667
       },
       {
         "question_id": "auto_169",
@@ -622,7 +622,7 @@
         "latency": 2.7056557500036433,
         "rouge_l": 0.36363636363636365,
         "bertscore": 0.36363636363636365,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_011",
@@ -633,7 +633,7 @@
         "latency": 8.920111333020031,
         "rouge_l": 0.046511627906976744,
         "bertscore": 0.046511627906976744,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_173",
@@ -644,7 +644,7 @@
         "latency": 2.2215499589801766,
         "rouge_l": 0.5,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_132",
@@ -655,7 +655,7 @@
         "latency": 2.0727891250280663,
         "rouge_l": 0.5833333333333334,
         "bertscore": 0.5833333333333334,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_061",
@@ -666,7 +666,7 @@
         "latency": 2.4144804580137134,
         "rouge_l": 0.4799999999999999,
         "bertscore": 0.4799999999999999,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_022",
@@ -677,7 +677,7 @@
         "latency": 4.152800542011391,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.13333333333333333
       },
       {
         "question_id": "auto_114",
@@ -688,7 +688,7 @@
         "latency": 3.695217375003267,
         "rouge_l": 0.3098591549295775,
         "bertscore": 0.39436619718309857,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_156",
@@ -699,7 +699,7 @@
         "latency": 5.393473624950275,
         "rouge_l": 0.14814814814814814,
         "bertscore": 0.2222222222222222,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_078",
@@ -710,7 +710,7 @@
         "latency": 3.901898332987912,
         "rouge_l": 0.11764705882352941,
         "bertscore": 0.11764705882352941,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_067",
@@ -721,7 +721,7 @@
         "latency": 11.709139459009748,
         "rouge_l": 0.20740740740740743,
         "bertscore": 0.3555555555555555,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_103",
@@ -732,7 +732,7 @@
         "latency": 16.886384333018214,
         "rouge_l": 0.13725490196078433,
         "bertscore": 0.13725490196078433,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_175",
@@ -743,7 +743,7 @@
         "latency": 2.141130500007421,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_199",
@@ -754,7 +754,7 @@
         "latency": 20.82710766699165,
         "rouge_l": 0.9645390070921985,
         "bertscore": 0.9645390070921985,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_110",
@@ -765,7 +765,7 @@
         "latency": 1.827518209000118,
         "rouge_l": 0.2424242424242424,
         "bertscore": 0.2424242424242424,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_080",
@@ -776,7 +776,7 @@
         "latency": 5.780490165983792,
         "rouge_l": 0.3880597014925373,
         "bertscore": 0.4776119402985075,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_128",
@@ -787,7 +787,7 @@
         "latency": 2.6904797500465065,
         "rouge_l": 0.5454545454545454,
         "bertscore": 0.8181818181818182,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_171",
@@ -798,7 +798,7 @@
         "latency": 2.375327792018652,
         "rouge_l": 0.6923076923076924,
         "bertscore": 0.6923076923076924,
-        "llm_judge": null
+        "llm_judge": 0.9
       },
       {
         "question_id": "auto_033",
@@ -820,7 +820,7 @@
         "latency": 2.314508832991123,
         "rouge_l": 0.11764705882352941,
         "bertscore": 0.11764705882352941,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_122",
@@ -831,7 +831,7 @@
         "latency": 7.131406583997887,
         "rouge_l": 0.044444444444444446,
         "bertscore": 0.044444444444444446,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_146",
@@ -842,7 +842,7 @@
         "latency": 16.811483082943596,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_102",
@@ -853,7 +853,7 @@
         "latency": 1.948857874958776,
         "rouge_l": 0.20952380952380953,
         "bertscore": 0.380952380952381,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_147",
@@ -864,7 +864,7 @@
         "latency": 1.3188937089871615,
         "rouge_l": 0.5714285714285715,
         "bertscore": 0.5714285714285715,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_124",
@@ -875,7 +875,7 @@
         "latency": 0.9143553339526989,
         "rouge_l": 0.26865671641791045,
         "bertscore": 0.26865671641791045,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_020",
@@ -886,7 +886,7 @@
         "latency": 16.22691958397627,
         "rouge_l": 0.5714285714285715,
         "bertscore": 0.5714285714285715,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_015",
@@ -897,7 +897,7 @@
         "latency": 5.780580541992094,
         "rouge_l": 0.25,
         "bertscore": 0.25,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_181",
@@ -908,7 +908,7 @@
         "latency": 6.324795833963435,
         "rouge_l": 0.04761904761904762,
         "bertscore": 0.04761904761904762,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_180",
@@ -919,7 +919,7 @@
         "latency": 3.749163792002946,
         "rouge_l": 0.36734693877551017,
         "bertscore": 0.6122448979591837,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_133",
@@ -930,7 +930,7 @@
         "latency": 2.2864937499980442,
         "rouge_l": 0.5833333333333334,
         "bertscore": 0.5833333333333334,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_066",
@@ -952,7 +952,7 @@
         "latency": 6.131198790972121,
         "rouge_l": 0.456140350877193,
         "bertscore": 0.6315789473684209,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_116",
@@ -963,7 +963,7 @@
         "latency": 4.256144875020254,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_047",
@@ -974,7 +974,7 @@
         "latency": 19.1401231669588,
         "rouge_l": 0.18691588785046728,
         "bertscore": 0.24299065420560745,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_113",
@@ -985,7 +985,7 @@
         "latency": 3.8404195840121247,
         "rouge_l": 0.8085106382978724,
         "bertscore": 0.8085106382978724,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_096",
@@ -996,7 +996,7 @@
         "latency": 1.9106723749428056,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_055",
@@ -1007,7 +1007,7 @@
         "latency": 6.346013457980007,
         "rouge_l": 0.8125000000000001,
         "bertscore": 0.8125000000000001,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_149",
@@ -1018,7 +1018,7 @@
         "latency": 1.3965973329613917,
         "rouge_l": 0.1388888888888889,
         "bertscore": 0.1388888888888889,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_090",
@@ -1029,7 +1029,7 @@
         "latency": 3.421533333021216,
         "rouge_l": 0.6,
         "bertscore": 0.7500000000000001,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_127",
@@ -1040,7 +1040,7 @@
         "latency": 2.0199178750044666,
         "rouge_l": 0.9,
         "bertscore": 0.9,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_136",
@@ -1051,7 +1051,7 @@
         "latency": 3.377403167018201,
         "rouge_l": 0.0851063829787234,
         "bertscore": 0.0851063829787234,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_125",
@@ -1062,7 +1062,7 @@
         "latency": 1.697904083004687,
         "rouge_l": 0.1739130434782609,
         "bertscore": 0.1739130434782609,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_145",
@@ -1073,7 +1073,7 @@
         "latency": 4.568704792007338,
         "rouge_l": 0.509090909090909,
         "bertscore": 0.6181818181818182,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_034",
@@ -1084,7 +1084,7 @@
         "latency": 4.476139415986836,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_129",
@@ -1095,7 +1095,7 @@
         "latency": 1.3057033749646507,
         "rouge_l": 0.25,
         "bertscore": 0.25,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_143",
@@ -1117,7 +1117,7 @@
         "latency": 9.59180691698566,
         "rouge_l": 0.023809523809523808,
         "bertscore": 0.023809523809523808,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_179",
@@ -1128,7 +1128,7 @@
         "latency": 6.460569582995959,
         "rouge_l": 0.5416666666666666,
         "bertscore": 0.5833333333333334,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_064",
@@ -1139,7 +1139,7 @@
         "latency": 1.8485263329930604,
         "rouge_l": 0.5,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_084",
@@ -1150,7 +1150,7 @@
         "latency": 12.32456108299084,
         "rouge_l": 0.0594059405940594,
         "bertscore": 0.0594059405940594,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_101",
@@ -1161,7 +1161,7 @@
         "latency": 4.637292125029489,
         "rouge_l": 0.5384615384615384,
         "bertscore": 0.6538461538461539,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_105",
@@ -1172,7 +1172,7 @@
         "latency": 2.7116662500193343,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_159",
@@ -1183,7 +1183,7 @@
         "latency": 3.639272583008278,
         "rouge_l": 0.36734693877551017,
         "bertscore": 0.44897959183673475,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_073",
@@ -1194,7 +1194,7 @@
         "latency": 2.067195749958046,
         "rouge_l": 0.8333333333333334,
         "bertscore": 0.8333333333333334,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       }
     ],
     "dense": [
@@ -1207,7 +1207,7 @@
         "latency": 10.857828708016314,
         "rouge_l": 0.2891566265060241,
         "bertscore": 0.3132530120481927,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_079",
@@ -1218,7 +1218,7 @@
         "latency": 2.7440264580072835,
         "rouge_l": 0.7027027027027027,
         "bertscore": 0.7027027027027027,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_006",
@@ -1229,7 +1229,7 @@
         "latency": 13.284615583019331,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_014",
@@ -1240,7 +1240,7 @@
         "latency": 6.611566791019868,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.4666666666666666
       },
       {
         "question_id": "auto_038",
@@ -1251,7 +1251,7 @@
         "latency": 18.16869545803638,
         "rouge_l": 0.014705882352941176,
         "bertscore": 0.014705882352941176,
-        "llm_judge": null
+        "llm_judge": 0.4000000000000001
       },
       {
         "question_id": "auto_160",
@@ -1262,7 +1262,7 @@
         "latency": 9.950776209007017,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3666666666666667
       },
       {
         "question_id": "auto_191",
@@ -1273,7 +1273,7 @@
         "latency": 3.6246363330283202,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_131",
@@ -1295,7 +1295,7 @@
         "latency": 6.435098416986875,
         "rouge_l": 0.035714285714285705,
         "bertscore": 0.035714285714285705,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_165",
@@ -1306,7 +1306,7 @@
         "latency": 1.7753557920223102,
         "rouge_l": 0.5,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_111",
@@ -1317,7 +1317,7 @@
         "latency": 3.5383489999803714,
         "rouge_l": 0.05555555555555555,
         "bertscore": 0.05555555555555555,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_086",
@@ -1328,7 +1328,7 @@
         "latency": 1.6916008329717442,
         "rouge_l": 0.3636363636363636,
         "bertscore": 0.3636363636363636,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_053",
@@ -1339,7 +1339,7 @@
         "latency": 10.349777749972418,
         "rouge_l": 0.044444444444444446,
         "bertscore": 0.044444444444444446,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_198",
@@ -1350,7 +1350,7 @@
         "latency": 17.99004095798591,
         "rouge_l": 0.5783132530120482,
         "bertscore": 0.5783132530120482,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_046",
@@ -1361,7 +1361,7 @@
         "latency": 12.059434208960738,
         "rouge_l": 0.042105263157894736,
         "bertscore": 0.06315789473684211,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_107",
@@ -1372,7 +1372,7 @@
         "latency": 5.12514875002671,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_194",
@@ -1383,7 +1383,7 @@
         "latency": 4.279376624966972,
         "rouge_l": 0.15789473684210528,
         "bertscore": 0.15789473684210528,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_031",
@@ -1394,7 +1394,7 @@
         "latency": 3.236995749990456,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_166",
@@ -1405,7 +1405,7 @@
         "latency": 1.7296978330123238,
         "rouge_l": 0.4210526315789474,
         "bertscore": 0.4210526315789474,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_003",
@@ -1416,7 +1416,7 @@
         "latency": 24.310898834024556,
         "rouge_l": 0.07453416149068323,
         "bertscore": 0.08695652173913045,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_126",
@@ -1427,7 +1427,7 @@
         "latency": 7.697332874988206,
         "rouge_l": 0.08333333333333334,
         "bertscore": 0.08333333333333334,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_197",
@@ -1438,7 +1438,7 @@
         "latency": 11.969436959014274,
         "rouge_l": 0.07142857142857144,
         "bertscore": 0.14285714285714288,
-        "llm_judge": null
+        "llm_judge": 0.4000000000000001
       },
       {
         "question_id": "auto_148",
@@ -1449,7 +1449,7 @@
         "latency": 2.383018499996979,
         "rouge_l": 0.8235294117647058,
         "bertscore": 0.8235294117647058,
-        "llm_judge": null
+        "llm_judge": 0.9888888888888889
       },
       {
         "question_id": "auto_081",
@@ -1460,7 +1460,7 @@
         "latency": 7.829907958046533,
         "rouge_l": 0.03703703703703704,
         "bertscore": 0.03703703703703704,
-        "llm_judge": null
+        "llm_judge": 0.4666666666666666
       },
       {
         "question_id": "auto_037",
@@ -1471,7 +1471,7 @@
         "latency": 6.907526375027373,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_139",
@@ -1504,7 +1504,7 @@
         "latency": 5.293000750010833,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_004",
@@ -1515,7 +1515,7 @@
         "latency": 10.917320624983404,
         "rouge_l": 0.07792207792207792,
         "bertscore": 0.07792207792207792,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_039",
@@ -1526,7 +1526,7 @@
         "latency": 15.192998290993273,
         "rouge_l": 0.15094339622641506,
         "bertscore": 0.15094339622641506,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_016",
@@ -1537,7 +1537,7 @@
         "latency": 7.167165332997683,
         "rouge_l": 0.35555555555555557,
         "bertscore": 0.4444444444444445,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_200",
@@ -1548,7 +1548,7 @@
         "latency": 58.0506148339482,
         "rouge_l": 0.02469135802469136,
         "bertscore": 0.02469135802469136,
-        "llm_judge": null
+        "llm_judge": 0.13333333333333333
       },
       {
         "question_id": "auto_062",
@@ -1559,7 +1559,7 @@
         "latency": 1.9975737080094405,
         "rouge_l": 0.7368421052631579,
         "bertscore": 0.7368421052631579,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_085",
@@ -1570,7 +1570,7 @@
         "latency": 2.590289167012088,
         "rouge_l": 0.8571428571428571,
         "bertscore": 0.8571428571428571,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_112",
@@ -1581,7 +1581,7 @@
         "latency": 3.0972429589601234,
         "rouge_l": 0.6909090909090909,
         "bertscore": 0.6909090909090909,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_162",
@@ -1614,7 +1614,7 @@
         "latency": 4.923361458000727,
         "rouge_l": 0.5,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_043",
@@ -1625,7 +1625,7 @@
         "latency": 10.193778083019424,
         "rouge_l": 0.3448275862068966,
         "bertscore": 0.41379310344827586,
-        "llm_judge": null
+        "llm_judge": 0.9466666666666667
       },
       {
         "question_id": "auto_204",
@@ -1636,7 +1636,7 @@
         "latency": 10.969806834007613,
         "rouge_l": 0.11398963730569948,
         "bertscore": 0.15544041450777202,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_153",
@@ -1647,7 +1647,7 @@
         "latency": 3.1856827089795843,
         "rouge_l": 0.45454545454545453,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_074",
@@ -1658,7 +1658,7 @@
         "latency": 2.8636644579819404,
         "rouge_l": 0.7999999999999999,
         "bertscore": 0.7999999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_045",
@@ -1669,7 +1669,7 @@
         "latency": 5.213785040949006,
         "rouge_l": 0.3846153846153846,
         "bertscore": 0.5384615384615384,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_120",
@@ -1680,7 +1680,7 @@
         "latency": 4.039698957989458,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.06666666666666667
       },
       {
         "question_id": "auto_065",
@@ -1691,7 +1691,7 @@
         "latency": 8.073875750007574,
         "rouge_l": 0.3835616438356165,
         "bertscore": 0.3835616438356165,
-        "llm_judge": null
+        "llm_judge": 0.9
       },
       {
         "question_id": "auto_017",
@@ -1702,7 +1702,7 @@
         "latency": 11.19891658303095,
         "rouge_l": 0.09836065573770493,
         "bertscore": 0.09836065573770493,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_001",
@@ -1713,7 +1713,7 @@
         "latency": 4.009432749997359,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_169",
@@ -1724,7 +1724,7 @@
         "latency": 1.9259194999467582,
         "rouge_l": 0.7692307692307693,
         "bertscore": 0.7692307692307693,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_011",
@@ -1735,7 +1735,7 @@
         "latency": 11.650167957996018,
         "rouge_l": 0.3448275862068966,
         "bertscore": 0.3793103448275862,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_173",
@@ -1746,7 +1746,7 @@
         "latency": 1.730130291020032,
         "rouge_l": 0.3636363636363636,
         "bertscore": 0.3636363636363636,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_132",
@@ -1757,7 +1757,7 @@
         "latency": 2.1232258749660105,
         "rouge_l": 0.46153846153846156,
         "bertscore": 0.46153846153846156,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_061",
@@ -1768,7 +1768,7 @@
         "latency": 2.737884124973789,
         "rouge_l": 0.4799999999999999,
         "bertscore": 0.4799999999999999,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_022",
@@ -1779,7 +1779,7 @@
         "latency": 4.417969083995558,
         "rouge_l": 0.13333333333333333,
         "bertscore": 0.13333333333333333,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_114",
@@ -1790,7 +1790,7 @@
         "latency": 5.942886792006902,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_156",
@@ -1801,7 +1801,7 @@
         "latency": 7.060382666008081,
         "rouge_l": 0.13559322033898305,
         "bertscore": 0.13559322033898305,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_078",
@@ -1812,7 +1812,7 @@
         "latency": 6.188873125007376,
         "rouge_l": 0.2692307692307693,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_067",
@@ -1823,7 +1823,7 @@
         "latency": 7.231635084026493,
         "rouge_l": 0.36781609195402304,
         "bertscore": 0.5747126436781609,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_103",
@@ -1834,7 +1834,7 @@
         "latency": 6.302224999992177,
         "rouge_l": 0.12121212121212123,
         "bertscore": 0.12121212121212123,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_175",
@@ -1845,7 +1845,7 @@
         "latency": 1.9952449590200558,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_199",
@@ -1856,7 +1856,7 @@
         "latency": 9.712137625028845,
         "rouge_l": 0.37037037037037035,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_110",
@@ -1867,7 +1867,7 @@
         "latency": 1.4504407920176163,
         "rouge_l": 0.1875,
         "bertscore": 0.1875,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_080",
@@ -1878,7 +1878,7 @@
         "latency": 5.279176332987845,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_128",
@@ -1889,7 +1889,7 @@
         "latency": 1.366093999997247,
         "rouge_l": 0.7499999999999999,
         "bertscore": 0.7499999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_171",
@@ -1900,7 +1900,7 @@
         "latency": 3.3942727919784375,
         "rouge_l": 0.38095238095238104,
         "bertscore": 0.5714285714285713,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_033",
@@ -1911,7 +1911,7 @@
         "latency": 16.754489959042985,
         "rouge_l": 0.19047619047619047,
         "bertscore": 0.19047619047619047,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_123",
@@ -1922,7 +1922,7 @@
         "latency": 2.547996749985032,
         "rouge_l": 0.11764705882352941,
         "bertscore": 0.11764705882352941,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_122",
@@ -1933,7 +1933,7 @@
         "latency": 4.192158042045776,
         "rouge_l": 0.057142857142857134,
         "bertscore": 0.057142857142857134,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_146",
@@ -1944,7 +1944,7 @@
         "latency": 5.92851341702044,
         "rouge_l": 0.0930232558139535,
         "bertscore": 0.0930232558139535,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_102",
@@ -1955,7 +1955,7 @@
         "latency": 5.164624916971661,
         "rouge_l": 0.5185185185185185,
         "bertscore": 0.6296296296296295,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_147",
@@ -1966,7 +1966,7 @@
         "latency": 2.42780720803421,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_124",
@@ -1977,7 +1977,7 @@
         "latency": 1.4060839579906315,
         "rouge_l": 0.6153846153846153,
         "bertscore": 0.6153846153846153,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_020",
@@ -1988,7 +1988,7 @@
         "latency": 6.913691499968991,
         "rouge_l": 0.044444444444444446,
         "bertscore": 0.044444444444444446,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_015",
@@ -1999,7 +1999,7 @@
         "latency": 5.679781625047326,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_181",
@@ -2010,7 +2010,7 @@
         "latency": 6.0678528340067714,
         "rouge_l": 0.4838709677419355,
         "bertscore": 0.6129032258064515,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_180",
@@ -2021,7 +2021,7 @@
         "latency": 3.8387787079554982,
         "rouge_l": 0.5306122448979592,
         "bertscore": 0.5714285714285715,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_133",
@@ -2032,7 +2032,7 @@
         "latency": 1.638702959055081,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_066",
@@ -2043,7 +2043,7 @@
         "latency": 5.976046291005332,
         "rouge_l": 0.48571428571428577,
         "bertscore": 0.6285714285714286,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_154",
@@ -2054,7 +2054,7 @@
         "latency": 7.128268541011494,
         "rouge_l": 0.31578947368421045,
         "bertscore": 0.4912280701754386,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_116",
@@ -2065,7 +2065,7 @@
         "latency": 3.1092197080142796,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_047",
@@ -2076,7 +2076,7 @@
         "latency": 14.71565087500494,
         "rouge_l": 0.1917808219178082,
         "bertscore": 0.3287671232876712,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_113",
@@ -2087,7 +2087,7 @@
         "latency": 2.1519802920520306,
         "rouge_l": 0.6111111111111112,
         "bertscore": 0.6111111111111112,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_096",
@@ -2098,7 +2098,7 @@
         "latency": 1.763467957964167,
         "rouge_l": 0.6666666666666666,
         "bertscore": 0.6666666666666666,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_055",
@@ -2109,7 +2109,7 @@
         "latency": 5.196536500006914,
         "rouge_l": 0.5625000000000001,
         "bertscore": 0.5625000000000001,
-        "llm_judge": null
+        "llm_judge": 0.9933333333333333
       },
       {
         "question_id": "auto_149",
@@ -2120,7 +2120,7 @@
         "latency": 1.7548832920147106,
         "rouge_l": 0.1111111111111111,
         "bertscore": 0.1388888888888889,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_090",
@@ -2131,7 +2131,7 @@
         "latency": 2.0960154999629594,
         "rouge_l": 0.7647058823529412,
         "bertscore": 0.7647058823529412,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_127",
@@ -2142,7 +2142,7 @@
         "latency": 1.804471959010698,
         "rouge_l": 0.9,
         "bertscore": 0.9,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_136",
@@ -2153,7 +2153,7 @@
         "latency": 4.153475040977355,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_125",
@@ -2164,7 +2164,7 @@
         "latency": 2.2915090000024065,
         "rouge_l": 0.16666666666666666,
         "bertscore": 0.16666666666666666,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_145",
@@ -2175,7 +2175,7 @@
         "latency": 23.326595666992944,
         "rouge_l": 0.03669724770642202,
         "bertscore": 0.03669724770642202,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_034",
@@ -2186,7 +2186,7 @@
         "latency": 19.337343249993864,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_129",
@@ -2197,7 +2197,7 @@
         "latency": 2.153290000045672,
         "rouge_l": 0.6666666666666665,
         "bertscore": 0.6666666666666665,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_143",
@@ -2208,7 +2208,7 @@
         "latency": 8.080137042037677,
         "rouge_l": 0.21359223300970875,
         "bertscore": 0.4660194174757281,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_083",
@@ -2219,7 +2219,7 @@
         "latency": 3.245610540965572,
         "rouge_l": 0.36065573770491804,
         "bertscore": 0.3934426229508196,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_179",
@@ -2230,7 +2230,7 @@
         "latency": 1.4068447080207989,
         "rouge_l": 0.19999999999999998,
         "bertscore": 0.19999999999999998,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_064",
@@ -2241,7 +2241,7 @@
         "latency": 4.164766040979885,
         "rouge_l": 0.1739130434782609,
         "bertscore": 0.2608695652173913,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_084",
@@ -2252,7 +2252,7 @@
         "latency": 4.889835708017927,
         "rouge_l": 0.14285714285714285,
         "bertscore": 0.1714285714285714,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_101",
@@ -2263,7 +2263,7 @@
         "latency": 2.4447179589769803,
         "rouge_l": 0.33333333333333337,
         "bertscore": 0.3888888888888889,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_105",
@@ -2274,7 +2274,7 @@
         "latency": 2.01778233301593,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_159",
@@ -2285,7 +2285,7 @@
         "latency": 3.654711666982621,
         "rouge_l": 0.46511627906976744,
         "bertscore": 0.558139534883721,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_073",
@@ -2296,7 +2296,7 @@
         "latency": 1.8577146250172518,
         "rouge_l": 0.8333333333333334,
         "bertscore": 0.8333333333333334,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       }
     ],
     "flatrag": [
@@ -2309,7 +2309,7 @@
         "latency": 19.811071834000018,
         "rouge_l": 0.15,
         "bertscore": 0.275,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_079",
@@ -2320,7 +2320,7 @@
         "latency": 8.921204333999981,
         "rouge_l": 0.6857142857142857,
         "bertscore": 0.6857142857142857,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_006",
@@ -2331,7 +2331,7 @@
         "latency": 20.463572874999954,
         "rouge_l": 0.35344827586206895,
         "bertscore": 0.35344827586206895,
-        "llm_judge": null
+        "llm_judge": 0.5333333333333333
       },
       {
         "question_id": "auto_014",
@@ -2342,7 +2342,7 @@
         "latency": 12.245637291000094,
         "rouge_l": 0.5555555555555556,
         "bertscore": 0.5555555555555556,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_038",
@@ -2353,7 +2353,7 @@
         "latency": 29.51086533399996,
         "rouge_l": 0.012903225806451613,
         "bertscore": 0.012903225806451613,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_160",
@@ -2364,7 +2364,7 @@
         "latency": 12.987202583999988,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_191",
@@ -2375,7 +2375,7 @@
         "latency": 8.79371991700009,
         "rouge_l": 0.11111111111111112,
         "bertscore": 0.11111111111111112,
-        "llm_judge": null
+        "llm_judge": 0.5333333333333333
       },
       {
         "question_id": "auto_131",
@@ -2386,7 +2386,7 @@
         "latency": 7.077914749999991,
         "rouge_l": 0.5714285714285715,
         "bertscore": 0.5714285714285715,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_070",
@@ -2397,7 +2397,7 @@
         "latency": 17.24949570800004,
         "rouge_l": 0.29032258064516125,
         "bertscore": 0.41935483870967744,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_165",
@@ -2408,7 +2408,7 @@
         "latency": 10.202382457999988,
         "rouge_l": 0.7741935483870968,
         "bertscore": 0.7741935483870968,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_111",
@@ -2419,7 +2419,7 @@
         "latency": 7.866973041000051,
         "rouge_l": 0.14285714285714288,
         "bertscore": 0.14285714285714288,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_086",
@@ -2430,7 +2430,7 @@
         "latency": 9.479874457999927,
         "rouge_l": 0.7142857142857143,
         "bertscore": 0.7142857142857143,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_053",
@@ -2441,7 +2441,7 @@
         "latency": 11.958365542000024,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_198",
@@ -2452,7 +2452,7 @@
         "latency": 26.669856832999926,
         "rouge_l": 0.6211180124223602,
         "bertscore": 0.6211180124223602,
-        "llm_judge": null
+        "llm_judge": 0.8333333333333334
       },
       {
         "question_id": "auto_046",
@@ -2463,7 +2463,7 @@
         "latency": 17.92212137499996,
         "rouge_l": 0.18604651162790695,
         "bertscore": 0.23255813953488372,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_107",
@@ -2474,7 +2474,7 @@
         "latency": 8.7801851669999,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_194",
@@ -2485,7 +2485,7 @@
         "latency": 11.27493225000012,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_031",
@@ -2496,7 +2496,7 @@
         "latency": 8.228759583000055,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_166",
@@ -2507,7 +2507,7 @@
         "latency": 10.543048917000078,
         "rouge_l": 0.20833333333333331,
         "bertscore": 0.29166666666666663,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_003",
@@ -2518,7 +2518,7 @@
         "latency": 15.394628166999837,
         "rouge_l": 0.9906542056074767,
         "bertscore": 0.9906542056074767,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_126",
@@ -2529,7 +2529,7 @@
         "latency": 12.699235833000103,
         "rouge_l": 0.15584415584415584,
         "bertscore": 0.2597402597402597,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_197",
@@ -2540,7 +2540,7 @@
         "latency": 12.04893958300022,
         "rouge_l": 0.380952380952381,
         "bertscore": 0.4285714285714286,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_148",
@@ -2551,7 +2551,7 @@
         "latency": 7.916772042000048,
         "rouge_l": 0.8235294117647058,
         "bertscore": 0.8235294117647058,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_081",
@@ -2573,7 +2573,7 @@
         "latency": 14.502604499999961,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_139",
@@ -2584,7 +2584,7 @@
         "latency": 6.979126250000036,
         "rouge_l": 0.5454545454545454,
         "bertscore": 0.5454545454545454,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_163",
@@ -2595,7 +2595,7 @@
         "latency": 10.532581915999799,
         "rouge_l": 0.5306122448979592,
         "bertscore": 0.6122448979591837,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_077",
@@ -2606,7 +2606,7 @@
         "latency": 11.741991707999887,
         "rouge_l": 0.25396825396825395,
         "bertscore": 0.31746031746031744,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_004",
@@ -2617,7 +2617,7 @@
         "latency": 13.882698625000103,
         "rouge_l": 0.9743589743589743,
         "bertscore": 0.9743589743589743,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_039",
@@ -2628,7 +2628,7 @@
         "latency": 11.265293375000056,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_016",
@@ -2639,7 +2639,7 @@
         "latency": 21.901795999999877,
         "rouge_l": 0.19999999999999998,
         "bertscore": 0.275,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_200",
@@ -2650,7 +2650,7 @@
         "latency": 17.34088533399995,
         "rouge_l": 0.020000000000000004,
         "bertscore": 0.020000000000000004,
-        "llm_judge": null
+        "llm_judge": 0.26666666666666666
       },
       {
         "question_id": "auto_062",
@@ -2661,7 +2661,7 @@
         "latency": 8.933188917000052,
         "rouge_l": 0.9090909090909091,
         "bertscore": 0.9090909090909091,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_085",
@@ -2672,7 +2672,7 @@
         "latency": 8.539045415999908,
         "rouge_l": 0.8571428571428571,
         "bertscore": 0.8571428571428571,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_112",
@@ -2683,7 +2683,7 @@
         "latency": 8.08337937500005,
         "rouge_l": 0.4090909090909091,
         "bertscore": 0.4090909090909091,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_162",
@@ -2694,7 +2694,7 @@
         "latency": 7.1778667080000105,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_010",
@@ -2705,7 +2705,7 @@
         "latency": 39.69094162500005,
         "rouge_l": 0.038910505836575876,
         "bertscore": 0.038910505836575876,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_013",
@@ -2716,7 +2716,7 @@
         "latency": 10.858486209000148,
         "rouge_l": 0.9166666666666666,
         "bertscore": 0.9166666666666666,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_043",
@@ -2727,7 +2727,7 @@
         "latency": 17.09962704099985,
         "rouge_l": 0.2622950819672132,
         "bertscore": 0.36065573770491804,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_204",
@@ -2738,7 +2738,7 @@
         "latency": 21.042494458000192,
         "rouge_l": 0.22110552763819094,
         "bertscore": 0.2412060301507538,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_153",
@@ -2749,7 +2749,7 @@
         "latency": 9.019100333000097,
         "rouge_l": 0.35555555555555557,
         "bertscore": 0.5333333333333333,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_074",
@@ -2760,7 +2760,7 @@
         "latency": 8.116578084000139,
         "rouge_l": 0.7999999999999999,
         "bertscore": 0.7999999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_045",
@@ -2782,7 +2782,7 @@
         "latency": 9.01484816700031,
         "rouge_l": 0.09523809523809525,
         "bertscore": 0.09523809523809525,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_065",
@@ -2793,7 +2793,7 @@
         "latency": 9.121372040999631,
         "rouge_l": 0.8275862068965517,
         "bertscore": 0.8275862068965517,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_017",
@@ -2804,7 +2804,7 @@
         "latency": 23.783806500000082,
         "rouge_l": 0.019801980198019802,
         "bertscore": 0.039603960396039604,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_001",
@@ -2815,7 +2815,7 @@
         "latency": 17.89686520899977,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_169",
@@ -2826,7 +2826,7 @@
         "latency": 11.31301108300022,
         "rouge_l": 0.13333333333333336,
         "bertscore": 0.16666666666666669,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_011",
@@ -2837,7 +2837,7 @@
         "latency": 10.4679987909999,
         "rouge_l": 0.22222222222222224,
         "bertscore": 0.3703703703703704,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_173",
@@ -2848,7 +2848,7 @@
         "latency": 7.562316749999809,
         "rouge_l": 0.42857142857142855,
         "bertscore": 0.42857142857142855,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_132",
@@ -2859,7 +2859,7 @@
         "latency": 7.427042874999643,
         "rouge_l": 0.5217391304347826,
         "bertscore": 0.5217391304347826,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_061",
@@ -2870,7 +2870,7 @@
         "latency": 8.532556207999733,
         "rouge_l": 0.4799999999999999,
         "bertscore": 0.4799999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_022",
@@ -2881,7 +2881,7 @@
         "latency": 9.588107832999867,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_114",
@@ -2892,7 +2892,7 @@
         "latency": 14.086905375000242,
         "rouge_l": 0.2975206611570248,
         "bertscore": 0.38016528925619836,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_156",
@@ -2903,7 +2903,7 @@
         "latency": 9.102033459000268,
         "rouge_l": 0.5454545454545454,
         "bertscore": 0.5818181818181818,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_078",
@@ -2914,7 +2914,7 @@
         "latency": 8.739270958000361,
         "rouge_l": 0.3,
         "bertscore": 0.5500000000000002,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_067",
@@ -2925,7 +2925,7 @@
         "latency": 12.613430166999933,
         "rouge_l": 0.4044943820224719,
         "bertscore": 0.5617977528089888,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_103",
@@ -2936,7 +2936,7 @@
         "latency": 13.245061207999697,
         "rouge_l": 0.32608695652173914,
         "bertscore": 0.4782608695652174,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_175",
@@ -2947,7 +2947,7 @@
         "latency": 7.135421499999666,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_199",
@@ -2958,7 +2958,7 @@
         "latency": 18.81307783400007,
         "rouge_l": 0.1864406779661017,
         "bertscore": 0.3389830508474576,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_110",
@@ -2969,7 +2969,7 @@
         "latency": 11.996102542000244,
         "rouge_l": 0.38888888888888895,
         "bertscore": 0.4722222222222222,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_080",
@@ -2980,7 +2980,7 @@
         "latency": 11.397701708000113,
         "rouge_l": 0.3076923076923077,
         "bertscore": 0.36923076923076925,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_128",
@@ -2991,7 +2991,7 @@
         "latency": 7.320795459000237,
         "rouge_l": 0.5454545454545454,
         "bertscore": 0.8181818181818182,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_171",
@@ -3002,7 +3002,7 @@
         "latency": 8.36189400000012,
         "rouge_l": 0.125,
         "bertscore": 0.18750000000000003,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_033",
@@ -3013,7 +3013,7 @@
         "latency": 11.521197999999913,
         "rouge_l": 0.3333333333333333,
         "bertscore": 0.3333333333333333,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_123",
@@ -3024,7 +3024,7 @@
         "latency": 7.408979167000325,
         "rouge_l": 0.125,
         "bertscore": 0.125,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_122",
@@ -3035,7 +3035,7 @@
         "latency": 12.141071125000053,
         "rouge_l": 0.036363636363636355,
         "bertscore": 0.036363636363636355,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_146",
@@ -3046,7 +3046,7 @@
         "latency": 19.76978045900023,
         "rouge_l": 0.125,
         "bertscore": 0.1375,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_102",
@@ -3057,7 +3057,7 @@
         "latency": 8.293483041999934,
         "rouge_l": 0.0975609756097561,
         "bertscore": 0.0975609756097561,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_147",
@@ -3068,7 +3068,7 @@
         "latency": 7.597219499999937,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_124",
@@ -3079,7 +3079,7 @@
         "latency": 6.972705458999826,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_020",
@@ -3090,7 +3090,7 @@
         "latency": 20.320638874999986,
         "rouge_l": 0.5783132530120482,
         "bertscore": 0.5783132530120482,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_015",
@@ -3101,7 +3101,7 @@
         "latency": 10.689916374999939,
         "rouge_l": 0.4827586206896552,
         "bertscore": 0.5517241379310344,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_181",
@@ -3112,7 +3112,7 @@
         "latency": 11.256604333000269,
         "rouge_l": 0.045454545454545456,
         "bertscore": 0.045454545454545456,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_180",
@@ -3123,7 +3123,7 @@
         "latency": 9.124905749999925,
         "rouge_l": 0.42857142857142855,
         "bertscore": 0.6666666666666666,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_133",
@@ -3134,7 +3134,7 @@
         "latency": 9.89253995800027,
         "rouge_l": 0.39999999999999997,
         "bertscore": 0.5777777777777777,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_066",
@@ -3145,7 +3145,7 @@
         "latency": 9.208536916999947,
         "rouge_l": 0.6086956521739131,
         "bertscore": 0.6521739130434783,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_154",
@@ -3156,7 +3156,7 @@
         "latency": 11.980812875000083,
         "rouge_l": 0.3466666666666666,
         "bertscore": 0.5066666666666666,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_116",
@@ -3167,7 +3167,7 @@
         "latency": 8.95360783299975,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_047",
@@ -3189,7 +3189,7 @@
         "latency": 7.565832499999942,
         "rouge_l": 0.5555555555555556,
         "bertscore": 0.5555555555555556,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_096",
@@ -3200,7 +3200,7 @@
         "latency": 7.911654333000115,
         "rouge_l": 0.5599999999999999,
         "bertscore": 0.7199999999999999,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_055",
@@ -3211,7 +3211,7 @@
         "latency": 10.634522667000056,
         "rouge_l": 0.5161290322580646,
         "bertscore": 0.5161290322580646,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_149",
@@ -3222,7 +3222,7 @@
         "latency": 7.249818875000074,
         "rouge_l": 0.9473684210526316,
         "bertscore": 0.9473684210526316,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_090",
@@ -3244,7 +3244,7 @@
         "latency": 6.050931249999849,
         "rouge_l": 0.7499999999999999,
         "bertscore": 0.7499999999999999,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_136",
@@ -3255,7 +3255,7 @@
         "latency": 9.549218916999962,
         "rouge_l": 0.0851063829787234,
         "bertscore": 0.0851063829787234,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_125",
@@ -3266,7 +3266,7 @@
         "latency": 8.081114166999669,
         "rouge_l": 0.06896551724137931,
         "bertscore": 0.06896551724137931,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_145",
@@ -3277,7 +3277,7 @@
         "latency": 15.21385245800002,
         "rouge_l": 0.24528301886792456,
         "bertscore": 0.339622641509434,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_034",
@@ -3288,7 +3288,7 @@
         "latency": 38.93087874999992,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_129",
@@ -3299,7 +3299,7 @@
         "latency": 7.604293916000188,
         "rouge_l": 0.6666666666666665,
         "bertscore": 0.6666666666666665,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_143",
@@ -3310,7 +3310,7 @@
         "latency": 9.343005041999731,
         "rouge_l": 0.4727272727272727,
         "bertscore": 0.7999999999999999,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_083",
@@ -3321,7 +3321,7 @@
         "latency": 13.144500166999933,
         "rouge_l": 0.024390243902439022,
         "bertscore": 0.024390243902439022,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_179",
@@ -3332,7 +3332,7 @@
         "latency": 7.118708874999811,
         "rouge_l": 0.2857142857142857,
         "bertscore": 0.2857142857142857,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_064",
@@ -3343,7 +3343,7 @@
         "latency": 7.285865917000137,
         "rouge_l": 0.5,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_084",
@@ -3354,7 +3354,7 @@
         "latency": 29.08679887499966,
         "rouge_l": 0.026845637583892617,
         "bertscore": 0.026845637583892617,
-        "llm_judge": null
+        "llm_judge": 0.9344926448232594
       },
       {
         "question_id": "auto_101",
@@ -3365,7 +3365,7 @@
         "latency": 10.539919833000113,
         "rouge_l": 0.6333333333333334,
         "bertscore": 0.6333333333333334,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_105",
@@ -3376,7 +3376,7 @@
         "latency": 7.592125541999849,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_159",
@@ -3387,7 +3387,7 @@
         "latency": 8.922298666999268,
         "rouge_l": 0.4313725490196078,
         "bertscore": 0.5098039215686274,
-        "llm_judge": null
+        "llm_judge": 0.7666666666666666
       },
       {
         "question_id": "auto_073",
@@ -3398,7 +3398,7 @@
         "latency": 7.107377999999699,
         "rouge_l": 0.8333333333333334,
         "bertscore": 0.8333333333333334,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       }
     ],
     "raptor": [
@@ -3411,7 +3411,7 @@
         "latency": 15.613201582999864,
         "rouge_l": 0.32499999999999996,
         "bertscore": 0.35000000000000003,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_079",
@@ -3422,7 +3422,7 @@
         "latency": 7.047401208000338,
         "rouge_l": 0.7999999999999999,
         "bertscore": 0.7999999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_006",
@@ -3433,7 +3433,7 @@
         "latency": 19.96621920800044,
         "rouge_l": 0.041666666666666664,
         "bertscore": 0.041666666666666664,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_014",
@@ -3444,7 +3444,7 @@
         "latency": 17.723899915999937,
         "rouge_l": 0.0851063829787234,
         "bertscore": 0.0851063829787234,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_038",
@@ -3455,7 +3455,7 @@
         "latency": 20.1555975830006,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.06666666666666667
       },
       {
         "question_id": "auto_160",
@@ -3466,7 +3466,7 @@
         "latency": 9.468300417000137,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_191",
@@ -3477,7 +3477,7 @@
         "latency": 7.954301665999992,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_131",
@@ -3488,7 +3488,7 @@
         "latency": 6.409688166999331,
         "rouge_l": 0.5714285714285715,
         "bertscore": 0.5714285714285715,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_070",
@@ -3510,7 +3510,7 @@
         "latency": 7.431526917000156,
         "rouge_l": 0.9600000000000001,
         "bertscore": 0.9600000000000001,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_111",
@@ -3521,7 +3521,7 @@
         "latency": 9.442335916999582,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_086",
@@ -3532,7 +3532,7 @@
         "latency": 5.731551959000171,
         "rouge_l": 0.3636363636363636,
         "bertscore": 0.3636363636363636,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_053",
@@ -3543,7 +3543,7 @@
         "latency": 11.73382591599966,
         "rouge_l": 0.05714285714285715,
         "bertscore": 0.05714285714285715,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_198",
@@ -3554,7 +3554,7 @@
         "latency": 22.150275792000684,
         "rouge_l": 0.546583850931677,
         "bertscore": 0.5590062111801243,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_046",
@@ -3565,7 +3565,7 @@
         "latency": 15.937596374999885,
         "rouge_l": 0.09411764705882353,
         "bertscore": 0.1176470588235294,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_107",
@@ -3576,7 +3576,7 @@
         "latency": 7.009432666999601,
         "rouge_l": 0.7058823529411764,
         "bertscore": 0.7058823529411764,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_194",
@@ -3587,7 +3587,7 @@
         "latency": 17.970274166999843,
         "rouge_l": 0.07142857142857142,
         "bertscore": 0.11904761904761903,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_031",
@@ -3598,7 +3598,7 @@
         "latency": 7.635489958999642,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.26666666666666666
       },
       {
         "question_id": "auto_166",
@@ -3609,7 +3609,7 @@
         "latency": 7.884680749999461,
         "rouge_l": 0.1142857142857143,
         "bertscore": 0.2285714285714286,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_003",
@@ -3620,7 +3620,7 @@
         "latency": 12.743594915999893,
         "rouge_l": 0.21621621621621623,
         "bertscore": 0.23423423423423423,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_126",
@@ -3631,7 +3631,7 @@
         "latency": 9.539181791999908,
         "rouge_l": 0.12903225806451615,
         "bertscore": 0.12903225806451615,
-        "llm_judge": null
+        "llm_judge": 0.9880873157470765
       },
       {
         "question_id": "auto_197",
@@ -3642,7 +3642,7 @@
         "latency": 15.791109208999842,
         "rouge_l": 0.1724137931034483,
         "bertscore": 0.1724137931034483,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_148",
@@ -3653,7 +3653,7 @@
         "latency": 7.197975375000169,
         "rouge_l": 0.7272727272727273,
         "bertscore": 0.7272727272727273,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_081",
@@ -3675,7 +3675,7 @@
         "latency": 24.209246374999566,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.5333333333333333
       },
       {
         "question_id": "auto_139",
@@ -3686,7 +3686,7 @@
         "latency": 6.75324454100064,
         "rouge_l": 0.4,
         "bertscore": 0.4,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_163",
@@ -3697,7 +3697,7 @@
         "latency": 9.353931375000684,
         "rouge_l": 0.4888888888888889,
         "bertscore": 0.4888888888888889,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_077",
@@ -3708,7 +3708,7 @@
         "latency": 8.880695875000129,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_004",
@@ -3719,7 +3719,7 @@
         "latency": 11.456327542000508,
         "rouge_l": 0.06896551724137932,
         "bertscore": 0.06896551724137932,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_039",
@@ -3730,7 +3730,7 @@
         "latency": 28.357261250000192,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_016",
@@ -3741,7 +3741,7 @@
         "latency": 19.693306624999423,
         "rouge_l": 0.0909090909090909,
         "bertscore": 0.12121212121212122,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_200",
@@ -3752,7 +3752,7 @@
         "latency": 13.09683616699931,
         "rouge_l": 0.061224489795918366,
         "bertscore": 0.061224489795918366,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_062",
@@ -3774,7 +3774,7 @@
         "latency": 7.543253875000119,
         "rouge_l": 0.8571428571428571,
         "bertscore": 0.8571428571428571,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_112",
@@ -3785,7 +3785,7 @@
         "latency": 8.5580740409996,
         "rouge_l": 0.6909090909090909,
         "bertscore": 0.6909090909090909,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_162",
@@ -3796,7 +3796,7 @@
         "latency": 7.155381332999241,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_010",
@@ -3807,7 +3807,7 @@
         "latency": 23.721853082999587,
         "rouge_l": 0.029411764705882353,
         "bertscore": 0.029411764705882353,
-        "llm_judge": null
+        "llm_judge": 0.26666666666666666
       },
       {
         "question_id": "auto_013",
@@ -3818,7 +3818,7 @@
         "latency": 13.642833290999988,
         "rouge_l": 0.4666666666666666,
         "bertscore": 0.5333333333333333,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_043",
@@ -3829,7 +3829,7 @@
         "latency": 20.265224332999423,
         "rouge_l": 0.3142857142857143,
         "bertscore": 0.3428571428571428,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_204",
@@ -3840,7 +3840,7 @@
         "latency": 12.862481582999862,
         "rouge_l": 0.05714285714285715,
         "bertscore": 0.07999999999999999,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_153",
@@ -3851,7 +3851,7 @@
         "latency": 7.151292874999854,
         "rouge_l": 0.15873015873015872,
         "bertscore": 0.25396825396825395,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_074",
@@ -3862,7 +3862,7 @@
         "latency": 7.925284707999708,
         "rouge_l": 0.7999999999999999,
         "bertscore": 0.7999999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_045",
@@ -3873,7 +3873,7 @@
         "latency": 17.36472962500011,
         "rouge_l": 0.14285714285714285,
         "bertscore": 0.17857142857142858,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_120",
@@ -3884,7 +3884,7 @@
         "latency": 7.019190665999304,
         "rouge_l": 0.2268041237113402,
         "bertscore": 0.2268041237113402,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_065",
@@ -3895,7 +3895,7 @@
         "latency": 7.686738749999677,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_017",
@@ -3917,7 +3917,7 @@
         "latency": 7.556034250000266,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_169",
@@ -3928,7 +3928,7 @@
         "latency": 9.308698249999907,
         "rouge_l": 0.2564102564102564,
         "bertscore": 0.358974358974359,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_011",
@@ -3939,7 +3939,7 @@
         "latency": 11.995408333999876,
         "rouge_l": 0.1739130434782609,
         "bertscore": 0.1739130434782609,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_173",
@@ -3950,7 +3950,7 @@
         "latency": 6.601691374999973,
         "rouge_l": 0.3636363636363636,
         "bertscore": 0.3636363636363636,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_132",
@@ -3961,7 +3961,7 @@
         "latency": 7.197705250000581,
         "rouge_l": 0.5806451612903226,
         "bertscore": 0.5806451612903226,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_061",
@@ -3972,7 +3972,7 @@
         "latency": 7.028717874999529,
         "rouge_l": 0.13333333333333333,
         "bertscore": 0.13333333333333333,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_022",
@@ -3983,7 +3983,7 @@
         "latency": 8.748609125000257,
         "rouge_l": 0.09302325581395349,
         "bertscore": 0.18604651162790697,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_114",
@@ -4005,7 +4005,7 @@
         "latency": 10.855180792000283,
         "rouge_l": 0.2950819672131148,
         "bertscore": 0.32786885245901637,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_078",
@@ -4016,7 +4016,7 @@
         "latency": 9.604607917000067,
         "rouge_l": 0.15384615384615385,
         "bertscore": 0.15384615384615385,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_067",
@@ -4027,7 +4027,7 @@
         "latency": 10.196343333999721,
         "rouge_l": 0.2898550724637681,
         "bertscore": 0.5217391304347826,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_103",
@@ -4038,7 +4038,7 @@
         "latency": 13.795713000000433,
         "rouge_l": 0.1095890410958904,
         "bertscore": 0.1095890410958904,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_175",
@@ -4049,7 +4049,7 @@
         "latency": 7.122019249999539,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_199",
@@ -4060,7 +4060,7 @@
         "latency": 21.167374040999675,
         "rouge_l": 0.4264705882352941,
         "bertscore": 0.4852941176470588,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_110",
@@ -4071,7 +4071,7 @@
         "latency": 6.753132749999168,
         "rouge_l": 0.1875,
         "bertscore": 0.1875,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_080",
@@ -4082,7 +4082,7 @@
         "latency": 14.514482250000583,
         "rouge_l": 0.25225225225225223,
         "bertscore": 0.3063063063063063,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_128",
@@ -4093,7 +4093,7 @@
         "latency": 6.596186499999931,
         "rouge_l": 0.7499999999999999,
         "bertscore": 0.7499999999999999,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_171",
@@ -4104,7 +4104,7 @@
         "latency": 7.161737542000083,
         "rouge_l": 0.06666666666666667,
         "bertscore": 0.20000000000000004,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_033",
@@ -4115,7 +4115,7 @@
         "latency": 20.489919708000343,
         "rouge_l": 0.13953488372093023,
         "bertscore": 0.13953488372093023,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_123",
@@ -4126,7 +4126,7 @@
         "latency": 7.343237708000743,
         "rouge_l": 0.11764705882352941,
         "bertscore": 0.11764705882352941,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_122",
@@ -4137,7 +4137,7 @@
         "latency": 14.416695083999912,
         "rouge_l": 0.03278688524590165,
         "bertscore": 0.03278688524590165,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_146",
@@ -4148,7 +4148,7 @@
         "latency": 9.798802833000082,
         "rouge_l": 0.14634146341463414,
         "bertscore": 0.14634146341463414,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_102",
@@ -4159,7 +4159,7 @@
         "latency": 9.220424665999417,
         "rouge_l": 0.4827586206896552,
         "bertscore": 0.5172413793103449,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_147",
@@ -4170,7 +4170,7 @@
         "latency": 7.026117417000023,
         "rouge_l": 0.5714285714285715,
         "bertscore": 0.5714285714285715,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_124",
@@ -4181,7 +4181,7 @@
         "latency": 6.574062916999537,
         "rouge_l": 0.4444444444444444,
         "bertscore": 0.7777777777777778,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_020",
@@ -4192,7 +4192,7 @@
         "latency": 17.54791650000061,
         "rouge_l": 0.058823529411764705,
         "bertscore": 0.058823529411764705,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_015",
@@ -4203,7 +4203,7 @@
         "latency": 14.15675629099951,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.06666666666666667
       },
       {
         "question_id": "auto_181",
@@ -4214,7 +4214,7 @@
         "latency": 12.146598375000394,
         "rouge_l": 0.0784313725490196,
         "bertscore": 0.0784313725490196,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_180",
@@ -4225,7 +4225,7 @@
         "latency": 11.023014708000119,
         "rouge_l": 0.38095238095238093,
         "bertscore": 0.4126984126984127,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_133",
@@ -4236,7 +4236,7 @@
         "latency": 8.1951778749999,
         "rouge_l": 0.4736842105263158,
         "bertscore": 0.5263157894736842,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_066",
@@ -4258,7 +4258,7 @@
         "latency": 9.357418083000084,
         "rouge_l": 0.15,
         "bertscore": 0.25,
-        "llm_judge": null
+        "llm_judge": 0.8333333333333334
       },
       {
         "question_id": "auto_116",
@@ -4269,7 +4269,7 @@
         "latency": 6.838934707999215,
         "rouge_l": 0.6086956521739131,
         "bertscore": 0.6086956521739131,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_047",
@@ -4280,7 +4280,7 @@
         "latency": 13.45415233300082,
         "rouge_l": 0.1851851851851852,
         "bertscore": 0.1851851851851852,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_113",
@@ -4291,7 +4291,7 @@
         "latency": 8.631284125000093,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_096",
@@ -4302,7 +4302,7 @@
         "latency": 7.33304945800046,
         "rouge_l": 0.9090909090909091,
         "bertscore": 0.9090909090909091,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_055",
@@ -4313,7 +4313,7 @@
         "latency": 8.827847459000623,
         "rouge_l": 0.2857142857142857,
         "bertscore": 0.2857142857142857,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_149",
@@ -4324,7 +4324,7 @@
         "latency": 6.759411875000296,
         "rouge_l": 0.09615384615384616,
         "bertscore": 0.09615384615384616,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_090",
@@ -4346,7 +4346,7 @@
         "latency": 6.852444375000232,
         "rouge_l": 0.7499999999999999,
         "bertscore": 0.7499999999999999,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_136",
@@ -4357,7 +4357,7 @@
         "latency": 9.275735375000295,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_125",
@@ -4379,7 +4379,7 @@
         "latency": 10.53405145799934,
         "rouge_l": 0.044444444444444446,
         "bertscore": 0.044444444444444446,
-        "llm_judge": null
+        "llm_judge": 0.4666666666666666
       },
       {
         "question_id": "auto_034",
@@ -4390,7 +4390,7 @@
         "latency": 29.435728125000423,
         "rouge_l": 0.11152416356877323,
         "bertscore": 0.14126394052044608,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_129",
@@ -4401,7 +4401,7 @@
         "latency": 6.5778460830006225,
         "rouge_l": 0.6,
         "bertscore": 0.6,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_143",
@@ -4423,7 +4423,7 @@
         "latency": 11.608700458000385,
         "rouge_l": 0.449438202247191,
         "bertscore": 0.49438202247191015,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_179",
@@ -4434,7 +4434,7 @@
         "latency": 7.113387709000563,
         "rouge_l": 0.2857142857142857,
         "bertscore": 0.2857142857142857,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_064",
@@ -4445,7 +4445,7 @@
         "latency": 6.498641709000367,
         "rouge_l": 0.5,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_084",
@@ -4456,7 +4456,7 @@
         "latency": 10.319266124999558,
         "rouge_l": 0.14492753623188404,
         "bertscore": 0.23188405797101447,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_101",
@@ -4478,7 +4478,7 @@
         "latency": 7.007988790999661,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_159",
@@ -4489,7 +4489,7 @@
         "latency": 7.356252875000791,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_073",
@@ -4500,7 +4500,7 @@
         "latency": 6.849041082999975,
         "rouge_l": 0.8333333333333334,
         "bertscore": 0.8333333333333334,
-        "llm_judge": null
+        "llm_judge": 0.9933333333333333
       }
     ],
     "treerag_dfs": [
@@ -4513,7 +4513,7 @@
         "latency": 115.64298245799989,
         "rouge_l": 0.11666666666666668,
         "bertscore": 0.18333333333333332,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_079",
@@ -4524,7 +4524,7 @@
         "latency": 28.565600916999983,
         "rouge_l": 0.4333333333333333,
         "bertscore": 0.4333333333333333,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_006",
@@ -4535,7 +4535,7 @@
         "latency": 68.74563766699998,
         "rouge_l": 0.04219409282700422,
         "bertscore": 0.04219409282700422,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_014",
@@ -4546,7 +4546,7 @@
         "latency": 143.51848433400005,
         "rouge_l": 0.04081632653061225,
         "bertscore": 0.04081632653061225,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_038",
@@ -4557,7 +4557,7 @@
         "latency": 162.08090979100007,
         "rouge_l": 0.3068783068783069,
         "bertscore": 0.41269841269841273,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_160",
@@ -4568,7 +4568,7 @@
         "latency": 29.358893625000064,
         "rouge_l": 0.16513761467889906,
         "bertscore": 0.3119266055045872,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_191",
@@ -4579,7 +4579,7 @@
         "latency": 32.36307616599993,
         "rouge_l": 0.08620689655172414,
         "bertscore": 0.15517241379310345,
-        "llm_judge": null
+        "llm_judge": 0.8333333333333334
       },
       {
         "question_id": "auto_131",
@@ -4590,7 +4590,7 @@
         "latency": 20.076326792000145,
         "rouge_l": 0.4615384615384615,
         "bertscore": 0.6153846153846154,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_070",
@@ -4601,7 +4601,7 @@
         "latency": 43.73804820800001,
         "rouge_l": 0.1634241245136187,
         "bertscore": 0.2178988326848249,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_165",
@@ -4612,7 +4612,7 @@
         "latency": 22.735096833999933,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_111",
@@ -4623,7 +4623,7 @@
         "latency": 36.534436625000126,
         "rouge_l": 0.41071428571428564,
         "bertscore": 0.42857142857142855,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_086",
@@ -4634,7 +4634,7 @@
         "latency": 23.783534665999923,
         "rouge_l": 0.42105263157894735,
         "bertscore": 0.42105263157894735,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_053",
@@ -4645,7 +4645,7 @@
         "latency": 98.51400150000018,
         "rouge_l": 0.9230769230769231,
         "bertscore": 0.9230769230769231,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_198",
@@ -4656,7 +4656,7 @@
         "latency": 137.33763216600005,
         "rouge_l": 0.9441624365482233,
         "bertscore": 0.9441624365482233,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_046",
@@ -4667,7 +4667,7 @@
         "latency": 100.1904282920002,
         "rouge_l": 0.0903225806451613,
         "bertscore": 0.0903225806451613,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_107",
@@ -4678,7 +4678,7 @@
         "latency": 20.101802458000293,
         "rouge_l": 0.4615384615384615,
         "bertscore": 0.4615384615384615,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_194",
@@ -4689,7 +4689,7 @@
         "latency": 48.164257417000044,
         "rouge_l": 0.025974025974025972,
         "bertscore": 0.025974025974025972,
-        "llm_judge": null
+        "llm_judge": 0.8333333333333334
       },
       {
         "question_id": "auto_031",
@@ -4700,7 +4700,7 @@
         "latency": 48.09652695800014,
         "rouge_l": 0.07142857142857144,
         "bertscore": 0.10714285714285714,
-        "llm_judge": null
+        "llm_judge": 0.06666666666666667
       },
       {
         "question_id": "auto_166",
@@ -4711,7 +4711,7 @@
         "latency": 23.899733957999615,
         "rouge_l": 0.19148936170212763,
         "bertscore": 0.2127659574468085,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_003",
@@ -4722,7 +4722,7 @@
         "latency": 41.70816508300004,
         "rouge_l": 0.06976744186046512,
         "bertscore": 0.06976744186046512,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_126",
@@ -4733,7 +4733,7 @@
         "latency": 17.807394916999783,
         "rouge_l": 0.12000000000000002,
         "bertscore": 0.19999999999999998,
-        "llm_judge": null
+        "llm_judge": 0.4666666666666666
       },
       {
         "question_id": "auto_197",
@@ -4744,7 +4744,7 @@
         "latency": 105.25996862500006,
         "rouge_l": 0.14634146341463414,
         "bertscore": 0.14634146341463414,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_148",
@@ -4755,7 +4755,7 @@
         "latency": 21.45346595800038,
         "rouge_l": 0.43478260869565216,
         "bertscore": 0.43478260869565216,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_081",
@@ -4766,7 +4766,7 @@
         "latency": 28.214712041999974,
         "rouge_l": 0.03448275862068965,
         "bertscore": 0.03448275862068965,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_037",
@@ -4777,7 +4777,7 @@
         "latency": 90.96923604199992,
         "rouge_l": 0.40816326530612246,
         "bertscore": 0.46938775510204084,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_139",
@@ -4788,7 +4788,7 @@
         "latency": 26.829659999999876,
         "rouge_l": 0.5517241379310345,
         "bertscore": 0.5517241379310345,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_163",
@@ -4799,7 +4799,7 @@
         "latency": 25.7766730000003,
         "rouge_l": 0.35897435897435903,
         "bertscore": 0.41025641025641024,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_077",
@@ -4810,7 +4810,7 @@
         "latency": 31.893282499999714,
         "rouge_l": 0.1565217391304348,
         "bertscore": 0.19130434782608693,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_004",
@@ -4821,7 +4821,7 @@
         "latency": 106.58772950000002,
         "rouge_l": 0.14035087719298245,
         "bertscore": 0.21929824561403508,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_039",
@@ -4832,7 +4832,7 @@
         "latency": 115.55929187499987,
         "rouge_l": 0.6333333333333333,
         "bertscore": 0.6666666666666667,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_016",
@@ -4854,7 +4854,7 @@
         "latency": 160.5964757910001,
         "rouge_l": 0.02469135802469136,
         "bertscore": 0.02469135802469136,
-        "llm_judge": null
+        "llm_judge": 0.5333333333333333
       },
       {
         "question_id": "auto_062",
@@ -4865,7 +4865,7 @@
         "latency": 22.759548915999858,
         "rouge_l": 0.47619047619047616,
         "bertscore": 0.47619047619047616,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_085",
@@ -4876,7 +4876,7 @@
         "latency": 21.44070720799982,
         "rouge_l": 0.5142857142857142,
         "bertscore": 0.5142857142857142,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_112",
@@ -4887,7 +4887,7 @@
         "latency": 29.846158124999874,
         "rouge_l": 0.25563909774436094,
         "bertscore": 0.31578947368421056,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_162",
@@ -4898,7 +4898,7 @@
         "latency": 21.004314166999848,
         "rouge_l": 0.75,
         "bertscore": 0.75,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_010",
@@ -4909,7 +4909,7 @@
         "latency": 48.58349179199968,
         "rouge_l": 0.06622516556291391,
         "bertscore": 0.09271523178807946,
-        "llm_judge": null
+        "llm_judge": 0.3
       },
       {
         "question_id": "auto_013",
@@ -4931,7 +4931,7 @@
         "latency": 100.55766137500041,
         "rouge_l": 0.1782178217821782,
         "bertscore": 0.19801980198019803,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_204",
@@ -4942,7 +4942,7 @@
         "latency": 59.111624041999676,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_153",
@@ -4953,7 +4953,7 @@
         "latency": 28.295364458000222,
         "rouge_l": 0.5217391304347826,
         "bertscore": 0.6521739130434782,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_074",
@@ -4975,7 +4975,7 @@
         "latency": 63.198417667000285,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_120",
@@ -4986,7 +4986,7 @@
         "latency": 15.760126999999557,
         "rouge_l": 0.09302325581395349,
         "bertscore": 0.09302325581395349,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_065",
@@ -4997,7 +4997,7 @@
         "latency": 34.987713583000186,
         "rouge_l": 0.29213483146067415,
         "bertscore": 0.3595505617977528,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_017",
@@ -5008,7 +5008,7 @@
         "latency": 136.86676308300048,
         "rouge_l": 0.25974025974025977,
         "bertscore": 0.28571428571428575,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_001",
@@ -5019,7 +5019,7 @@
         "latency": 58.595972500000244,
         "rouge_l": 0.1218274111675127,
         "bertscore": 0.2639593908629441,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_169",
@@ -5030,7 +5030,7 @@
         "latency": 26.60433841699978,
         "rouge_l": 0.16901408450704225,
         "bertscore": 0.19718309859154926,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_011",
@@ -5041,7 +5041,7 @@
         "latency": 171.6552497089997,
         "rouge_l": 0.058823529411764705,
         "bertscore": 0.08823529411764706,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_173",
@@ -5052,7 +5052,7 @@
         "latency": 20.691464583000197,
         "rouge_l": 0.3333333333333333,
         "bertscore": 0.7777777777777778,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_132",
@@ -5063,7 +5063,7 @@
         "latency": 20.621585042000333,
         "rouge_l": 0.42424242424242425,
         "bertscore": 0.6060606060606061,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_061",
@@ -5074,7 +5074,7 @@
         "latency": 27.142606833000173,
         "rouge_l": 0.3243243243243243,
         "bertscore": 0.3243243243243243,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_022",
@@ -5085,7 +5085,7 @@
         "latency": 62.32149333399957,
         "rouge_l": 0.3055555555555555,
         "bertscore": 0.33333333333333326,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_114",
@@ -5096,7 +5096,7 @@
         "latency": 35.614983417000076,
         "rouge_l": 0.19191919191919193,
         "bertscore": 0.2626262626262626,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_156",
@@ -5107,7 +5107,7 @@
         "latency": 32.512542625000606,
         "rouge_l": 0.2695035460992908,
         "bertscore": 0.3404255319148936,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_078",
@@ -5118,7 +5118,7 @@
         "latency": 28.924211957999432,
         "rouge_l": 0.17391304347826086,
         "bertscore": 0.3695652173913043,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_067",
@@ -5129,7 +5129,7 @@
         "latency": 38.170654374999685,
         "rouge_l": 0.20408163265306123,
         "bertscore": 0.2755102040816327,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_103",
@@ -5140,7 +5140,7 @@
         "latency": 23.298854208000193,
         "rouge_l": 0.34210526315789475,
         "bertscore": 0.47368421052631576,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_175",
@@ -5151,7 +5151,7 @@
         "latency": 21.045020249999652,
         "rouge_l": 0.631578947368421,
         "bertscore": 0.631578947368421,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_199",
@@ -5162,7 +5162,7 @@
         "latency": 94.85963916699984,
         "rouge_l": 0.2361111111111111,
         "bertscore": 0.36111111111111105,
-        "llm_judge": null
+        "llm_judge": 0.9
       },
       {
         "question_id": "auto_110",
@@ -5173,7 +5173,7 @@
         "latency": 26.146960916999888,
         "rouge_l": 0.08823529411764706,
         "bertscore": 0.11764705882352941,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_080",
@@ -5195,7 +5195,7 @@
         "latency": 21.47332741700029,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_171",
@@ -5206,7 +5206,7 @@
         "latency": 33.59603916600008,
         "rouge_l": 0.20588235294117646,
         "bertscore": 0.23529411764705882,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_033",
@@ -5217,7 +5217,7 @@
         "latency": 70.77505674999975,
         "rouge_l": 0.03389830508474576,
         "bertscore": 0.06779661016949153,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_123",
@@ -5228,7 +5228,7 @@
         "latency": 18.830490291999922,
         "rouge_l": 0.04878048780487805,
         "bertscore": 0.04878048780487805,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_122",
@@ -5239,7 +5239,7 @@
         "latency": 26.76402791700002,
         "rouge_l": 0.26506024096385544,
         "bertscore": 0.3132530120481928,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_146",
@@ -5250,7 +5250,7 @@
         "latency": 32.41047870799957,
         "rouge_l": 0.23157894736842108,
         "bertscore": 0.2736842105263158,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_102",
@@ -5261,7 +5261,7 @@
         "latency": 25.948433292000118,
         "rouge_l": 0.410958904109589,
         "bertscore": 0.6027397260273972,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_147",
@@ -5272,7 +5272,7 @@
         "latency": 19.48001587500039,
         "rouge_l": 0.608695652173913,
         "bertscore": 0.608695652173913,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_124",
@@ -5283,7 +5283,7 @@
         "latency": 19.40138562500033,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_020",
@@ -5294,7 +5294,7 @@
         "latency": 92.55493366599967,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_015",
@@ -5305,7 +5305,7 @@
         "latency": 56.51477483400049,
         "rouge_l": 0.04081632653061224,
         "bertscore": 0.04081632653061224,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_181",
@@ -5316,7 +5316,7 @@
         "latency": 49.73536341700037,
         "rouge_l": 0.1642512077294686,
         "bertscore": 0.22222222222222227,
-        "llm_judge": null
+        "llm_judge": 0.9500544492905197
       },
       {
         "question_id": "auto_180",
@@ -5327,7 +5327,7 @@
         "latency": 31.50380637499984,
         "rouge_l": 0.33766233766233766,
         "bertscore": 0.36363636363636365,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_133",
@@ -5338,7 +5338,7 @@
         "latency": 25.37969220800005,
         "rouge_l": 0.490566037735849,
         "bertscore": 0.5660377358490566,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_066",
@@ -5349,7 +5349,7 @@
         "latency": 31.268481459000213,
         "rouge_l": 0.4634146341463415,
         "bertscore": 0.5365853658536586,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_154",
@@ -5360,7 +5360,7 @@
         "latency": 34.902961707999566,
         "rouge_l": 0.25862068965517243,
         "bertscore": 0.3275862068965517,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_116",
@@ -5371,7 +5371,7 @@
         "latency": 26.658737000000656,
         "rouge_l": 0.358974358974359,
         "bertscore": 0.358974358974359,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_047",
@@ -5382,7 +5382,7 @@
         "latency": 111.88596070800031,
         "rouge_l": 0.15286624203821655,
         "bertscore": 0.2165605095541401,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_113",
@@ -5393,7 +5393,7 @@
         "latency": 39.01120058400011,
         "rouge_l": 0.2537313432835821,
         "bertscore": 0.3283582089552239,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_096",
@@ -5404,7 +5404,7 @@
         "latency": 26.473438500000157,
         "rouge_l": 0.7333333333333334,
         "bertscore": 0.7333333333333334,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_055",
@@ -5415,7 +5415,7 @@
         "latency": 79.66828791700027,
         "rouge_l": 0.35714285714285715,
         "bertscore": 0.39285714285714285,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_149",
@@ -5426,7 +5426,7 @@
         "latency": 24.201504874999955,
         "rouge_l": 0.5294117647058824,
         "bertscore": 0.5294117647058824,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_090",
@@ -5437,7 +5437,7 @@
         "latency": 26.824283207999542,
         "rouge_l": 0.31884057971014496,
         "bertscore": 0.43478260869565216,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_127",
@@ -5448,7 +5448,7 @@
         "latency": 23.465544125000633,
         "rouge_l": 0.8181818181818182,
         "bertscore": 0.8181818181818182,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_136",
@@ -5470,7 +5470,7 @@
         "latency": 23.08568245799961,
         "rouge_l": 0.2580645161290323,
         "bertscore": 0.2580645161290323,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_145",
@@ -5481,7 +5481,7 @@
         "latency": 40.03791058299976,
         "rouge_l": 0.24242424242424243,
         "bertscore": 0.2878787878787879,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_034",
@@ -5492,7 +5492,7 @@
         "latency": 47.468962290999116,
         "rouge_l": 0.09523809523809523,
         "bertscore": 0.09523809523809523,
-        "llm_judge": null
+        "llm_judge": 0.06666666666666667
       },
       {
         "question_id": "auto_129",
@@ -5503,7 +5503,7 @@
         "latency": 23.42793191600049,
         "rouge_l": 0.6666666666666665,
         "bertscore": 0.6666666666666665,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_143",
@@ -5514,7 +5514,7 @@
         "latency": 34.651387292000436,
         "rouge_l": 0.2601626016260163,
         "bertscore": 0.3089430894308943,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_083",
@@ -5525,7 +5525,7 @@
         "latency": 43.191422375,
         "rouge_l": 0.17346938775510204,
         "bertscore": 0.35714285714285715,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_179",
@@ -5536,7 +5536,7 @@
         "latency": 33.29705566700068,
         "rouge_l": 0.3888888888888889,
         "bertscore": 0.4166666666666667,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_064",
@@ -5547,7 +5547,7 @@
         "latency": 30.195915833000072,
         "rouge_l": 0.25,
         "bertscore": 0.25,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_084",
@@ -5558,7 +5558,7 @@
         "latency": 41.61695533399961,
         "rouge_l": 0.15023474178403756,
         "bertscore": 0.27230046948356806,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_101",
@@ -5569,7 +5569,7 @@
         "latency": 31.869791874999464,
         "rouge_l": 0.46315789473684205,
         "bertscore": 0.4842105263157894,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_105",
@@ -5580,7 +5580,7 @@
         "latency": 23.010363624998718,
         "rouge_l": 0.5945945945945945,
         "bertscore": 0.5945945945945945,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_159",
@@ -5602,7 +5602,7 @@
         "latency": 27.885579542000414,
         "rouge_l": 0.4444444444444445,
         "bertscore": 0.4444444444444445,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       }
     ],
     "treerag_beam": [
@@ -5615,7 +5615,7 @@
         "latency": 183.1185171670004,
         "rouge_l": 0.14184397163120568,
         "bertscore": 0.18439716312056736,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_079",
@@ -5626,7 +5626,7 @@
         "latency": 19.514517291998345,
         "rouge_l": 0.7999999999999999,
         "bertscore": 0.7999999999999999,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_006",
@@ -5637,7 +5637,7 @@
         "latency": 159.2748551249988,
         "rouge_l": 0.07885304659498209,
         "bertscore": 0.17204301075268816,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_014",
@@ -5648,7 +5648,7 @@
         "latency": 518.2930461670003,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_038",
@@ -5659,7 +5659,7 @@
         "latency": 149.7670645829985,
         "rouge_l": 0.09090909090909091,
         "bertscore": 0.13636363636363635,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_160",
@@ -5670,7 +5670,7 @@
         "latency": 39.90106283299974,
         "rouge_l": 0.23841059602649003,
         "bertscore": 0.3443708609271523,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_191",
@@ -5681,7 +5681,7 @@
         "latency": 25.453147291998903,
         "rouge_l": 0.3125,
         "bertscore": 0.3125,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_131",
@@ -5703,7 +5703,7 @@
         "latency": 37.399327999999514,
         "rouge_l": 0.2732919254658385,
         "bertscore": 0.39751552795031053,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_165",
@@ -5714,7 +5714,7 @@
         "latency": 27.99541258299905,
         "rouge_l": 0.2037037037037037,
         "bertscore": 0.2037037037037037,
-        "llm_judge": null
+        "llm_judge": 0.9866666666666667
       },
       {
         "question_id": "auto_111",
@@ -5725,7 +5725,7 @@
         "latency": 33.035150083998815,
         "rouge_l": 0.45098039215686275,
         "bertscore": 0.4901960784313726,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_086",
@@ -5736,7 +5736,7 @@
         "latency": 21.494629124999847,
         "rouge_l": 0.5,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_053",
@@ -5747,7 +5747,7 @@
         "latency": 104.4513441250001,
         "rouge_l": 0.5116279069767441,
         "bertscore": 0.5116279069767441,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_198",
@@ -5758,7 +5758,7 @@
         "latency": 366.18864908400064,
         "rouge_l": 0.08403361344537816,
         "bertscore": 0.11764705882352942,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_046",
@@ -5769,7 +5769,7 @@
         "latency": 139.73665808299847,
         "rouge_l": 0.06993006993006994,
         "bertscore": 0.09790209790209792,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_107",
@@ -5780,7 +5780,7 @@
         "latency": 23.220831750000798,
         "rouge_l": 0.27906976744186046,
         "bertscore": 0.27906976744186046,
-        "llm_judge": null
+        "llm_judge": 0.6
       },
       {
         "question_id": "auto_194",
@@ -5791,7 +5791,7 @@
         "latency": 32.7959094580001,
         "rouge_l": 0.049999999999999996,
         "bertscore": 0.049999999999999996,
-        "llm_judge": null
+        "llm_judge": 0.06666666666666667
       },
       {
         "question_id": "auto_031",
@@ -5802,7 +5802,7 @@
         "latency": 191.6380981250004,
         "rouge_l": 0.13953488372093023,
         "bertscore": 0.13953488372093023,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_166",
@@ -5813,7 +5813,7 @@
         "latency": 22.6964933750005,
         "rouge_l": 0.19607843137254902,
         "bertscore": 0.3137254901960784,
-        "llm_judge": null
+        "llm_judge": 0.8666666666666667
       },
       {
         "question_id": "auto_003",
@@ -5824,7 +5824,7 @@
         "latency": 173.72414300000128,
         "rouge_l": 0.10344827586206896,
         "bertscore": 0.14655172413793102,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_126",
@@ -5835,7 +5835,7 @@
         "latency": 30.513511582999854,
         "rouge_l": 0.12000000000000002,
         "bertscore": 0.16,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_197",
@@ -5846,7 +5846,7 @@
         "latency": 236.43146758299918,
         "rouge_l": 0.017699115044247787,
         "bertscore": 0.035398230088495575,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_148",
@@ -5857,7 +5857,7 @@
         "latency": 18.566488332999143,
         "rouge_l": 0.8235294117647058,
         "bertscore": 0.8235294117647058,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_081",
@@ -5868,7 +5868,7 @@
         "latency": 25.11603175000164,
         "rouge_l": 0.16842105263157897,
         "bertscore": 0.2947368421052632,
-        "llm_judge": null
+        "llm_judge": 0.9933333333333333
       },
       {
         "question_id": "auto_037",
@@ -5879,7 +5879,7 @@
         "latency": 223.00607841700003,
         "rouge_l": 0.022988505747126436,
         "bertscore": 0.022988505747126436,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_139",
@@ -5890,7 +5890,7 @@
         "latency": 22.99976479200086,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_163",
@@ -5901,7 +5901,7 @@
         "latency": 35.2024481669996,
         "rouge_l": 0.020618556701030927,
         "bertscore": 0.020618556701030927,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_077",
@@ -5912,7 +5912,7 @@
         "latency": 29.6285116250001,
         "rouge_l": 0.1746031746031746,
         "bertscore": 0.20634920634920634,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_004",
@@ -5923,7 +5923,7 @@
         "latency": 120.91635520800082,
         "rouge_l": 0.1,
         "bertscore": 0.15,
-        "llm_judge": null
+        "llm_judge": 0.39999999999999997
       },
       {
         "question_id": "auto_039",
@@ -5934,7 +5934,7 @@
         "latency": 179.05194520799887,
         "rouge_l": 0.1797752808988764,
         "bertscore": 0.2359550561797753,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_016",
@@ -5945,7 +5945,7 @@
         "latency": 133.58803966599953,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.4666666666666666
       },
       {
         "question_id": "auto_200",
@@ -5956,7 +5956,7 @@
         "latency": 237.43564566699933,
         "rouge_l": 0.060240963855421686,
         "bertscore": 0.060240963855421686,
-        "llm_judge": null
+        "llm_judge": 0.06666666666666667
       },
       {
         "question_id": "auto_062",
@@ -5967,7 +5967,7 @@
         "latency": 21.85926974999893,
         "rouge_l": 0.3389830508474576,
         "bertscore": 0.3728813559322034,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_085",
@@ -5978,7 +5978,7 @@
         "latency": 18.874019207998572,
         "rouge_l": 0.375,
         "bertscore": 0.375,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_112",
@@ -5989,7 +5989,7 @@
         "latency": 29.09991829199862,
         "rouge_l": 0.373134328358209,
         "bertscore": 0.373134328358209,
-        "llm_judge": null
+        "llm_judge": 0.9666666666666667
       },
       {
         "question_id": "auto_162",
@@ -6000,7 +6000,7 @@
         "latency": 20.850522875000024,
         "rouge_l": 0.20408163265306123,
         "bertscore": 0.2857142857142857,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_010",
@@ -6011,7 +6011,7 @@
         "latency": 78.59964975000003,
         "rouge_l": 0.15384615384615385,
         "bertscore": 0.15384615384615385,
-        "llm_judge": null
+        "llm_judge": 0.20000000000000004
       },
       {
         "question_id": "auto_013",
@@ -6022,7 +6022,7 @@
         "latency": 140.0760563340009,
         "rouge_l": 0.2962962962962963,
         "bertscore": 0.3703703703703704,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_043",
@@ -6033,7 +6033,7 @@
         "latency": 147.56758058299965,
         "rouge_l": 0.3508771929824561,
         "bertscore": 0.3859649122807018,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_204",
@@ -6044,7 +6044,7 @@
         "latency": 282.2508544170014,
         "rouge_l": 0.12631578947368421,
         "bertscore": 0.15789473684210525,
-        "llm_judge": null
+        "llm_judge": 0.7999999999999999
       },
       {
         "question_id": "auto_153",
@@ -6055,7 +6055,7 @@
         "latency": 28.015921250000247,
         "rouge_l": 0.2962962962962963,
         "bertscore": 0.5,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_074",
@@ -6066,7 +6066,7 @@
         "latency": 19.795775999999023,
         "rouge_l": 0.39999999999999997,
         "bertscore": 0.39999999999999997,
-        "llm_judge": null
+        "llm_judge": 0.987738195419921
       },
       {
         "question_id": "auto_045",
@@ -6077,7 +6077,7 @@
         "latency": 176.8180298749994,
         "rouge_l": 0.6666666666666666,
         "bertscore": 0.7333333333333334,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_120",
@@ -6088,7 +6088,7 @@
         "latency": 20.360954959000082,
         "rouge_l": 0.3888888888888889,
         "bertscore": 0.4444444444444444,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_065",
@@ -6099,7 +6099,7 @@
         "latency": 27.8369923750015,
         "rouge_l": 0.35555555555555557,
         "bertscore": 0.35555555555555557,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_017",
@@ -6110,7 +6110,7 @@
         "latency": 192.61948287499945,
         "rouge_l": 0.07058823529411765,
         "bertscore": 0.07058823529411765,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_001",
@@ -6121,7 +6121,7 @@
         "latency": 163.6885148329984,
         "rouge_l": 0.09523809523809525,
         "bertscore": 0.1904761904761905,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_169",
@@ -6132,7 +6132,7 @@
         "latency": 23.090510832998916,
         "rouge_l": 0.13698630136986303,
         "bertscore": 0.1917808219178082,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_011",
@@ -6143,7 +6143,7 @@
         "latency": 290.9689927500003,
         "rouge_l": 0.07228915662650603,
         "bertscore": 0.09638554216867469,
-        "llm_judge": null
+        "llm_judge": 0.46666666666666673
       },
       {
         "question_id": "auto_173",
@@ -6154,7 +6154,7 @@
         "latency": 20.94898312499936,
         "rouge_l": 0.3333333333333333,
         "bertscore": 0.7777777777777778,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_132",
@@ -6165,7 +6165,7 @@
         "latency": 25.83923466700071,
         "rouge_l": 0.37499999999999994,
         "bertscore": 0.40624999999999994,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_061",
@@ -6176,7 +6176,7 @@
         "latency": 25.808771665999302,
         "rouge_l": 0.3055555555555556,
         "bertscore": 0.3055555555555556,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_022",
@@ -6209,7 +6209,7 @@
         "latency": 35.34431020900047,
         "rouge_l": 0.3090909090909091,
         "bertscore": 0.41818181818181815,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_078",
@@ -6220,7 +6220,7 @@
         "latency": 33.35864241700074,
         "rouge_l": 0.22222222222222218,
         "bertscore": 0.2698412698412698,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_067",
@@ -6231,7 +6231,7 @@
         "latency": 36.49058774999867,
         "rouge_l": 0.22499999999999998,
         "bertscore": 0.3875,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_103",
@@ -6242,7 +6242,7 @@
         "latency": 39.52203566699973,
         "rouge_l": 0.24705882352941175,
         "bertscore": 0.30588235294117644,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_175",
@@ -6253,7 +6253,7 @@
         "latency": 22.415567709000243,
         "rouge_l": 0.631578947368421,
         "bertscore": 0.631578947368421,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_199",
@@ -6264,7 +6264,7 @@
         "latency": 191.4310190410015,
         "rouge_l": 0.0,
         "bertscore": 0.0,
-        "llm_judge": null
+        "llm_judge": 0.7333333333333334
       },
       {
         "question_id": "auto_110",
@@ -6275,7 +6275,7 @@
         "latency": 26.25958874999924,
         "rouge_l": 0.30107526881720426,
         "bertscore": 0.5161290322580646,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_080",
@@ -6286,7 +6286,7 @@
         "latency": 40.11990233300094,
         "rouge_l": 0.21897810218978103,
         "bertscore": 0.24817518248175183,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_128",
@@ -6297,7 +6297,7 @@
         "latency": 22.525117792001765,
         "rouge_l": 0.45454545454545453,
         "bertscore": 0.45454545454545453,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_171",
@@ -6308,7 +6308,7 @@
         "latency": 32.93496804099959,
         "rouge_l": 0.11764705882352941,
         "bertscore": 0.11764705882352941,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_033",
@@ -6319,7 +6319,7 @@
         "latency": 194.86522666699966,
         "rouge_l": 0.18055555555555555,
         "bertscore": 0.20833333333333334,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_123",
@@ -6330,7 +6330,7 @@
         "latency": 22.448435791999145,
         "rouge_l": 0.2745098039215686,
         "bertscore": 0.3137254901960784,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_122",
@@ -6341,7 +6341,7 @@
         "latency": 29.89809737500036,
         "rouge_l": 0.3333333333333333,
         "bertscore": 0.4222222222222222,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_146",
@@ -6352,7 +6352,7 @@
         "latency": 35.23836008299986,
         "rouge_l": 0.18,
         "bertscore": 0.23999999999999996,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_102",
@@ -6363,7 +6363,7 @@
         "latency": 27.22736995899868,
         "rouge_l": 0.5357142857142857,
         "bertscore": 0.6785714285714286,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_147",
@@ -6374,7 +6374,7 @@
         "latency": 26.201376458000595,
         "rouge_l": 0.33333333333333337,
         "bertscore": 0.33333333333333337,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_124",
@@ -6396,7 +6396,7 @@
         "latency": 257.9302604159966,
         "rouge_l": 0.022988505747126436,
         "bertscore": 0.022988505747126436,
-        "llm_judge": null
+        "llm_judge": 0.19999999999999998
       },
       {
         "question_id": "auto_015",
@@ -6407,7 +6407,7 @@
         "latency": 194.4682766670012,
         "rouge_l": 0.22857142857142854,
         "bertscore": 0.22857142857142854,
-        "llm_judge": null
+        "llm_judge": 0.6666666666666666
       },
       {
         "question_id": "auto_181",
@@ -6418,7 +6418,7 @@
         "latency": 40.23120720800216,
         "rouge_l": 0.21476510067114093,
         "bertscore": 0.29530201342281875,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_180",
@@ -6429,7 +6429,7 @@
         "latency": 26.785721625001315,
         "rouge_l": 0.2898550724637681,
         "bertscore": 0.43478260869565216,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_133",
@@ -6440,7 +6440,7 @@
         "latency": 26.502239708999696,
         "rouge_l": 0.06896551724137931,
         "bertscore": 0.06896551724137931,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_066",
@@ -6451,7 +6451,7 @@
         "latency": 25.001073416999134,
         "rouge_l": 0.4545454545454546,
         "bertscore": 0.4848484848484849,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_154",
@@ -6462,7 +6462,7 @@
         "latency": 31.929468959002406,
         "rouge_l": 0.36363636363636365,
         "bertscore": 0.47727272727272724,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_116",
@@ -6473,7 +6473,7 @@
         "latency": 20.763691749998543,
         "rouge_l": 0.6666666666666666,
         "bertscore": 0.6666666666666666,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_047",
@@ -6484,7 +6484,7 @@
         "latency": 157.51456462499846,
         "rouge_l": 0.1320754716981132,
         "bertscore": 0.18867924528301885,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_113",
@@ -6495,7 +6495,7 @@
         "latency": 22.971419374996913,
         "rouge_l": 0.4057971014492754,
         "bertscore": 0.43478260869565216,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_096",
@@ -6506,7 +6506,7 @@
         "latency": 21.993753916998685,
         "rouge_l": 0.5625000000000001,
         "bertscore": 0.5625000000000001,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_055",
@@ -6528,7 +6528,7 @@
         "latency": 28.425825165999413,
         "rouge_l": 0.391304347826087,
         "bertscore": 0.391304347826087,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_090",
@@ -6539,7 +6539,7 @@
         "latency": 25.903927415998623,
         "rouge_l": 0.38356164383561636,
         "bertscore": 0.4657534246575343,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_127",
@@ -6550,7 +6550,7 @@
         "latency": 16.485666542001127,
         "rouge_l": 0.9,
         "bertscore": 0.9,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_136",
@@ -6561,7 +6561,7 @@
         "latency": 25.22156104199894,
         "rouge_l": 0.35593220338983045,
         "bertscore": 0.44067796610169496,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_125",
@@ -6572,7 +6572,7 @@
         "latency": 27.931056708999677,
         "rouge_l": 0.6818181818181818,
         "bertscore": 0.8181818181818181,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_145",
@@ -6583,7 +6583,7 @@
         "latency": 28.274900500000513,
         "rouge_l": 0.3089430894308943,
         "bertscore": 0.37398373983739835,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_034",
@@ -6594,7 +6594,7 @@
         "latency": 168.75374020899835,
         "rouge_l": 0.09523809523809523,
         "bertscore": 0.09523809523809523,
-        "llm_judge": null
+        "llm_judge": 0.3333333333333333
       },
       {
         "question_id": "auto_129",
@@ -6605,7 +6605,7 @@
         "latency": 21.000869666000654,
         "rouge_l": 0.5217391304347825,
         "bertscore": 0.5217391304347825,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_143",
@@ -6616,7 +6616,7 @@
         "latency": 39.224923708999995,
         "rouge_l": 0.1596244131455399,
         "bertscore": 0.22535211267605634,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_083",
@@ -6627,7 +6627,7 @@
         "latency": 25.94113779199688,
         "rouge_l": 0.2735042735042735,
         "bertscore": 0.46153846153846156,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_179",
@@ -6638,7 +6638,7 @@
         "latency": 23.55783458299993,
         "rouge_l": 0.48275862068965514,
         "bertscore": 0.48275862068965514,
-        "llm_judge": null
+        "llm_judge": 0.9747853594765942
       },
       {
         "question_id": "auto_064",
@@ -6649,7 +6649,7 @@
         "latency": 33.72459887500008,
         "rouge_l": 0.12820512820512822,
         "bertscore": 0.15384615384615385,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_084",
@@ -6660,7 +6660,7 @@
         "latency": 37.54767708399959,
         "rouge_l": 0.04444444444444444,
         "bertscore": 0.04444444444444444,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       },
       {
         "question_id": "auto_101",
@@ -6671,7 +6671,7 @@
         "latency": 28.93025508300343,
         "rouge_l": 0.4395604395604395,
         "bertscore": 0.5274725274725275,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_105",
@@ -6682,7 +6682,7 @@
         "latency": 20.285134999998263,
         "rouge_l": 1.0,
         "bertscore": 1.0,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_159",
@@ -6693,7 +6693,7 @@
         "latency": 26.795955166999192,
         "rouge_l": 0.25806451612903225,
         "bertscore": 0.3225806451612903,
-        "llm_judge": null
+        "llm_judge": 1.0
       },
       {
         "question_id": "auto_073",
@@ -6704,7 +6704,7 @@
         "latency": 20.862447000003158,
         "rouge_l": 0.2926829268292683,
         "bertscore": 0.2926829268292683,
-        "llm_judge": null
+        "llm_judge": 0.9333333333333332
       }
     ]
   }

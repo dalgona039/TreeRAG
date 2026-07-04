@@ -1,30 +1,30 @@
 {
-  "spearman_rho": NaN,
-  "p_value": NaN,
+  "spearman_rho": 0.6,
+  "p_value": 0.208,
   "system_scores": {
     "bm25": {
       "llama": 0.7813333333333332,
-      "qwen": null
+      "qwen": 0.8145614035087718
     },
     "dense": {
       "llama": 0.7853333333333333,
-      "qwen": null
+      "qwen": 0.7932865497076023
     },
     "flatrag": {
       "llama": 0.7859999999999999,
-      "qwen": null
+      "qwen": 0.8482759650502422
     },
     "raptor": {
       "llama": 0.7739999999999999,
-      "qwen": null
+      "qwen": 0.7512750442490416
     },
     "treerag_dfs": {
       "llama": 0.792,
-      "qwen": null
+      "qwen": 0.7948587352761403
     },
     "treerag_beam": {
       "llama": 0.8228956228956229,
-      "qwen": null
+      "qwen": 0.8330791953147001
     }
   }
 }
