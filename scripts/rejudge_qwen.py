@@ -21,7 +21,8 @@ def main():
     bench  = json.load(open(BENCH_FILE,  encoding="utf-8"))
 
     # question_id → {question, expected_answer_hint}
-    qmap = {q["question_id"]: q for q in bench}
+    questions = bench if isinstance(bench, list) else bench.get("questions", [])
+    qmap = {q["question_id"]: q for q in questions}
 
     judge = LocalJudge(model="qwen3.5:9b")
 
