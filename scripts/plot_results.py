@@ -483,19 +483,45 @@ def figure_comparison(report) -> None:
 
 
 def figure_ablation(ablation) -> None:
-    rows = sorted(ablation["configs"], key=lambda r: r["rouge_l"])
-    names = [r["id"] for r in rows]
-    scores = [r["rouge_l"] for r in rows]
-    deltas = [r["delta_rouge_l_vs_full"] for r in rows]
+    """OFAT ablation sweep: LLM-Judge and ROUGE-L per hyperparameter configuration.
 
-    fig, ax = plt.subplots(figsize=(9, 5))
-    bars = ax.barh(names, scores, color="#55A868")
-    for bar, d in zip(bars, deltas):
-        ax.text(bar.get_width() + 0.005, bar.get_y() + bar.get_height() / 2,
-                f"Δ={d:+.3f}", va="center", fontsize=9)
-    ax.set_xlabel("ROUGE-L")
-    ax.set_title("Ablation: ROUGE-L by configuration")
-    ax.margins(x=0.15)
+    Expects ablation dict with a 'rows' list (ablation_sweep_llama.json format):
+      {sweep, value, label, is_default, rouge_l, llm_judge, context_tokens, latency_s}
+    """
+    rows = ablation.get("rows") or ablation.get("configs", [])
+    if not rows:
+        print("  ⚠ ablation: no rows found, skipping")
+        return
+
+    # Build display label: "sweep · label", mark default with *
+    display = []
+    for r in rows:
+        sweep = r.get("sweep", "")
+        lbl   = r.get("label") or r.get("id", "?")
+        star  = " *" if r.get("is_default") else ""
+        display.append(f"{sweep}: {lbl}{star}")
+
+    judge  = [r.get("llm_judge", 0) or 0 for r in rows]
+    rouge  = [r.get("rouge_l",   0) or 0 for r in rows]
+
+    # Sort by LLM-Judge descending so best configs are at top
+    order  = sorted(range(len(rows)), key=lambda i: judge[i], reverse=True)
+    display = [display[i] for i in order]
+    judge   = [judge[i]   for i in order]
+    rouge   = [rouge[i]   for i in order]
+
+    y = range(len(display))
+    fig, ax = plt.subplots(figsize=(10, max(5, len(display) * 0.45)))
+    ax.barh([i + 0.2 for i in y], judge, 0.38,
+            color=CB_PALETTE[0], label="LLM-Judge", alpha=0.85)
+    ax.barh([i - 0.2 for i in y], rouge, 0.38,
+            color=CB_PALETTE[1], label="ROUGE-L", alpha=0.85)
+    ax.set_yticks(list(y))
+    ax.set_yticklabels(display, fontsize=8)
+    ax.set_xlabel("Score")
+    ax.set_title("OFAT ablation sweep (PageTree-RAG Beam, n=50)\n* = default setting")
+    ax.legend(fontsize=9)
+    ax.margins(x=0.12)
     _save(fig, "figure_2_ablation")
 
 
@@ -560,8 +586,12 @@ def figure_efficiency(report) -> None:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Generate figures (PHASE D-3)")
-    parser.add_argument("--evaluation", default=str(REPORT_DIR / "evaluation_latest.json"))
-    parser.add_argument("--ablation", default=str(REPORT_DIR / "ablation_results.json"))
+    parser.add_argument("--evaluation",
+                        default=str(REPORT_DIR / "online_local_llama_general_v3_n100.json"))
+    parser.add_argument("--ablation",
+                        default=str(REPORT_DIR / "ablation_sweep_llama.json"))
+    parser.add_argument("--hotpot",
+                        default=str(REPORT_DIR / "exp2_multihop_hotpotqa_20260630_021448.json"))
     args = parser.parse_args(argv)
 
     with open(args.evaluation, "r", encoding="utf-8") as f:
@@ -570,9 +600,27 @@ def main(argv=None) -> int:
         ablation = json.load(f)
 
     print(f"Generating figures → {FIG_DIR}")
+    print(f"  data source: {args.evaluation}")
+
+    # core comparison + ablation
     figure_comparison(report)
     figure_ablation(ablation)
+
+    # ACM paper figures (all use v3 n=100 as source)
+    figure_main_bars(report)
+    figure_context_reduction(report)
     figure_efficiency(report)
+
+    # multi-hop panel (optional: skip gracefully if hotpot file missing)
+    import os
+    if os.path.exists(args.hotpot):
+        with open(args.hotpot, "r", encoding="utf-8") as f:
+            hotpot = json.load(f)
+        figure_multihop(report, hotpot)
+    else:
+        print(f"  ⚠ hotpot file not found, skipping figure_3_multihop: {args.hotpot}")
+
+    # architecture (no data dependency — purely illustrative)
     figure_architecture()
     return 0
 
