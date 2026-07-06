@@ -498,6 +498,9 @@ def aggregate(per_system: Dict[str, List[Dict[str, Any]]]) -> Dict[str, Dict[str
         mer = [r["medical_entity_recall"] for r in rows if "medical_entity_recall" in r]
         if mer:
             agg[system]["medical_entity_recall"] = _mean(mer)
+        chosen = [r["chosen_algo"] for r in rows if r.get("chosen_algo")]
+        if chosen:
+            agg[system]["dfs_fraction"] = sum(1 for c in chosen if c == "dfs") / len(chosen)
     return agg
 
 
@@ -645,6 +648,9 @@ def main(argv: Optional[List[str]] = None) -> int:
                              "Use 'ollama' for local generation via Ollama.")
     parser.add_argument("--gen-model", default="llama3.1:8b",
                         help="Model name for --gen-backend=ollama (default: llama3.1:8b).")
+    parser.add_argument("--margin-cutoff", type=float, default=0.15,
+                        help="treerag_auto: root top1-vs-runner-up score margin above which "
+                             "DFS is selected over Beam Search (default: 0.15).")
     args = parser.parse_args(argv)
 
     systems = ALL_SYSTEMS if args.systems == "all" else [
@@ -703,6 +709,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         local_judge_model=args.local_judge_model,
         gen_backend=gen_backend,
         gen_model=gen_model,
+        margin_cutoff=args.margin_cutoff,
     )
     # Print individual answers for small smoke runs (≤5 questions)
     n_questions = dataset.get("total_questions", len(dataset["questions"]))
@@ -730,10 +737,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         "gen_model": gen_model if gen_backend == "ollama" else Config.MODEL_NAME,
         "dataset": os.path.basename(args.dataset),
         "systems": systems,
+        "margin_cutoff": args.margin_cutoff,
         "summary": agg,
         "significance": sig,
         "per_question": per_system,
     }
+    if "treerag_auto" in systems and "dfs_fraction" in agg.get("treerag_auto", {}):
+        print(f"\n🎯 treerag_auto (margin_cutoff={args.margin_cutoff}): "
+              f"DFS selected on {agg['treerag_auto']['dfs_fraction']*100:.1f}% of queries")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
     # Only update the stable copy when no explicit --output was given.
