@@ -441,15 +441,20 @@ try:
     sns.set_theme(style="white")
 except Exception:  # seaborn optional
     plt.style.use("seaborn-v0_8-white") if "seaborn-v0_8-white" in plt.style.available else None
-# UNIFIED_STYLE_INJECTED
+# UNIFIED_STYLE_INJECTED (publication-polish pass: serif face, subtle gridlines,
+# axes pushed behind data, thinner default marker/line weights matching journal figures)
 plt.rcParams.update({
-    "axes.grid": False,
+    "axes.grid": True, "axes.grid.axis": "y", "grid.alpha": 0.28,
+    "grid.linestyle": "-", "grid.linewidth": 0.5, "axes.axisbelow": True,
     "axes.spines.top": False, "axes.spines.right": False,
-    "axes.edgecolor": "#444444", "axes.linewidth": 1.0,
-    "axes.titlesize": 15, "axes.titleweight": "semibold",
-    "axes.labelsize": 14, "xtick.labelsize": 12, "ytick.labelsize": 12,
-    "font.size": 13, "font.family": "DejaVu Sans",
-    "legend.fontsize": 12, "legend.frameon": False,
+    "axes.edgecolor": "#333333", "axes.linewidth": 0.9,
+    "axes.titlesize": 14, "axes.titleweight": "bold",
+    "axes.labelsize": 13, "xtick.labelsize": 11, "ytick.labelsize": 11,
+    "xtick.color": "#333333", "ytick.color": "#333333",
+    "font.size": 12, "font.family": "serif",
+    "font.serif": ["Nimbus Roman", "Times New Roman", "DejaVu Serif"],
+    "mathtext.fontset": "dejavuserif",
+    "legend.fontsize": 10.5, "legend.frameon": False,
     "savefig.dpi": 300, "figure.dpi": 300,
 })
 
@@ -732,8 +737,10 @@ def figure_main_bars(report, out_dir=None):
     x = range(len(systems))
     w = 0.38
     fig, ax = plt.subplots(figsize=(9, 5))
-    ax.bar([i - w / 2 for i in x], rouge, w, label="ROUGE-L", color=CB_PALETTE[0])
-    ax.bar([i + w / 2 for i in x], bert, w, label="BERTScore", color=CB_PALETTE[1])
+    ax.bar([i - w / 2 for i in x], rouge, w, label="ROUGE-L", color=CB_PALETTE[0],
+           edgecolor="black", linewidth=0.6)
+    ax.bar([i + w / 2 for i in x], bert, w, label="BERTScore", color=CB_PALETTE[1],
+           edgecolor="black", linewidth=0.6)
     ax.set_xticks(list(x))
     ax.set_xticklabels(labels, rotation=20, ha="right")
     ax.set_ylabel("Score")
@@ -756,8 +763,10 @@ def figure_multihop(full_report, hotpot_report, out_dir=None):
     x = range(len(systems))
     w = 0.38
     fig, ax = plt.subplots(figsize=(9, 5))
-    ax.bar([i - w / 2 for i in x], full, w, label="Full benchmark", color=CB_PALETTE[2])
-    ax.bar([i + w / 2 for i in x], hot, w, label="HotpotQA multi-hop", color=CB_PALETTE[3])
+    ax.bar([i - w / 2 for i in x], full, w, label="Full benchmark", color=CB_PALETTE[2],
+           edgecolor="black", linewidth=0.6)
+    ax.bar([i + w / 2 for i in x], hot, w, label="HotpotQA multi-hop", color=CB_PALETTE[3],
+           edgecolor="black", linewidth=0.6)
     ax.set_xticks(list(x))
     ax.set_xticklabels(labels, rotation=20, ha="right")
     ax.set_ylabel("ROUGE-L")

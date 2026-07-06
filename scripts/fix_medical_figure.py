@@ -50,14 +50,19 @@ def make_figure(data):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    # UNIFIED_STYLE_INJECTED
+    # UNIFIED_STYLE_INJECTED (publication-polish pass, matches scripts/plot_results.py)
     plt.rcParams.update({
-        "axes.grid": False, "axes.spines.top": False, "axes.spines.right": False,
-        "axes.edgecolor": "#444444", "axes.linewidth": 1.0,
-        "axes.titlesize": 15, "axes.titleweight": "semibold",
-        "axes.labelsize": 14, "xtick.labelsize": 12, "ytick.labelsize": 12,
-        "font.size": 13, "font.family": "DejaVu Sans",
-        "legend.fontsize": 12, "legend.frameon": False,
+        "axes.grid": True, "axes.grid.axis": "y", "grid.alpha": 0.28,
+        "grid.linestyle": "-", "grid.linewidth": 0.5, "axes.axisbelow": True,
+        "axes.spines.top": False, "axes.spines.right": False,
+        "axes.edgecolor": "#333333", "axes.linewidth": 0.9,
+        "axes.titlesize": 14, "axes.titleweight": "bold",
+        "axes.labelsize": 13, "xtick.labelsize": 11, "ytick.labelsize": 11,
+        "xtick.color": "#333333", "ytick.color": "#333333",
+        "font.size": 12, "font.family": "serif",
+        "font.serif": ["Nimbus Roman", "Times New Roman", "DejaVu Serif"],
+        "mathtext.fontset": "dejavuserif",
+        "legend.fontsize": 10.5, "legend.frameon": False,
         "savefig.dpi": 300, "figure.dpi": 300,
     })
     from matplotlib.lines import Line2D
@@ -72,15 +77,18 @@ def make_figure(data):
     ax.bar(x, rouge, color=COLORS, edgecolor="black", linewidth=0.5, width=0.62)
     ax.set_ylabel("ROUGE-L"); ax.set_ylim(0, 0.55)
     ax.set_xticks(list(x)); ax.set_xticklabels(labels, rotation=18, ha="right")
-    ax.annotate("★", (best, rouge[best] + 0.015), ha="center", va="bottom",
-                fontsize=18, color="gold")
+    ax.scatter([best], [rouge[best] + 0.022], marker="*", s=260,
+               color="#F2C200", edgecolors="black", linewidths=0.6, zorder=5)
     ax2 = ax.twinx()
     ax2.plot(x, recall, "k--o", linewidth=1.8, markersize=8)
+    ax2.grid(False)
     ax2.set_ylabel("Medical Entity Recall"); ax2.set_ylim(0.75, 1.07)
-    ax.set_title("Medical Domain Results (n=42)\n★ = best ROUGE-L")
+    ax.set_title("Medical Domain Results (n=42)")
     ax.legend(handles=[Line2D([0], [0], color="#4C72B0", lw=8, label="ROUGE-L (left axis)"),
                        Line2D([0], [0], color="k", ls="--", marker="o",
-                              label="Entity Recall (right axis)")],
+                              label="Entity Recall (right axis)"),
+                       Line2D([0], [0], marker="*", color="none", markerfacecolor="#F2C200",
+                              markeredgecolor="black", markersize=14, label="Best ROUGE-L")],
               loc="upper right", framealpha=0.9)
     fig.tight_layout()
     FIGDIR.mkdir(parents=True, exist_ok=True)
