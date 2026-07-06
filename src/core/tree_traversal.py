@@ -16,7 +16,7 @@ class TreeNavigator:
         self.relevant_nodes: List[Dict[str, Any]] = []
         self.visited_titles: List[str] = []
         self.node_count = 0
-        self.error_recovery = ErrorRecoveryFilter(llm_weight=0.7, keyword_weight=0.3)
+        self.error_recovery = ErrorRecoveryFilter(llm_weight=0.7, keyword_weight=0.3, confidence_threshold=0.5)
     
     def search(
         self, 
@@ -204,8 +204,15 @@ JSON만 출력하세요:
                     "reason": f"LLM error: {str(e)}"
                 }
         
+        threshold = self.error_recovery.adaptive_threshold_adjustment(
+            num_selected=len(self.relevant_nodes),
+            num_total=max(self.node_count, 1),
+            query_length=len(query),
+            depth=depth
+        )
+
         decision = self.error_recovery.dual_stage_filter(
-            node, query, parent_context, depth, llm_check_fn=llm_evaluate
+            node, query, parent_context, depth, llm_check_fn=llm_evaluate, threshold=threshold
         )
         
         if decision.is_relevant:

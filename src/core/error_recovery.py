@@ -36,7 +36,8 @@ class ErrorRecoveryFilter:
         query: str,
         parent_context: str,
         depth: int,
-        llm_check_fn = None
+        llm_check_fn = None,
+        threshold: float = 0.5
     ) -> FilteringDecision:
         
         if depth == 0:
@@ -84,7 +85,7 @@ class ErrorRecoveryFilter:
             self.keyword_weight * keyword_confidence
         )
         
-        is_relevant = combined_score > 0.5
+        is_relevant = combined_score > threshold
         
         self.filtering_history.append({
             'node_id': node.get('id', 'unknown'),
@@ -213,26 +214,47 @@ class ErrorRecoveryFilter:
         self,
         num_selected: int,
         num_total: int,
-        query_length: int
+        query_length: int,
+        depth: int = 1
     ) -> float:
-        
+        """Compute tau(q, depth): a threshold adjusted by how aggressively the
+        traversal has been filtering so far (filter_rate), how specific the
+        query is (query_length), and how deep in the tree we are (depth).
+
+        Shallow nodes (depth<=1) get a lower bar to favor recall — pruning
+        early costs more than a few extra LLM checks. Deep nodes (depth>=4)
+        get a higher bar to favor precision, since by then the traversal has
+        already committed a lot of budget and false positives are expensive
+        to unwind.
+        """
         base_threshold = self.confidence_threshold
-        
+
         filter_rate = 1.0 - (num_selected / num_total) if num_total > 0 else 0.0
-        
+
         if filter_rate > 0.9:
-            return base_threshold - 0.15
+            rate_adj = -0.15
         elif filter_rate > 0.7:
-            return base_threshold - 0.1
+            rate_adj = -0.1
         elif filter_rate < 0.3:
-            return base_threshold + 0.1
-        
+            rate_adj = 0.1
+        else:
+            rate_adj = 0.0
+
         if query_length < 10:
-            return base_threshold + 0.1
+            length_adj = 0.1
         elif query_length > 100:
-            return base_threshold - 0.05
-        
-        return base_threshold
+            length_adj = -0.05
+        else:
+            length_adj = 0.0
+
+        if depth <= 1:
+            depth_adj = -0.05
+        elif depth >= 4:
+            depth_adj = 0.05
+        else:
+            depth_adj = 0.0
+
+        return base_threshold + rate_adj + length_adj + depth_adj
     
     def explain_filtering_decisions(self, limit: int = 10) -> str:
         

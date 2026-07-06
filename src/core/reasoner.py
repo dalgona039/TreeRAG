@@ -7,11 +7,12 @@ from src.core.tree_traversal import TreeNavigator, format_traversal_results
 from src.core.beam_search import BeamSearchNavigator, format_beam_results
 from src.core.contextual_compressor import ContextualCompressor, format_compressed_context
 from src.core.reference_resolver import ReferenceResolver
+from src.core.adaptive_policy import score_root_children, choose_traversal_algorithm
 from src.utils.cache import get_cache
 from src.utils.hallucination_detector import create_detector
 
 # Traversal algorithm types
-TraversalAlgorithm = Literal["dfs", "beam_search"]
+TraversalAlgorithm = Literal["dfs", "beam_search", "auto"]
 
 DOMAIN_PROMPTS = {
     "general": """당신은 전문 문서 분석 AI 어시스턴트입니다.
@@ -165,13 +166,15 @@ class TreeRAGReasoner:
         traversal_algorithm: TraversalAlgorithm = "beam_search",
         beam_width: int = 5,
         enable_compression: bool = True,
-        enable_reference_resolver: bool = True
+        enable_reference_resolver: bool = True,
+        margin_cutoff: float = 0.15
     ):
         self.index_trees: List[Dict[str, Any]] = []
         self.index_filenames = index_filenames
         self.use_deep_traversal = use_deep_traversal
         self.traversal_algorithm = traversal_algorithm
         self.beam_width = beam_width
+        self.margin_cutoff = margin_cutoff
         self.enable_compression = enable_compression
         self.enable_reference_resolver = enable_reference_resolver
         self.compressor = ContextualCompressor() if enable_compression else None
@@ -507,12 +510,28 @@ class TreeRAGReasoner:
         all_results = []
         all_visited = []
         all_selected = []
-        
+        auto_selected_algorithms = []
+
         for idx, tree in enumerate(self.index_trees):
             doc_name = self.index_filenames[idx].replace("_index.json", "")
-            
+
+            effective_algorithm = self.traversal_algorithm
+            if self.traversal_algorithm == "auto":
+                root_scores = score_root_children(tree, query)
+                effective_algorithm = choose_traversal_algorithm(
+                    root_scores, margin_cutoff=self.margin_cutoff
+                )
+                auto_selected_algorithms.append({
+                    "document": doc_name,
+                    "selected": effective_algorithm,
+                    "root_children_scores": root_scores
+                })
+                print(f"🎯 Auto policy: {effective_algorithm} "
+                      f"(root scores={['%.2f' % s for s in root_scores]}, "
+                      f"margin_cutoff={self.margin_cutoff})")
+
             # 알고리즘에 따라 다른 Navigator 사용
-            if self.traversal_algorithm == "beam_search":
+            if effective_algorithm == "beam_search":
                 print(f"🔍 Using Beam Search (width={self.beam_width})")
                 navigator = BeamSearchNavigator(tree, doc_name, beam_width=self.beam_width)
                 relevant_nodes, trav_stats = navigator.search(
@@ -530,11 +549,11 @@ class TreeRAGReasoner:
                     max_branches=max_branches
                 )
                 formatted = format_traversal_results(relevant_nodes, doc_name)
-            
+
             all_results.append(formatted)
-            
+
             # 알고리즘에 따라 다른 통계 형식 처리
-            if self.traversal_algorithm == "beam_search":
+            if effective_algorithm == "beam_search":
                 # Beam Search: nodes_visited는 ID 목록, nodes_selected는 점수 포함
                 all_visited.extend([f"{doc_name}: node_{i}" for i in range(trav_stats.get("nodes_visited", 0) if isinstance(trav_stats.get("nodes_visited"), int) else len(trav_stats.get("nodes_visited", [])))])
                 all_selected.extend([{
@@ -562,6 +581,9 @@ class TreeRAGReasoner:
             "nodes_visited": all_visited,
             "nodes_selected": all_selected
         }
+        if self.traversal_algorithm == "auto":
+            traversal_data["auto_selected_algorithm"] = auto_selected_algorithms
+            traversal_data["margin_cutoff"] = self.margin_cutoff
         
         final_context = "\n\n---\n\n".join(all_results)
         

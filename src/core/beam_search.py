@@ -4,6 +4,7 @@ import heapq
 from typing import Dict, Any, List, Tuple, Optional, Callable
 from dataclasses import dataclass, field
 from src.config import Config
+from src.core.error_recovery import ErrorRecoveryFilter
 
 
 @dataclass(order=True)
@@ -83,7 +84,22 @@ class BeamSearchNavigator:
         self.node_scores = {}
         self.total_evaluated = 0
         self.total_expanded = 0
-        
+
+        # tau(q, depth): base = min_score_threshold (preserves prior fixed
+        # behaviour when filter_rate/query_length/depth are all neutral),
+        # adjusted per-depth so shallow levels favor recall and deep levels
+        # favor precision. See ErrorRecoveryFilter.adaptive_threshold_adjustment.
+        query_length = len(query)
+        threshold_filter = ErrorRecoveryFilter(confidence_threshold=min_score_threshold)
+
+        def selection_threshold(depth: int) -> float:
+            return threshold_filter.adaptive_threshold_adjustment(
+                num_selected=len(self.selected_nodes),
+                num_total=max(len(self.visited_nodes), 1),
+                query_length=query_length,
+                depth=depth
+            )
+
         root = self.tree
         root_beam = BeamNode.create(
             node=root,
@@ -114,7 +130,7 @@ class BeamSearchNavigator:
                 children = node.get("children", [])
                 
                 if not children or depth == max_depth - 1:
-                    if beam_node.cumulative_score >= min_score_threshold:
+                    if beam_node.cumulative_score >= selection_threshold(depth):
                         self.selected_nodes.append({
                             "node": node,
                             "path": beam_node.path,
@@ -153,7 +169,7 @@ class BeamSearchNavigator:
                 for s in self.selected_nodes
             )
             
-            if not already_selected and beam_node.cumulative_score >= min_score_threshold:
+            if not already_selected and beam_node.cumulative_score >= selection_threshold(beam_node.depth):
                 self.selected_nodes.append({
                     "node": node,
                     "path": beam_node.path,
