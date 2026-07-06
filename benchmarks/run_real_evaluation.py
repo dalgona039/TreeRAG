@@ -121,11 +121,14 @@ def keyword_traversal(
 class Evaluator:
     def __init__(self, mode: str, use_llm_judge: bool, domain: str = "general",
                  local_judge: bool = False, local_judge_model: str = "llama3.1:8b",
-                 gen_backend: str = "gemini", gen_model: str = "gemma4:12b"):
+                 gen_backend: str = "gemini", gen_model: str = "gemma4:12b",
+                 margin_cutoff: float = 0.15):
         self.mode = mode  # "online" | "offline"
         self.domain = domain
         self.gen_backend = gen_backend
         self.gen_model = gen_model
+        self.margin_cutoff = margin_cutoff
+        self.last_chosen_algo: Optional[str] = None
         self.use_llm_judge = use_llm_judge and (mode == "online" or local_judge)
         self._index_cache: Dict[str, Any] = {}
         self._bm25_cache: Dict[str, Any] = {}
@@ -292,20 +295,37 @@ class Evaluator:
             # truncation that corrupts answers with small models.
             use_simple = (self.gen_backend == "ollama")
 
+            traversal_algorithm = {"dfs": "dfs", "beam": "beam_search", "auto": "auto"}[algo]
             key = (doc_id, algo)
             if key not in self._reasoner_cache:
                 self._reasoner_cache[key] = TreeRAGReasoner(
                     [doc_id],
-                    traversal_algorithm="dfs" if algo == "dfs" else "beam_search",
+                    traversal_algorithm=traversal_algorithm,
                     enable_compression=True,
+                    margin_cutoff=self.margin_cutoff,
                 )
             answer, meta = self._reasoner_cache[key].query(
                 q, max_branches=branches, use_simple_prompt=use_simple
             )
             nodes = meta.get("nodes_selected", []) or []
             nodes = [n if isinstance(n, dict) else {"id": n} for n in nodes]
+            if algo == "auto":
+                auto_log = meta.get("auto_selected_algorithm", []) or []
+                self.last_chosen_algo = auto_log[0]["selected"] if auto_log else None
             return answer, nodes
+
         # offline keyword approximation
+        if algo == "auto":
+            tree = self.load_tree(doc_id)
+            root_scores = [
+                _token_f1(q, _node_text(c)) for c in (tree.get("children", []) or [])
+            ]
+            chosen = choose_traversal_algorithm(root_scores, margin_cutoff=self.margin_cutoff)
+            self.last_chosen_algo = "dfs" if chosen == "dfs" else "beam"
+            k = branches if chosen == "dfs" else max(branches, 5)
+            nodes = keyword_traversal(tree, q, k, prefer_shallow=(chosen == "dfs"))
+            return extractive_answer(nodes), nodes
+
         k = branches if algo == "dfs" else max(branches, 5)
         nodes = keyword_traversal(
             self.load_tree(doc_id), q, k, prefer_shallow=(algo == "dfs")
@@ -325,6 +345,8 @@ class Evaluator:
             return self._run_treerag(q, doc_id, "dfs", branches)
         if system == "treerag_beam":
             return self._run_treerag(q, doc_id, "beam", branches)
+        if system == "treerag_auto":
+            return self._run_treerag(q, doc_id, "auto", branches)
         raise ValueError(f"Unknown system: {system}")
 
     # -- scoring ------------------------------------------------------------
@@ -414,6 +436,7 @@ def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator,
         for q in questions:
             expected = q.get("expected_answer_hint", "")
             t0 = time.perf_counter()
+            evaluator.last_chosen_algo = None
             try:
                 answer, nodes = evaluator.run_system(
                     system, q["question"], q["document_id"]
@@ -432,17 +455,18 @@ def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator,
 
             context = extractive_answer(nodes)
             scores = evaluator.score_answer(q["question"], context, answer, expected)
-            per_system[system].append(
-                {
-                    "question_id": q["question_id"],
-                    "document_id": q["document_id"],
-                    "answer": answer,
-                    "retrieved_count": len(nodes),
-                    "context_tokens": int(len(context) / 4),
-                    "latency": latency,
-                    **scores,
-                }
-            )
+            row = {
+                "question_id": q["question_id"],
+                "document_id": q["document_id"],
+                "answer": answer,
+                "retrieved_count": len(nodes),
+                "context_tokens": int(len(context) / 4),
+                "latency": latency,
+                **scores,
+            }
+            if system == "treerag_auto":
+                row["chosen_algo"] = evaluator.last_chosen_algo
+            per_system[system].append(row)
 
         # Save checkpoint after each system completes.
         if ckpt:
