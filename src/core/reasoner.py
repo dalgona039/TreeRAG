@@ -238,7 +238,8 @@ class TreeRAGReasoner:
             else self.PROMPT_CACHE_VERSION
         )
         cache_node_context["__prompt_cache_version"] = cache_version
-        
+        cache_node_context["__traversal_algorithm"] = self.traversal_algorithm
+
         cache = get_cache()
         cached_response = cache.get(
             question=user_question,
