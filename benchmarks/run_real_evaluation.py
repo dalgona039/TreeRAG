@@ -41,8 +41,9 @@ if str(_PROJECT_ROOT) not in sys.path:
 from benchmarks.metrics.text_similarity import bertscore_f1, rouge_l_score, _token_f1
 from benchmarks.metrics.statistical_tests import StatisticalTests
 from src.config import Config
+from src.core.adaptive_policy import choose_traversal_algorithm
 
-ALL_SYSTEMS = ["bm25", "dense", "flatrag", "raptor", "treerag_dfs", "treerag_beam"]
+ALL_SYSTEMS = ["bm25", "dense", "flatrag", "raptor", "treerag_dfs", "treerag_beam", "treerag_auto"]
 SYSTEM_LABELS = {
     "bm25": "BM25",
     "dense": "Dense Retrieval",
@@ -50,6 +51,7 @@ SYSTEM_LABELS = {
     "raptor": "RAPTOR",
     "treerag_dfs": "TreeRAG-DFS",
     "treerag_beam": "TreeRAG-Beam",
+    "treerag_auto": "TreeRAG-Auto",
 }
 DEFAULT_REPORT_DIR = _PROJECT_ROOT / "data" / "benchmark_reports"
 RAW_TEXT_DIR = _PROJECT_ROOT / "data" / "raw_text"
