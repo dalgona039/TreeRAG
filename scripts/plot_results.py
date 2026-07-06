@@ -598,11 +598,11 @@ def figure_efficiency(report) -> None:
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Generate figures (PHASE D-3)")
     parser.add_argument("--evaluation",
-                        default=str(REPORT_DIR / "online_local_llama_general_v3_n100.json"))
+                        default=str(REPORT_DIR / "online_local_llama_general_v4_n100.json"))
     parser.add_argument("--ablation",
                         default=str(REPORT_DIR / "ablation_sweep_llama.json"))
     parser.add_argument("--hotpot",
-                        default=str(REPORT_DIR / "exp2_multihop_hotpotqa_20260630_021448.json"))
+                        default=str(REPORT_DIR / "exp2_multihop_hotpotqa_20260706_070918.json"))
     args = parser.parse_args(argv)
 
     with open(args.evaluation, "r", encoding="utf-8") as f:
