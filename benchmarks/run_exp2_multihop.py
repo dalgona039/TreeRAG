@@ -149,11 +149,9 @@ def run_hotpotqa(n: int, seed: int, smoke: bool, limit: int = 0) -> Optional[Dic
             bad = [r for r in rows if len(r["answer"]) < 10]
             if bad:
                 failed.append(f"{s}: {len(bad)} short answers")
-            # treerag_beam uses cache from treerag_dfs — latency near 0 is expected.
-            if s != "treerag_beam":
-                slow = [r for r in rows if r["latency"] < 1.0]
-                if slow:
-                    failed.append(f"{s}: {len(slow)} fast answers (latency<1s → no LLM?)")
+            slow = [r for r in rows if r["latency"] < 1.0]
+            if slow:
+                failed.append(f"{s}: {len(slow)} fast answers (latency<1s → no LLM?)")
         if failed:
             print("\n⛔ SMOKE FAIL:")
             for msg in failed:
