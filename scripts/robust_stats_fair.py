@@ -25,10 +25,16 @@ B = 10000
 
 
 def _best_general_report() -> tuple[str, int]:
-    """Return (filename, n) for the largest available fair-protocol general report."""
-    preferred = "online_local_llama_general_v3_n100.json"
+    """Return (filename, n) for the largest available fair-protocol general report.
+
+    v4_n100 is preferred over v3_n100 so this matches the source used by
+    Table 8 and Figures 2-4 (both clean; this is just about using the same
+    run, not a contamination fix).
+    """
+    preferred = "online_local_llama_general_v4_n100.json"
+    secondary = "online_local_llama_general_v3_n100.json"
     fallback = "online_local_llama_general_v2.json"
-    for fname in (preferred, fallback):
+    for fname in (preferred, secondary, fallback):
         path = REP / fname
         if path.is_file():
             try:
@@ -44,18 +50,30 @@ def _best_general_report() -> tuple[str, int]:
 
 
 def _best_hotpotqa_report() -> tuple[str, int]:
-    """Return (filename, n) for the largest available HotpotQA fair-protocol report."""
-    best_name, best_n = "exp2_multihop_hotpotqa_20260629_133031.json", 0
-    for path in REP.glob("exp2_multihop_hotpotqa_*.json"):
+    """Return (filename, n) for the best available HotpotQA fair-protocol report.
+
+    Excludes files marked "_CONTAMINATED" (recycled DFS/Beam cache-bug
+    artifacts, see Section 4.3/6.2). Among the remaining candidates, prefers
+    larger n; ties are broken by the timestamp embedded in the filename
+    (exp2_multihop_hotpotqa_<YYYYMMDD>_<HHMMSS>.json sorts correctly as a
+    string), falling back to file mtime if the filename can't be parsed, so
+    a fresh clean re-run always wins over a stale one at the same n.
+    """
+    best_name, best_n, best_key = "exp2_multihop_hotpotqa_20260629_133031.json", 0, ""
+    for path in sorted(REP.glob("exp2_multihop_hotpotqa_*.json")):
+        if "_CONTAMINATED" in path.name:
+            continue
         try:
             d = json.load(open(path, encoding="utf-8"))
             pq = d.get("per_question", {})
             first = next(iter(pq), None)
             n = len(pq[first]) if first else 0
-            if n > best_n:
-                best_name, best_n = path.name, n
         except Exception:
             continue
+        stem = path.stem.replace("exp2_multihop_hotpotqa_", "")
+        key = stem if (len(stem) == 15 and stem[8] == "_") else f"{path.stat().st_mtime:020.6f}"
+        if n > best_n or (n == best_n and key > best_key):
+            best_name, best_n, best_key = path.name, n, key
     return best_name, best_n
 
 

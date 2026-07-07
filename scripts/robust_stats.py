@@ -105,24 +105,32 @@ def analyze(xa, xb):
 
 
 def _latest_hotpotqa_report() -> tuple[str, int]:
-    """Return (filename, n_questions) for the largest available HotpotQA report.
+    """Return (filename, n_questions) for the best available HotpotQA report.
 
     Among exp2_multihop_hotpotqa_*.json files, picks the one with the most
     questions (not the most recent timestamp) so a smoke run never shadows a
-    larger result. Falls back to hotpotqa_results.json when no exp2 file exists.
+    larger result. Excludes files marked "_CONTAMINATED" (recycled DFS/Beam
+    cache-bug artifacts, see Section 4.3/6.2); ties at the same n are broken
+    by the timestamp embedded in the filename (falling back to file mtime),
+    so a fresh clean re-run always wins over a stale one. Falls back to
+    hotpotqa_results.json when no exp2 file exists.
     """
     import json as _json
-    best_name, best_n = "hotpotqa_results.json", 20
-    for path in REP.glob("exp2_multihop_hotpotqa_*.json"):
+    best_name, best_n, best_key = "hotpotqa_results.json", 20, ""
+    for path in sorted(REP.glob("exp2_multihop_hotpotqa_*.json")):
+        if "_CONTAMINATED" in path.name:
+            continue
         try:
             d = _json.load(open(path, encoding="utf-8"))
             pq = d.get("per_question", {})
             first = next(iter(pq), None)
             n = len(pq[first]) if first else 0
-            if n > best_n:
-                best_name, best_n = path.name, n
         except Exception:
             continue
+        stem = path.stem.replace("exp2_multihop_hotpotqa_", "")
+        key = stem if (len(stem) == 15 and stem[8] == "_") else f"{path.stat().st_mtime:020.6f}"
+        if n > best_n or (n == best_n and key > best_key):
+            best_name, best_n, best_key = path.name, n, key
     return best_name, best_n
 
 
@@ -134,7 +142,7 @@ BENCH = {
     "Medical (n=42)":  ("medical_results.json", "treerag_dfs",
                         ["bm25", "dense", "flatrag", "raptor"]),
     f"HotpotQA (n={_hpqa_n})": (_hpqa_file, "treerag_beam",
-                                 ["bm25", "flatrag", "raptor"]),
+                                 ["bm25", "dense", "flatrag", "raptor"]),
 }
 
 if __name__ == "__main__":

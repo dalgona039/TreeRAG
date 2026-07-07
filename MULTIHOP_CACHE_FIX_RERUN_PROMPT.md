@@ -1,3 +1,11 @@
+> **⚠️ 상위 버그 발견으로 대체됨 (2026-07-07):** 아래 Task A/C가 재실행한
+> HotpotQA n=100 데이터 자체가 `_normalize_item()` 파싱 버그로 **전부 빈
+> 컨텍스트(children=0)**였음이 추가로 밝혀졌다. 캐시 키 수정(이 프롬프트)은
+> 여전히 유효하고 필요하지만, Task A/C의 실행 결과와 Task F가 요구하는 재실행은
+> `HOTPOTQA_EMPTY_CONTEXT_FIX_PROMPT.md`로 대체한다 — 그쪽을 먼저 실행할 것.
+> Task B(category breakdown, general 벤치마크 기반)는 이 버그와 무관하므로 그대로
+> 유효.
+
 # PageTree-RAG — 멀티홉 벤치마크 캐시-오염 재실행 프롬프트 (Claude Code)
 
 > 배경: `scripts/check_cache_contamination.py` 진단 결과, 멀티홉(HotpotQA) 벤치마크
