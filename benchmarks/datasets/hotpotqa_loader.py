@@ -44,21 +44,42 @@ HOTPOTQA_URL = HOTPOTQA_URLS[0]
 
 
 def _normalize_item(raw: Dict[str, Any]) -> Dict[str, Any]:
-    """Normalise a native HotpotQA item to the spec's dict schema."""
+    """Normalise a native HotpotQA item to the spec's dict schema.
+
+    Handles both the official HotpotQA dev-set schema (context/supporting_facts
+    as a dict of parallel lists: {"title": [...], "sentences": [[...], ...]})
+    and the list-of-pairs schema used by the bundled 20-question sample.
+    """
     supporting = []
-    for sf in raw.get("supporting_facts", []) or []:
-        if isinstance(sf, (list, tuple)) and len(sf) >= 2:
-            supporting.append({"title": sf[0], "sent_id": sf[1]})
-        elif isinstance(sf, dict):
-            supporting.append({"title": sf.get("title", ""), "sent_id": sf.get("sent_id", 0)})
+    sf = raw.get("supporting_facts")
+    if isinstance(sf, dict):
+        titles = sf.get("title", [])
+        sent_ids = sf.get("sent_id", [])
+        for t, sid in zip(titles, sent_ids):
+            supporting.append({"title": t, "sent_id": sid})
+    elif isinstance(sf, list):
+        for item in sf:
+            if isinstance(item, (list, tuple)) and len(item) >= 2:
+                supporting.append({"title": item[0], "sent_id": item[1]})
+            elif isinstance(item, dict):
+                supporting.append({"title": item.get("title", ""), "sent_id": item.get("sent_id", 0)})
+
     context = []
-    for ctx in raw.get("context", []) or []:
-        if isinstance(ctx, (list, tuple)) and len(ctx) >= 2:
-            context.append({"title": ctx[0], "sentences": list(ctx[1])})
-        elif isinstance(ctx, dict):
-            context.append({"title": ctx.get("title", ""), "sentences": ctx.get("sentences", [])})
+    ctx = raw.get("context")
+    if isinstance(ctx, dict):
+        titles = ctx.get("title", [])
+        sentences = ctx.get("sentences", [])
+        for t, sents in zip(titles, sentences):
+            context.append({"title": t, "sentences": list(sents)})
+    elif isinstance(ctx, list):
+        for c in ctx:
+            if isinstance(c, (list, tuple)) and len(c) >= 2:
+                context.append({"title": c[0], "sentences": list(c[1])})
+            elif isinstance(c, dict):
+                context.append({"title": c.get("title", ""), "sentences": c.get("sentences", [])})
+
     return {
-        "question_id": raw.get("_id", ""),
+        "question_id": raw.get("_id") or raw.get("id", ""),
         "question": raw.get("question", ""),
         "answer": raw.get("answer", ""),
         "type": raw.get("type", "bridge"),
