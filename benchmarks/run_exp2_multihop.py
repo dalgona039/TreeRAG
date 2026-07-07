@@ -316,7 +316,7 @@ def main() -> None:
                         help="Skip category breakdown (Part B)")
     parser.add_argument(
         "--existing-report",
-        default=str(REPORT_DIR / "online_local_llama_general_v2.json"),
+        default=str(REPORT_DIR / "online_local_llama_general_v4_n100.json"),
         help="Existing full_benchmark report JSON for Part B",
     )
     args = parser.parse_args()

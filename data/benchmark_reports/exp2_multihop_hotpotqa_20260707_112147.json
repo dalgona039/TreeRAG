@@ -1,0 +1,400 @@
+{
+  "dataset": "hotpotqa",
+  "n_questions": 5,
+  "summary": {
+    "bm25": {
+      "rouge_l": 0.23508771929824562,
+      "bertscore": 0.23508771929824562,
+      "llm_judge": 0.6933333333333334,
+      "latency": 10.585891491605434,
+      "context_tokens": 211.0,
+      "n": 5
+    },
+    "dense": {
+      "rouge_l": 0.23606889564336372,
+      "bertscore": 0.23606889564336372,
+      "llm_judge": 0.8399999999999999,
+      "latency": 6.895195799821522,
+      "context_tokens": 240.4,
+      "n": 5
+    },
+    "flatrag": {
+      "rouge_l": 0.0457680250783699,
+      "bertscore": 0.0457680250783699,
+      "llm_judge": 0.6933333333333332,
+      "latency": 8.62607789998874,
+      "context_tokens": 0.0,
+      "n": 5
+    },
+    "raptor": {
+      "rouge_l": 0.23089253187613842,
+      "bertscore": 0.23089253187613842,
+      "llm_judge": 0.7466666666666667,
+      "latency": 6.891544108197559,
+      "context_tokens": 260.8,
+      "n": 5
+    },
+    "treerag_dfs": {
+      "rouge_l": 0.032184565225899436,
+      "bertscore": 0.032184565225899436,
+      "llm_judge": 0.64,
+      "latency": 63.235353750002105,
+      "context_tokens": 6.2,
+      "n": 5
+    },
+    "treerag_beam": {
+      "rouge_l": 0.22566154502774222,
+      "bertscore": 0.22566154502774222,
+      "llm_judge": 0.76,
+      "latency": 65.8295645164093,
+      "context_tokens": 20.2,
+      "n": 5
+    }
+  },
+  "significance": {
+    "bm25": {
+      "p_value": 0.38752163272731077,
+      "significant": false,
+      "effect_size": 0.021835250363465585,
+      "mean_diff": -0.009426174270503398
+    },
+    "dense": {
+      "p_value": 0.40461613832607457,
+      "significant": false,
+      "effect_size": 0.024124305834976312,
+      "mean_diff": -0.010407350615621513
+    },
+    "flatrag": {
+      "p_value": 0.32976667843236407,
+      "significant": false,
+      "effect_size": 0.5805930414236606,
+      "mean_diff": 0.1798935199493723
+    },
+    "raptor": {
+      "p_value": 0.43195172101941254,
+      "significant": false,
+      "effect_size": 0.012093122699124156,
+      "mean_diff": -0.005230986848396218
+    },
+    "treerag_dfs": {
+      "p_value": 0.31824976775846664,
+      "significant": false,
+      "effect_size": 0.6273832692967873,
+      "mean_diff": 0.19347697980184278
+    }
+  },
+  "per_question": {
+    "bm25": [
+      {
+        "question_id": "5a8ad8b65542992d82986fa2",
+        "document_id": "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+        "answer": "There is not enough information provided in the context about Max Neufeld's location to determine whether he was from farther west than Eduard Zahariev. Therefore, I cannot answer the question based on the given context.",
+        "latency": 15.767154166998807,
+        "context_tokens": 235,
+        "rouge_l": 0.10526315789473684,
+        "bertscore": 0.10526315789473684,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "5ae406f055429970de88d874",
+        "document_id": "hotpotqa_5ae406f055429970de88d874_index.json",
+        "answer": "There is no information in the provided context about a soccer team from Cason, CA that features the son of Roy Lassiter. However, according to the context, Roy Lassiter's son is Ariel Lassiter, who plays for the LA Galaxy. There is no mention of him being associated with a specific team from Cason, CA.",
+        "latency": 11.136151499988046,
+        "context_tokens": 192,
+        "rouge_l": 0.07017543859649122,
+        "bertscore": 0.07017543859649122,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "5a7793275542992a6e59df04",
+        "document_id": "hotpotqa_5a7793275542992a6e59df04_index.json",
+        "answer": "There is no specific information about the location of the firm that owns Babycham, only its name (Accolade Wines) and a mention that \"the name is now owned by Accolade Wines.\"",
+        "latency": 7.880970125028398,
+        "context_tokens": 189,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.5333333333333333
+      },
+      {
+        "question_id": "5adfd22255429906c02daa4f",
+        "document_id": "hotpotqa_5adfd22255429906c02daa4f_index.json",
+        "answer": "Tamzin Outhwaite.",
+        "latency": 4.744987290992867,
+        "context_tokens": 295,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.5333333333333333
+      },
+      {
+        "question_id": "5ac4f12d55429924173fb4f6",
+        "document_id": "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+        "answer": "Yes, according to the context, they are both operas. \"Stiffelio\" is specifically mentioned as an opera by Giuseppe Verdi, while \"Pravda\" is not directly described as an opera, but rather a person (Isobel Pravda) who is related to a Czech actor with the surname \"Pravda\", which may imply some connection to the concept or name. However, based on the information provided, \"Stiffelio\" is clearly identified as an opera.",
+        "latency": 13.400194375019055,
+        "context_tokens": 144,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.6
+      }
+    ],
+    "dense": [
+      {
+        "question_id": "5a8ad8b65542992d82986fa2",
+        "document_id": "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+        "answer": "There is not enough information in the context to determine who was from farther west between Max Neufeld and Eduard Zahariev. The context only mentions Mariana Dimitrova's second husband as Eduard Zahariev, but does not provide any information about a person named Max Neufeld.",
+        "latency": 9.171136416029185,
+        "context_tokens": 137,
+        "rouge_l": 0.0851063829787234,
+        "bertscore": 0.0851063829787234,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "5ae406f055429970de88d874",
+        "document_id": "hotpotqa_5ae406f055429970de88d874_index.json",
+        "answer": "There is no information about Roy Lassiter or his son in the context provided. The answer cannot be determined based on the given text.",
+        "latency": 5.794132458046079,
+        "context_tokens": 244,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "5a7793275542992a6e59df04",
+        "document_id": "hotpotqa_5a7793275542992a6e59df04_index.json",
+        "answer": "There is no information provided about a company called \"Babycham\" or its location in the context. The context mentions two other companies, Enagás (a Spanish energy company) and KSQA (a television station in Kansas, United States), but does not mention Babycham at all.",
+        "latency": 10.786000457999762,
+        "context_tokens": 294,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.6666666666666666
+      },
+      {
+        "question_id": "5adfd22255429906c02daa4f",
+        "document_id": "hotpotqa_5adfd22255429906c02daa4f_index.json",
+        "answer": "Tamzin Outhwaite.",
+        "latency": 3.4284532500314526,
+        "context_tokens": 422,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.8666666666666667
+      },
+      {
+        "question_id": "5ac4f12d55429924173fb4f6",
+        "document_id": "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+        "answer": "No, Pravda and Stiffelio are not both operas, according to the provided context, which lists different contexts for each term.",
+        "latency": 5.296256417001132,
+        "context_tokens": 105,
+        "rouge_l": 0.09523809523809523,
+        "bertscore": 0.09523809523809523,
+        "llm_judge": 0.7999999999999999
+      }
+    ],
+    "flatrag": [
+      {
+        "question_id": "5a8ad8b65542992d82986fa2",
+        "document_id": "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+        "answer": "Max Neufeld's birthplace is not specified in the provided context. However, it can be inferred that Eduard Zahariev was from a specific region (Veliko Turnovo) in Bulgaria and later lived in California, which implies he spent time in a western location.",
+        "latency": 9.164888874976896,
+        "context_tokens": 0,
+        "rouge_l": 0.0909090909090909,
+        "bertscore": 0.0909090909090909,
+        "llm_judge": 0.6
+      },
+      {
+        "question_id": "5ae406f055429970de88d874",
+        "document_id": "hotpotqa_5ae406f055429970de88d874_index.json",
+        "answer": "The answer cannot be determined from the given context. There is no mention of a \"Cason, CA\" soccer team or any connection between such a team and Roy Lassiter's son, Ariel Lassiter.",
+        "latency": 8.163261541980319,
+        "context_tokens": 0,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "5a7793275542992a6e59df04",
+        "document_id": "hotpotqa_5a7793275542992a6e59df04_index.json",
+        "answer": "There is no information in the provided context about a company called \"Babycham\" or its location. Document 1 mentions \"Babycham\" but it's not clear what document 1 is, and there's no relevant text available to answer the question. Therefore, I cannot provide an answer based on the given context.",
+        "latency": 10.876916041015647,
+        "context_tokens": 0,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "5adfd22255429906c02daa4f",
+        "document_id": "hotpotqa_5adfd22255429906c02daa4f_index.json",
+        "answer": "Tamzin Maria Outhwaite. \n\nThis answer comes from Document 3, where Tamzin Outhwaite's career history includes her playing Melanie Owen in the BBC One soap opera \"EastEnders\".",
+        "latency": 7.794399208971299,
+        "context_tokens": 0,
+        "rouge_l": 0.13793103448275862,
+        "bertscore": 0.13793103448275862,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "5ac4f12d55429924173fb4f6",
+        "document_id": "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+        "answer": "Yes. According to Document 1, Pravda is an opera, and according to Document 2 and Document 3, Stiffelio is also an opera.",
+        "latency": 7.130923832999542,
+        "context_tokens": 0,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.46666666666666673
+      }
+    ],
+    "raptor": [
+      {
+        "question_id": "5a8ad8b65542992d82986fa2",
+        "document_id": "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+        "answer": "There is no information in the context about Max Neufeld's place of origin. The context only mentions Eduard Zahariev as a Bulgarian film director and screenwriter born on July 1, 1938. Since there is no comparison between the two, we cannot determine who was from farther west.\n\nTherefore, the correct answer is \"Insufficient information\" or \"Cannot be determined\".",
+        "latency": 9.880213166994508,
+        "context_tokens": 269,
+        "rouge_l": 0.06557377049180328,
+        "bertscore": 0.06557377049180328,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "5ae406f055429970de88d874",
+        "document_id": "hotpotqa_5ae406f055429970de88d874_index.json",
+        "answer": "The LA Galaxy player mentioned is Ariel Lassiter, who is the son of Roy Lassiter. However, there is no specific information provided about which Cason, CA soccer team features Ariel Lassiter. The context only mentions that Ariel Lassiter plays for the LA Galaxy.",
+        "latency": 7.602681916032452,
+        "context_tokens": 204,
+        "rouge_l": 0.08888888888888888,
+        "bertscore": 0.08888888888888888,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "5a7793275542992a6e59df04",
+        "document_id": "hotpotqa_5a7793275542992a6e59df04_index.json",
+        "answer": "There is no mention of Babycham or its location in the context provided. However, I can see that Accolade Wines is mentioned and it is stated to have headquarters in a specific location.\n\nGiven that the question specifically asks about the country where the firm that owns Babycham is located, but there's no information on Babycham, I would say \"Unknown\" based on the context provided.",
+        "latency": 11.085092458000872,
+        "context_tokens": 280,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "5adfd22255429906c02daa4f",
+        "document_id": "hotpotqa_5adfd22255429906c02daa4f_index.json",
+        "answer": "Tamzin Outhwaite",
+        "latency": 3.21616729197558,
+        "context_tokens": 336,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "5ac4f12d55429924173fb4f6",
+        "document_id": "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+        "answer": "Pravda and Stiffelio are both operas? HotpotQA multi-hop context for: Pravda and Stiffelio are both operas? Pravda and Stiffelio are both operas? HotpotQA multi-hop context for: Pravda and Isobel Pravda Isobel Pravda is an English actress and the granddaughter of Czech Pravda Pravda (Russian: Правда ; ] , \"Truth\") is a Russian broadsheet newspaper, José Cura José Cura (born December 5, 1962 in Rosario, Argentina) is an Argentin Stiffelio Stiffelio is an opera in three acts by Giuseppe Verdi, from an Italian Pravda Pyat Pravda Pyat (Russian: правда пять or \"Truth Five\") is a weekly Russi \"Canio",
+        "latency": 2.6735657079843804,
+        "context_tokens": 215,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.46666666666666673
+      }
+    ],
+    "treerag_dfs": [
+      {
+        "question_id": "5a8ad8b65542992d82986fa2",
+        "document_id": "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+        "answer": "Based on the context provided, we have two sections that mention Max Neufeld. \n\nIn section [1], it is mentioned that \"A Waltz by Strauss (1925 film) is a 1925 Austrian silent film directed by Max Neufeld.\" This implies that Max Neufeld was likely from Austria.\n\nSection [2] mentions another film, \"The Arsonists of Europe\", which is also directed by Max Neufeld and starring Eugen Neufeld. Since both films are mentioned to be made in Austria and there's no mention of Eduard Zahariev being associated with any Austrian films, it can be inferred that Max Neufeld was from Austria.\n\nEduard Zahariev's origin is not specified in the given context, but based on the question \"Who was from farther west, Max Neufeld or Eduard Zahariev?\", it implies that we are comparing their geographical origins.\n\nGiven this information and without further data on Eduard Zahariev's place of origin, it can be deduced that Max Neufeld is likely from a region farther east than Eduard Zahariev.",
+        "latency": 77.44569479196798,
+        "context_tokens": 13,
+        "rouge_l": 0.02395209580838323,
+        "bertscore": 0.02395209580838323,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "5ae406f055429970de88d874",
+        "document_id": "hotpotqa_5ae406f055429970de88d874_index.json",
+        "answer": "The LA Galaxy player Ariel Lassiter's father, Roy Lassiter, is not directly associated with a Cason, CA soccer team. According to the context, Roy Lassiter has a son named Ariel Lassiter who plays for the LA Galaxy, which is based in Los Angeles, California (LA). However, there is no information about a Cason, CA soccer team featuring Ariel Lassiter or any other connection between them.\n\nHowever, since the question specifically asks about a Cason, CA soccer team and the context mentions Roy Lassiter as the father of an LA Galaxy player, I couldn't find any direct answer. But if we consider the parent-child relationship mentioned in the context, it is likely that the correct answer might be Ariel Lassiter playing for another team but there's no specific information about him being associated with a Cason, CA soccer team.\n\nBut since this question directly matches an existing section in the provided document: **[1] What Cason, CA soccer team features the son of Roy Lassiter? > Roy Lassiter**, \n\nSo I'll answer it by referring to that:\n\nThe answer is not explicitly mentioned but based on the related information, we can assume that Ariel Lassiter is the one associated with his father's background.",
+        "latency": 76.31304983305745,
+        "context_tokens": 3,
+        "rouge_l": 0.01932367149758454,
+        "bertscore": 0.01932367149758454,
+        "llm_judge": 0.6
+      },
+      {
+        "question_id": "5a7793275542992a6e59df04",
+        "document_id": "hotpotqa_5a7793275542992a6e59df04_index.json",
+        "answer": "England. According to the context, Babycham's inventor, Francis Showering, is from Shepton Mallet in Somerset, England, and the brand name is now owned by Accolade Wines, which suggests the company has a presence or location in England.",
+        "latency": 52.59097604203271,
+        "context_tokens": 5,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.39999999999999997
+      },
+      {
+        "question_id": "5adfd22255429906c02daa4f",
+        "document_id": "hotpotqa_5adfd22255429906c02daa4f_index.json",
+        "answer": "Tamzin Outhwaite. She is mentioned in section [2] as a notable practitioner at the White Bear Theatre, and she played the role of Melanie Owen in the BBC One soap opera \"EastEnders\".",
+        "latency": 62.55275458295364,
+        "context_tokens": 8,
+        "rouge_l": 0.11764705882352941,
+        "bertscore": 0.11764705882352941,
+        "llm_judge": 1.0
+      },
+      {
+        "question_id": "5ac4f12d55429924173fb4f6",
+        "document_id": "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+        "answer": "Yes, according to section [1], Pravda is mentioned alongside Stiffelio as an opera.",
+        "latency": 47.27429349999875,
+        "context_tokens": 2,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.46666666666666673
+      }
+    ],
+    "treerag_beam": [
+      {
+        "question_id": "5a8ad8b65542992d82986fa2",
+        "document_id": "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+        "answer": "Based on the provided context, we can determine that:\n\n* Max Neufeld was born in Austria (13 February 1887), which is a country located in Central Europe.\n* Eduard Zahariev was from Bulgaria (1 July 1938), which is a country located in Southeastern Europe.\n\nAustria is generally considered to be farther west than Bulgaria. Therefore, the answer to the question is:\n\nMax Neufeld was from farther west compared to Eduard Zahariev.",
+        "latency": 65.16616695804987,
+        "context_tokens": 24,
+        "rouge_l": 0.05633802816901409,
+        "bertscore": 0.05633802816901409,
+        "llm_judge": 0.7999999999999999
+      },
+      {
+        "question_id": "5ae406f055429970de88d874",
+        "document_id": "hotpotqa_5ae406f055429970de88d874_index.json",
+        "answer": "The answer is not directly provided in the context, but we can infer based on the information given.\n\nAccording to the context, Roy Lassiter is mentioned as a retired American soccer striker and the father of LA Galaxy player Ariel Lassiter. However, there is no mention of a specific Cason, CA soccer team that features Ariel Lassiter.\n\nHowever, if I had to make an educated guess based on the information provided, I would say that the LA Galaxy might be the team featuring Ariel Lassiter, but this is not directly stated in the context.",
+        "latency": 73.18147454102291,
+        "context_tokens": 25,
+        "rouge_l": 0.04166666666666667,
+        "bertscore": 0.04166666666666667,
+        "llm_judge": 0.6
+      },
+      {
+        "question_id": "5a7793275542992a6e59df04",
+        "document_id": "hotpotqa_5a7793275542992a6e59df04_index.json",
+        "answer": "Accolade Wines is a company that owns the brand Babycham. According to the context, Accolade Wines is based in England, where Francis Showering, the inventor of Babycham, was from.\n\nSo, the correct answer is:\nEngland",
+        "latency": 56.65473141701659,
+        "context_tokens": 18,
+        "rouge_l": 0.0,
+        "bertscore": 0.0,
+        "llm_judge": 0.7333333333333334
+      },
+      {
+        "question_id": "5adfd22255429906c02daa4f",
+        "document_id": "hotpotqa_5adfd22255429906c02daa4f_index.json",
+        "answer": "Tamzin Outhwaite.",
+        "latency": 69.12472220795462,
+        "context_tokens": 20,
+        "rouge_l": 1.0,
+        "bertscore": 1.0,
+        "llm_judge": 0.9333333333333332
+      },
+      {
+        "question_id": "5ac4f12d55429924173fb4f6",
+        "document_id": "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+        "answer": "No, they are not. \n\nStiffelio is an opera by Giuseppe Verdi, while Pravda is a Russian newspaper, as mentioned in the context. However, there is a mention of a ship called \"Pravda\", which is unrelated to the newspaper or the opera.\n\nAdditionally, there is another mention of Steamer \"Pravda\" on page 2, which implies that \"Pravda\" can refer to a ship, not just an opera.",
+        "latency": 65.02072745800251,
+        "context_tokens": 14,
+        "rouge_l": 0.030303030303030307,
+        "bertscore": 0.030303030303030307,
+        "llm_judge": 0.7333333333333334
+      }
+    ]
+  }
+}
