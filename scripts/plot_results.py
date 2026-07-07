@@ -444,17 +444,17 @@ except Exception:  # seaborn optional
 # UNIFIED_STYLE_INJECTED (publication-polish pass: serif face, subtle gridlines,
 # axes pushed behind data, thinner default marker/line weights matching journal figures)
 plt.rcParams.update({
-    "axes.grid": True, "axes.grid.axis": "y", "grid.alpha": 0.28,
+    "axes.grid": True, "axes.grid.axis": "y", "grid.alpha": 0.15,
     "grid.linestyle": "-", "grid.linewidth": 0.5, "axes.axisbelow": True,
     "axes.spines.top": False, "axes.spines.right": False,
     "axes.edgecolor": "#333333", "axes.linewidth": 0.9,
-    "axes.titlesize": 14, "axes.titleweight": "bold",
-    "axes.labelsize": 13, "xtick.labelsize": 11, "ytick.labelsize": 11,
+    "axes.titlesize": 15, "axes.titleweight": "bold",
+    "axes.labelsize": 14.5, "xtick.labelsize": 12.5, "ytick.labelsize": 12.5,
     "xtick.color": "#333333", "ytick.color": "#333333",
-    "font.size": 12, "font.family": "serif",
+    "font.size": 13, "font.family": "serif",
     "font.serif": ["Nimbus Roman", "Times New Roman", "DejaVu Serif"],
     "mathtext.fontset": "dejavuserif",
-    "legend.fontsize": 10.5, "legend.frameon": False,
+    "legend.fontsize": 12, "legend.frameon": False,
     "savefig.dpi": 300, "figure.dpi": 300,
 })
 
@@ -546,10 +546,14 @@ def figure_efficiency(report) -> None:
     FlatRAG has context_tokens==0 (no retrieval context) — shown with annotation but
     excluded from the Pareto frontier to avoid distortion.
     Separate panel figure_3b_latency shows the latency cost honestly.
+
+    Points are identified with inline text labels only (no duplicate legend
+    entry per point) to avoid redundant labeling; a legend is shown only for
+    non-obvious annotations (Pareto frontier line, FlatRAG's zero-context caveat).
     """
     systems = report["systems"]
     summ = report["summary"]
-    fig, ax = plt.subplots(figsize=(9, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
     cmap = plt.get_cmap("tab10")
     pts_for_pareto = []
     for i, s in enumerate(systems):
@@ -558,14 +562,14 @@ def figure_efficiency(report) -> None:
         judge = a.get("llm_judge")
         if judge is None:
             continue
-        label = LABELS.get(s, s)
+        label = _ACM_LABELS.get(s, LABELS.get(s, s))
         is_flatrag = (ctx == 0)
         marker = "*" if s.startswith("treerag") else ("s" if is_flatrag else "o")
         ax.scatter(ctx, judge, s=180, marker=marker,
                    color=cmap(i % 10), alpha=0.85, edgecolors="k",
-                   label=label + (" (no retrieval ctx)" if is_flatrag else ""))
-        ax.annotate(label, (ctx, judge), xytext=(5, 5),
-                    textcoords="offset points", fontsize=8)
+                   label="FlatRAG (no retrieval ctx)" if is_flatrag else None)
+        ax.annotate(label, (ctx, judge), xytext=(7, 7),
+                    textcoords="offset points", fontsize=11.5)
         if not is_flatrag:
             pts_for_pareto.append((ctx, judge, label))
     frontier, pxs, pys = _pareto_frontier(pts_for_pareto)
@@ -574,29 +578,29 @@ def figure_efficiency(report) -> None:
                 alpha=0.7, label="Pareto frontier")
     ax.set_xlabel("Context tokens (fewer = more efficient)")
     ax.set_ylabel("LLM-Judge score (higher = better)")
-    ax.set_title(
-        "Efficiency: context tokens vs LLM-Judge\n"
-        "fewer tokens, higher quality (upper-left dominates)"
-    )
-    ax.legend(fontsize=8, loc="best")
+    # No in-figure title: the caption carries the message (journal style).
+    ax.margins(x=0.18, y=0.15)
+    handles, labels_ = ax.get_legend_handles_labels()
+    if handles:
+        ax.legend(fontsize=11.5, loc="lower right", handletextpad=0.4)
     _save(fig, "figure_3_efficiency")
 
     # Panel b: latency vs LLM-Judge (honest cost view)
-    fig2, ax2 = plt.subplots(figsize=(9, 5))
+    fig2, ax2 = plt.subplots(figsize=(8, 5))
     for i, s in enumerate(systems):
         a = summ[s]
         judge = a.get("llm_judge")
         if judge is None:
             continue
-        label = LABELS.get(s, s)
+        label = _ACM_LABELS.get(s, LABELS.get(s, s))
         ax2.scatter(a.get("latency", 0), judge, s=150,
-                    color=cmap(i % 10), alpha=0.85, edgecolors="k", label=label)
+                    color=cmap(i % 10), alpha=0.85, edgecolors="k")
         ax2.annotate(label, (a.get("latency", 0), judge),
-                     xytext=(5, 5), textcoords="offset points", fontsize=8)
+                     xytext=(7, 7), textcoords="offset points", fontsize=11.5)
     ax2.set_xlabel("Latency (s) — tree traversal cost")
     ax2.set_ylabel("LLM-Judge score")
-    ax2.set_title("Latency vs quality (tree traversal incurs higher latency)")
-    ax2.legend(fontsize=8, loc="best")
+    # No in-figure title: the caption carries the message (journal style).
+    ax2.margins(x=0.18, y=0.15)
     _save(fig2, "figure_3b_latency")
 
 
@@ -744,8 +748,9 @@ def figure_main_bars(report, out_dir=None):
     ax.set_xticks(list(x))
     ax.set_xticklabels(labels, rotation=20, ha="right")
     ax.set_ylabel("Score")
-    ax.set_title("Main results: ROUGE-L and BERTScore by system")
-    ax.legend()
+    # No in-figure title: the caption carries the message (journal style).
+    ax.legend(loc="lower left", bbox_to_anchor=(0.0, 1.01), ncol=2,
+              handletextpad=0.4, columnspacing=1.2, borderaxespad=0.0)
     out_dir.mkdir(parents=True, exist_ok=True)
     for ext in ("pdf", "png"):
         fig.savefig(out_dir / "figure_2_main_results.{0}".format(ext), dpi=300, bbox_inches="tight")
