@@ -142,6 +142,51 @@ Task A-D 결과가 모두 나온 뒤 진행. Word 닫고 백업 먼저.
 
 ---
 
+## Task F — Table 13 / Figure 9 (Statistical Robustness)가 Task A-E에서 누락됨
+
+**확인된 문제:** `scripts/robust_stats_fair.py`의 `_best_hotpotqa_report()`는
+`exp2_multihop_hotpotqa_*.json`을 glob으로 스캔해 "가장 큰 n"을 자동 선택하는데:
+
+1. `_CONTAMINATED` 접미사를 붙여도 이 glob 패턴에 여전히 매치된다 (파일명이
+   `exp2_multihop_hotpotqa_`로 시작하고 `.json`으로 끝나기만 하면 매치).
+2. 오염된 `exp2_multihop_hotpotqa_20260630_021448.json`(n=100)과 Task A의 새 클린
+   `exp2_multihop_hotpotqa_20260707_022936.json`(n=100)이 n에서 동점이라, 비교가
+   `n > best_n`(엄격한 부등호)이라서 먼저 스캔되는 쪽이 이긴다 — glob 순서는
+   보장되지 않으므로 **어느 쪽이 선택됐는지 알 수 없다.**
+3. 실측: 문서의 현재 Table 13 HotpotQA 행(`vs BM25 p=0.020` 유의,
+   `vs RAPTOR p=0.060` 비유의)은 Task A로 새로 고친 Table 10의 결론
+   (`vs RAPTOR만 유의, p=0.018`)과 **정반대**다 → 오염된 파일이 여전히 쓰이고
+   있다는 확정적 증거. 이 Table 13 수치를 그대로 시각화한 **Figure 9(CI forest
+   plot)도 16행 중 8행(HotpotQA ROUGE-L ×4 + LLM-Judge ×4)이 오염된 값이다.**
+
+부수적으로, 같은 스크립트의 `_best_general_report()`는 general 벤치마크로
+`"online_local_llama_general_v3_n100.json"`을 하드코딩 우선순위로 쓰는데, Table 8과
+Figure 2-4는 실제로 `v4_n100.json`을 쓴다 (둘 다 오염은 아니지만 서로 다른 실행분).
+급한 문제는 아니니 여유 있으면 같이 정리, 없으면 건너뛰어도 됨.
+
+**할 일:**
+
+1. `_best_hotpotqa_report()` 수정: `_CONTAMINATED` 파일을 명시적으로 제외하고,
+   동점일 때 "먼저 발견된 것"이 아니라 **파일명의 타임스탬프가 가장 최근인 것**을
+   고르도록 변경 (예: 파일명에서 timestamp를 파싱해 비교, 또는 최소한
+   `path.stat().st_mtime`로 최신 파일 우선).
+   ```bash
+   grep -n "_CONTAMINATED\|glob(" scripts/robust_stats_fair.py
+   ```
+2. (여유 있으면) `_best_general_report()`도 `v4_n100.json`을 `v3_n100.json`보다
+   우선하도록 순서 조정 — Table 8/Figure 2-4와 근거 파일을 통일.
+3. 재실행:
+   ```bash
+   python scripts/robust_stats_fair.py
+   ```
+   출력이 어느 파일(`_meta.file`)을 실제로 썼는지 로그로 확인.
+4. **보고:** 새로 생성된 `robust_stats_fair_summary.json`의 HotpotQA
+   ROUGE-L/LLM-Judge 부분 전체 (vs BM25/Dense/FlatRAG/RAPTOR 각각의
+   Δ, [95% CI], d_z, p_perm, power, n₈₀) — 이걸로 제가 Table 13과 Figure 9를
+   갱신합니다. general 쪽도 파일을 바꿨다면 그 결과도 함께 공유.
+
+---
+
 ## 완료 후 보고 형식
 
 - Task A: 새 파일 경로, 재검증 exact-match %, 새 Table 10 전체 수치, 기존 대비
@@ -150,5 +195,8 @@ Task A-D 결과가 모두 나온 뒤 진행. Word 닫고 백업 먼저.
 - Task C: 두 사례가 클린 데이터에서 유지되는지/대체됐는지.
 - Task D: 실제로 넣은 문장.
 - Task E: 어떤 표/문단을 바꿨는지 diff 요약.
+- Task F: `_best_hotpotqa_report()`/`_best_general_report()` 수정 diff, 재실행
+  로그가 가리킨 실제 소스 파일, 새 HotpotQA(및 general) robust-stats 수치.
 
-결과 주시면 그걸로 §5.9/§6.2/§4.3 문구를 정리하는 작업을 이어서 진행합니다.
+결과 주시면 그걸로 §5.9/§6.2/§4.3 문구, Table 13, Figure 9까지 정리하는 작업을
+이어서 진행합니다.
