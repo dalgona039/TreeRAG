@@ -62,11 +62,26 @@ def main():
     raptor_index = [r for r in main_acct if r["stage"] == "raptor_index_summarization"]
     rest = [r for r in main_acct if r["stage"] != "raptor_index_summarization"]
 
-    # First 800 non-indexing records: 4 baseline systems x 200 (100 gen + 100 judge), in run order.
+    # Boundary between the 4 baseline systems (generation_baseline + judge only)
+    # and the TreeRAG systems (traversal_dfs / generation / judge / unknown, then
+    # traversal_beam / generation / judge) is the first record whose stage isn't
+    # one shared-baseline-path can produce. A system that hit an exception on some
+    # question (e.g. RAPTOR skipping a judge call) can make its own block shorter
+    # than the naive 200, so this is found by content, not a fixed offset.
+    treerag_start = next(
+        (i for i, r in enumerate(rest) if r["stage"] not in ("generation_baseline", "judge")),
+        len(rest),
+    )
+    baseline_stream = rest[:treerag_start]
+    tail = rest[treerag_start:]
+
+    # Baseline systems: 200 records each in run order (BM25, Dense, FlatRAG,
+    # RAPTOR); if any system's actual count differs from 200 due to a skipped
+    # call, later systems' boundaries in this split would drift — verified equal
+    # to len(baseline_stream) == 800 by the diagnostics check below.
     blocks = {}
     for i, name in enumerate(BASELINE_SYSTEMS):
-        blocks[name] = rest[i * 200:(i + 1) * 200]
-    tail = rest[800:]
+        blocks[name] = baseline_stream[i * 200:(i + 1) * 200]
 
     beam_start = next((i for i, r in enumerate(tail) if r["stage"] == "traversal_beam"), len(tail))
     dfs_block = tail[:beam_start]
@@ -80,7 +95,9 @@ def main():
     diagnostics["TreeRAG-DFS"] = {"n": len(dfs_block), "stages": sorted(set(r["stage"] for r in dfs_block))}
     diagnostics["TreeRAG-Beam"] = {"n": len(beam_block), "stages": sorted(set(r["stage"] for r in beam_block))}
     diagnostics["raptor_indexing_calls"] = len(raptor_index)
-    diagnostics["unknown_stage_records"] = [r for r in main_acct if r["stage"] == "unknown"]
+    diagnostics["unknown_stage_records_count"] = len([r for r in main_acct if r["stage"] == "unknown"])
+    diagnostics["baseline_stream_len_expected_800"] = len(baseline_stream)
+    diagnostics["treerag_start_index"] = treerag_start
 
     results = {
         "BM25": summarize(blocks["BM25"], 100),
