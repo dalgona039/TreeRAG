@@ -18,6 +18,25 @@ from typing import Any, Dict, Optional
 _AXES = ("faithfulness", "relevance", "completeness")
 
 
+def _record_local_judge_usage(result: dict, model: str, latency_s: float) -> None:
+    """B1 instrumentation hook; no-op unless TREERAG_TOKEN_ACCOUNTING is set."""
+    from src.utils import llm_accounting
+
+    if not llm_accounting.ENABLED:
+        return
+    try:
+        llm_accounting.record(
+            backend="ollama",
+            model=model,
+            prompt_tokens=result.get("prompt_eval_count"),
+            completion_tokens=result.get("eval_count"),
+            latency_s=latency_s,
+            stage_name="judge",
+        )
+    except Exception:
+        pass  # accounting must never break the actual call
+
+
 class GeminiJudge:
     """Uses Gemini to score answers on faithfulness / relevance / completeness."""
 
@@ -79,9 +98,12 @@ Respond in JSON only:
             question=question, context=context, answer=answer, expected=expected
         )
         try:
-            response = self.client.models.generate_content(
-                model=self.model, contents=prompt
-            )
+            from src.utils import llm_accounting
+
+            with llm_accounting.stage("judge"):
+                response = self.client.models.generate_content(
+                    model=self.model, contents=prompt
+                )
             data = self._extract_json(getattr(response, "text", "") or "")
         except Exception as exc:  # network, empty, or malformed JSON
             return self._empty_result(f"judge_error: {type(exc).__name__}")
@@ -144,9 +166,12 @@ class LocalJudge:
             "think": False,  # disable thinking tokens (qwen3 etc.) so JSON parses cleanly
         }).encode()
         try:
+            import time as _time
+            _t0 = _time.time()
             req = _urllib.Request(self.url, data=payload, headers={"Content-Type": "application/json"})
             with _urllib.urlopen(req, timeout=120) as resp:
                 data = _json.loads(resp.read())
+            _record_local_judge_usage(data, self.model, _time.time() - _t0)
             text = data.get("response", "")
             parsed = GeminiJudge._extract_json(text)
         except (_urlerr.URLError, _json.JSONDecodeError, Exception) as exc:

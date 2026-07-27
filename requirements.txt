@@ -17,3 +17,17 @@ pytest>=8.0.0
 pytest-asyncio>=0.23.0
 pytest-cov>=4.1.0
 httpx>=0.26.0
+
+# benchmarks/ evaluation deps — real (non-fallback) metrics and baselines.
+# Without these, benchmarks/metrics/text_similarity.py and
+# src/core/dense_retrieval_baseline.py silently fall back to lexical proxies
+# (see docs/paper_revision/B5_metric_variants.md, B3_baseline_hyperparams.md).
+rouge-score>=0.1.2
+bert-score>=0.3.13
+sentence-transformers>=5.0.0
+torch>=2.0.0
+scikit-learn>=1.0.0
+umap-learn>=0.5.5
+faiss-cpu>=1.8.0
+openai>=1.0.0
+tenacity>=8.2.3

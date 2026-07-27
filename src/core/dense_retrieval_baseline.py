@@ -81,7 +81,11 @@ def _build_default_embedder() -> Callable[[List[str]], np.ndarray]:
 
         for name in (KO_MODEL, FALLBACK_MODEL):
             try:
-                model = SentenceTransformer(name)
+                # Force CPU: sentence-transformers auto-selects Apple's MPS
+                # (Metal) backend on macOS, and a torch MPS tensor-cast kernel
+                # was observed to segfault (EXC_BAD_ACCESS) during RAPTOR's
+                # tree-building embedding calls on this platform/torch version.
+                model = SentenceTransformer(name, device="cpu")
                 return lambda texts: np.asarray(
                     model.encode(list(texts), show_progress_bar=False),
                     dtype="float32",

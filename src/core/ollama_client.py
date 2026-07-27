@@ -18,9 +18,28 @@ JSON wrappers gracefully.
 from __future__ import annotations
 
 import json
+import time as _time
 import urllib.error as _urlerr
 import urllib.request as _urllib
 from typing import Any, Optional
+
+
+def _record_ollama_usage(result: dict, model: str, latency_s: float) -> None:
+    """B1 instrumentation hook; no-op unless TREERAG_TOKEN_ACCOUNTING is set."""
+    from src.utils import llm_accounting
+
+    if not llm_accounting.ENABLED:
+        return
+    try:
+        llm_accounting.record(
+            backend="ollama",
+            model=model,
+            prompt_tokens=result.get("prompt_eval_count"),
+            completion_tokens=result.get("eval_count"),
+            latency_s=latency_s,
+        )
+    except Exception:
+        pass  # accounting must never break the actual call
 
 
 class OllamaResponse:
@@ -88,12 +107,14 @@ class OllamaModels:
             data=data,
             headers={"Content-Type": "application/json"},
         )
+        _t0 = _time.time()
         try:
             with _urllib.urlopen(req, timeout=self._timeout) as resp:
                 result = json.loads(resp.read())
         except (_urlerr.URLError, OSError) as exc:
             raise RuntimeError(f"Ollama request failed ({self._generate_url}): {exc}") from exc
 
+        _record_ollama_usage(result, used_model, _time.time() - _t0)
         text = result.get("response", "")
         return OllamaResponse(text)
 

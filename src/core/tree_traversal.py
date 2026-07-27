@@ -289,12 +289,15 @@ JSON만 출력하세요:
 """
         
         try:
-            response = Config.get_client("traversal").models.generate_content(
-                model=Config.MODEL_NAME,
-                contents=prompt,
-                config=Config.get_generation_config(response_mime_type="application/json")
-            )
-            
+            from src.utils import llm_accounting
+
+            with llm_accounting.stage("traversal_dfs"):
+                response = Config.get_client("traversal").models.generate_content(
+                    model=Config.MODEL_NAME,
+                    contents=prompt,
+                    config=Config.get_generation_config(response_mime_type="application/json")
+                )
+
             if not response.text:
                 print(f"   ⚠️ No response for child selection, selecting first {max_branches}")
                 return children[:max_branches]

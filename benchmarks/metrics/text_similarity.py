@@ -116,7 +116,8 @@ def bertscore_f1(hypothesis: str, reference: str, lang: str = "ko") -> float:
 
         model = "klue/roberta-base" if lang == "ko" else "roberta-base"
         _, _, f1 = _bert_score(
-            [hypothesis], [reference], lang=lang, model_type=model, verbose=False
+            [hypothesis], [reference], lang=lang, model_type=model, verbose=False,
+            device="cpu",  # avoid the torch MPS segfault seen in the Dense/RAPTOR embedders on this platform
         )
         return float(f1.mean().item())
     except Exception:

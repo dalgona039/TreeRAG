@@ -72,9 +72,15 @@ def test_retrieve_top_k_limit():
     assert len(r.retrieve("heart", top_k=2)) <= 2
 
 
-def test_backend_falls_back_offline():
+def test_backend_falls_back_offline(monkeypatch):
+    # Real RAPTOR (third_party/raptor + local Ollama, see
+    # src/core/raptor_ollama_adapter.py) may genuinely be available in this
+    # environment, so force the unavailable path explicitly rather than
+    # relying on ambient environment state (matches this test's intent: a
+    # missing/failed real-RAPTOR backend must not crash, it must fall back).
+    monkeypatch.setattr(RaptorBaseline, "_try_real_raptor", staticmethod(lambda *_a, **_k: None))
     r = RaptorBaseline(DOC, "doc")
-    assert r.backend == "fallback"  # real RAPTOR unavailable offline
+    assert r.backend == "fallback"
 
 
 def test_answer_schema_and_no_page_citation():

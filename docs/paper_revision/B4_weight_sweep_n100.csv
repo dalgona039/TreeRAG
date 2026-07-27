@@ -1,0 +1,701 @@
+question_id,document_id,config,section_f1,top_ids
+auto_048,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.6,ch1|sec1.3|ch6|art1.3.1|root
+auto_048,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.6,ch1|sec1.3|art1.3.1|ch6|root
+auto_048,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.6,sec1.3|ch1|ch6|root|art1.3.1
+auto_048,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.6,root|ch1|ch6|sec1.3|art1.3.1
+auto_048,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.6,ch1|sec1.3|root|ch6|art1.3.1
+auto_048,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.6,ch1|sec1.3|ch6|art1.3.1|root
+auto_048,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.6,ch1|sec1.3|ch6|root|art1.3.1
+auto_079,hotpotqa_hp_sample_002_index.json,current_60_25_15,0.5,SEC1|SEC0|ROOT
+auto_079,hotpotqa_hp_sample_002_index.json,pure_bm25_100_0_0,0.5,SEC1|SEC0|ROOT
+auto_079,hotpotqa_hp_sample_002_index.json,pure_semantic_0_100_0,0.5,SEC1|SEC0|ROOT
+auto_079,hotpotqa_hp_sample_002_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_079,hotpotqa_hp_sample_002_index.json,equal_33_33_33,0.5,SEC1|ROOT|SEC0
+auto_079,hotpotqa_hp_sample_002_index.json,bm25_heavy_80_10_10,0.5,SEC1|SEC0|ROOT
+auto_079,hotpotqa_hp_sample_002_index.json,semantic_heavy_20_70_10,0.5,SEC1|SEC0|ROOT
+auto_006,0cbccdf9_2204.08939v1-2_index.json,current_60_25_15,0.5714285714285715,doc|ch2.s3.a3|ch1|ch2|ch4
+auto_006,0cbccdf9_2204.08939v1-2_index.json,pure_bm25_100_0_0,0.5714285714285715,doc|ch2.s3.a3|ch1|ch2.s3.a2|ch2.s1
+auto_006,0cbccdf9_2204.08939v1-2_index.json,pure_semantic_0_100_0,0.0,ch2.s1.a2|ch2.s3.a1|ch2.s3.a2|ch2.s1|ch2.s3
+auto_006,0cbccdf9_2204.08939v1-2_index.json,pure_structural_0_0_100,0.5714285714285715,doc|ch1|ch2|ch4|ch2.s1
+auto_006,0cbccdf9_2204.08939v1-2_index.json,equal_33_33_33,0.5714285714285715,doc|ch1|ch2.s3.a3|ch2|ch4
+auto_006,0cbccdf9_2204.08939v1-2_index.json,bm25_heavy_80_10_10,0.5714285714285715,doc|ch2.s3.a3|ch1|ch2|ch2.s1
+auto_006,0cbccdf9_2204.08939v1-2_index.json,semantic_heavy_20_70_10,0.5714285714285715,doc|ch2.s3.a3|ch1|ch2.s1.a2|ch2
+auto_014,2025학년도 교육과정 반도체공학과_index.json,current_60_25_15,0.6666666666666666,1.2|1|5.2|12.44
+auto_014,2025학년도 교육과정 반도체공학과_index.json,pure_bm25_100_0_0,0.6666666666666666,1.2|5.2|1|12.44
+auto_014,2025학년도 교육과정 반도체공학과_index.json,pure_semantic_0_100_0,0.6666666666666666,1|12.44|1.2|5.2
+auto_014,2025학년도 교육과정 반도체공학과_index.json,pure_structural_0_0_100,0.6666666666666666,1|1.2|5.2|12.44
+auto_014,2025학년도 교육과정 반도체공학과_index.json,equal_33_33_33,0.6666666666666666,1.2|1|5.2|12.44
+auto_014,2025학년도 교육과정 반도체공학과_index.json,bm25_heavy_80_10_10,0.6666666666666666,1.2|1|5.2|12.44
+auto_014,2025학년도 교육과정 반도체공학과_index.json,semantic_heavy_20_70_10,0.6666666666666666,1.2|1|12.44|5.2
+auto_038,92928ecd_생체의공학개론_보고서_index.json,current_60_25_15,0.0,CH-01|SEC-01-01|DOC-2025104184
+auto_038,92928ecd_생체의공학개론_보고서_index.json,pure_bm25_100_0_0,0.0,CH-01|SEC-01-01|DOC-2025104184
+auto_038,92928ecd_생체의공학개론_보고서_index.json,pure_semantic_0_100_0,0.0,CH-01|DOC-2025104184|SEC-01-01
+auto_038,92928ecd_생체의공학개론_보고서_index.json,pure_structural_0_0_100,0.0,DOC-2025104184|CH-01|SEC-01-01
+auto_038,92928ecd_생체의공학개론_보고서_index.json,equal_33_33_33,0.0,CH-01|DOC-2025104184|SEC-01-01
+auto_038,92928ecd_생체의공학개론_보고서_index.json,bm25_heavy_80_10_10,0.0,CH-01|SEC-01-01|DOC-2025104184
+auto_038,92928ecd_생체의공학개론_보고서_index.json,semantic_heavy_20_70_10,0.0,CH-01|SEC-01-01|DOC-2025104184
+auto_160,hotpotqa_hp_sample_013_index.json,current_60_25_15,0.8,ROOT|SEC0|SEC1
+auto_160,hotpotqa_hp_sample_013_index.json,pure_bm25_100_0_0,0.8,ROOT|SEC0|SEC1
+auto_160,hotpotqa_hp_sample_013_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_160,hotpotqa_hp_sample_013_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_160,hotpotqa_hp_sample_013_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_160,hotpotqa_hp_sample_013_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC0|SEC1
+auto_160,hotpotqa_hp_sample_013_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC0|SEC1
+auto_191,hotpotqa_hp_sample_020_index.json,current_60_25_15,0.5,SEC0|SEC1|ROOT
+auto_191,hotpotqa_hp_sample_020_index.json,pure_bm25_100_0_0,0.5,SEC0|SEC1|ROOT
+auto_191,hotpotqa_hp_sample_020_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_191,hotpotqa_hp_sample_020_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_191,hotpotqa_hp_sample_020_index.json,equal_33_33_33,0.5,SEC0|SEC1|ROOT
+auto_191,hotpotqa_hp_sample_020_index.json,bm25_heavy_80_10_10,0.5,SEC0|SEC1|ROOT
+auto_191,hotpotqa_hp_sample_020_index.json,semantic_heavy_20_70_10,0.5,SEC0|SEC1|ROOT
+auto_131,hotpotqa_hp_sample_010_index.json,current_60_25_15,0.5,SEC0|ROOT|SEC1
+auto_131,hotpotqa_hp_sample_010_index.json,pure_bm25_100_0_0,0.5,SEC0|ROOT|SEC1
+auto_131,hotpotqa_hp_sample_010_index.json,pure_semantic_0_100_0,0.5,SEC0|ROOT|SEC1
+auto_131,hotpotqa_hp_sample_010_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_131,hotpotqa_hp_sample_010_index.json,equal_33_33_33,0.5,SEC0|ROOT|SEC1
+auto_131,hotpotqa_hp_sample_010_index.json,bm25_heavy_80_10_10,0.5,SEC0|ROOT|SEC1
+auto_131,hotpotqa_hp_sample_010_index.json,semantic_heavy_20_70_10,0.5,SEC0|ROOT|SEC1
+auto_070,hotpotqa_hp_sample_001_index.json,current_60_25_15,0.8,ROOT|SEC1|SEC0
+auto_070,hotpotqa_hp_sample_001_index.json,pure_bm25_100_0_0,0.8,SEC1|ROOT|SEC0
+auto_070,hotpotqa_hp_sample_001_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_070,hotpotqa_hp_sample_001_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_070,hotpotqa_hp_sample_001_index.json,equal_33_33_33,0.8,ROOT|SEC1|SEC0
+auto_070,hotpotqa_hp_sample_001_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC1|SEC0
+auto_070,hotpotqa_hp_sample_001_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC1|SEC0
+auto_165,hotpotqa_hp_sample_015_index.json,current_60_25_15,0.5,ROOT|SEC0|SEC1
+auto_165,hotpotqa_hp_sample_015_index.json,pure_bm25_100_0_0,0.5,ROOT|SEC0|SEC1
+auto_165,hotpotqa_hp_sample_015_index.json,pure_semantic_0_100_0,0.5,SEC0|ROOT|SEC1
+auto_165,hotpotqa_hp_sample_015_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_165,hotpotqa_hp_sample_015_index.json,equal_33_33_33,0.5,ROOT|SEC0|SEC1
+auto_165,hotpotqa_hp_sample_015_index.json,bm25_heavy_80_10_10,0.5,ROOT|SEC0|SEC1
+auto_165,hotpotqa_hp_sample_015_index.json,semantic_heavy_20_70_10,0.5,SEC0|ROOT|SEC1
+auto_111,hotpotqa_hp_sample_006_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_111,hotpotqa_hp_sample_006_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_111,hotpotqa_hp_sample_006_index.json,pure_semantic_0_100_0,0.8,SEC1|SEC0|ROOT
+auto_111,hotpotqa_hp_sample_006_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_111,hotpotqa_hp_sample_006_index.json,equal_33_33_33,0.8,SEC1|SEC0|ROOT
+auto_111,hotpotqa_hp_sample_006_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_111,hotpotqa_hp_sample_006_index.json,semantic_heavy_20_70_10,0.8,SEC1|SEC0|ROOT
+auto_086,hotpotqa_hp_sample_004_index.json,current_60_25_15,0.5,SEC0|SEC1|ROOT
+auto_086,hotpotqa_hp_sample_004_index.json,pure_bm25_100_0_0,0.5,SEC0|SEC1|ROOT
+auto_086,hotpotqa_hp_sample_004_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_086,hotpotqa_hp_sample_004_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_086,hotpotqa_hp_sample_004_index.json,equal_33_33_33,0.5,SEC0|SEC1|ROOT
+auto_086,hotpotqa_hp_sample_004_index.json,bm25_heavy_80_10_10,0.5,SEC0|SEC1|ROOT
+auto_086,hotpotqa_hp_sample_004_index.json,semantic_heavy_20_70_10,0.5,SEC0|SEC1|ROOT
+auto_053,c7b780a9_생체의공학개론#11_index.json,current_60_25_15,0.33333333333333337,SEC3.1|CH3|SEC1.2|ROOT|CH1
+auto_053,c7b780a9_생체의공학개론#11_index.json,pure_bm25_100_0_0,0.33333333333333337,SEC3.1|CH3|SEC1.2|ROOT|CH1
+auto_053,c7b780a9_생체의공학개론#11_index.json,pure_semantic_0_100_0,0.0,CH3|SEC1.2|ROOT|CH1|SEC1.1
+auto_053,c7b780a9_생체의공학개론#11_index.json,pure_structural_0_0_100,0.33333333333333337,ROOT|CH3|CH1|CH4|SEC3.1
+auto_053,c7b780a9_생체의공학개론#11_index.json,equal_33_33_33,0.33333333333333337,SEC3.1|CH3|ROOT|SEC1.2|CH1
+auto_053,c7b780a9_생체의공학개론#11_index.json,bm25_heavy_80_10_10,0.33333333333333337,SEC3.1|CH3|SEC1.2|ROOT|CH1
+auto_053,c7b780a9_생체의공학개론#11_index.json,semantic_heavy_20_70_10,0.33333333333333337,SEC3.1|CH3|SEC1.2|ROOT|CH1
+auto_198,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.33333333333333337,section_1_1|chapter_1|article_1_1_1|article_1_2_3|chapter_3
+auto_198,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.33333333333333337,section_1_1|chapter_1|article_1_1_1|article_1_2_3|chapter_3
+auto_198,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.33333333333333337,section_1_1|chapter_1|article_1_1_1|chapter_3|section_2_2
+auto_198,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.0,chapter_1|chapter_3|chapter_6|section_1_1|section_2_2
+auto_198,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.33333333333333337,chapter_1|section_1_1|article_1_1_1|chapter_3|chapter_6
+auto_198,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.33333333333333337,section_1_1|chapter_1|article_1_1_1|article_1_2_3|chapter_3
+auto_198,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.33333333333333337,section_1_1|chapter_1|article_1_1_1|chapter_3|chapter_6
+auto_046,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.5,sec1.2|art1.2.2|ch3|ch1|art1.2.3
+auto_046,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.5,art1.2.2|sec1.2|ch3|art1.2.3|ch1
+auto_046,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.16666666666666666,sec1.2|ch1|sec5.1|art1.3.1|sec3.1
+auto_046,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.16666666666666666,root|ch3|ch1|ch6|sec1.2
+auto_046,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.3333333333333333,sec1.2|art1.2.2|ch3|ch1|root
+auto_046,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.5,sec1.2|art1.2.2|ch3|art1.2.3|ch1
+auto_046,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.3333333333333333,sec1.2|art1.2.2|ch1|ch3|sec5.1
+auto_107,hotpotqa_hp_sample_006_index.json,current_60_25_15,0.5,SEC1|SEC0|ROOT
+auto_107,hotpotqa_hp_sample_006_index.json,pure_bm25_100_0_0,0.5,SEC1|SEC0|ROOT
+auto_107,hotpotqa_hp_sample_006_index.json,pure_semantic_0_100_0,0.5,SEC1|SEC0|ROOT
+auto_107,hotpotqa_hp_sample_006_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_107,hotpotqa_hp_sample_006_index.json,equal_33_33_33,0.5,SEC1|SEC0|ROOT
+auto_107,hotpotqa_hp_sample_006_index.json,bm25_heavy_80_10_10,0.5,SEC1|SEC0|ROOT
+auto_107,hotpotqa_hp_sample_006_index.json,semantic_heavy_20_70_10,0.5,SEC1|SEC0|ROOT
+auto_194,hotpotqa_hp_sample_020_index.json,current_60_25_15,0.8,SEC0|SEC1|ROOT
+auto_194,hotpotqa_hp_sample_020_index.json,pure_bm25_100_0_0,0.8,SEC0|SEC1|ROOT
+auto_194,hotpotqa_hp_sample_020_index.json,pure_semantic_0_100_0,0.8,SEC0|SEC1|ROOT
+auto_194,hotpotqa_hp_sample_020_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_194,hotpotqa_hp_sample_020_index.json,equal_33_33_33,0.8,SEC0|SEC1|ROOT
+auto_194,hotpotqa_hp_sample_020_index.json,bm25_heavy_80_10_10,0.8,SEC0|SEC1|ROOT
+auto_194,hotpotqa_hp_sample_020_index.json,semantic_heavy_20_70_10,0.8,SEC0|SEC1|ROOT
+auto_031,92928ecd_생체의공학개론_보고서_index.json,current_60_25_15,0.0,
+auto_031,92928ecd_생체의공학개론_보고서_index.json,pure_bm25_100_0_0,0.0,
+auto_031,92928ecd_생체의공학개론_보고서_index.json,pure_semantic_0_100_0,0.0,
+auto_031,92928ecd_생체의공학개론_보고서_index.json,pure_structural_0_0_100,0.0,
+auto_031,92928ecd_생체의공학개론_보고서_index.json,equal_33_33_33,0.0,
+auto_031,92928ecd_생체의공학개론_보고서_index.json,bm25_heavy_80_10_10,0.0,
+auto_031,92928ecd_생체의공학개론_보고서_index.json,semantic_heavy_20_70_10,0.0,
+auto_166,hotpotqa_hp_sample_015_index.json,current_60_25_15,0.5,SEC1|ROOT|SEC0
+auto_166,hotpotqa_hp_sample_015_index.json,pure_bm25_100_0_0,0.5,SEC1|ROOT|SEC0
+auto_166,hotpotqa_hp_sample_015_index.json,pure_semantic_0_100_0,0.5,SEC1|SEC0|ROOT
+auto_166,hotpotqa_hp_sample_015_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_166,hotpotqa_hp_sample_015_index.json,equal_33_33_33,0.5,SEC1|ROOT|SEC0
+auto_166,hotpotqa_hp_sample_015_index.json,bm25_heavy_80_10_10,0.5,SEC1|ROOT|SEC0
+auto_166,hotpotqa_hp_sample_015_index.json,semantic_heavy_20_70_10,0.5,SEC1|ROOT|SEC0
+auto_003,0cbccdf9_2204.08939v1-2_index.json,current_60_25_15,1.0,ch2|ch2.s3.a3|ch2.s3.a1
+auto_003,0cbccdf9_2204.08939v1-2_index.json,pure_bm25_100_0_0,1.0,ch2|ch2.s3.a3|ch2.s3.a1
+auto_003,0cbccdf9_2204.08939v1-2_index.json,pure_semantic_0_100_0,1.0,ch2.s3.a3|ch2.s3.a1|ch2
+auto_003,0cbccdf9_2204.08939v1-2_index.json,pure_structural_0_0_100,1.0,ch2|ch2.s3.a3|ch2.s3.a1
+auto_003,0cbccdf9_2204.08939v1-2_index.json,equal_33_33_33,1.0,ch2|ch2.s3.a3|ch2.s3.a1
+auto_003,0cbccdf9_2204.08939v1-2_index.json,bm25_heavy_80_10_10,1.0,ch2|ch2.s3.a3|ch2.s3.a1
+auto_003,0cbccdf9_2204.08939v1-2_index.json,semantic_heavy_20_70_10,1.0,ch2|ch2.s3.a3|ch2.s3.a1
+auto_126,hotpotqa_hp_sample_009_index.json,current_60_25_15,0.8,SEC1|ROOT|SEC0
+auto_126,hotpotqa_hp_sample_009_index.json,pure_bm25_100_0_0,0.8,SEC1|ROOT|SEC0
+auto_126,hotpotqa_hp_sample_009_index.json,pure_semantic_0_100_0,0.8,SEC1|SEC0|ROOT
+auto_126,hotpotqa_hp_sample_009_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_126,hotpotqa_hp_sample_009_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_126,hotpotqa_hp_sample_009_index.json,bm25_heavy_80_10_10,0.8,SEC1|ROOT|SEC0
+auto_126,hotpotqa_hp_sample_009_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_197,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.33333333333333337,section_1_1|section_1_3|chapter_2|section_2_2|section_5_4
+auto_197,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.33333333333333337,section_1_1|section_1_3|section_2_2|chapter_2|section_5_4
+auto_197,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.33333333333333337,section_2_2|section_5_4|article_2_1_2|article_3_2_1|section_1_1
+auto_197,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.33333333333333337,chapter_2|section_1_1|section_1_3|section_2_2|section_5_4
+auto_197,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.33333333333333337,chapter_2|section_1_1|section_1_3|section_2_2|section_5_4
+auto_197,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.33333333333333337,section_1_1|section_1_3|section_2_2|chapter_2|section_5_4
+auto_197,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.33333333333333337,section_2_2|section_1_1|chapter_2|section_1_3|section_5_4
+auto_148,hotpotqa_hp_sample_012_index.json,current_60_25_15,0.6666666666666666,SEC1|ROOT
+auto_148,hotpotqa_hp_sample_012_index.json,pure_bm25_100_0_0,0.6666666666666666,SEC1|ROOT
+auto_148,hotpotqa_hp_sample_012_index.json,pure_semantic_0_100_0,0.6666666666666666,SEC1|ROOT
+auto_148,hotpotqa_hp_sample_012_index.json,pure_structural_0_0_100,0.6666666666666666,ROOT|SEC1
+auto_148,hotpotqa_hp_sample_012_index.json,equal_33_33_33,0.6666666666666666,SEC1|ROOT
+auto_148,hotpotqa_hp_sample_012_index.json,bm25_heavy_80_10_10,0.6666666666666666,SEC1|ROOT
+auto_148,hotpotqa_hp_sample_012_index.json,semantic_heavy_20_70_10,0.6666666666666666,SEC1|ROOT
+auto_081,hotpotqa_hp_sample_003_index.json,current_60_25_15,0.5,SEC0|ROOT|SEC1
+auto_081,hotpotqa_hp_sample_003_index.json,pure_bm25_100_0_0,0.5,SEC0|ROOT|SEC1
+auto_081,hotpotqa_hp_sample_003_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_081,hotpotqa_hp_sample_003_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_081,hotpotqa_hp_sample_003_index.json,equal_33_33_33,0.5,SEC0|ROOT|SEC1
+auto_081,hotpotqa_hp_sample_003_index.json,bm25_heavy_80_10_10,0.5,SEC0|ROOT|SEC1
+auto_081,hotpotqa_hp_sample_003_index.json,semantic_heavy_20_70_10,0.5,SEC0|ROOT|SEC1
+auto_037,92928ecd_생체의공학개론_보고서_index.json,current_60_25_15,0.0,ART-03-01-01|SEC-03-01|ART-03-02-02|CH-03
+auto_037,92928ecd_생체의공학개론_보고서_index.json,pure_bm25_100_0_0,0.0,ART-03-01-01|SEC-03-01|ART-03-02-02|CH-03
+auto_037,92928ecd_생체의공학개론_보고서_index.json,pure_semantic_0_100_0,0.0,ART-03-01-01|ART-03-02-02|CH-03|SEC-03-01
+auto_037,92928ecd_생체의공학개론_보고서_index.json,pure_structural_0_0_100,0.0,CH-03|SEC-03-01|ART-03-01-01|ART-03-02-02
+auto_037,92928ecd_생체의공학개론_보고서_index.json,equal_33_33_33,0.0,SEC-03-01|CH-03|ART-03-01-01|ART-03-02-02
+auto_037,92928ecd_생체의공학개론_보고서_index.json,bm25_heavy_80_10_10,0.0,ART-03-01-01|SEC-03-01|ART-03-02-02|CH-03
+auto_037,92928ecd_생체의공학개론_보고서_index.json,semantic_heavy_20_70_10,0.0,ART-03-01-01|ART-03-02-02|SEC-03-01|CH-03
+auto_139,hotpotqa_hp_sample_011_index.json,current_60_25_15,0.5,SEC0|SEC1|ROOT
+auto_139,hotpotqa_hp_sample_011_index.json,pure_bm25_100_0_0,0.5,SEC0|SEC1|ROOT
+auto_139,hotpotqa_hp_sample_011_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_139,hotpotqa_hp_sample_011_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_139,hotpotqa_hp_sample_011_index.json,equal_33_33_33,0.5,SEC0|ROOT|SEC1
+auto_139,hotpotqa_hp_sample_011_index.json,bm25_heavy_80_10_10,0.5,SEC0|SEC1|ROOT
+auto_139,hotpotqa_hp_sample_011_index.json,semantic_heavy_20_70_10,0.5,SEC0|SEC1|ROOT
+auto_163,hotpotqa_hp_sample_014_index.json,current_60_25_15,0.8,SEC1|ROOT|SEC0
+auto_163,hotpotqa_hp_sample_014_index.json,pure_bm25_100_0_0,0.8,SEC1|ROOT|SEC0
+auto_163,hotpotqa_hp_sample_014_index.json,pure_semantic_0_100_0,0.8,SEC1|ROOT|SEC0
+auto_163,hotpotqa_hp_sample_014_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_163,hotpotqa_hp_sample_014_index.json,equal_33_33_33,0.8,ROOT|SEC1|SEC0
+auto_163,hotpotqa_hp_sample_014_index.json,bm25_heavy_80_10_10,0.8,SEC1|ROOT|SEC0
+auto_163,hotpotqa_hp_sample_014_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_077,hotpotqa_hp_sample_002_index.json,current_60_25_15,0.8,SEC0|ROOT|SEC1
+auto_077,hotpotqa_hp_sample_002_index.json,pure_bm25_100_0_0,0.8,SEC0|ROOT|SEC1
+auto_077,hotpotqa_hp_sample_002_index.json,pure_semantic_0_100_0,0.8,SEC0|ROOT|SEC1
+auto_077,hotpotqa_hp_sample_002_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_077,hotpotqa_hp_sample_002_index.json,equal_33_33_33,0.8,SEC0|ROOT|SEC1
+auto_077,hotpotqa_hp_sample_002_index.json,bm25_heavy_80_10_10,0.8,SEC0|ROOT|SEC1
+auto_077,hotpotqa_hp_sample_002_index.json,semantic_heavy_20_70_10,0.8,SEC0|ROOT|SEC1
+auto_004,0cbccdf9_2204.08939v1-2_index.json,current_60_25_15,0.5714285714285715,ch2.s1|ch2.s1.a2|ch4|ch3.s1|ch2.s2
+auto_004,0cbccdf9_2204.08939v1-2_index.json,pure_bm25_100_0_0,0.5714285714285715,ch2.s1|ch2.s1.a2|ch3.s1|ch4|ch2.s2
+auto_004,0cbccdf9_2204.08939v1-2_index.json,pure_semantic_0_100_0,0.5714285714285715,ch2.s1.a2|ch2.s1|ch3.s1|ch2.s3.a1|ch3.s2
+auto_004,0cbccdf9_2204.08939v1-2_index.json,pure_structural_0_0_100,0.5714285714285715,doc|ch4|ch2|ch2.s1|ch3.s1
+auto_004,0cbccdf9_2204.08939v1-2_index.json,equal_33_33_33,0.5714285714285715,ch2.s1|doc|ch4|ch3.s1|ch2.s1.a2
+auto_004,0cbccdf9_2204.08939v1-2_index.json,bm25_heavy_80_10_10,0.5714285714285715,ch2.s1|ch2.s1.a2|ch4|ch3.s1|ch2.s2
+auto_004,0cbccdf9_2204.08939v1-2_index.json,semantic_heavy_20_70_10,0.5714285714285715,ch2.s1|ch2.s1.a2|ch4|ch3.s1|doc
+auto_039,92928ecd_생체의공학개론_보고서_index.json,current_60_25_15,0.0,
+auto_039,92928ecd_생체의공학개론_보고서_index.json,pure_bm25_100_0_0,0.0,
+auto_039,92928ecd_생체의공학개론_보고서_index.json,pure_semantic_0_100_0,0.0,
+auto_039,92928ecd_생체의공학개론_보고서_index.json,pure_structural_0_0_100,0.0,
+auto_039,92928ecd_생체의공학개론_보고서_index.json,equal_33_33_33,0.0,
+auto_039,92928ecd_생체의공학개론_보고서_index.json,bm25_heavy_80_10_10,0.0,
+auto_039,92928ecd_생체의공학개론_보고서_index.json,semantic_heavy_20_70_10,0.0,
+auto_016,2025학년도 교육과정 반도체공학과_index.json,current_60_25_15,0.28571428571428575,document|7|11|3.2.1|6
+auto_016,2025학년도 교육과정 반도체공학과_index.json,pure_bm25_100_0_0,0.28571428571428575,document|3.2.1|7|14.7.1|6
+auto_016,2025학년도 교육과정 반도체공학과_index.json,pure_semantic_0_100_0,0.28571428571428575,document|3.2.1|14.7|7|11
+auto_016,2025학년도 교육과정 반도체공학과_index.json,pure_structural_0_0_100,0.28571428571428575,document|7|6|11|14
+auto_016,2025학년도 교육과정 반도체공학과_index.json,equal_33_33_33,0.28571428571428575,document|7|11|14|6
+auto_016,2025학년도 교육과정 반도체공학과_index.json,bm25_heavy_80_10_10,0.28571428571428575,document|7|3.2.1|11|14.7.1
+auto_016,2025학년도 교육과정 반도체공학과_index.json,semantic_heavy_20_70_10,0.28571428571428575,document|7|11|3.2.1|14
+auto_200,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.5,document|chapter_5
+auto_200,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.5,document|chapter_5
+auto_200,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.5,document|chapter_5
+auto_200,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.5,document|chapter_5
+auto_200,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.5,document|chapter_5
+auto_200,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.5,document|chapter_5
+auto_200,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.5,document|chapter_5
+auto_062,hotpotqa_hp_sample_001_index.json,current_60_25_15,0.5,ROOT|SEC0|SEC1
+auto_062,hotpotqa_hp_sample_001_index.json,pure_bm25_100_0_0,0.5,ROOT|SEC0|SEC1
+auto_062,hotpotqa_hp_sample_001_index.json,pure_semantic_0_100_0,0.5,ROOT|SEC0|SEC1
+auto_062,hotpotqa_hp_sample_001_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_062,hotpotqa_hp_sample_001_index.json,equal_33_33_33,0.5,ROOT|SEC0|SEC1
+auto_062,hotpotqa_hp_sample_001_index.json,bm25_heavy_80_10_10,0.5,ROOT|SEC0|SEC1
+auto_062,hotpotqa_hp_sample_001_index.json,semantic_heavy_20_70_10,0.5,ROOT|SEC0|SEC1
+auto_085,hotpotqa_hp_sample_004_index.json,current_60_25_15,0.5,SEC0|SEC1|ROOT
+auto_085,hotpotqa_hp_sample_004_index.json,pure_bm25_100_0_0,0.5,SEC0|SEC1|ROOT
+auto_085,hotpotqa_hp_sample_004_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_085,hotpotqa_hp_sample_004_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_085,hotpotqa_hp_sample_004_index.json,equal_33_33_33,0.5,SEC0|SEC1|ROOT
+auto_085,hotpotqa_hp_sample_004_index.json,bm25_heavy_80_10_10,0.5,SEC0|SEC1|ROOT
+auto_085,hotpotqa_hp_sample_004_index.json,semantic_heavy_20_70_10,0.5,SEC0|SEC1|ROOT
+auto_112,hotpotqa_hp_sample_006_index.json,current_60_25_15,1.0,SEC0|SEC1|ROOT
+auto_112,hotpotqa_hp_sample_006_index.json,pure_bm25_100_0_0,1.0,SEC0|SEC1|ROOT
+auto_112,hotpotqa_hp_sample_006_index.json,pure_semantic_0_100_0,1.0,SEC0|SEC1|ROOT
+auto_112,hotpotqa_hp_sample_006_index.json,pure_structural_0_0_100,1.0,ROOT|SEC0|SEC1
+auto_112,hotpotqa_hp_sample_006_index.json,equal_33_33_33,1.0,SEC0|SEC1|ROOT
+auto_112,hotpotqa_hp_sample_006_index.json,bm25_heavy_80_10_10,1.0,SEC0|SEC1|ROOT
+auto_112,hotpotqa_hp_sample_006_index.json,semantic_heavy_20_70_10,1.0,SEC0|SEC1|ROOT
+auto_162,hotpotqa_hp_sample_014_index.json,current_60_25_15,0.6666666666666666,SEC1|ROOT
+auto_162,hotpotqa_hp_sample_014_index.json,pure_bm25_100_0_0,0.6666666666666666,SEC1|ROOT
+auto_162,hotpotqa_hp_sample_014_index.json,pure_semantic_0_100_0,0.6666666666666666,SEC1|ROOT
+auto_162,hotpotqa_hp_sample_014_index.json,pure_structural_0_0_100,0.6666666666666666,ROOT|SEC1
+auto_162,hotpotqa_hp_sample_014_index.json,equal_33_33_33,0.6666666666666666,SEC1|ROOT
+auto_162,hotpotqa_hp_sample_014_index.json,bm25_heavy_80_10_10,0.6666666666666666,SEC1|ROOT
+auto_162,hotpotqa_hp_sample_014_index.json,semantic_heavy_20_70_10,0.6666666666666666,SEC1|ROOT
+auto_010,0cbccdf9_2204.08939v1-2_index.json,current_60_25_15,0.4444444444444445,ch2.s1|doc|ch2.s1.a2|ch4|ch3.s1
+auto_010,0cbccdf9_2204.08939v1-2_index.json,pure_bm25_100_0_0,0.4444444444444445,ch2.s1|ch2.s1.a2|doc|ch3.s1|ch4
+auto_010,0cbccdf9_2204.08939v1-2_index.json,pure_semantic_0_100_0,0.4444444444444445,ch2.s1.a2|ch2.s1|ch3.s1|ch7|ch3.s2
+auto_010,0cbccdf9_2204.08939v1-2_index.json,pure_structural_0_0_100,0.5714285714285715,doc|ch4|ch1|ch3|ch2
+auto_010,0cbccdf9_2204.08939v1-2_index.json,equal_33_33_33,0.5714285714285715,ch2.s1|doc|ch4|ch3|ch1
+auto_010,0cbccdf9_2204.08939v1-2_index.json,bm25_heavy_80_10_10,0.4444444444444445,ch2.s1|doc|ch2.s1.a2|ch4|ch3.s1
+auto_010,0cbccdf9_2204.08939v1-2_index.json,semantic_heavy_20_70_10,0.4444444444444445,ch2.s1|ch2.s1.a2|doc|ch3.s1|ch4
+auto_013,2025학년도 교육과정 반도체공학과_index.json,current_60_25_15,0.5,1.1|5.1|12.44
+auto_013,2025학년도 교육과정 반도체공학과_index.json,pure_bm25_100_0_0,0.5,1.1|5.1|12.44
+auto_013,2025학년도 교육과정 반도체공학과_index.json,pure_semantic_0_100_0,0.5,12.44|1.1|5.1
+auto_013,2025학년도 교육과정 반도체공학과_index.json,pure_structural_0_0_100,0.5,1.1|5.1|12.44
+auto_013,2025학년도 교육과정 반도체공학과_index.json,equal_33_33_33,0.5,1.1|5.1|12.44
+auto_013,2025학년도 교육과정 반도체공학과_index.json,bm25_heavy_80_10_10,0.5,1.1|5.1|12.44
+auto_013,2025학년도 교육과정 반도체공학과_index.json,semantic_heavy_20_70_10,0.5,1.1|12.44|5.1
+auto_043,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.5714285714285715,sec3.3|root|art1.3.2|ch3|sec2.3
+auto_043,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.5714285714285715,sec3.3|art1.3.2|root|ch3|sec2.3
+auto_043,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.5714285714285715,root|sec2.3|art1.3.2|sec3.3|sec1.3
+auto_043,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.0,root|ch3|ch6|ch1|ch2
+auto_043,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.5714285714285715,root|sec3.3|ch3|art1.3.2|sec2.3
+auto_043,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.5714285714285715,sec3.3|art1.3.2|root|ch3|sec2.3
+auto_043,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.5714285714285715,root|sec3.3|art1.3.2|sec2.3|ch3
+auto_204,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.5714285714285715,section_1_1|chapter_1|article_1_1_1|chapter_3|chapter_6
+auto_204,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.5714285714285715,section_1_1|chapter_1|article_1_1_1|chapter_3|section_2_2
+auto_204,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.5714285714285715,section_1_1|chapter_1|article_1_1_1|chapter_3|section_2_2
+auto_204,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.28571428571428575,chapter_1|chapter_3|chapter_6|section_1_1|section_2_2
+auto_204,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.5714285714285715,chapter_1|section_1_1|article_1_1_1|chapter_3|chapter_6
+auto_204,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.5714285714285715,section_1_1|chapter_1|article_1_1_1|chapter_3|section_2_2
+auto_204,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.5714285714285715,section_1_1|chapter_1|article_1_1_1|chapter_3|chapter_6
+auto_153,hotpotqa_hp_sample_012_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_153,hotpotqa_hp_sample_012_index.json,pure_bm25_100_0_0,0.8,SEC0|SEC1|ROOT
+auto_153,hotpotqa_hp_sample_012_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC1|SEC0
+auto_153,hotpotqa_hp_sample_012_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_153,hotpotqa_hp_sample_012_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_153,hotpotqa_hp_sample_012_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_153,hotpotqa_hp_sample_012_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_074,hotpotqa_hp_sample_002_index.json,current_60_25_15,0.5,SEC1|SEC0|ROOT
+auto_074,hotpotqa_hp_sample_002_index.json,pure_bm25_100_0_0,0.5,SEC1|SEC0|ROOT
+auto_074,hotpotqa_hp_sample_002_index.json,pure_semantic_0_100_0,0.5,SEC1|SEC0|ROOT
+auto_074,hotpotqa_hp_sample_002_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_074,hotpotqa_hp_sample_002_index.json,equal_33_33_33,0.5,SEC1|SEC0|ROOT
+auto_074,hotpotqa_hp_sample_002_index.json,bm25_heavy_80_10_10,0.5,SEC1|SEC0|ROOT
+auto_074,hotpotqa_hp_sample_002_index.json,semantic_heavy_20_70_10,0.5,SEC1|SEC0|ROOT
+auto_045,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.33333333333333337,sec5.1|sec1.2|ch3|ch5|sec3.1
+auto_045,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.33333333333333337,sec5.1|sec1.2|ch3|sec3.1|ch5
+auto_045,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.33333333333333337,sec5.1|sec3.1|sec1.2|ch5|ch1
+auto_045,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.0,root|ch3|ch5|ch1|ch6
+auto_045,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.33333333333333337,sec5.1|ch3|ch5|sec1.2|root
+auto_045,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.33333333333333337,sec5.1|sec1.2|ch3|sec3.1|ch5
+auto_045,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.33333333333333337,sec5.1|sec1.2|ch5|sec3.1|ch3
+auto_120,hotpotqa_hp_sample_008_index.json,current_60_25_15,0.6666666666666666,SEC1|ROOT
+auto_120,hotpotqa_hp_sample_008_index.json,pure_bm25_100_0_0,0.6666666666666666,SEC1|ROOT
+auto_120,hotpotqa_hp_sample_008_index.json,pure_semantic_0_100_0,0.6666666666666666,SEC1|ROOT
+auto_120,hotpotqa_hp_sample_008_index.json,pure_structural_0_0_100,0.6666666666666666,ROOT|SEC1
+auto_120,hotpotqa_hp_sample_008_index.json,equal_33_33_33,0.6666666666666666,SEC1|ROOT
+auto_120,hotpotqa_hp_sample_008_index.json,bm25_heavy_80_10_10,0.6666666666666666,SEC1|ROOT
+auto_120,hotpotqa_hp_sample_008_index.json,semantic_heavy_20_70_10,0.6666666666666666,SEC1|ROOT
+auto_065,hotpotqa_hp_sample_001_index.json,current_60_25_15,0.5,SEC1|ROOT|SEC0
+auto_065,hotpotqa_hp_sample_001_index.json,pure_bm25_100_0_0,0.5,SEC1|ROOT|SEC0
+auto_065,hotpotqa_hp_sample_001_index.json,pure_semantic_0_100_0,0.5,SEC1|ROOT|SEC0
+auto_065,hotpotqa_hp_sample_001_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_065,hotpotqa_hp_sample_001_index.json,equal_33_33_33,0.5,SEC1|ROOT|SEC0
+auto_065,hotpotqa_hp_sample_001_index.json,bm25_heavy_80_10_10,0.5,SEC1|ROOT|SEC0
+auto_065,hotpotqa_hp_sample_001_index.json,semantic_heavy_20_70_10,0.5,SEC1|ROOT|SEC0
+auto_017,2025학년도 교육과정 반도체공학과_index.json,current_60_25_15,0.6666666666666666,1.1|5.1
+auto_017,2025학년도 교육과정 반도체공학과_index.json,pure_bm25_100_0_0,0.6666666666666666,1.1|5.1
+auto_017,2025학년도 교육과정 반도체공학과_index.json,pure_semantic_0_100_0,0.6666666666666666,1.1|5.1
+auto_017,2025학년도 교육과정 반도체공학과_index.json,pure_structural_0_0_100,0.6666666666666666,1.1|5.1
+auto_017,2025학년도 교육과정 반도체공학과_index.json,equal_33_33_33,0.6666666666666666,1.1|5.1
+auto_017,2025학년도 교육과정 반도체공학과_index.json,bm25_heavy_80_10_10,0.6666666666666666,1.1|5.1
+auto_017,2025학년도 교육과정 반도체공학과_index.json,semantic_heavy_20_70_10,0.6666666666666666,1.1|5.1
+auto_001,0cbccdf9_2204.08939v1-2_index.json,current_60_25_15,0.5,doc|ch2.s3.a3|ch2.s3.a1
+auto_001,0cbccdf9_2204.08939v1-2_index.json,pure_bm25_100_0_0,0.5,doc|ch2.s3.a3|ch2.s3.a1
+auto_001,0cbccdf9_2204.08939v1-2_index.json,pure_semantic_0_100_0,0.5,ch2.s3.a3|ch2.s3.a1|doc
+auto_001,0cbccdf9_2204.08939v1-2_index.json,pure_structural_0_0_100,0.5,doc|ch2.s3.a3|ch2.s3.a1
+auto_001,0cbccdf9_2204.08939v1-2_index.json,equal_33_33_33,0.5,doc|ch2.s3.a3|ch2.s3.a1
+auto_001,0cbccdf9_2204.08939v1-2_index.json,bm25_heavy_80_10_10,0.5,doc|ch2.s3.a3|ch2.s3.a1
+auto_001,0cbccdf9_2204.08939v1-2_index.json,semantic_heavy_20_70_10,0.5,doc|ch2.s3.a3|ch2.s3.a1
+auto_169,hotpotqa_hp_sample_016_index.json,current_60_25_15,0.5,ROOT|SEC1|SEC0
+auto_169,hotpotqa_hp_sample_016_index.json,pure_bm25_100_0_0,0.5,ROOT|SEC0|SEC1
+auto_169,hotpotqa_hp_sample_016_index.json,pure_semantic_0_100_0,0.5,SEC1|ROOT|SEC0
+auto_169,hotpotqa_hp_sample_016_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_169,hotpotqa_hp_sample_016_index.json,equal_33_33_33,0.5,ROOT|SEC1|SEC0
+auto_169,hotpotqa_hp_sample_016_index.json,bm25_heavy_80_10_10,0.5,ROOT|SEC0|SEC1
+auto_169,hotpotqa_hp_sample_016_index.json,semantic_heavy_20_70_10,0.5,ROOT|SEC1|SEC0
+auto_011,2025학년도 교육과정 반도체공학과_index.json,current_60_25_15,0.33333333333333337,document|12.44|7|3.2.1|11
+auto_011,2025학년도 교육과정 반도체공학과_index.json,pure_bm25_100_0_0,0.33333333333333337,document|12.44|3.2.1|7|14.7.1
+auto_011,2025학년도 교육과정 반도체공학과_index.json,pure_semantic_0_100_0,0.33333333333333337,document|3.2.1|14.7|7|11
+auto_011,2025학년도 교육과정 반도체공학과_index.json,pure_structural_0_0_100,0.33333333333333337,document|7|6|11|14
+auto_011,2025학년도 교육과정 반도체공학과_index.json,equal_33_33_33,0.33333333333333337,document|7|11|12.44|14
+auto_011,2025학년도 교육과정 반도체공학과_index.json,bm25_heavy_80_10_10,0.33333333333333337,document|12.44|7|3.2.1|11
+auto_011,2025학년도 교육과정 반도체공학과_index.json,semantic_heavy_20_70_10,0.33333333333333337,document|7|11|3.2.1|12.44
+auto_173,hotpotqa_hp_sample_017_index.json,current_60_25_15,0.5,SEC0|SEC1|ROOT
+auto_173,hotpotqa_hp_sample_017_index.json,pure_bm25_100_0_0,0.5,SEC0|SEC1|ROOT
+auto_173,hotpotqa_hp_sample_017_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_173,hotpotqa_hp_sample_017_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_173,hotpotqa_hp_sample_017_index.json,equal_33_33_33,0.5,SEC0|SEC1|ROOT
+auto_173,hotpotqa_hp_sample_017_index.json,bm25_heavy_80_10_10,0.5,SEC0|SEC1|ROOT
+auto_173,hotpotqa_hp_sample_017_index.json,semantic_heavy_20_70_10,0.5,SEC0|SEC1|ROOT
+auto_132,hotpotqa_hp_sample_010_index.json,current_60_25_15,0.8,ROOT|SEC0|SEC1
+auto_132,hotpotqa_hp_sample_010_index.json,pure_bm25_100_0_0,0.8,ROOT|SEC0|SEC1
+auto_132,hotpotqa_hp_sample_010_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_132,hotpotqa_hp_sample_010_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_132,hotpotqa_hp_sample_010_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_132,hotpotqa_hp_sample_010_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC0|SEC1
+auto_132,hotpotqa_hp_sample_010_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC0|SEC1
+auto_061,hotpotqa_hp_sample_001_index.json,current_60_25_15,0.5,ROOT|SEC0|SEC1
+auto_061,hotpotqa_hp_sample_001_index.json,pure_bm25_100_0_0,0.5,ROOT|SEC0|SEC1
+auto_061,hotpotqa_hp_sample_001_index.json,pure_semantic_0_100_0,0.5,ROOT|SEC0|SEC1
+auto_061,hotpotqa_hp_sample_001_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_061,hotpotqa_hp_sample_001_index.json,equal_33_33_33,0.5,ROOT|SEC0|SEC1
+auto_061,hotpotqa_hp_sample_001_index.json,bm25_heavy_80_10_10,0.5,ROOT|SEC0|SEC1
+auto_061,hotpotqa_hp_sample_001_index.json,semantic_heavy_20_70_10,0.5,ROOT|SEC0|SEC1
+auto_022,61dd7aa0_s41598-026-41649-2_reference_index.json,current_60_25_15,1.0,SEC1.1
+auto_022,61dd7aa0_s41598-026-41649-2_reference_index.json,pure_bm25_100_0_0,1.0,SEC1.1
+auto_022,61dd7aa0_s41598-026-41649-2_reference_index.json,pure_semantic_0_100_0,1.0,SEC1.1
+auto_022,61dd7aa0_s41598-026-41649-2_reference_index.json,pure_structural_0_0_100,1.0,SEC1.1
+auto_022,61dd7aa0_s41598-026-41649-2_reference_index.json,equal_33_33_33,1.0,SEC1.1
+auto_022,61dd7aa0_s41598-026-41649-2_reference_index.json,bm25_heavy_80_10_10,1.0,SEC1.1
+auto_022,61dd7aa0_s41598-026-41649-2_reference_index.json,semantic_heavy_20_70_10,1.0,SEC1.1
+auto_114,hotpotqa_hp_sample_006_index.json,current_60_25_15,1.0,ROOT|SEC0|SEC1
+auto_114,hotpotqa_hp_sample_006_index.json,pure_bm25_100_0_0,1.0,ROOT|SEC0|SEC1
+auto_114,hotpotqa_hp_sample_006_index.json,pure_semantic_0_100_0,1.0,ROOT|SEC0|SEC1
+auto_114,hotpotqa_hp_sample_006_index.json,pure_structural_0_0_100,1.0,ROOT|SEC0|SEC1
+auto_114,hotpotqa_hp_sample_006_index.json,equal_33_33_33,1.0,ROOT|SEC0|SEC1
+auto_114,hotpotqa_hp_sample_006_index.json,bm25_heavy_80_10_10,1.0,ROOT|SEC0|SEC1
+auto_114,hotpotqa_hp_sample_006_index.json,semantic_heavy_20_70_10,1.0,ROOT|SEC0|SEC1
+auto_156,hotpotqa_hp_sample_012_index.json,current_60_25_15,0.8,SEC0|SEC1|ROOT
+auto_156,hotpotqa_hp_sample_012_index.json,pure_bm25_100_0_0,0.8,SEC0|SEC1|ROOT
+auto_156,hotpotqa_hp_sample_012_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_156,hotpotqa_hp_sample_012_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_156,hotpotqa_hp_sample_012_index.json,equal_33_33_33,0.8,SEC0|SEC1|ROOT
+auto_156,hotpotqa_hp_sample_012_index.json,bm25_heavy_80_10_10,0.8,SEC0|SEC1|ROOT
+auto_156,hotpotqa_hp_sample_012_index.json,semantic_heavy_20_70_10,0.8,SEC0|SEC1|ROOT
+auto_078,hotpotqa_hp_sample_002_index.json,current_60_25_15,0.8,SEC0|ROOT|SEC1
+auto_078,hotpotqa_hp_sample_002_index.json,pure_bm25_100_0_0,0.8,SEC0|ROOT|SEC1
+auto_078,hotpotqa_hp_sample_002_index.json,pure_semantic_0_100_0,0.8,SEC0|ROOT|SEC1
+auto_078,hotpotqa_hp_sample_002_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_078,hotpotqa_hp_sample_002_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_078,hotpotqa_hp_sample_002_index.json,bm25_heavy_80_10_10,0.8,SEC0|ROOT|SEC1
+auto_078,hotpotqa_hp_sample_002_index.json,semantic_heavy_20_70_10,0.8,SEC0|ROOT|SEC1
+auto_067,hotpotqa_hp_sample_001_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_067,hotpotqa_hp_sample_001_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_067,hotpotqa_hp_sample_001_index.json,pure_semantic_0_100_0,0.8,SEC0|SEC1|ROOT
+auto_067,hotpotqa_hp_sample_001_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_067,hotpotqa_hp_sample_001_index.json,equal_33_33_33,0.8,SEC1|SEC0|ROOT
+auto_067,hotpotqa_hp_sample_001_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_067,hotpotqa_hp_sample_001_index.json,semantic_heavy_20_70_10,0.8,SEC1|SEC0|ROOT
+auto_103,hotpotqa_hp_sample_005_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_103,hotpotqa_hp_sample_005_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_103,hotpotqa_hp_sample_005_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC1|SEC0
+auto_103,hotpotqa_hp_sample_005_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_103,hotpotqa_hp_sample_005_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_103,hotpotqa_hp_sample_005_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_103,hotpotqa_hp_sample_005_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_175,hotpotqa_hp_sample_017_index.json,current_60_25_15,0.5,SEC1|ROOT|SEC0
+auto_175,hotpotqa_hp_sample_017_index.json,pure_bm25_100_0_0,0.5,SEC1|ROOT|SEC0
+auto_175,hotpotqa_hp_sample_017_index.json,pure_semantic_0_100_0,0.5,SEC1|ROOT|SEC0
+auto_175,hotpotqa_hp_sample_017_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_175,hotpotqa_hp_sample_017_index.json,equal_33_33_33,0.5,SEC1|ROOT|SEC0
+auto_175,hotpotqa_hp_sample_017_index.json,bm25_heavy_80_10_10,0.5,SEC1|ROOT|SEC0
+auto_175,hotpotqa_hp_sample_017_index.json,semantic_heavy_20_70_10,0.5,SEC1|ROOT|SEC0
+auto_199,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.33333333333333337,section_1_1|chapter_1|article_1_1_2|section_2_2|article_3_4_1
+auto_199,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.33333333333333337,section_1_1|chapter_1|article_1_1_2|section_2_2|article_3_4_1
+auto_199,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.0,section_1_1|chapter_1|section_2_2|article_3_4_1|section_1_2
+auto_199,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.0,chapter_1|chapter_3|chapter_4|chapter_5|chapter_2
+auto_199,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.33333333333333337,section_1_1|chapter_1|article_1_1_2|section_2_2|chapter_3
+auto_199,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.33333333333333337,section_1_1|chapter_1|article_1_1_2|section_2_2|article_3_4_1
+auto_199,웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.33333333333333337,section_1_1|chapter_1|article_1_1_2|section_2_2|chapter_3
+auto_110,hotpotqa_hp_sample_006_index.json,current_60_25_15,1.0,ROOT|SEC0|SEC1
+auto_110,hotpotqa_hp_sample_006_index.json,pure_bm25_100_0_0,1.0,ROOT|SEC1|SEC0
+auto_110,hotpotqa_hp_sample_006_index.json,pure_semantic_0_100_0,1.0,ROOT|SEC0|SEC1
+auto_110,hotpotqa_hp_sample_006_index.json,pure_structural_0_0_100,1.0,ROOT|SEC1|SEC0
+auto_110,hotpotqa_hp_sample_006_index.json,equal_33_33_33,1.0,ROOT|SEC0|SEC1
+auto_110,hotpotqa_hp_sample_006_index.json,bm25_heavy_80_10_10,1.0,ROOT|SEC1|SEC0
+auto_110,hotpotqa_hp_sample_006_index.json,semantic_heavy_20_70_10,1.0,ROOT|SEC0|SEC1
+auto_080,hotpotqa_hp_sample_002_index.json,current_60_25_15,0.8,ROOT|SEC0|SEC1
+auto_080,hotpotqa_hp_sample_002_index.json,pure_bm25_100_0_0,0.8,ROOT|SEC0|SEC1
+auto_080,hotpotqa_hp_sample_002_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_080,hotpotqa_hp_sample_002_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_080,hotpotqa_hp_sample_002_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_080,hotpotqa_hp_sample_002_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC0|SEC1
+auto_080,hotpotqa_hp_sample_002_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC0|SEC1
+auto_128,hotpotqa_hp_sample_010_index.json,current_60_25_15,0.5,SEC1|ROOT|SEC0
+auto_128,hotpotqa_hp_sample_010_index.json,pure_bm25_100_0_0,0.5,SEC1|ROOT|SEC0
+auto_128,hotpotqa_hp_sample_010_index.json,pure_semantic_0_100_0,0.5,SEC1|ROOT|SEC0
+auto_128,hotpotqa_hp_sample_010_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_128,hotpotqa_hp_sample_010_index.json,equal_33_33_33,0.5,SEC1|ROOT|SEC0
+auto_128,hotpotqa_hp_sample_010_index.json,bm25_heavy_80_10_10,0.5,SEC1|ROOT|SEC0
+auto_128,hotpotqa_hp_sample_010_index.json,semantic_heavy_20_70_10,0.5,SEC1|ROOT|SEC0
+auto_171,hotpotqa_hp_sample_016_index.json,current_60_25_15,1.0,SEC1|SEC0
+auto_171,hotpotqa_hp_sample_016_index.json,pure_bm25_100_0_0,1.0,SEC1|SEC0
+auto_171,hotpotqa_hp_sample_016_index.json,pure_semantic_0_100_0,1.0,SEC1|SEC0
+auto_171,hotpotqa_hp_sample_016_index.json,pure_structural_0_0_100,1.0,SEC1|SEC0
+auto_171,hotpotqa_hp_sample_016_index.json,equal_33_33_33,1.0,SEC1|SEC0
+auto_171,hotpotqa_hp_sample_016_index.json,bm25_heavy_80_10_10,1.0,SEC1|SEC0
+auto_171,hotpotqa_hp_sample_016_index.json,semantic_heavy_20_70_10,1.0,SEC1|SEC0
+auto_033,92928ecd_생체의공학개론_보고서_index.json,current_60_25_15,0.6666666666666666,ART-05-01-01|CH-05
+auto_033,92928ecd_생체의공학개론_보고서_index.json,pure_bm25_100_0_0,0.6666666666666666,ART-05-01-01|CH-05
+auto_033,92928ecd_생체의공학개론_보고서_index.json,pure_semantic_0_100_0,0.6666666666666666,ART-05-01-01|CH-05
+auto_033,92928ecd_생체의공학개론_보고서_index.json,pure_structural_0_0_100,0.6666666666666666,CH-05|ART-05-01-01
+auto_033,92928ecd_생체의공학개론_보고서_index.json,equal_33_33_33,0.6666666666666666,ART-05-01-01|CH-05
+auto_033,92928ecd_생체의공학개론_보고서_index.json,bm25_heavy_80_10_10,0.6666666666666666,ART-05-01-01|CH-05
+auto_033,92928ecd_생체의공학개론_보고서_index.json,semantic_heavy_20_70_10,0.6666666666666666,ART-05-01-01|CH-05
+auto_123,hotpotqa_hp_sample_009_index.json,current_60_25_15,0.5,SEC1|ROOT|SEC0
+auto_123,hotpotqa_hp_sample_009_index.json,pure_bm25_100_0_0,0.5,SEC1|ROOT|SEC0
+auto_123,hotpotqa_hp_sample_009_index.json,pure_semantic_0_100_0,0.5,SEC1|SEC0|ROOT
+auto_123,hotpotqa_hp_sample_009_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_123,hotpotqa_hp_sample_009_index.json,equal_33_33_33,0.5,SEC1|ROOT|SEC0
+auto_123,hotpotqa_hp_sample_009_index.json,bm25_heavy_80_10_10,0.5,SEC1|ROOT|SEC0
+auto_123,hotpotqa_hp_sample_009_index.json,semantic_heavy_20_70_10,0.5,SEC1|ROOT|SEC0
+auto_122,hotpotqa_hp_sample_008_index.json,current_60_25_15,0.8,SEC0|ROOT|SEC1
+auto_122,hotpotqa_hp_sample_008_index.json,pure_bm25_100_0_0,0.8,SEC0|SEC1|ROOT
+auto_122,hotpotqa_hp_sample_008_index.json,pure_semantic_0_100_0,0.8,SEC0|ROOT|SEC1
+auto_122,hotpotqa_hp_sample_008_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_122,hotpotqa_hp_sample_008_index.json,equal_33_33_33,0.8,SEC0|ROOT|SEC1
+auto_122,hotpotqa_hp_sample_008_index.json,bm25_heavy_80_10_10,0.8,SEC0|SEC1|ROOT
+auto_122,hotpotqa_hp_sample_008_index.json,semantic_heavy_20_70_10,0.8,SEC0|ROOT|SEC1
+auto_146,hotpotqa_hp_sample_011_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_146,hotpotqa_hp_sample_011_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_146,hotpotqa_hp_sample_011_index.json,pure_semantic_0_100_0,0.8,SEC1|SEC0|ROOT
+auto_146,hotpotqa_hp_sample_011_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_146,hotpotqa_hp_sample_011_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_146,hotpotqa_hp_sample_011_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_146,hotpotqa_hp_sample_011_index.json,semantic_heavy_20_70_10,0.8,SEC1|SEC0|ROOT
+auto_102,hotpotqa_hp_sample_005_index.json,current_60_25_15,0.8,ROOT|SEC0|SEC1
+auto_102,hotpotqa_hp_sample_005_index.json,pure_bm25_100_0_0,0.8,ROOT|SEC0|SEC1
+auto_102,hotpotqa_hp_sample_005_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_102,hotpotqa_hp_sample_005_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_102,hotpotqa_hp_sample_005_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_102,hotpotqa_hp_sample_005_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC0|SEC1
+auto_102,hotpotqa_hp_sample_005_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC0|SEC1
+auto_147,hotpotqa_hp_sample_012_index.json,current_60_25_15,0.5,ROOT|SEC0|SEC1
+auto_147,hotpotqa_hp_sample_012_index.json,pure_bm25_100_0_0,0.5,ROOT|SEC0|SEC1
+auto_147,hotpotqa_hp_sample_012_index.json,pure_semantic_0_100_0,0.5,ROOT|SEC0|SEC1
+auto_147,hotpotqa_hp_sample_012_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_147,hotpotqa_hp_sample_012_index.json,equal_33_33_33,0.5,ROOT|SEC0|SEC1
+auto_147,hotpotqa_hp_sample_012_index.json,bm25_heavy_80_10_10,0.5,ROOT|SEC0|SEC1
+auto_147,hotpotqa_hp_sample_012_index.json,semantic_heavy_20_70_10,0.5,ROOT|SEC0|SEC1
+auto_124,hotpotqa_hp_sample_009_index.json,current_60_25_15,0.6666666666666666,SEC1|ROOT
+auto_124,hotpotqa_hp_sample_009_index.json,pure_bm25_100_0_0,0.6666666666666666,SEC1|ROOT
+auto_124,hotpotqa_hp_sample_009_index.json,pure_semantic_0_100_0,0.6666666666666666,SEC1|ROOT
+auto_124,hotpotqa_hp_sample_009_index.json,pure_structural_0_0_100,0.6666666666666666,ROOT|SEC1
+auto_124,hotpotqa_hp_sample_009_index.json,equal_33_33_33,0.6666666666666666,SEC1|ROOT
+auto_124,hotpotqa_hp_sample_009_index.json,bm25_heavy_80_10_10,0.6666666666666666,SEC1|ROOT
+auto_124,hotpotqa_hp_sample_009_index.json,semantic_heavy_20_70_10,0.6666666666666666,SEC1|ROOT
+auto_020,2025학년도 교육과정 반도체공학과_index.json,current_60_25_15,0.8,1.2|1|5.2
+auto_020,2025학년도 교육과정 반도체공학과_index.json,pure_bm25_100_0_0,0.8,1.2|5.2|1
+auto_020,2025학년도 교육과정 반도체공학과_index.json,pure_semantic_0_100_0,0.8,1|1.2|5.2
+auto_020,2025학년도 교육과정 반도체공학과_index.json,pure_structural_0_0_100,0.8,1|1.2|5.2
+auto_020,2025학년도 교육과정 반도체공학과_index.json,equal_33_33_33,0.8,1.2|1|5.2
+auto_020,2025학년도 교육과정 반도체공학과_index.json,bm25_heavy_80_10_10,0.8,1.2|1|5.2
+auto_020,2025학년도 교육과정 반도체공학과_index.json,semantic_heavy_20_70_10,0.8,1.2|1|5.2
+auto_015,2025학년도 교육과정 반도체공학과_index.json,current_60_25_15,0.6666666666666666,12.44|1.2.1|1.2|12.48
+auto_015,2025학년도 교육과정 반도체공학과_index.json,pure_bm25_100_0_0,0.6666666666666666,12.44|1.2.1|1.2|12.48
+auto_015,2025학년도 교육과정 반도체공학과_index.json,pure_semantic_0_100_0,0.6666666666666666,1.2|12.44|12.48|1.2.1
+auto_015,2025학년도 교육과정 반도체공학과_index.json,pure_structural_0_0_100,0.6666666666666666,12.44|1.2|12.48|1.2.1
+auto_015,2025학년도 교육과정 반도체공학과_index.json,equal_33_33_33,0.6666666666666666,12.44|1.2|1.2.1|12.48
+auto_015,2025학년도 교육과정 반도체공학과_index.json,bm25_heavy_80_10_10,0.6666666666666666,12.44|1.2.1|1.2|12.48
+auto_015,2025학년도 교육과정 반도체공학과_index.json,semantic_heavy_20_70_10,0.6666666666666666,12.44|1.2|12.48|1.2.1
+auto_181,hotpotqa_hp_sample_017_index.json,current_60_25_15,0.8,SEC0|ROOT|SEC1
+auto_181,hotpotqa_hp_sample_017_index.json,pure_bm25_100_0_0,0.8,SEC0|SEC1|ROOT
+auto_181,hotpotqa_hp_sample_017_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_181,hotpotqa_hp_sample_017_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_181,hotpotqa_hp_sample_017_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_181,hotpotqa_hp_sample_017_index.json,bm25_heavy_80_10_10,0.8,SEC0|SEC1|ROOT
+auto_181,hotpotqa_hp_sample_017_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC0|SEC1
+auto_180,hotpotqa_hp_sample_017_index.json,current_60_25_15,0.8,ROOT|SEC0|SEC1
+auto_180,hotpotqa_hp_sample_017_index.json,pure_bm25_100_0_0,0.8,ROOT|SEC0|SEC1
+auto_180,hotpotqa_hp_sample_017_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_180,hotpotqa_hp_sample_017_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_180,hotpotqa_hp_sample_017_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_180,hotpotqa_hp_sample_017_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC0|SEC1
+auto_180,hotpotqa_hp_sample_017_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC0|SEC1
+auto_133,hotpotqa_hp_sample_010_index.json,current_60_25_15,0.8,SEC0|SEC1|ROOT
+auto_133,hotpotqa_hp_sample_010_index.json,pure_bm25_100_0_0,0.8,SEC0|SEC1|ROOT
+auto_133,hotpotqa_hp_sample_010_index.json,pure_semantic_0_100_0,0.8,SEC0|SEC1|ROOT
+auto_133,hotpotqa_hp_sample_010_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_133,hotpotqa_hp_sample_010_index.json,equal_33_33_33,0.8,SEC0|SEC1|ROOT
+auto_133,hotpotqa_hp_sample_010_index.json,bm25_heavy_80_10_10,0.8,SEC0|SEC1|ROOT
+auto_133,hotpotqa_hp_sample_010_index.json,semantic_heavy_20_70_10,0.8,SEC0|SEC1|ROOT
+auto_066,hotpotqa_hp_sample_001_index.json,current_60_25_15,0.8,ROOT|SEC0|SEC1
+auto_066,hotpotqa_hp_sample_001_index.json,pure_bm25_100_0_0,0.8,ROOT|SEC0|SEC1
+auto_066,hotpotqa_hp_sample_001_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC0|SEC1
+auto_066,hotpotqa_hp_sample_001_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_066,hotpotqa_hp_sample_001_index.json,equal_33_33_33,0.8,ROOT|SEC0|SEC1
+auto_066,hotpotqa_hp_sample_001_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC0|SEC1
+auto_066,hotpotqa_hp_sample_001_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC0|SEC1
+auto_154,hotpotqa_hp_sample_012_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_154,hotpotqa_hp_sample_012_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_154,hotpotqa_hp_sample_012_index.json,pure_semantic_0_100_0,0.8,SEC1|ROOT|SEC0
+auto_154,hotpotqa_hp_sample_012_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_154,hotpotqa_hp_sample_012_index.json,equal_33_33_33,0.8,SEC1|SEC0|ROOT
+auto_154,hotpotqa_hp_sample_012_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_154,hotpotqa_hp_sample_012_index.json,semantic_heavy_20_70_10,0.8,SEC1|SEC0|ROOT
+auto_116,hotpotqa_hp_sample_007_index.json,current_60_25_15,0.6666666666666666,SEC1|ROOT
+auto_116,hotpotqa_hp_sample_007_index.json,pure_bm25_100_0_0,0.6666666666666666,SEC1|ROOT
+auto_116,hotpotqa_hp_sample_007_index.json,pure_semantic_0_100_0,0.6666666666666666,ROOT|SEC1
+auto_116,hotpotqa_hp_sample_007_index.json,pure_structural_0_0_100,0.6666666666666666,ROOT|SEC1
+auto_116,hotpotqa_hp_sample_007_index.json,equal_33_33_33,0.6666666666666666,SEC1|ROOT
+auto_116,hotpotqa_hp_sample_007_index.json,bm25_heavy_80_10_10,0.6666666666666666,SEC1|ROOT
+auto_116,hotpotqa_hp_sample_007_index.json,semantic_heavy_20_70_10,0.6666666666666666,ROOT|SEC1
+auto_047,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,current_60_25_15,0.5714285714285715,ch3|sec3.2|sec3.1|ch6|sec5.4
+auto_047,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_bm25_100_0_0,0.5714285714285715,ch3|sec3.2|sec3.1|sec5.4|ch6
+auto_047,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_semantic_0_100_0,0.5714285714285715,sec3.2|sec3.1|sec5.4|ch6|ch3
+auto_047,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,pure_structural_0_0_100,0.5714285714285715,ch3|ch6|sec3.2|sec3.1|sec5.4
+auto_047,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,equal_33_33_33,0.5714285714285715,ch3|ch6|sec3.2|sec3.1|sec5.4
+auto_047,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,bm25_heavy_80_10_10,0.5714285714285715,ch3|sec3.2|sec3.1|ch6|sec5.4
+auto_047,bd2f85ad_웹:파이썬 프로그래밍 프로젝트 #6 보고서_index.json,semantic_heavy_20_70_10,0.5714285714285715,ch3|sec3.2|sec3.1|ch6|sec5.4
+auto_113,hotpotqa_hp_sample_006_index.json,current_60_25_15,0.8,SEC0|ROOT|SEC1
+auto_113,hotpotqa_hp_sample_006_index.json,pure_bm25_100_0_0,0.8,SEC0|ROOT|SEC1
+auto_113,hotpotqa_hp_sample_006_index.json,pure_semantic_0_100_0,0.8,SEC0|SEC1|ROOT
+auto_113,hotpotqa_hp_sample_006_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_113,hotpotqa_hp_sample_006_index.json,equal_33_33_33,0.8,SEC0|ROOT|SEC1
+auto_113,hotpotqa_hp_sample_006_index.json,bm25_heavy_80_10_10,0.8,SEC0|ROOT|SEC1
+auto_113,hotpotqa_hp_sample_006_index.json,semantic_heavy_20_70_10,0.8,SEC0|SEC1|ROOT
+auto_096,hotpotqa_hp_sample_005_index.json,current_60_25_15,0.5,SEC0|ROOT|SEC1
+auto_096,hotpotqa_hp_sample_005_index.json,pure_bm25_100_0_0,0.5,SEC0|ROOT|SEC1
+auto_096,hotpotqa_hp_sample_005_index.json,pure_semantic_0_100_0,0.5,SEC0|ROOT|SEC1
+auto_096,hotpotqa_hp_sample_005_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_096,hotpotqa_hp_sample_005_index.json,equal_33_33_33,0.5,SEC0|ROOT|SEC1
+auto_096,hotpotqa_hp_sample_005_index.json,bm25_heavy_80_10_10,0.5,SEC0|ROOT|SEC1
+auto_096,hotpotqa_hp_sample_005_index.json,semantic_heavy_20_70_10,0.5,SEC0|ROOT|SEC1
+auto_055,c7b780a9_생체의공학개론#11_index.json,current_60_25_15,0.33333333333333337,SEC4.2|CH4|ROOT|SEC1.1|SEC1.2
+auto_055,c7b780a9_생체의공학개론#11_index.json,pure_bm25_100_0_0,0.33333333333333337,SEC4.2|CH4|SEC1.1|ROOT|SEC1.2
+auto_055,c7b780a9_생체의공학개론#11_index.json,pure_semantic_0_100_0,0.0,CH4|SEC1.2|ROOT|CH1|CH3
+auto_055,c7b780a9_생체의공학개론#11_index.json,pure_structural_0_0_100,0.33333333333333337,ROOT|CH4|CH1|CH3|SEC4.2
+auto_055,c7b780a9_생체의공학개론#11_index.json,equal_33_33_33,0.33333333333333337,SEC4.2|CH4|ROOT|SEC1.1|SEC1.2
+auto_055,c7b780a9_생체의공학개론#11_index.json,bm25_heavy_80_10_10,0.33333333333333337,SEC4.2|CH4|ROOT|SEC1.1|SEC1.2
+auto_055,c7b780a9_생체의공학개론#11_index.json,semantic_heavy_20_70_10,0.33333333333333337,SEC4.2|CH4|ROOT|SEC1.2|SEC1.1
+auto_149,hotpotqa_hp_sample_012_index.json,current_60_25_15,0.0,SEC1|ROOT
+auto_149,hotpotqa_hp_sample_012_index.json,pure_bm25_100_0_0,0.0,SEC1|ROOT
+auto_149,hotpotqa_hp_sample_012_index.json,pure_semantic_0_100_0,0.0,SEC1|ROOT
+auto_149,hotpotqa_hp_sample_012_index.json,pure_structural_0_0_100,0.0,ROOT|SEC1
+auto_149,hotpotqa_hp_sample_012_index.json,equal_33_33_33,0.0,SEC1|ROOT
+auto_149,hotpotqa_hp_sample_012_index.json,bm25_heavy_80_10_10,0.0,SEC1|ROOT
+auto_149,hotpotqa_hp_sample_012_index.json,semantic_heavy_20_70_10,0.0,SEC1|ROOT
+auto_090,hotpotqa_hp_sample_004_index.json,current_60_25_15,0.8,SEC1|ROOT|SEC0
+auto_090,hotpotqa_hp_sample_004_index.json,pure_bm25_100_0_0,0.8,SEC1|ROOT|SEC0
+auto_090,hotpotqa_hp_sample_004_index.json,pure_semantic_0_100_0,0.8,SEC1|ROOT|SEC0
+auto_090,hotpotqa_hp_sample_004_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_090,hotpotqa_hp_sample_004_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_090,hotpotqa_hp_sample_004_index.json,bm25_heavy_80_10_10,0.8,SEC1|ROOT|SEC0
+auto_090,hotpotqa_hp_sample_004_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_127,hotpotqa_hp_sample_010_index.json,current_60_25_15,0.5,ROOT|SEC0|SEC1
+auto_127,hotpotqa_hp_sample_010_index.json,pure_bm25_100_0_0,0.5,ROOT|SEC0|SEC1
+auto_127,hotpotqa_hp_sample_010_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_127,hotpotqa_hp_sample_010_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_127,hotpotqa_hp_sample_010_index.json,equal_33_33_33,0.5,ROOT|SEC0|SEC1
+auto_127,hotpotqa_hp_sample_010_index.json,bm25_heavy_80_10_10,0.5,ROOT|SEC0|SEC1
+auto_127,hotpotqa_hp_sample_010_index.json,semantic_heavy_20_70_10,0.5,ROOT|SEC0|SEC1
+auto_136,hotpotqa_hp_sample_010_index.json,current_60_25_15,0.8,ROOT|SEC1|SEC0
+auto_136,hotpotqa_hp_sample_010_index.json,pure_bm25_100_0_0,0.8,ROOT|SEC1|SEC0
+auto_136,hotpotqa_hp_sample_010_index.json,pure_semantic_0_100_0,0.8,ROOT|SEC1|SEC0
+auto_136,hotpotqa_hp_sample_010_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_136,hotpotqa_hp_sample_010_index.json,equal_33_33_33,0.8,ROOT|SEC1|SEC0
+auto_136,hotpotqa_hp_sample_010_index.json,bm25_heavy_80_10_10,0.8,ROOT|SEC1|SEC0
+auto_136,hotpotqa_hp_sample_010_index.json,semantic_heavy_20_70_10,0.8,ROOT|SEC1|SEC0
+auto_125,hotpotqa_hp_sample_009_index.json,current_60_25_15,0.8,SEC1|ROOT|SEC0
+auto_125,hotpotqa_hp_sample_009_index.json,pure_bm25_100_0_0,0.8,SEC1|ROOT|SEC0
+auto_125,hotpotqa_hp_sample_009_index.json,pure_semantic_0_100_0,0.8,SEC1|SEC0|ROOT
+auto_125,hotpotqa_hp_sample_009_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_125,hotpotqa_hp_sample_009_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_125,hotpotqa_hp_sample_009_index.json,bm25_heavy_80_10_10,0.8,SEC1|ROOT|SEC0
+auto_125,hotpotqa_hp_sample_009_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_145,hotpotqa_hp_sample_011_index.json,current_60_25_15,0.8,SEC1|ROOT|SEC0
+auto_145,hotpotqa_hp_sample_011_index.json,pure_bm25_100_0_0,0.8,SEC1|ROOT|SEC0
+auto_145,hotpotqa_hp_sample_011_index.json,pure_semantic_0_100_0,0.8,SEC1|SEC0|ROOT
+auto_145,hotpotqa_hp_sample_011_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_145,hotpotqa_hp_sample_011_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_145,hotpotqa_hp_sample_011_index.json,bm25_heavy_80_10_10,0.8,SEC1|ROOT|SEC0
+auto_145,hotpotqa_hp_sample_011_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_034,92928ecd_생체의공학개론_보고서_index.json,current_60_25_15,0.0,
+auto_034,92928ecd_생체의공학개론_보고서_index.json,pure_bm25_100_0_0,0.0,
+auto_034,92928ecd_생체의공학개론_보고서_index.json,pure_semantic_0_100_0,0.0,
+auto_034,92928ecd_생체의공학개론_보고서_index.json,pure_structural_0_0_100,0.0,
+auto_034,92928ecd_생체의공학개론_보고서_index.json,equal_33_33_33,0.0,
+auto_034,92928ecd_생체의공학개론_보고서_index.json,bm25_heavy_80_10_10,0.0,
+auto_034,92928ecd_생체의공학개론_보고서_index.json,semantic_heavy_20_70_10,0.0,
+auto_129,hotpotqa_hp_sample_010_index.json,current_60_25_15,0.5,ROOT|SEC0|SEC1
+auto_129,hotpotqa_hp_sample_010_index.json,pure_bm25_100_0_0,0.5,ROOT|SEC0|SEC1
+auto_129,hotpotqa_hp_sample_010_index.json,pure_semantic_0_100_0,0.5,ROOT|SEC0|SEC1
+auto_129,hotpotqa_hp_sample_010_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_129,hotpotqa_hp_sample_010_index.json,equal_33_33_33,0.5,ROOT|SEC0|SEC1
+auto_129,hotpotqa_hp_sample_010_index.json,bm25_heavy_80_10_10,0.5,ROOT|SEC0|SEC1
+auto_129,hotpotqa_hp_sample_010_index.json,semantic_heavy_20_70_10,0.5,ROOT|SEC0|SEC1
+auto_143,hotpotqa_hp_sample_011_index.json,current_60_25_15,1.0,SEC1|ROOT|SEC0
+auto_143,hotpotqa_hp_sample_011_index.json,pure_bm25_100_0_0,1.0,SEC1|ROOT|SEC0
+auto_143,hotpotqa_hp_sample_011_index.json,pure_semantic_0_100_0,1.0,SEC1|ROOT|SEC0
+auto_143,hotpotqa_hp_sample_011_index.json,pure_structural_0_0_100,1.0,ROOT|SEC1|SEC0
+auto_143,hotpotqa_hp_sample_011_index.json,equal_33_33_33,1.0,SEC1|ROOT|SEC0
+auto_143,hotpotqa_hp_sample_011_index.json,bm25_heavy_80_10_10,1.0,SEC1|ROOT|SEC0
+auto_143,hotpotqa_hp_sample_011_index.json,semantic_heavy_20_70_10,1.0,SEC1|ROOT|SEC0
+auto_083,hotpotqa_hp_sample_003_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_083,hotpotqa_hp_sample_003_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_083,hotpotqa_hp_sample_003_index.json,pure_semantic_0_100_0,0.8,SEC1|SEC0|ROOT
+auto_083,hotpotqa_hp_sample_003_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_083,hotpotqa_hp_sample_003_index.json,equal_33_33_33,0.8,SEC1|SEC0|ROOT
+auto_083,hotpotqa_hp_sample_003_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_083,hotpotqa_hp_sample_003_index.json,semantic_heavy_20_70_10,0.8,SEC1|SEC0|ROOT
+auto_179,hotpotqa_hp_sample_017_index.json,current_60_25_15,0.8,SEC0|ROOT|SEC1
+auto_179,hotpotqa_hp_sample_017_index.json,pure_bm25_100_0_0,0.8,SEC0|SEC1|ROOT
+auto_179,hotpotqa_hp_sample_017_index.json,pure_semantic_0_100_0,0.8,SEC0|SEC1|ROOT
+auto_179,hotpotqa_hp_sample_017_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_179,hotpotqa_hp_sample_017_index.json,equal_33_33_33,0.8,SEC0|ROOT|SEC1
+auto_179,hotpotqa_hp_sample_017_index.json,bm25_heavy_80_10_10,0.8,SEC0|SEC1|ROOT
+auto_179,hotpotqa_hp_sample_017_index.json,semantic_heavy_20_70_10,0.8,SEC0|SEC1|ROOT
+auto_064,hotpotqa_hp_sample_001_index.json,current_60_25_15,0.5,SEC1|SEC0|ROOT
+auto_064,hotpotqa_hp_sample_001_index.json,pure_bm25_100_0_0,0.5,SEC1|SEC0|ROOT
+auto_064,hotpotqa_hp_sample_001_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_064,hotpotqa_hp_sample_001_index.json,pure_structural_0_0_100,0.5,ROOT|SEC1|SEC0
+auto_064,hotpotqa_hp_sample_001_index.json,equal_33_33_33,0.5,SEC1|SEC0|ROOT
+auto_064,hotpotqa_hp_sample_001_index.json,bm25_heavy_80_10_10,0.5,SEC1|SEC0|ROOT
+auto_064,hotpotqa_hp_sample_001_index.json,semantic_heavy_20_70_10,0.5,SEC1|SEC0|ROOT
+auto_084,hotpotqa_hp_sample_003_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_084,hotpotqa_hp_sample_003_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_084,hotpotqa_hp_sample_003_index.json,pure_semantic_0_100_0,0.8,SEC1|ROOT|SEC0
+auto_084,hotpotqa_hp_sample_003_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_084,hotpotqa_hp_sample_003_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_084,hotpotqa_hp_sample_003_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_084,hotpotqa_hp_sample_003_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_101,hotpotqa_hp_sample_005_index.json,current_60_25_15,0.8,SEC1|SEC0|ROOT
+auto_101,hotpotqa_hp_sample_005_index.json,pure_bm25_100_0_0,0.8,SEC1|SEC0|ROOT
+auto_101,hotpotqa_hp_sample_005_index.json,pure_semantic_0_100_0,0.8,SEC1|ROOT|SEC0
+auto_101,hotpotqa_hp_sample_005_index.json,pure_structural_0_0_100,0.8,ROOT|SEC1|SEC0
+auto_101,hotpotqa_hp_sample_005_index.json,equal_33_33_33,0.8,SEC1|ROOT|SEC0
+auto_101,hotpotqa_hp_sample_005_index.json,bm25_heavy_80_10_10,0.8,SEC1|SEC0|ROOT
+auto_101,hotpotqa_hp_sample_005_index.json,semantic_heavy_20_70_10,0.8,SEC1|ROOT|SEC0
+auto_105,hotpotqa_hp_sample_006_index.json,current_60_25_15,0.5,SEC0|ROOT|SEC1
+auto_105,hotpotqa_hp_sample_006_index.json,pure_bm25_100_0_0,0.5,SEC0|SEC1|ROOT
+auto_105,hotpotqa_hp_sample_006_index.json,pure_semantic_0_100_0,0.5,SEC0|SEC1|ROOT
+auto_105,hotpotqa_hp_sample_006_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_105,hotpotqa_hp_sample_006_index.json,equal_33_33_33,0.5,SEC0|ROOT|SEC1
+auto_105,hotpotqa_hp_sample_006_index.json,bm25_heavy_80_10_10,0.5,SEC0|SEC1|ROOT
+auto_105,hotpotqa_hp_sample_006_index.json,semantic_heavy_20_70_10,0.5,SEC0|SEC1|ROOT
+auto_159,hotpotqa_hp_sample_013_index.json,current_60_25_15,0.8,SEC0|ROOT|SEC1
+auto_159,hotpotqa_hp_sample_013_index.json,pure_bm25_100_0_0,0.8,SEC0|ROOT|SEC1
+auto_159,hotpotqa_hp_sample_013_index.json,pure_semantic_0_100_0,0.8,SEC0|ROOT|SEC1
+auto_159,hotpotqa_hp_sample_013_index.json,pure_structural_0_0_100,0.8,ROOT|SEC0|SEC1
+auto_159,hotpotqa_hp_sample_013_index.json,equal_33_33_33,0.8,SEC0|ROOT|SEC1
+auto_159,hotpotqa_hp_sample_013_index.json,bm25_heavy_80_10_10,0.8,SEC0|ROOT|SEC1
+auto_159,hotpotqa_hp_sample_013_index.json,semantic_heavy_20_70_10,0.8,SEC0|ROOT|SEC1
+auto_073,hotpotqa_hp_sample_002_index.json,current_60_25_15,0.5,SEC0|SEC1|ROOT
+auto_073,hotpotqa_hp_sample_002_index.json,pure_bm25_100_0_0,0.5,SEC0|SEC1|ROOT
+auto_073,hotpotqa_hp_sample_002_index.json,pure_semantic_0_100_0,0.5,SEC0|ROOT|SEC1
+auto_073,hotpotqa_hp_sample_002_index.json,pure_structural_0_0_100,0.5,ROOT|SEC0|SEC1
+auto_073,hotpotqa_hp_sample_002_index.json,equal_33_33_33,0.5,SEC0|SEC1|ROOT
+auto_073,hotpotqa_hp_sample_002_index.json,bm25_heavy_80_10_10,0.5,SEC0|SEC1|ROOT
+auto_073,hotpotqa_hp_sample_002_index.json,semantic_heavy_20_70_10,0.5,SEC0|SEC1|ROOT

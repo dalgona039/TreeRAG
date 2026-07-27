@@ -422,11 +422,14 @@ class TreeRAGReasoner:
             else:
                 gen_cfg = Config.get_generation_config()
 
-            response = Config.get_client("reasoning").models.generate_content(
-                model=Config.MODEL_NAME,
-                contents=prompt,
-                config=gen_cfg,
-            )
+            from src.utils import llm_accounting
+
+            with llm_accounting.stage("generation"):
+                response = Config.get_client("reasoning").models.generate_content(
+                    model=Config.MODEL_NAME,
+                    contents=prompt,
+                    config=gen_cfg,
+                )
             if not response.text:
                 raise ValueError("Empty response from model")
 

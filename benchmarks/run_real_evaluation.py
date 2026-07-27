@@ -34,6 +34,13 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+# faiss (RAPTOR baseline) and torch (Dense baseline / hallucination detector)
+# each bundle their own OpenMP runtime; loading both in this one process
+# segfaults on macOS without this. Must precede any import that pulls either in.
+# See tests/conftest.py for why OMP_NUM_THREADS=1 is needed too.
+os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+
 _PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(_PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(_PROJECT_ROOT))
@@ -185,12 +192,15 @@ class Evaluator:
                 f"### Answer:"
             )
         try:
+            from src.utils import llm_accounting
+
             client = _Config.get_client()  # returns override when set
-            resp = client.models.generate_content(
-                model=None,   # OllamaClient ignores this
-                contents=prompt,
-                config=None,  # no JSON format: we want natural language
-            )
+            with llm_accounting.stage("generation_baseline"):
+                resp = client.models.generate_content(
+                    model=None,   # OllamaClient ignores this
+                    contents=prompt,
+                    config=None,  # no JSON format: we want natural language
+                )
             answer = (resp.text or "").strip()
             if len(answer) < 10:
                 print(f"   ⚠️ LLM returned very short answer ({len(answer)} chars) — extractive fallback")
@@ -753,6 +763,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         with open(latest, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
     print(f"\n💾 Report → {out_path}")
+
+    # B1 instrumentation: dump per-call token/latency accounting if enabled
+    # (TREERAG_TOKEN_ACCOUNTING=1). No-op and no file written otherwise.
+    from src.utils import llm_accounting
+    if llm_accounting.ENABLED:
+        acct_path = out_path.with_name(out_path.stem + "_token_accounting.json")
+        llm_accounting.dump(str(acct_path))
+        print(f"💾 Token accounting ({len(llm_accounting.get_records())} calls) → {acct_path}")
 
     # Save markdown table for paper use
     md_path = out_path.with_suffix(".md")

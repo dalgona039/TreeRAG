@@ -1,6 +1,6 @@
 import os
 import logging
-from typing import Any
+from typing import Any, Optional
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
@@ -147,6 +147,27 @@ def _retry_delay_seconds(msg: str):
     return None
 
 
+def _record_gemini_usage(resp: Any, model: Optional[str], latency_s: float) -> None:
+    """B1 instrumentation hook; no-op unless TREERAG_TOKEN_ACCOUNTING is set."""
+    from src.utils import llm_accounting
+
+    if not llm_accounting.ENABLED:
+        return
+    try:
+        usage = getattr(resp, "usage_metadata", None)
+        prompt_tokens = getattr(usage, "prompt_token_count", None) if usage else None
+        completion_tokens = getattr(usage, "candidates_token_count", None) if usage else None
+        llm_accounting.record(
+            backend="gemini",
+            model=model or Config.MODEL_NAME,
+            prompt_tokens=prompt_tokens,
+            completion_tokens=completion_tokens,
+            latency_s=latency_s,
+        )
+    except Exception:
+        pass  # accounting must never break the actual call
+
+
 class _ResilientModels:
     def __init__(self, inner):
         self._inner = inner
@@ -158,9 +179,11 @@ class _ResilientModels:
                 _time.sleep(wait)
         backoff = 2.0
         for attempt in range(_GEMINI_MAX_RETRIES + 1):
+            _t0 = _time.time()
             try:
                 resp = self._inner.generate_content(*args, **kwargs)
                 _last_call[0] = _time.time()
+                _record_gemini_usage(resp, kwargs.get("model"), _time.time() - _t0)
                 return resp
             except Exception as exc:
                 msg = str(exc)

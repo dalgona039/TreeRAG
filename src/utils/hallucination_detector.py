@@ -22,7 +22,10 @@ def _load_embedder():
         import numpy as np
         for name in ("intfloat/multilingual-e5-base", "jhgan/ko-sroberta-multitask"):
             try:
-                model = SentenceTransformer(name)
+                # device="cpu": torch's MPS (Apple GPU) backend has been observed
+                # to segfault during sentence-transformers encode() calls on this
+                # platform — see src/core/dense_retrieval_baseline.py for the same fix.
+                model = SentenceTransformer(name, device="cpu")
                 return lambda texts: np.asarray(
                     model.encode(list(texts), show_progress_bar=False), dtype="float32"
                 )

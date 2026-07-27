@@ -6,10 +6,18 @@ recursively summarising clusters of chunks, then retrieves by traversing that
 tree. It is the closest competing method to TreeRAG and the most important
 baseline for the ACM submission.
 
-This module wraps the real RAPTOR library when it is installed and falls back
-to :class:`RaptorFallback` — a deterministic, network-free approximation — when
-it is not. The fallback is intentionally simple so that, when available, real
-RAPTOR always performs at least as well.
+This module wraps the real RAPTOR library — vendored at ``third_party/raptor``
+from https://github.com/parthsarthi03/raptor (it isn't on PyPI under this
+name; see ``third_party/README.md``) and driven by a local Ollama QA/
+summarization adapter (``src/core/raptor_ollama_adapter.py``) instead of
+RAPTOR's default OpenAI backend — and falls back to :class:`RaptorFallback`,
+a deterministic, network-free approximation with no real clustering or LLM
+summarization, only if the real library or its dependencies (torch,
+sentence-transformers, umap-learn, faiss, scikit-learn) aren't importable, or
+if the local Ollama server isn't reachable. Verified end-to-end (real GMM
+clustering + genuine LLM-generated cluster summaries) as of 2026-07-27; see
+``docs/paper_revision/B3_baseline_hyperparams.md`` for the prior state.
+Results in ``data/benchmark_reports/`` predating that date used the fallback.
 
 All retrieval results use the same node-dict schema as the other baselines:
 ``{"title", "summary", "page_ref", "score"}``.
@@ -172,15 +180,35 @@ class RaptorBaseline:
 
     @staticmethod
     def _try_real_raptor(document_text: str):
-        """Attempt to build a real RAPTOR tree; return an adapter or None."""
+        """Attempt to build a real RAPTOR tree; return an adapter or None.
+
+        Uses the vendored RAPTOR implementation (``third_party/raptor``) with
+        local Ollama QA/summarization models and the Dense baseline's embedder
+        (``src/core/raptor_ollama_adapter.py``) instead of RAPTOR's default
+        OpenAI backend, so no OpenAI API key is required.
+        """
         try:
-            from raptor import RetrievalAugmentation  # type: ignore
+            from src.core.raptor_ollama_adapter import (
+                ensure_raptor_importable,
+                make_embedding_model,
+                make_qa_model,
+                make_summarization_model,
+            )
+
+            ensure_raptor_importable()
+            from raptor import RetrievalAugmentation, RetrievalAugmentationConfig
         except Exception:
             return None
-        # Real RAPTOR requires an embedding/summarisation backend (typically an
-        # OpenAI key). Building it may fail without network; the caller's
-        # try/except then routes to the deterministic fallback.
-        ra = RetrievalAugmentation()
+
+        config = RetrievalAugmentationConfig(
+            qa_model=make_qa_model(),
+            summarization_model=make_summarization_model(),
+            embedding_model=make_embedding_model(),
+            tb_max_tokens=100,
+            tb_num_layers=5,
+            tr_top_k=5,
+        )
+        ra = RetrievalAugmentation(config=config)
         ra.add_documents(document_text)
 
         class _RealAdapter:
@@ -188,15 +216,21 @@ class RaptorBaseline:
                 self.ra = ra_inst
 
             def retrieve(self, query, top_k=10):
-                context = self.ra.retrieve(query)
-                return [
-                    {
-                        "title": "RAPTOR node",
-                        "summary": context,
-                        "page_ref": "",
-                        "score": 1.0,
-                    }
-                ]
+                selected_nodes, _context = self.ra.retriever.retrieve_information_collapse_tree(
+                    query, top_k=top_k, max_tokens=3500
+                )
+                out = []
+                for node in selected_nodes:
+                    layer = self.ra.retriever.tree_node_index_to_layer.get(node.index)
+                    out.append(
+                        {
+                            "title": f"RAPTOR L{layer}-N{node.index}",
+                            "summary": node.text,
+                            "page_ref": "",
+                            "score": 1.0,
+                        }
+                    )
+                return out
 
         return _RealAdapter(ra)
 

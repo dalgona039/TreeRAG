@@ -15,6 +15,16 @@ from pypdf import PdfWriter
 os.environ['TESTING'] = '1'
 os.environ['GOOGLE_API_KEY'] = 'test-key-only-for-testing'
 os.environ['DISABLE_RATE_LIMIT'] = 'true'
+# faiss (via RAPTOR) and torch (via sentence-transformers) each bundle their
+# own OpenMP runtime; loading both in one process segfaults on macOS without
+# this. Must be set before either library is imported anywhere in the suite.
+# KMP_DUPLICATE_LIB_OK alone bypasses the startup abort but two independent
+# thread pools can still crash later (observed: SIGSEGV inside libomp's own
+# barrier/suspend code) — OMP_NUM_THREADS=1 avoids that by keeping each
+# runtime single-threaded, which also makes these fast CPU-only calls on
+# small texts effectively free to serialize.
+os.environ.setdefault('KMP_DUPLICATE_LIB_OK', 'TRUE')
+os.environ.setdefault('OMP_NUM_THREADS', '1')
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
