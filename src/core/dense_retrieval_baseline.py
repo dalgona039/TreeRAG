@@ -137,8 +137,20 @@ class DenseRetriever:
             try:
                 with open(path, "rb") as f:
                     cached = pickle.load(f)
-                if cached.get("n") == len(self.nodes):
-                    return np.asarray(cached["embeddings"], dtype="float32")
+                cached_emb = np.asarray(cached.get("embeddings"), dtype="float32")
+                # A cache built by a different embedder (e.g. the 256-dim
+                # HashingEmbedder fallback vs. a 768-dim real sentence-transformers
+                # model) has a different vector width. Node-count alone doesn't
+                # catch that mismatch — silently returning it produces a
+                # dimension-mismatch at FAISS/dot-product time that gets
+                # swallowed downstream, yielding empty retrieval results.
+                if cached.get("n") == len(self.nodes) and cached_emb.shape[0] == len(self.nodes):
+                    if self.nodes:
+                        probe_dim = int(np.asarray(self.embedder([self._texts[0]])).shape[-1])
+                        if cached_emb.shape[1] == probe_dim:
+                            return cached_emb
+                    else:
+                        return cached_emb
             except Exception:
                 pass
 
