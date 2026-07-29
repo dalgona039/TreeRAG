@@ -203,8 +203,17 @@ class ErrorRecoveryFilter:
             critical_keywords = re.findall(r'\b\w{4,}\b', query_lower)
             
             matches = sum(1 for kw in critical_keywords if kw in title)
-            
-            if matches >= 2 or (matches >= 1 and len(title) > 20):
+
+            # Word count, not character count: a character-length threshold
+            # (originally `len(title) > 20`) assumes English-scale titles and
+            # systematically fails on CJK text, where a complete, specific
+            # title like "초음파의 개요 및 역사" (4 words) is only 12
+            # characters — well under 20 — so a single strong keyword match
+            # was never recovered. Confirmed via the medical-domain fair
+            # rerun (B7): this made TreeNavigator's DFS over-filtering
+            # recovery a near-total no-op on Korean documents (27/42
+            # questions fell back to "no relevant sections found").
+            if matches >= 2 or (matches >= 1 and len(title.split()) >= 3):
                 recovered.append(node)
                 self.false_negatives_detected += 1
         
