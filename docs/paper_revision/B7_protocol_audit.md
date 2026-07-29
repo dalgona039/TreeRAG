@@ -65,18 +65,40 @@ These are the tables that substantiate the paper's core claim.
   inherit the offline protocol from Tables 3/4, while only the HotpotQA rows reflect
   the full LLM-based system.
 
-## 5. Rerunning Table 4 (Medical, n=42) under the fair protocol
+## 5. ★ Table 4 (Medical, n=42) rerun under the fair protocol — the offline result does not hold
 
-This table is small (n=42) and was explicitly flagged by the task as high priority
-given how load-bearing the medical_entity_recall=1.000 result is. **A fair-protocol
-rerun of Table 4 is included in the B1 full-benchmark rerun currently in progress**
-(`data/benchmark_reports/online_local_llama_general_b1_20260727_n100.json`, general
-domain, n=100, seed 42) — that rerun covers the *general* fair-protocol table, not
-medical specifically. A dedicated medical-domain fair-protocol rerun
-(`--domain medical`, n=42, all 6 systems, same Llama 3.1 8B backend) has **not** been
-run yet; it is a separate ~15-30 minute job (much smaller than the n=100 general run)
-that should be queued once the current background rerun finishes, to avoid contending
-for the same local Ollama server.
+Run: `data/benchmark_reports/online_local_llama_medical_b7_20260728_n42.json`, all 6
+systems, `--domain medical`, `--mode online`, `--gen-backend ollama --gen-model
+llama3.1:8b`, same backend as Table 8. (One interruption mid-run from an external-drive
+disconnect; resumed cleanly from the built-in checkpoint, which reuses completed
+systems' saved rows rather than re-querying them — BM25/Dense/FlatRAG were unaffected.)
+
+| System | ROUGE-L (fair) | ROUGE-L (Table 4, offline) | Med. Entity Recall (fair) | Med. Entity Recall (Table 4, offline) | Ctx tok (fair) |
+|---|---|---|---|---|---|
+| BM25 | 0.257 | 0.358 | 0.895 | 1.000 | 76.7 |
+| Dense Retrieval | 0.257 | 0.315 | 0.954 | 0.992 | 81.4 |
+| FlatRAG | 0.337 | 0.271 | **0.974** | 1.000 | 0‡ |
+| RAPTOR | 0.073 | 0.053 | 0.825 | 0.895 | 412.4 |
+| PageTree-RAG (DFS) | **0.067** | **0.366** (table's best) | **0.720** (worst) | **1.000** (table's headline) | 4.5 |
+| PageTree-RAG (Beam) | 0.117 | 0.265 | 0.893 | 1.000 | 20.1 |
+
+**The result reverses.** Under the offline keyword-scoring path (current Table 4),
+PageTree-RAG (DFS) has the best ROUGE-L (0.366) and a perfect medical entity recall
+(1.000) — the paper's single most-cited impressive number. Under the fair protocol with
+real LLM-based traversal, **PageTree-RAG (DFS) has the *worst* ROUGE-L of all six
+systems (0.067) and the *worst* medical entity recall (0.720)**; FlatRAG and Dense
+actually lead entity recall (0.974, 0.954). Paired t-test confirms Beam is
+significantly worse than BM25/Dense/FlatRAG on ROUGE-L (p<0.001 for all three) under
+the fair protocol.
+
+This is not a small effect or noise — it is a complete reversal of the paper's most
+prominent domain-specific claim. **The medical_entity_recall=1.000 result cannot be
+used to support the paper's core contribution as currently framed**; it is specific to
+the offline keyword-scoring fallback path and does not replicate under the LLM-based
+adaptive traversal that the paper's title and abstract describe. This should be
+reported in the paper directly — either drop the medical entity recall = 1.000 claim
+from the abstract/highlights entirely, or reframe Table 4 explicitly as an offline-path
+result with the fair-protocol numbers alongside it as the honest comparison.
 
 ## 6. Rerunning Table 5 (Ablation, n=70) under the fair protocol
 
@@ -91,7 +113,8 @@ reasonable next step once the medical rerun above is done.
   Table 4 and 5 confirmed byte-exact) and 6, 8 (both online/fair, Table 8 byte-exact
   from B5). Caption text confirms 9, 10, 11, 12 as fair-protocol by the authors' own
   prior claim, though not independently re-derived byte-for-byte here.
-- **Not measured**: byte-exact source-file confirmation for Tables 3, 9, 10, 11, 12;
-  a fair-protocol medical rerun (Table 4) and ablation rerun (Table 5) — both queued
-  as follow-up work, not run in this session due to Ollama contention with the B1
-  background job.
+- **Not measured**: byte-exact source-file confirmation for Tables 3, 9, 10, 11, 12; a
+  fair-protocol ablation rerun (Table 5) — queued as follow-up work, not run in this
+  session (lower priority than the medical rerun, which was completed — see §5 above,
+  and produced a critical finding: the fair-protocol medical result reverses the
+  paper's offline-path headline claim).

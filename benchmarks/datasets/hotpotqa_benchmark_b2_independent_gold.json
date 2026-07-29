@@ -1,0 +1,1409 @@
+{
+  "version": "2.0-hotpotqa",
+  "backend": "hotpotqa",
+  "total_questions": 100,
+  "documents": [
+    "hotpotqa_5ac2f6b8554299677310265f_index.json",
+    "hotpotqa_5ab613985542992aa134a418_index.json",
+    "hotpotqa_5adfa92d55429942ec259ae0_index.json",
+    "hotpotqa_5ac259125542992f1f2b3867_index.json",
+    "hotpotqa_5a8a03245542992e4fca84d5_index.json",
+    "hotpotqa_5a73977d554299623ed4ac08_index.json",
+    "hotpotqa_5ab9aab555429970cfb8eb65_index.json",
+    "hotpotqa_5a7db0915542990b8f503a30_index.json",
+    "hotpotqa_5ab8e70b5542991b5579f031_index.json",
+    "hotpotqa_5adfd22255429906c02daa4f_index.json",
+    "hotpotqa_5ae1af14554299234fd042c4_index.json",
+    "hotpotqa_5ae5c7fd554299546bf82f5b_index.json",
+    "hotpotqa_5adf8ade5542993344016ce8_index.json",
+    "hotpotqa_5adfa451554299025d62a319_index.json",
+    "hotpotqa_5a8835dc5542994846c1ce2b_index.json",
+    "hotpotqa_5a738fe855429908901be2fb_index.json",
+    "hotpotqa_5a87bc3f5542996432c57275_index.json",
+    "hotpotqa_5ab85f555542992aa3b8c8ca_index.json",
+    "hotpotqa_5ac248fd55429951e9e68525_index.json",
+    "hotpotqa_5ade3af855429939a52fe867_index.json",
+    "hotpotqa_5ae28c0a554299495565daaa_index.json",
+    "hotpotqa_5ae505d355429908b63264e4_index.json",
+    "hotpotqa_5a8b78f055429971feec471a_index.json",
+    "hotpotqa_5ae328f45542991a06ce993c_index.json",
+    "hotpotqa_5ac3a76e554299741d48a2be_index.json",
+    "hotpotqa_5ae5cf0b55429929b08079aa_index.json",
+    "hotpotqa_5ae5b06e554299546bf82f2a_index.json",
+    "hotpotqa_5adec5055542995534e8c707_index.json",
+    "hotpotqa_5ab430fa5542991751b4d6dd_index.json",
+    "hotpotqa_5a88fa9e5542993b751ca8de_index.json",
+    "hotpotqa_5abebb8f5542994516f4540a_index.json",
+    "hotpotqa_5a81736255429903bc27b96e_index.json",
+    "hotpotqa_5a88a1bb5542997e5c09a64c_index.json",
+    "hotpotqa_5abd1b6e55429933744ab729_index.json",
+    "hotpotqa_5abfcd7a5542993fe9a41e7a_index.json",
+    "hotpotqa_5ae056c755429945ae959319_index.json",
+    "hotpotqa_5ab2f45d5542991669774151_index.json",
+    "hotpotqa_5a8591715542994c784ddb27_index.json",
+    "hotpotqa_5adc46665542994650320cc8_index.json",
+    "hotpotqa_5a8789115542994846c1cd9a_index.json",
+    "hotpotqa_5a713f395542994082a3e6ea_index.json",
+    "hotpotqa_5ae406f055429970de88d874_index.json",
+    "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+    "hotpotqa_5a74f5155542993748c89750_index.json",
+    "hotpotqa_5a8e0dbd554299068b959e3e_index.json",
+    "hotpotqa_5a7cd72055429909bec7683b_index.json",
+    "hotpotqa_5a80721b554299485f5985ef_index.json",
+    "hotpotqa_5a8e2147554299068b959e67_index.json",
+    "hotpotqa_5ac3b04f55429939154138b7_index.json",
+    "hotpotqa_5ab5e2645542992aa134a3c5_index.json",
+    "hotpotqa_5abd0b6b5542996e802b46b4_index.json",
+    "hotpotqa_5a7211e655429971e9dc923c_index.json",
+    "hotpotqa_5a7d2afb554299452d57bb41_index.json",
+    "hotpotqa_5abdd30c5542991f66106052_index.json",
+    "hotpotqa_5ab2a01d5542992953946778_index.json",
+    "hotpotqa_5a70f4695542994082a3e435_index.json",
+    "hotpotqa_5a7c2819554299683c1c62db_index.json",
+    "hotpotqa_5a7b22f8554299042af8f6ff_index.json",
+    "hotpotqa_5ae779a555429952e35ea931_index.json",
+    "hotpotqa_5a8485fa5542992a431d1a41_index.json",
+    "hotpotqa_5a8a803b55429930ff3c0e04_index.json",
+    "hotpotqa_5ae0038655429925eb1afbe0_index.json",
+    "hotpotqa_5abba3255542996cc5e4a031_index.json",
+    "hotpotqa_5a77a65b5542992a6e59df57_index.json",
+    "hotpotqa_5ae791cf55429952e35ea978_index.json",
+    "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+    "hotpotqa_5ae54c085542992663a4f1c4_index.json",
+    "hotpotqa_5ab2acbc55429929539467d2_index.json",
+    "hotpotqa_5ae0f5fc554299422ee9957c_index.json",
+    "hotpotqa_5ae738f75542991bbc9761c4_index.json",
+    "hotpotqa_5a739b1955429978a71e9044_index.json",
+    "hotpotqa_5a80b322554299485f5986c8_index.json",
+    "hotpotqa_5ae528e655429908b632652c_index.json",
+    "hotpotqa_5abffda6554299012d1db55b_index.json",
+    "hotpotqa_5abd0814554299700f9d797a_index.json",
+    "hotpotqa_5a7db0a05542991319bc93f5_index.json",
+    "hotpotqa_5add114a5542994734353826_index.json",
+    "hotpotqa_5a76f5b155429972597f1400_index.json",
+    "hotpotqa_5ae3e2455542994393b9e78c_index.json",
+    "hotpotqa_5a810506554299260e20a202_index.json",
+    "hotpotqa_5a79e3555542994bb945712f_index.json",
+    "hotpotqa_5abd2cde5542993062266bb1_index.json",
+    "hotpotqa_5a7faed65542994857a767b6_index.json",
+    "hotpotqa_5a8b24f955429949d91db4cd_index.json",
+    "hotpotqa_5ae0c1be5542993d6555ec42_index.json",
+    "hotpotqa_5a7605f85542994ccc91868d_index.json",
+    "hotpotqa_5a75eca555429976ec32bca8_index.json",
+    "hotpotqa_5ae1fc24554299492dc91bbd_index.json",
+    "hotpotqa_5a8a07725542992d82986e5b_index.json",
+    "hotpotqa_5ab482815542990594ba9c3d_index.json",
+    "hotpotqa_5a7cffb755429907fabef09f_index.json",
+    "hotpotqa_5a7793275542992a6e59df04_index.json",
+    "hotpotqa_5a8c301d554299240d9c20cb_index.json",
+    "hotpotqa_5a7ec95b55429934daa2fc67_index.json",
+    "hotpotqa_5ae0432a55429924de1b7081_index.json",
+    "hotpotqa_5a73d951554299623ed4ac77_index.json",
+    "hotpotqa_5abf64265542997ec76fd3eb_index.json",
+    "hotpotqa_5a8488f45542992a431d1a47_index.json",
+    "hotpotqa_5ae73d505542991e8301cc2c_index.json",
+    "hotpotqa_5a8799c55542996e4f308877_index.json"
+  ],
+  "questions": [
+    {
+      "question_id": "5ac2f6b8554299677310265f",
+      "document_id": "hotpotqa_5ac2f6b8554299677310265f_index.json",
+      "question": "Henry W. Bloch School of Management is named after the founder of an American tax preparation company that is based where?",
+      "expected_sections": [
+        "SEC3",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Kansas City",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab613985542992aa134a418",
+      "document_id": "hotpotqa_5ab613985542992aa134a418_index.json",
+      "question": "What kind of material forms the wrapping for the chocolate candies that Hershey Kissables were shaped like?",
+      "expected_sections": [
+        "SEC1",
+        "SEC8"
+      ],
+      "expected_answer_hint": "aluminum foil",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5adfa92d55429942ec259ae0",
+      "document_id": "hotpotqa_5adfa92d55429942ec259ae0_index.json",
+      "question": "Are both Superdrag and Collective Soul rock bands?",
+      "expected_sections": [
+        "SEC5",
+        "SEC9"
+      ],
+      "expected_answer_hint": "yes",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ac259125542992f1f2b3867",
+      "document_id": "hotpotqa_5ac259125542992f1f2b3867_index.json",
+      "question": "Where was the sitcom filmed that Judy Greer played Kitty Sanchez in?",
+      "expected_sections": [
+        "SEC3",
+        "SEC7"
+      ],
+      "expected_answer_hint": "primarily in Culver City and Marina del Rey",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8a03245542992e4fca84d5",
+      "document_id": "hotpotqa_5a8a03245542992e4fca84d5_index.json",
+      "question": "What profession does Spice Girls discography and Emma Bunton have in common?",
+      "expected_sections": [
+        "SEC1",
+        "SEC6"
+      ],
+      "expected_answer_hint": "singer",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a73977d554299623ed4ac08",
+      "document_id": "hotpotqa_5a73977d554299623ed4ac08_index.json",
+      "question": "What is the shared country of ancestry between Art Laboe and Scout Tufankjian?",
+      "expected_sections": [
+        "SEC0",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Armenian",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ab9aab555429970cfb8eb65",
+      "document_id": "hotpotqa_5ab9aab555429970cfb8eb65_index.json",
+      "question": "What is the name of the largest publicly owned company in Minnesota that is situated in Minnesota's most populous county?",
+      "expected_sections": [
+        "SEC3",
+        "SEC8"
+      ],
+      "expected_answer_hint": "United Healthcare",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7db0915542990b8f503a30",
+      "document_id": "hotpotqa_5a7db0915542990b8f503a30_index.json",
+      "question": "What German philosopher, economist and political theorist was Jakob Lukas Schabelitz a friend and associate of?",
+      "expected_sections": [
+        "SEC5",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Karl Marx",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab8e70b5542991b5579f031",
+      "document_id": "hotpotqa_5ab8e70b5542991b5579f031_index.json",
+      "question": "Besides dísir, what is another Nordic term for a ghost?",
+      "expected_sections": [
+        "SEC7",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Idisi",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5adfd22255429906c02daa4f",
+      "document_id": "hotpotqa_5adfd22255429906c02daa4f_index.json",
+      "question": "which actress was a notable practitioner at the white bear theatre and is also known for playing the role of melanie owen in the BBC one soap opera \"eatenders\"?",
+      "expected_sections": [
+        "SEC0",
+        "SEC6"
+      ],
+      "expected_answer_hint": "Tamzin Outhwaite",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae1af14554299234fd042c4",
+      "document_id": "hotpotqa_5ae1af14554299234fd042c4_index.json",
+      "question": "Are both William Beaudine and Richard Benjamin American actors?",
+      "expected_sections": [
+        "SEC0",
+        "SEC4"
+      ],
+      "expected_answer_hint": "yes",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ae5c7fd554299546bf82f5b",
+      "document_id": "hotpotqa_5ae5c7fd554299546bf82f5b_index.json",
+      "question": "Notable works of Bailee Madison includes a 2011 American Romantic comedy film that was directed by Dennis Dugan, and written by Allan Loeb and who?",
+      "expected_sections": [
+        "SEC4",
+        "SEC7"
+      ],
+      "expected_answer_hint": "Timothy Dowling",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5adf8ade5542993344016ce8",
+      "document_id": "hotpotqa_5adf8ade5542993344016ce8_index.json",
+      "question": "Dutch-born American businessman, Harry Koch, fathered a son born in 1900 that founded which oil refinery firm?",
+      "expected_sections": [
+        "SEC6",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Koch Industries",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5adfa451554299025d62a319",
+      "document_id": "hotpotqa_5adfa451554299025d62a319_index.json",
+      "question": "The first Latina Supreme Court Justice was part of the majority decision of a case that upheld which previous supreme court case?",
+      "expected_sections": [
+        "SEC1",
+        "SEC7"
+      ],
+      "expected_answer_hint": "Apprendi v. New Jersey",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8835dc5542994846c1ce2b",
+      "document_id": "hotpotqa_5a8835dc5542994846c1ce2b_index.json",
+      "question": "Who is a winner of the 2013 6 Hours of Silverstone a co-commentator for?",
+      "expected_sections": [
+        "SEC0",
+        "SEC8"
+      ],
+      "expected_answer_hint": "BBC Formula One",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a738fe855429908901be2fb",
+      "document_id": "hotpotqa_5a738fe855429908901be2fb_index.json",
+      "question": "What film was written and directed by Joby Harold with music written by Samuel Sim?",
+      "expected_sections": [
+        "SEC6",
+        "SEC7"
+      ],
+      "expected_answer_hint": "Awake",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a87bc3f5542996432c57275",
+      "document_id": "hotpotqa_5a87bc3f5542996432c57275_index.json",
+      "question": "Which is located farther West, the Cascade Locks and Canal or Lake Worth Lagoon?",
+      "expected_sections": [
+        "SEC5",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Cascade Locks and Canal",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ab85f555542992aa3b8c8ca",
+      "document_id": "hotpotqa_5ab85f555542992aa3b8c8ca_index.json",
+      "question": " \"Hold On\" is a song that features the vocals of a British singer whose debut album won what prize in 2017?",
+      "expected_sections": [
+        "SEC0",
+        "SEC4"
+      ],
+      "expected_answer_hint": "Mercury Prize",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ac248fd55429951e9e68525",
+      "document_id": "hotpotqa_5ac248fd55429951e9e68525_index.json",
+      "question": "What is the approximate population of the town near which Forward Operating Base Gibraltar was located ?",
+      "expected_sections": [
+        "SEC7",
+        "SEC9"
+      ],
+      "expected_answer_hint": "approximately 14,000",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ade3af855429939a52fe867",
+      "document_id": "hotpotqa_5ade3af855429939a52fe867_index.json",
+      "question": "In the Library with the Lead Pipe, an academic journal on topics about libraries, is abstracted and indexed by this third largest private company in Birmingham, Alabama? ",
+      "expected_sections": [
+        "SEC0",
+        "SEC1"
+      ],
+      "expected_answer_hint": "EBSCO Information Services",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae28c0a554299495565daaa",
+      "document_id": "hotpotqa_5ae28c0a554299495565daaa_index.json",
+      "question": "What is the length of the river into which Pack Creek runs after it goes through the Spanish Valley? ",
+      "expected_sections": [
+        "SEC0",
+        "SEC8"
+      ],
+      "expected_answer_hint": "1450 mi",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae505d355429908b63264e4",
+      "document_id": "hotpotqa_5ae505d355429908b63264e4_index.json",
+      "question": "Marco de la O stars in the title role of El Chapo which premiered on which network in April 2017?",
+      "expected_sections": [
+        "SEC6",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Univision",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8b78f055429971feec471a",
+      "document_id": "hotpotqa_5a8b78f055429971feec471a_index.json",
+      "question": "Was Steve Sekely and Willian King Baggot known by multiple names or nicknames?",
+      "expected_sections": [
+        "SEC2",
+        "SEC3"
+      ],
+      "expected_answer_hint": "yes",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ae328f45542991a06ce993c",
+      "document_id": "hotpotqa_5ae328f45542991a06ce993c_index.json",
+      "question": "On which station did the 2014 South Korean television series, starring the main rapper of boyband SS501, air?",
+      "expected_sections": [
+        "SEC2",
+        "SEC9"
+      ],
+      "expected_answer_hint": "KBS2",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ac3a76e554299741d48a2be",
+      "document_id": "hotpotqa_5ac3a76e554299741d48a2be_index.json",
+      "question": "Who released the song \"With or Without You\" first, Jai McDowall or U2?",
+      "expected_sections": [
+        "SEC6",
+        "SEC7"
+      ],
+      "expected_answer_hint": "U2",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae5cf0b55429929b08079aa",
+      "document_id": "hotpotqa_5ae5cf0b55429929b08079aa_index.json",
+      "question": "what caused the death of over 250 people in Accra, Ghana?",
+      "expected_sections": [
+        "SEC7",
+        "SEC8"
+      ],
+      "expected_answer_hint": "an explosion and a fire occurred at a petrol station",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae5b06e554299546bf82f2a",
+      "document_id": "hotpotqa_5ae5b06e554299546bf82f2a_index.json",
+      "question": "What was the capacity of the stadium that Colección Privada that was filmed on October 10, 2000?",
+      "expected_sections": [
+        "SEC1",
+        "SEC2"
+      ],
+      "expected_answer_hint": "15,500",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5adec5055542995534e8c707",
+      "document_id": "hotpotqa_5adec5055542995534e8c707_index.json",
+      "question": "Mark Newhouse finished 9th in a 2013 series of poker tournaments sponsored by what corporation?",
+      "expected_sections": [
+        "SEC7",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Caesars Entertainment Corporation",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab430fa5542991751b4d6dd",
+      "document_id": "hotpotqa_5ab430fa5542991751b4d6dd_index.json",
+      "question": "What kind of company is this group whose headquarters are in AIA Central? ",
+      "expected_sections": [
+        "SEC4",
+        "SEC9"
+      ],
+      "expected_answer_hint": "pan-Asian life insurance group",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a88fa9e5542993b751ca8de",
+      "document_id": "hotpotqa_5a88fa9e5542993b751ca8de_index.json",
+      "question": "What NFL team did the 2017 ESPN College Football Friday Primetime host who played at Oklahoma in college play for?",
+      "expected_sections": [
+        "SEC2",
+        "SEC8"
+      ],
+      "expected_answer_hint": "the Bears",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5abebb8f5542994516f4540a",
+      "document_id": "hotpotqa_5abebb8f5542994516f4540a_index.json",
+      "question": "Which English singer from the 1960s has an album entitled Dangerous Acquaintances released in 1981?",
+      "expected_sections": [
+        "SEC3",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Marianne Evelyn Gabriel Faithfull",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a81736255429903bc27b96e",
+      "document_id": "hotpotqa_5a81736255429903bc27b96e_index.json",
+      "question": "What is the formal name for the sporting facility located in Coos County, New Hampshire?",
+      "expected_sections": [
+        "SEC0",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Nansen Ski Jump",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a88a1bb5542997e5c09a64c",
+      "document_id": "hotpotqa_5a88a1bb5542997e5c09a64c_index.json",
+      "question": "Who directed a 2006 film where Ron Perkins character plays the manager of a hotel?",
+      "expected_sections": [
+        "SEC0",
+        "SEC2"
+      ],
+      "expected_answer_hint": "Christopher Nolan",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5abd1b6e55429933744ab729",
+      "document_id": "hotpotqa_5abd1b6e55429933744ab729_index.json",
+      "question": "Which of the following cities is a county-level city, Jingzhou or Zixing?",
+      "expected_sections": [
+        "SEC6",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Zixing",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5abfcd7a5542993fe9a41e7a",
+      "document_id": "hotpotqa_5abfcd7a5542993fe9a41e7a_index.json",
+      "question": "Do Xinghua, Jiangsu and Jingdezhen both border the same town to the north?",
+      "expected_sections": [
+        "SEC3",
+        "SEC8"
+      ],
+      "expected_answer_hint": "no",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ae056c755429945ae959319",
+      "document_id": "hotpotqa_5ae056c755429945ae959319_index.json",
+      "question": "James Garner had a role in the 2004 romantic drama directed by whom?",
+      "expected_sections": [
+        "SEC3",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Nick Cassavetes",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab2f45d5542991669774151",
+      "document_id": "hotpotqa_5ab2f45d5542991669774151_index.json",
+      "question": "What is the name of the place in The Chronicles of Narnia where Lucy Pevensie and Mr. Tumnus meet?",
+      "expected_sections": [
+        "SEC2",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Lantern Waste",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8591715542994c784ddb27",
+      "document_id": "hotpotqa_5a8591715542994c784ddb27_index.json",
+      "question": "What was the breakthrough role of the actor starring in Good Boy! and was a native of Atlanta?",
+      "expected_sections": [
+        "SEC6",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Tai Frasier in \"Clueless\"",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5adc46665542994650320cc8",
+      "document_id": "hotpotqa_5adc46665542994650320cc8_index.json",
+      "question": "In what year was the composer of \"Anthem\" born?",
+      "expected_sections": [
+        "SEC0",
+        "SEC9"
+      ],
+      "expected_answer_hint": "1943",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8789115542994846c1cd9a",
+      "document_id": "hotpotqa_5a8789115542994846c1cd9a_index.json",
+      "question": "Imran Khan has worked in what type of films refering to the Pashto Language film industry?",
+      "expected_sections": [
+        "SEC1",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Pollywood",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a713f395542994082a3e6ea",
+      "document_id": "hotpotqa_5a713f395542994082a3e6ea_index.json",
+      "question": "Where does the state legislature in which John Coffin Talbot served convene?",
+      "expected_sections": [
+        "SEC6",
+        "SEC7"
+      ],
+      "expected_answer_hint": "the State House in Augusta",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae406f055429970de88d874",
+      "document_id": "hotpotqa_5ae406f055429970de88d874_index.json",
+      "question": "What Cason, CA soccer team features the son of Roy Lassiter?",
+      "expected_sections": [
+        "SEC6",
+        "SEC8"
+      ],
+      "expected_answer_hint": "LA Galaxy",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8ad8b65542992d82986fa2",
+      "document_id": "hotpotqa_5a8ad8b65542992d82986fa2_index.json",
+      "question": "Who was from farther west, Max Neufeld or Eduard Zahariev?",
+      "expected_sections": [
+        "SEC0",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Max Neufeld",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a74f5155542993748c89750",
+      "document_id": "hotpotqa_5a74f5155542993748c89750_index.json",
+      "question": "What mine was operated by Royal Oak Mines at at earlier date, Kemess Mine or Colomac Mine?",
+      "expected_sections": [
+        "SEC5",
+        "SEC7"
+      ],
+      "expected_answer_hint": "The Colomac Mine",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a8e0dbd554299068b959e3e",
+      "document_id": "hotpotqa_5a8e0dbd554299068b959e3e_index.json",
+      "question": "What type of media does Hot Pixel and PlayStation Portable have in common?",
+      "expected_sections": [
+        "SEC0",
+        "SEC9"
+      ],
+      "expected_answer_hint": "video game",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7cd72055429909bec7683b",
+      "document_id": "hotpotqa_5a7cd72055429909bec7683b_index.json",
+      "question": "What years was the auto racing series held that was followed on by the 2016 Blancpain GT Series Sprint Cup?",
+      "expected_sections": [
+        "SEC3",
+        "SEC6"
+      ],
+      "expected_answer_hint": "2010 to 2012",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a80721b554299485f5985ef",
+      "document_id": "hotpotqa_5a80721b554299485f5985ef_index.json",
+      "question": "The Livesey Hal War Memorial commemorates the fallen of which war, that had over 60 million casualties?",
+      "expected_sections": [
+        "SEC0",
+        "SEC9"
+      ],
+      "expected_answer_hint": "World War II",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8e2147554299068b959e67",
+      "document_id": "hotpotqa_5a8e2147554299068b959e67_index.json",
+      "question": "Murray Seafield St George Head most recognised for which song from the concept album and subsequent musical \"Chess\" by Tim Rice, Benny Andersson and Björn Ulvaeus?",
+      "expected_sections": [
+        "SEC1",
+        "SEC4"
+      ],
+      "expected_answer_hint": "One Night in Bangkok",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ac3b04f55429939154138b7",
+      "document_id": "hotpotqa_5ac3b04f55429939154138b7_index.json",
+      "question": "Which railway is a part of Summerseat and also runs between Heywood and Rawtenstall?",
+      "expected_sections": [
+        "SEC4",
+        "SEC5"
+      ],
+      "expected_answer_hint": "East Lancashire Railway",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab5e2645542992aa134a3c5",
+      "document_id": "hotpotqa_5ab5e2645542992aa134a3c5_index.json",
+      "question": " Thomas Anthony Jankiewicz was best known for penning a film staring an actress who played Fiona Bowa on what NBC sitcom?",
+      "expected_sections": [
+        "SEC4",
+        "SEC6"
+      ],
+      "expected_answer_hint": "About a Boy",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5abd0b6b5542996e802b46b4",
+      "document_id": "hotpotqa_5abd0b6b5542996e802b46b4_index.json",
+      "question": "Finally includes the song that peaked at what on the US Hot 100",
+      "expected_sections": [
+        "SEC1",
+        "SEC7"
+      ],
+      "expected_answer_hint": "number five",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7211e655429971e9dc923c",
+      "document_id": "hotpotqa_5a7211e655429971e9dc923c_index.json",
+      "question": "What Finnish Christmas figure, which eventually become more or less conflated with Santa Claus, has modern representations typically made of straw.?",
+      "expected_sections": [
+        "SEC0",
+        "SEC4"
+      ],
+      "expected_answer_hint": "The Yule goat",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7d2afb554299452d57bb41",
+      "document_id": "hotpotqa_5a7d2afb554299452d57bb41_index.json",
+      "question": "The Story of Them Featuring Van Morrison is a compilation album recorded by what Northern Irish band formed in Belfast in April 1964?",
+      "expected_sections": [
+        "SEC2",
+        "SEC5"
+      ],
+      "expected_answer_hint": "Them",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5abdd30c5542991f66106052",
+      "document_id": "hotpotqa_5abdd30c5542991f66106052_index.json",
+      "question": "The 2015 MTV Video Music Awards pre-show premiered the music video for a love ballad with a prominent what?",
+      "expected_sections": [
+        "SEC2",
+        "SEC8"
+      ],
+      "expected_answer_hint": "dream pop influence",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab2a01d5542992953946778",
+      "document_id": "hotpotqa_5ab2a01d5542992953946778_index.json",
+      "question": "What kind of novelists were both Robert Stone and Truman Capote?",
+      "expected_sections": [
+        "SEC0",
+        "SEC1"
+      ],
+      "expected_answer_hint": "American",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a70f4695542994082a3e435",
+      "document_id": "hotpotqa_5a70f4695542994082a3e435_index.json",
+      "question": "Which canal was built between 1836 and 1847, Washington City Canal or Whitewater Canal?",
+      "expected_sections": [
+        "SEC1",
+        "SEC6"
+      ],
+      "expected_answer_hint": "The Whitewater Canal",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a7c2819554299683c1c62db",
+      "document_id": "hotpotqa_5a7c2819554299683c1c62db_index.json",
+      "question": "The 1997 independent slapstick comedy film Snowboard Academy stars this Danish-Italian actress, model, singer and reality television personality who began her career modelling for whom?",
+      "expected_sections": [
+        "SEC3",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Greg Gorman and Helmut Newton",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7b22f8554299042af8f6ff",
+      "document_id": "hotpotqa_5a7b22f8554299042af8f6ff_index.json",
+      "question": "Who was the opponent of the Republican of Indenosia when Nugroho Notosusanto served as a member of the Student Army",
+      "expected_sections": [
+        "SEC2",
+        "SEC9"
+      ],
+      "expected_answer_hint": "the Dutch Empire",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae779a555429952e35ea931",
+      "document_id": "hotpotqa_5ae779a555429952e35ea931_index.json",
+      "question": "Orson Welles made Filming the Trial, a making-of film of the production of The Trial, which was originally filmed where?",
+      "expected_sections": [
+        "SEC0",
+        "SEC2"
+      ],
+      "expected_answer_hint": "Europe",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8485fa5542992a431d1a41",
+      "document_id": "hotpotqa_5a8485fa5542992a431d1a41_index.json",
+      "question": "Who was the brother of the architect of Hook and Ladder No. 4 located in Albany, NY?",
+      "expected_sections": [
+        "SEC2",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Cuyler Reynolds",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8a803b55429930ff3c0e04",
+      "document_id": "hotpotqa_5a8a803b55429930ff3c0e04_index.json",
+      "question": "Jean Hudson Boyd is known for her controversial sentencing of Ethan Couch. What was his sentence?",
+      "expected_sections": [
+        "SEC6",
+        "SEC7"
+      ],
+      "expected_answer_hint": "ten years of probation",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae0038655429925eb1afbe0",
+      "document_id": "hotpotqa_5ae0038655429925eb1afbe0_index.json",
+      "question": "Which is a Macedonian weekly, Hänt Extra or Tea Moderna?",
+      "expected_sections": [
+        "SEC1",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Tea Moderna",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5abba3255542996cc5e4a031",
+      "document_id": "hotpotqa_5abba3255542996cc5e4a031_index.json",
+      "question": "Are John O'Hara and Rabindranath Tagore the same nationality?",
+      "expected_sections": [
+        "SEC4",
+        "SEC5"
+      ],
+      "expected_answer_hint": "no",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a77a65b5542992a6e59df57",
+      "document_id": "hotpotqa_5a77a65b5542992a6e59df57_index.json",
+      "question": "when was the album that includes the song by Dustin Lynch released to country radio on February 17, 2017?",
+      "expected_sections": [
+        "SEC5",
+        "SEC9"
+      ],
+      "expected_answer_hint": "September 8, 2017",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae791cf55429952e35ea978",
+      "document_id": "hotpotqa_5ae791cf55429952e35ea978_index.json",
+      "question": "The English company behind the British Rail Class D1/3 locomotive, Ruston & Hornsby is now a part of what German company?",
+      "expected_sections": [
+        "SEC4",
+        "SEC6"
+      ],
+      "expected_answer_hint": "the Siemens group",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ac4f12d55429924173fb4f6",
+      "document_id": "hotpotqa_5ac4f12d55429924173fb4f6_index.json",
+      "question": "Pravda and Stiffelio are both operas?",
+      "expected_sections": [
+        "SEC4",
+        "SEC6"
+      ],
+      "expected_answer_hint": "no",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ae54c085542992663a4f1c4",
+      "document_id": "hotpotqa_5ae54c085542992663a4f1c4_index.json",
+      "question": "What are some other areas that share a common deer species with the forests of Mara and Mondrem?",
+      "expected_sections": [
+        "SEC1",
+        "SEC2"
+      ],
+      "expected_answer_hint": "New Zealand, Canada, the United States, the Falkland Islands, and Peru.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab2acbc55429929539467d2",
+      "document_id": "hotpotqa_5ab2acbc55429929539467d2_index.json",
+      "question": "What island is located  808 nmi northwest of the capital of Hawaii?",
+      "expected_sections": [
+        "SEC6",
+        "SEC7"
+      ],
+      "expected_answer_hint": "Laysan",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae0f5fc554299422ee9957c",
+      "document_id": "hotpotqa_5ae0f5fc554299422ee9957c_index.json",
+      "question": "Who did Neleus of Scepsis study under in addition to Theophrastus in the Peripatetic school?",
+      "expected_sections": [
+        "SEC2",
+        "SEC6"
+      ],
+      "expected_answer_hint": "Aristotle",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae738f75542991bbc9761c4",
+      "document_id": "hotpotqa_5ae738f75542991bbc9761c4_index.json",
+      "question": "What year was the brother of this first round draft pick by the Washington Redskins drafted?",
+      "expected_sections": [
+        "SEC3",
+        "SEC5"
+      ],
+      "expected_answer_hint": "2003",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a739b1955429978a71e9044",
+      "document_id": "hotpotqa_5a739b1955429978a71e9044_index.json",
+      "question": "What company claims to manufacture one out of every three objects that provide a shelf life typically ranging from one to five years?",
+      "expected_sections": [
+        "SEC1",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Crown Holdings Incorporated",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a80b322554299485f5986c8",
+      "document_id": "hotpotqa_5a80b322554299485f5986c8_index.json",
+      "question": "The twenty-first season of South Park was entitled \"White People Renovating Houses\" is which episode of the series overall?",
+      "expected_sections": [
+        "SEC4",
+        "SEC7"
+      ],
+      "expected_answer_hint": "278th episode",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae528e655429908b632652c",
+      "document_id": "hotpotqa_5ae528e655429908b632652c_index.json",
+      "question": "Which publisher released the prequel to the 2012 novel Boneland in 1960?",
+      "expected_sections": [
+        "SEC5",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Sir William Collins",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5abffda6554299012d1db55b",
+      "document_id": "hotpotqa_5abffda6554299012d1db55b_index.json",
+      "question": "What is the main nickname of the professional association football club where Ewan Fenton spent thirteen seasons?",
+      "expected_sections": [
+        "SEC6",
+        "SEC9"
+      ],
+      "expected_answer_hint": "\"the Seasiders\"",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5abd0814554299700f9d797a",
+      "document_id": "hotpotqa_5abd0814554299700f9d797a_index.json",
+      "question": "Jimmy D'Arcy played in Northern Ireland for the team based in what county?",
+      "expected_sections": [
+        "SEC3",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Antrim",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7db0a05542991319bc93f5",
+      "document_id": "hotpotqa_5a7db0a05542991319bc93f5_index.json",
+      "question": "What college in the Blue Ridge Assembly Historic District  emphasized the study of art?",
+      "expected_sections": [
+        "SEC0",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Black Mountain College",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5add114a5542994734353826",
+      "document_id": "hotpotqa_5add114a5542994734353826_index.json",
+      "question": "Which is the younger brother in the composer duo that composed Aati Kya Khandala?",
+      "expected_sections": [
+        "SEC2",
+        "SEC6"
+      ],
+      "expected_answer_hint": "Lalit",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a76f5b155429972597f1400",
+      "document_id": "hotpotqa_5a76f5b155429972597f1400_index.json",
+      "question": "What American composer born in 1937 pioneered minimal music?",
+      "expected_sections": [
+        "SEC1",
+        "SEC7"
+      ],
+      "expected_answer_hint": "Philip Morris Glass",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae3e2455542994393b9e78c",
+      "document_id": "hotpotqa_5ae3e2455542994393b9e78c_index.json",
+      "question": "Scout Tufankjian and Daron Malakian are both what?",
+      "expected_sections": [
+        "SEC2",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Armenian–American",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a810506554299260e20a202",
+      "document_id": "hotpotqa_5a810506554299260e20a202_index.json",
+      "question": "What is the birth date of this American composer, who composed the Ghost Quartet?",
+      "expected_sections": [
+        "SEC1",
+        "SEC5"
+      ],
+      "expected_answer_hint": "January 4, 1976",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a79e3555542994bb945712f",
+      "document_id": "hotpotqa_5a79e3555542994bb945712f_index.json",
+      "question": "Who was born first, Sarah Jacobson or Arthur Hiller?",
+      "expected_sections": [
+        "SEC8",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Arthur Hiller",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5abd2cde5542993062266bb1",
+      "document_id": "hotpotqa_5abd2cde5542993062266bb1_index.json",
+      "question": "Evil controllers was featured on Game informer who was published by which monthly video magazine corporation?",
+      "expected_sections": [
+        "SEC3",
+        "SEC7"
+      ],
+      "expected_answer_hint": "GameStop Corp.",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7faed65542994857a767b6",
+      "document_id": "hotpotqa_5a7faed65542994857a767b6_index.json",
+      "question": "What city did the name come from for the Polish truck manufacturer who sold to various countries, including more than the socialist states of Central and Eastern Europe?",
+      "expected_sections": [
+        "SEC6",
+        "SEC9"
+      ],
+      "expected_answer_hint": "City of Starachowice",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8b24f955429949d91db4cd",
+      "document_id": "hotpotqa_5a8b24f955429949d91db4cd_index.json",
+      "question": "Where is the airline company that operated United Express Flight 3411 on April 9, 2017 on behalf of United Express headquartered?",
+      "expected_sections": [
+        "SEC1",
+        "SEC4"
+      ],
+      "expected_answer_hint": "Indianapolis, Indiana",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae0c1be5542993d6555ec42",
+      "document_id": "hotpotqa_5ae0c1be5542993d6555ec42_index.json",
+      "question": "The 2008 American romantic drama film directed by David Fincher won what directing award?",
+      "expected_sections": [
+        "SEC7",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Academy Award for Best Art Direction",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7605f85542994ccc91868d",
+      "document_id": "hotpotqa_5a7605f85542994ccc91868d_index.json",
+      "question": "Which battle lasted longer, Battle of Hürtgen Forest or Battle of Pusan Perimeter?",
+      "expected_sections": [
+        "SEC3",
+        "SEC5"
+      ],
+      "expected_answer_hint": "Battle of Hürtgen Forest",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a75eca555429976ec32bca8",
+      "document_id": "hotpotqa_5a75eca555429976ec32bca8_index.json",
+      "question": "Which one of the Long Island Herald newspaper chain serves a village in Nassau County, New York with a population of 6,483?",
+      "expected_sections": [
+        "SEC4",
+        "SEC5"
+      ],
+      "expected_answer_hint": "The Nassau Herald",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae1fc24554299492dc91bbd",
+      "document_id": "hotpotqa_5ae1fc24554299492dc91bbd_index.json",
+      "question": "John Paesano wrote which film for DreamWorks Dragons?",
+      "expected_sections": [
+        "SEC1",
+        "SEC2"
+      ],
+      "expected_answer_hint": "Dragons: Riders of Berk",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8a07725542992d82986e5b",
+      "document_id": "hotpotqa_5a8a07725542992d82986e5b_index.json",
+      "question": "Along side Thomas Alan, which singer's first three albums were recorded at The Boarding House?",
+      "expected_sections": [
+        "SEC5",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Steve Martin",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ab482815542990594ba9c3d",
+      "document_id": "hotpotqa_5ab482815542990594ba9c3d_index.json",
+      "question": "Flowers in the Attick starred which \"Mad Men\" actress?",
+      "expected_sections": [
+        "SEC7",
+        "SEC8"
+      ],
+      "expected_answer_hint": "Kiernan Brennan Shipka",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7cffb755429907fabef09f",
+      "document_id": "hotpotqa_5a7cffb755429907fabef09f_index.json",
+      "question": "What character played by Laurence Olivier in 1969 was an officer in the Royal Air Force",
+      "expected_sections": [
+        "SEC6",
+        "SEC7"
+      ],
+      "expected_answer_hint": "Hugh Dowding",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a7793275542992a6e59df04",
+      "document_id": "hotpotqa_5a7793275542992a6e59df04_index.json",
+      "question": "Which country is the firm that owns Babycham located?",
+      "expected_sections": [
+        "SEC3",
+        "SEC6"
+      ],
+      "expected_answer_hint": "Australia",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8c301d554299240d9c20cb",
+      "document_id": "hotpotqa_5a8c301d554299240d9c20cb_index.json",
+      "question": "Casino and Culto A La Vida are cocktails, one of which contains Havana Club 7 and what else?",
+      "expected_sections": [
+        "SEC8",
+        "SEC9"
+      ],
+      "expected_answer_hint": "It features Havana Club 7 Añejo Rum and Cranberry juice",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a7ec95b55429934daa2fc67",
+      "document_id": "hotpotqa_5a7ec95b55429934daa2fc67_index.json",
+      "question": "Were Gregory La Cava and Mike Judge both actors? ",
+      "expected_sections": [
+        "SEC2",
+        "SEC9"
+      ],
+      "expected_answer_hint": "no",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5ae0432a55429924de1b7081",
+      "document_id": "hotpotqa_5ae0432a55429924de1b7081_index.json",
+      "question": "Were Rosario Castellanos and Lucy Maud Montgomery both authors?",
+      "expected_sections": [
+        "SEC1",
+        "SEC9"
+      ],
+      "expected_answer_hint": "yes",
+      "difficulty": "medium",
+      "category": "multi_hop",
+      "hotpotqa_type": "comparison"
+    },
+    {
+      "question_id": "5a73d951554299623ed4ac77",
+      "document_id": "hotpotqa_5a73d951554299623ed4ac77_index.json",
+      "question": "A holdout is an accessory used by cheats in order for them to recieve what?",
+      "expected_sections": [
+        "SEC1",
+        "SEC6"
+      ],
+      "expected_answer_hint": "reward",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5abf64265542997ec76fd3eb",
+      "document_id": "hotpotqa_5abf64265542997ec76fd3eb_index.json",
+      "question": "Dance and Laugh Amongst the Rotten is a studio Album by a band from which country ?",
+      "expected_sections": [
+        "SEC7",
+        "SEC8"
+      ],
+      "expected_answer_hint": "the Netherlands",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8488f45542992a431d1a47",
+      "document_id": "hotpotqa_5a8488f45542992a431d1a47_index.json",
+      "question": "Who wrote The Devils, and was an eninent English theater, opera and film director?",
+      "expected_sections": [
+        "SEC4",
+        "SEC7"
+      ],
+      "expected_answer_hint": "Peter Hall",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5ae73d505542991e8301cc2c",
+      "document_id": "hotpotqa_5ae73d505542991e8301cc2c_index.json",
+      "question": "Sebastian Gutierrez is known for writing the screenplay for the 2003 film directed by whom?",
+      "expected_sections": [
+        "SEC1",
+        "SEC2"
+      ],
+      "expected_answer_hint": "Mathieu Kassovitz",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    },
+    {
+      "question_id": "5a8799c55542996e4f308877",
+      "document_id": "hotpotqa_5a8799c55542996e4f308877_index.json",
+      "question": "Jens Risom introduced what type of design, characterized by minimalism and functionality?",
+      "expected_sections": [
+        "SEC1",
+        "SEC9"
+      ],
+      "expected_answer_hint": "Scandinavian design",
+      "difficulty": "hard",
+      "category": "multi_hop",
+      "hotpotqa_type": "bridge"
+    }
+  ]
+}
