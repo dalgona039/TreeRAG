@@ -1,0 +1,2982 @@
+[
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 476,
+    "completion_tokens": 81,
+    "total_tokens": 557,
+    "latency_s": 16.22049307823181,
+    "timestamp": 1785370857.359806
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 259,
+    "completion_tokens": 57,
+    "total_tokens": 316,
+    "latency_s": 7.333016872406006,
+    "timestamp": 1785370864.69769
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 269,
+    "completion_tokens": 72,
+    "total_tokens": 341,
+    "latency_s": 8.223510026931763,
+    "timestamp": 1785370872.927216
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 280,
+    "completion_tokens": 65,
+    "total_tokens": 345,
+    "latency_s": 7.425866603851318,
+    "timestamp": 1785370880.354741
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 263,
+    "completion_tokens": 75,
+    "total_tokens": 338,
+    "latency_s": 8.2879958152771,
+    "timestamp": 1785370888.6434891
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 264,
+    "completion_tokens": 73,
+    "total_tokens": 337,
+    "latency_s": 7.821760892868042,
+    "timestamp": 1785370896.465612
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 252,
+    "completion_tokens": 62,
+    "total_tokens": 314,
+    "latency_s": 7.449626922607422,
+    "timestamp": 1785370916.429934
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 475,
+    "completion_tokens": 126,
+    "total_tokens": 601,
+    "latency_s": 11.987383842468262,
+    "timestamp": 1785370928.427307
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 258,
+    "completion_tokens": 53,
+    "total_tokens": 311,
+    "latency_s": 5.588134288787842,
+    "timestamp": 1785370934.015876
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 268,
+    "completion_tokens": 53,
+    "total_tokens": 321,
+    "latency_s": 5.649503946304321,
+    "timestamp": 1785370939.6673138
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 279,
+    "completion_tokens": 106,
+    "total_tokens": 385,
+    "latency_s": 10.070780992507935,
+    "timestamp": 1785370949.738909
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 262,
+    "completion_tokens": 75,
+    "total_tokens": 337,
+    "latency_s": 7.417581081390381,
+    "timestamp": 1785370957.1570098
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 263,
+    "completion_tokens": 73,
+    "total_tokens": 336,
+    "latency_s": 7.262447834014893,
+    "timestamp": 1785370964.42024
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 243,
+    "completion_tokens": 144,
+    "total_tokens": 387,
+    "latency_s": 14.26842212677002,
+    "timestamp": 1785370978.692139
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 359,
+    "completion_tokens": 61,
+    "total_tokens": 420,
+    "latency_s": 8.414730072021484,
+    "timestamp": 1785370995.583712
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 473,
+    "completion_tokens": 85,
+    "total_tokens": 558,
+    "latency_s": 8.33798885345459,
+    "timestamp": 1785371003.9324071
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 256,
+    "completion_tokens": 59,
+    "total_tokens": 315,
+    "latency_s": 6.115249872207642,
+    "timestamp": 1785371010.048272
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 260,
+    "completion_tokens": 75,
+    "total_tokens": 335,
+    "latency_s": 7.524558782577515,
+    "timestamp": 1785371017.573366
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 261,
+    "completion_tokens": 58,
+    "total_tokens": 319,
+    "latency_s": 6.0850019454956055,
+    "timestamp": 1785371023.658983
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 220,
+    "completion_tokens": 254,
+    "total_tokens": 474,
+    "latency_s": 22.18370509147644,
+    "timestamp": 1785371045.872579
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 481,
+    "completion_tokens": 58,
+    "total_tokens": 539,
+    "latency_s": 9.112961769104004,
+    "timestamp": 1785371055.274693
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 476,
+    "completion_tokens": 111,
+    "total_tokens": 587,
+    "latency_s": 10.620877981185913,
+    "timestamp": 1785371065.897125
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 264,
+    "completion_tokens": 59,
+    "total_tokens": 323,
+    "latency_s": 6.36866307258606,
+    "timestamp": 1785371072.266648
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 263,
+    "completion_tokens": 66,
+    "total_tokens": 329,
+    "latency_s": 6.917428970336914,
+    "timestamp": 1785371079.1847281
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 276,
+    "completion_tokens": 70,
+    "total_tokens": 346,
+    "latency_s": 7.82055401802063,
+    "timestamp": 1785371087.006078
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 273,
+    "completion_tokens": 92,
+    "total_tokens": 365,
+    "latency_s": 9.413519144058228,
+    "timestamp": 1785371096.42017
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 275,
+    "completion_tokens": 23,
+    "total_tokens": 298,
+    "latency_s": 3.6193161010742188,
+    "timestamp": 1785371100.040104
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 259,
+    "completion_tokens": 76,
+    "total_tokens": 335,
+    "latency_s": 7.7636330127716064,
+    "timestamp": 1785371107.8044019
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 257,
+    "completion_tokens": 63,
+    "total_tokens": 320,
+    "latency_s": 7.678950786590576,
+    "timestamp": 1785371115.484203
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 476,
+    "completion_tokens": 112,
+    "total_tokens": 588,
+    "latency_s": 10.925057888031006,
+    "timestamp": 1785371126.410887
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 264,
+    "completion_tokens": 72,
+    "total_tokens": 336,
+    "latency_s": 7.224390029907227,
+    "timestamp": 1785371133.6360052
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 494,
+    "completion_tokens": 90,
+    "total_tokens": 584,
+    "latency_s": 11.917333126068115,
+    "timestamp": 1785371145.554504
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 274,
+    "completion_tokens": 23,
+    "total_tokens": 297,
+    "latency_s": 4.460410118103027,
+    "timestamp": 1785371150.015351
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 269,
+    "completion_tokens": 64,
+    "total_tokens": 333,
+    "latency_s": 7.0500288009643555,
+    "timestamp": 1785371157.066188
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 272,
+    "completion_tokens": 96,
+    "total_tokens": 368,
+    "latency_s": 9.824154138565063,
+    "timestamp": 1785371166.89084
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 259,
+    "completion_tokens": 69,
+    "total_tokens": 328,
+    "latency_s": 6.999355316162109,
+    "timestamp": 1785371173.890707
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 263,
+    "completion_tokens": 69,
+    "total_tokens": 332,
+    "latency_s": 6.989720821380615,
+    "timestamp": 1785371180.880821
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 249,
+    "completion_tokens": 259,
+    "total_tokens": 508,
+    "latency_s": 22.88479208946228,
+    "timestamp": 1785371203.7678132
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 480,
+    "completion_tokens": 71,
+    "total_tokens": 551,
+    "latency_s": 10.133491039276123,
+    "timestamp": 1785371214.9436412
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 477,
+    "completion_tokens": 140,
+    "total_tokens": 617,
+    "latency_s": 12.952292680740356,
+    "timestamp": 1785371227.897516
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 265,
+    "completion_tokens": 59,
+    "total_tokens": 324,
+    "latency_s": 6.3567938804626465,
+    "timestamp": 1785371234.254953
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 495,
+    "completion_tokens": 115,
+    "total_tokens": 610,
+    "latency_s": 10.81686806678772,
+    "timestamp": 1785371245.072635
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 270,
+    "completion_tokens": 91,
+    "total_tokens": 361,
+    "latency_s": 9.013823986053467,
+    "timestamp": 1785371254.087435
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 275,
+    "completion_tokens": 85,
+    "total_tokens": 360,
+    "latency_s": 8.502523183822632,
+    "timestamp": 1785371262.5905
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 271,
+    "completion_tokens": 59,
+    "total_tokens": 330,
+    "latency_s": 6.631210088729858,
+    "timestamp": 1785371269.222081
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 264,
+    "completion_tokens": 78,
+    "total_tokens": 342,
+    "latency_s": 7.898713111877441,
+    "timestamp": 1785371277.12187
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 255,
+    "completion_tokens": 58,
+    "total_tokens": 313,
+    "latency_s": 6.557331800460815,
+    "timestamp": 1785371283.679799
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 255,
+    "completion_tokens": 56,
+    "total_tokens": 311,
+    "latency_s": 6.905551910400391,
+    "timestamp": 1785371290.587689
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 481,
+    "completion_tokens": 108,
+    "total_tokens": 589,
+    "latency_s": 10.300165176391602,
+    "timestamp": 1785371300.8898282
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 269,
+    "completion_tokens": 62,
+    "total_tokens": 331,
+    "latency_s": 6.579808950424194,
+    "timestamp": 1785371307.47028
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 499,
+    "completion_tokens": 98,
+    "total_tokens": 597,
+    "latency_s": 9.38845682144165,
+    "timestamp": 1785371316.8598242
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 277,
+    "completion_tokens": 64,
+    "total_tokens": 341,
+    "latency_s": 6.729002952575684,
+    "timestamp": 1785371323.589503
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 274,
+    "completion_tokens": 63,
+    "total_tokens": 337,
+    "latency_s": 6.753854036331177,
+    "timestamp": 1785371330.3443189
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 279,
+    "completion_tokens": 87,
+    "total_tokens": 366,
+    "latency_s": 8.664760112762451,
+    "timestamp": 1785371339.009693
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 259,
+    "completion_tokens": 77,
+    "total_tokens": 336,
+    "latency_s": 7.84417986869812,
+    "timestamp": 1785371346.8543942
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 268,
+    "completion_tokens": 79,
+    "total_tokens": 347,
+    "latency_s": 8.01612901687622,
+    "timestamp": 1785371354.8711848
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 252,
+    "completion_tokens": 256,
+    "total_tokens": 508,
+    "latency_s": 22.33895707130432,
+    "timestamp": 1785371377.211724
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 480,
+    "completion_tokens": 58,
+    "total_tokens": 538,
+    "latency_s": 9.070617914199829,
+    "timestamp": 1785371386.624796
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 480,
+    "completion_tokens": 103,
+    "total_tokens": 583,
+    "latency_s": 9.832121133804321,
+    "timestamp": 1785371396.4591749
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 267,
+    "completion_tokens": 57,
+    "total_tokens": 324,
+    "latency_s": 6.202073812484741,
+    "timestamp": 1785371402.662636
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 280,
+    "completion_tokens": 60,
+    "total_tokens": 340,
+    "latency_s": 6.463471174240112,
+    "timestamp": 1785371409.127042
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 277,
+    "completion_tokens": 97,
+    "total_tokens": 374,
+    "latency_s": 9.506679058074951,
+    "timestamp": 1785371418.634142
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 279,
+    "completion_tokens": 86,
+    "total_tokens": 365,
+    "latency_s": 8.607071876525879,
+    "timestamp": 1785371427.241923
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 263,
+    "completion_tokens": 65,
+    "total_tokens": 328,
+    "latency_s": 6.853808879852295,
+    "timestamp": 1785371434.09642
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 268,
+    "completion_tokens": 63,
+    "total_tokens": 331,
+    "latency_s": 6.676827907562256,
+    "timestamp": 1785371440.7737632
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 190,
+    "completion_tokens": 275,
+    "total_tokens": 465,
+    "latency_s": 24.554313898086548,
+    "timestamp": 1785371465.3299258
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 517,
+    "completion_tokens": 60,
+    "total_tokens": 577,
+    "latency_s": 9.618037939071655,
+    "timestamp": 1785371475.2968268
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 479,
+    "completion_tokens": 43,
+    "total_tokens": 522,
+    "latency_s": 4.7985570430755615,
+    "timestamp": 1785371480.097643
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 257,
+    "completion_tokens": 71,
+    "total_tokens": 328,
+    "latency_s": 7.351138114929199,
+    "timestamp": 1785371487.449632
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 276,
+    "completion_tokens": 63,
+    "total_tokens": 339,
+    "latency_s": 7.206405162811279,
+    "timestamp": 1785371494.6569128
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 271,
+    "completion_tokens": 65,
+    "total_tokens": 336,
+    "latency_s": 7.076254844665527,
+    "timestamp": 1785371501.7337642
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 266,
+    "completion_tokens": 87,
+    "total_tokens": 353,
+    "latency_s": 8.689463138580322,
+    "timestamp": 1785371510.423906
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 250,
+    "completion_tokens": 60,
+    "total_tokens": 310,
+    "latency_s": 7.243803977966309,
+    "timestamp": 1785371517.669468
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 479,
+    "completion_tokens": 99,
+    "total_tokens": 578,
+    "latency_s": 9.549577951431274,
+    "timestamp": 1785371527.220852
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 257,
+    "completion_tokens": 64,
+    "total_tokens": 321,
+    "latency_s": 6.749255895614624,
+    "timestamp": 1785371533.971018
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 276,
+    "completion_tokens": 62,
+    "total_tokens": 338,
+    "latency_s": 6.567854166030884,
+    "timestamp": 1785371540.5395951
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 271,
+    "completion_tokens": 62,
+    "total_tokens": 333,
+    "latency_s": 6.585482835769653,
+    "timestamp": 1785371547.125497
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 267,
+    "completion_tokens": 64,
+    "total_tokens": 331,
+    "latency_s": 6.733906030654907,
+    "timestamp": 1785371553.860013
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 266,
+    "completion_tokens": 89,
+    "total_tokens": 355,
+    "latency_s": 8.825846910476685,
+    "timestamp": 1785371562.6864672
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 252,
+    "completion_tokens": 384,
+    "total_tokens": 636,
+    "latency_s": 33.20554494857788,
+    "timestamp": 1785371595.8933902
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 608,
+    "completion_tokens": 57,
+    "total_tokens": 665,
+    "latency_s": 10.137718915939331,
+    "timestamp": 1785371606.5206342
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 490,
+    "completion_tokens": 87,
+    "total_tokens": 577,
+    "latency_s": 8.516570091247559,
+    "timestamp": 1785371615.0386539
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 268,
+    "completion_tokens": 95,
+    "total_tokens": 363,
+    "latency_s": 9.296247005462646,
+    "timestamp": 1785371624.336433
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 277,
+    "completion_tokens": 69,
+    "total_tokens": 346,
+    "latency_s": 7.166569948196411,
+    "timestamp": 1785371631.5037692
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 290,
+    "completion_tokens": 80,
+    "total_tokens": 370,
+    "latency_s": 8.091389894485474,
+    "timestamp": 1785371639.59566
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 287,
+    "completion_tokens": 75,
+    "total_tokens": 362,
+    "latency_s": 11.666991949081421,
+    "timestamp": 1785371651.262999
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 289,
+    "completion_tokens": 84,
+    "total_tokens": 373,
+    "latency_s": 28.500317811965942,
+    "timestamp": 1785371679.7655292
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 278,
+    "completion_tokens": 68,
+    "total_tokens": 346,
+    "latency_s": 13.654956102371216,
+    "timestamp": 1785371693.4212081
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 263,
+    "completion_tokens": 181,
+    "total_tokens": 444,
+    "latency_s": 24.263728857040405,
+    "timestamp": 1785371717.6873899
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 443,
+    "completion_tokens": 54,
+    "total_tokens": 497,
+    "latency_s": 9.80466890335083,
+    "timestamp": 1785371727.711443
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 492,
+    "completion_tokens": 118,
+    "total_tokens": 610,
+    "latency_s": 11.431249856948853,
+    "timestamp": 1785371739.145159
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 279,
+    "completion_tokens": 76,
+    "total_tokens": 355,
+    "latency_s": 7.899833917617798,
+    "timestamp": 1785371747.045713
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 292,
+    "completion_tokens": 65,
+    "total_tokens": 357,
+    "latency_s": 6.907148122787476,
+    "timestamp": 1785371753.95381
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 289,
+    "completion_tokens": 82,
+    "total_tokens": 371,
+    "latency_s": 8.24367094039917,
+    "timestamp": 1785371762.1981351
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 291,
+    "completion_tokens": 72,
+    "total_tokens": 363,
+    "latency_s": 7.416944742202759,
+    "timestamp": 1785371769.6160839
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 275,
+    "completion_tokens": 64,
+    "total_tokens": 339,
+    "latency_s": 6.766987085342407,
+    "timestamp": 1785371776.383594
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 280,
+    "completion_tokens": 73,
+    "total_tokens": 353,
+    "latency_s": 7.48701810836792,
+    "timestamp": 1785371783.8712351
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 265,
+    "completion_tokens": 184,
+    "total_tokens": 449,
+    "latency_s": 15.981063842773438,
+    "timestamp": 1785371799.854125
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 449,
+    "completion_tokens": 59,
+    "total_tokens": 508,
+    "latency_s": 8.837743997573853,
+    "timestamp": 1785371808.8738308
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 496,
+    "completion_tokens": 129,
+    "total_tokens": 625,
+    "latency_s": 12.261146306991577,
+    "timestamp": 1785371821.136833
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 283,
+    "completion_tokens": 59,
+    "total_tokens": 342,
+    "latency_s": 6.337992906570435,
+    "timestamp": 1785371827.475598
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 296,
+    "completion_tokens": 57,
+    "total_tokens": 353,
+    "latency_s": 6.143641948699951,
+    "timestamp": 1785371833.619977
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 293,
+    "completion_tokens": 71,
+    "total_tokens": 364,
+    "latency_s": 7.3297810554504395,
+    "timestamp": 1785371840.950305
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 295,
+    "completion_tokens": 75,
+    "total_tokens": 370,
+    "latency_s": 7.6426379680633545,
+    "timestamp": 1785371848.593747
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 284,
+    "completion_tokens": 58,
+    "total_tokens": 342,
+    "latency_s": 6.2653021812438965,
+    "timestamp": 1785371854.859642
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 279,
+    "completion_tokens": 102,
+    "total_tokens": 381,
+    "latency_s": 9.89201307296753,
+    "timestamp": 1785371864.7520268
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 343,
+    "completion_tokens": 137,
+    "total_tokens": 480,
+    "latency_s": 13.373642921447754,
+    "timestamp": 1785371878.1271622
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 425,
+    "completion_tokens": 68,
+    "total_tokens": 493,
+    "latency_s": 9.541887044906616,
+    "timestamp": 1785371887.861708
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 485,
+    "completion_tokens": 77,
+    "total_tokens": 562,
+    "latency_s": 7.599311828613281,
+    "timestamp": 1785371895.46233
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 272,
+    "completion_tokens": 77,
+    "total_tokens": 349,
+    "latency_s": 7.834745168685913,
+    "timestamp": 1785371903.2976582
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 285,
+    "completion_tokens": 73,
+    "total_tokens": 358,
+    "latency_s": 7.494925022125244,
+    "timestamp": 1785371910.793313
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 282,
+    "completion_tokens": 50,
+    "total_tokens": 332,
+    "latency_s": 5.574722051620483,
+    "timestamp": 1785371916.368621
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 284,
+    "completion_tokens": 100,
+    "total_tokens": 384,
+    "latency_s": 9.727521181106567,
+    "timestamp": 1785371926.096944
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 268,
+    "completion_tokens": 81,
+    "total_tokens": 349,
+    "latency_s": 8.163347005844116,
+    "timestamp": 1785371934.260983
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 273,
+    "completion_tokens": 119,
+    "total_tokens": 392,
+    "latency_s": 11.352025985717773,
+    "timestamp": 1785371945.6135948
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 258,
+    "completion_tokens": 44,
+    "total_tokens": 302,
+    "latency_s": 5.085810899734497,
+    "timestamp": 1785371950.700489
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 272,
+    "completion_tokens": 67,
+    "total_tokens": 339,
+    "latency_s": 8.05875301361084,
+    "timestamp": 1785371958.865767
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 820,
+    "completion_tokens": 185,
+    "total_tokens": 1005,
+    "latency_s": 22.798178911209106,
+    "timestamp": 1785371981.6701708
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 312,
+    "completion_tokens": 51,
+    "total_tokens": 363,
+    "latency_s": 7.04241418838501,
+    "timestamp": 1785371988.7133
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 341,
+    "completion_tokens": 64,
+    "total_tokens": 405,
+    "latency_s": 7.571724891662598,
+    "timestamp": 1785371996.2856908
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 348,
+    "completion_tokens": 94,
+    "total_tokens": 442,
+    "latency_s": 10.333263874053955,
+    "timestamp": 1785372006.6198342
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 345,
+    "completion_tokens": 84,
+    "total_tokens": 429,
+    "latency_s": 9.027813911437988,
+    "timestamp": 1785372015.6484008
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 306,
+    "completion_tokens": 77,
+    "total_tokens": 383,
+    "latency_s": 8.383699893951416,
+    "timestamp": 1785372024.032733
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 326,
+    "completion_tokens": 52,
+    "total_tokens": 378,
+    "latency_s": 6.600094795227051,
+    "timestamp": 1785372030.633659
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 313,
+    "completion_tokens": 60,
+    "total_tokens": 373,
+    "latency_s": 7.799574851989746,
+    "timestamp": 1785372038.434653
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 789,
+    "completion_tokens": 115,
+    "total_tokens": 904,
+    "latency_s": 10.946732997894287,
+    "timestamp": 1785372049.3829749
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 281,
+    "completion_tokens": 57,
+    "total_tokens": 338,
+    "latency_s": 7.242004871368408,
+    "timestamp": 1785372056.6257012
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 294,
+    "completion_tokens": 61,
+    "total_tokens": 355,
+    "latency_s": 7.127247095108032,
+    "timestamp": 1785372063.754229
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 303,
+    "completion_tokens": 45,
+    "total_tokens": 348,
+    "latency_s": 6.235432147979736,
+    "timestamp": 1785372069.9902132
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 300,
+    "completion_tokens": 23,
+    "total_tokens": 323,
+    "latency_s": 3.768998861312866,
+    "timestamp": 1785372073.7609038
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 313,
+    "completion_tokens": 78,
+    "total_tokens": 391,
+    "latency_s": 8.548980951309204,
+    "timestamp": 1785372082.310496
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 275,
+    "completion_tokens": 80,
+    "total_tokens": 355,
+    "latency_s": 8.05698299407959,
+    "timestamp": 1785372090.367997
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 264,
+    "completion_tokens": 64,
+    "total_tokens": 328,
+    "latency_s": 7.875811815261841,
+    "timestamp": 1785372098.2485561
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 799,
+    "completion_tokens": 263,
+    "total_tokens": 1062,
+    "latency_s": 23.939162969589233,
+    "timestamp": 1785372122.191019
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 291,
+    "completion_tokens": 76,
+    "total_tokens": 367,
+    "latency_s": 8.410325050354004,
+    "timestamp": 1785372130.602149
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 304,
+    "completion_tokens": 62,
+    "total_tokens": 366,
+    "latency_s": 6.663588285446167,
+    "timestamp": 1785372137.26646
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 313,
+    "completion_tokens": 59,
+    "total_tokens": 372,
+    "latency_s": 6.4204230308532715,
+    "timestamp": 1785372143.6875362
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 310,
+    "completion_tokens": 135,
+    "total_tokens": 445,
+    "latency_s": 12.877875804901123,
+    "timestamp": 1785372156.565844
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 320,
+    "completion_tokens": 81,
+    "total_tokens": 401,
+    "latency_s": 8.27394986152649,
+    "timestamp": 1785372164.840236
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 327,
+    "completion_tokens": 74,
+    "total_tokens": 401,
+    "latency_s": 7.687652111053467,
+    "timestamp": 1785372172.528618
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 324,
+    "completion_tokens": 101,
+    "total_tokens": 425,
+    "latency_s": 10.045877933502197,
+    "timestamp": 1785372182.57511
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 285,
+    "completion_tokens": 83,
+    "total_tokens": 368,
+    "latency_s": 8.967607021331787,
+    "timestamp": 1785372191.543395
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 305,
+    "completion_tokens": 72,
+    "total_tokens": 377,
+    "latency_s": 7.535677909851074,
+    "timestamp": 1785372199.079813
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 308,
+    "completion_tokens": 72,
+    "total_tokens": 380,
+    "latency_s": 8.065726041793823,
+    "timestamp": 1785372207.146154
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 302,
+    "completion_tokens": 80,
+    "total_tokens": 382,
+    "latency_s": 8.720906019210815,
+    "timestamp": 1785372215.867451
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 274,
+    "completion_tokens": 60,
+    "total_tokens": 334,
+    "latency_s": 7.62873101234436,
+    "timestamp": 1785372223.4984052
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 798,
+    "completion_tokens": 140,
+    "total_tokens": 938,
+    "latency_s": 13.272258043289185,
+    "timestamp": 1785372236.773164
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 322,
+    "completion_tokens": 57,
+    "total_tokens": 379,
+    "latency_s": 6.299676895141602,
+    "timestamp": 1785372243.0735822
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 319,
+    "completion_tokens": 97,
+    "total_tokens": 416,
+    "latency_s": 9.657416105270386,
+    "timestamp": 1785372252.7321012
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 284,
+    "completion_tokens": 81,
+    "total_tokens": 365,
+    "latency_s": 8.279819011688232,
+    "timestamp": 1785372261.012654
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 267,
+    "completion_tokens": 131,
+    "total_tokens": 398,
+    "latency_s": 12.874428987503052,
+    "timestamp": 1785372273.888434
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 383,
+    "completion_tokens": 77,
+    "total_tokens": 460,
+    "latency_s": 9.876707792282104,
+    "timestamp": 1785372284.635988
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 793,
+    "completion_tokens": 121,
+    "total_tokens": 914,
+    "latency_s": 11.55693793296814,
+    "timestamp": 1785372296.194755
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 285,
+    "completion_tokens": 68,
+    "total_tokens": 353,
+    "latency_s": 7.767014026641846,
+    "timestamp": 1785372303.962345
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 298,
+    "completion_tokens": 88,
+    "total_tokens": 386,
+    "latency_s": 8.685403108596802,
+    "timestamp": 1785372312.649824
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 307,
+    "completion_tokens": 64,
+    "total_tokens": 371,
+    "latency_s": 6.619185924530029,
+    "timestamp": 1785372319.269938
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 304,
+    "completion_tokens": 59,
+    "total_tokens": 363,
+    "latency_s": 6.1840808391571045,
+    "timestamp": 1785372325.454378
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 314,
+    "completion_tokens": 69,
+    "total_tokens": 383,
+    "latency_s": 7.015697956085205,
+    "timestamp": 1785372332.470452
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 321,
+    "completion_tokens": 68,
+    "total_tokens": 389,
+    "latency_s": 7.006273031234741,
+    "timestamp": 1785372339.4771352
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 318,
+    "completion_tokens": 64,
+    "total_tokens": 382,
+    "latency_s": 6.598683834075928,
+    "timestamp": 1785372346.076132
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 326,
+    "completion_tokens": 71,
+    "total_tokens": 397,
+    "latency_s": 7.956937074661255,
+    "timestamp": 1785372354.03354
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 329,
+    "completion_tokens": 80,
+    "total_tokens": 409,
+    "latency_s": 8.768028974533081,
+    "timestamp": 1785372362.802561
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 279,
+    "completion_tokens": 85,
+    "total_tokens": 364,
+    "latency_s": 8.918545722961426,
+    "timestamp": 1785372371.72261
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 299,
+    "completion_tokens": 68,
+    "total_tokens": 367,
+    "latency_s": 6.942705869674683,
+    "timestamp": 1785372378.6661189
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 302,
+    "completion_tokens": 55,
+    "total_tokens": 357,
+    "latency_s": 5.822070121765137,
+    "timestamp": 1785372384.488926
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 296,
+    "completion_tokens": 75,
+    "total_tokens": 371,
+    "latency_s": 7.5550360679626465,
+    "timestamp": 1785372392.044224
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 450,
+    "completion_tokens": 63,
+    "total_tokens": 513,
+    "latency_s": 8.405198812484741,
+    "timestamp": 1785372400.450397
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 309,
+    "completion_tokens": 65,
+    "total_tokens": 374,
+    "latency_s": 8.269128322601318,
+    "timestamp": 1785372408.900502
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 804,
+    "completion_tokens": 123,
+    "total_tokens": 927,
+    "latency_s": 11.792634963989258,
+    "timestamp": 1785372420.694884
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 296,
+    "completion_tokens": 50,
+    "total_tokens": 346,
+    "latency_s": 6.1783411502838135,
+    "timestamp": 1785372426.8737102
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 320,
+    "completion_tokens": 81,
+    "total_tokens": 401,
+    "latency_s": 9.064888000488281,
+    "timestamp": 1785372435.93904
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 318,
+    "completion_tokens": 93,
+    "total_tokens": 411,
+    "latency_s": 10.120399236679077,
+    "timestamp": 1785372446.059953
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 305,
+    "completion_tokens": 79,
+    "total_tokens": 384,
+    "latency_s": 8.633241176605225,
+    "timestamp": 1785372454.6934779
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 303,
+    "completion_tokens": 97,
+    "total_tokens": 400,
+    "latency_s": 9.906341075897217,
+    "timestamp": 1785372464.600275
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 290,
+    "completion_tokens": 70,
+    "total_tokens": 360,
+    "latency_s": 7.883479833602905,
+    "timestamp": 1785372472.484239
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 286,
+    "completion_tokens": 72,
+    "total_tokens": 358,
+    "latency_s": 8.64363408088684,
+    "timestamp": 1785372481.130832
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 802,
+    "completion_tokens": 128,
+    "total_tokens": 930,
+    "latency_s": 12.218377113342285,
+    "timestamp": 1785372493.351402
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 294,
+    "completion_tokens": 72,
+    "total_tokens": 366,
+    "latency_s": 8.069447994232178,
+    "timestamp": 1785372501.421547
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 323,
+    "completion_tokens": 56,
+    "total_tokens": 379,
+    "latency_s": 6.265493869781494,
+    "timestamp": 1785372507.687419
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 288,
+    "completion_tokens": 59,
+    "total_tokens": 347,
+    "latency_s": 6.978173017501831,
+    "timestamp": 1785372514.666059
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 269,
+    "completion_tokens": 63,
+    "total_tokens": 332,
+    "latency_s": 7.826675891876221,
+    "timestamp": 1785372522.494588
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 800,
+    "completion_tokens": 99,
+    "total_tokens": 899,
+    "latency_s": 9.661448001861572,
+    "timestamp": 1785372532.156877
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 316,
+    "completion_tokens": 72,
+    "total_tokens": 388,
+    "latency_s": 7.509161949157715,
+    "timestamp": 1785372539.666652
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 292,
+    "completion_tokens": 77,
+    "total_tokens": 369,
+    "latency_s": 7.959834098815918,
+    "timestamp": 1785372547.627105
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 286,
+    "completion_tokens": 65,
+    "total_tokens": 351,
+    "latency_s": 6.924093008041382,
+    "timestamp": 1785372554.55175
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 271,
+    "completion_tokens": 55,
+    "total_tokens": 326,
+    "latency_s": 7.175673007965088,
+    "timestamp": 1785372561.7290938
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 799,
+    "completion_tokens": 156,
+    "total_tokens": 955,
+    "latency_s": 14.637477159500122,
+    "timestamp": 1785372576.368086
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 315,
+    "completion_tokens": 79,
+    "total_tokens": 394,
+    "latency_s": 8.121411085128784,
+    "timestamp": 1785372584.490669
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 320,
+    "completion_tokens": 64,
+    "total_tokens": 384,
+    "latency_s": 6.865539789199829,
+    "timestamp": 1785372591.356691
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 323,
+    "completion_tokens": 83,
+    "total_tokens": 406,
+    "latency_s": 8.47854208946228,
+    "timestamp": 1785372599.835613
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 273,
+    "completion_tokens": 56,
+    "total_tokens": 329,
+    "latency_s": 7.279069900512695,
+    "timestamp": 1785372607.116784
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 798,
+    "completion_tokens": 97,
+    "total_tokens": 895,
+    "latency_s": 9.588290929794312,
+    "timestamp": 1785372616.706097
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 290,
+    "completion_tokens": 60,
+    "total_tokens": 350,
+    "latency_s": 6.505897045135498,
+    "timestamp": 1785372623.212488
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 319,
+    "completion_tokens": 73,
+    "total_tokens": 392,
+    "latency_s": 7.625956058502197,
+    "timestamp": 1785372630.839046
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 326,
+    "completion_tokens": 67,
+    "total_tokens": 393,
+    "latency_s": 7.121340751647949,
+    "timestamp": 1785372637.960789
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 323,
+    "completion_tokens": 67,
+    "total_tokens": 390,
+    "latency_s": 7.084554195404053,
+    "timestamp": 1785372645.045721
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 284,
+    "completion_tokens": 65,
+    "total_tokens": 349,
+    "latency_s": 6.9167420864105225,
+    "timestamp": 1785372651.962868
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 258,
+    "completion_tokens": 56,
+    "total_tokens": 314,
+    "latency_s": 6.968786954879761,
+    "timestamp": 1785372658.93369
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 815,
+    "completion_tokens": 78,
+    "total_tokens": 893,
+    "latency_s": 8.21155309677124,
+    "timestamp": 1785372667.147594
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 307,
+    "completion_tokens": 76,
+    "total_tokens": 383,
+    "latency_s": 7.994560956954956,
+    "timestamp": 1785372675.145347
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 336,
+    "completion_tokens": 53,
+    "total_tokens": 389,
+    "latency_s": 5.994285821914673,
+    "timestamp": 1785372681.140152
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 301,
+    "completion_tokens": 96,
+    "total_tokens": 397,
+    "latency_s": 9.71659803390503,
+    "timestamp": 1785372690.8576262
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 310,
+    "completion_tokens": 60,
+    "total_tokens": 370,
+    "latency_s": 7.862025260925293,
+    "timestamp": 1785372698.721557
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 817,
+    "completion_tokens": 135,
+    "total_tokens": 952,
+    "latency_s": 13.079395055770874,
+    "timestamp": 1785372711.802784
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 309,
+    "completion_tokens": 112,
+    "total_tokens": 421,
+    "latency_s": 11.115507125854492,
+    "timestamp": 1785372722.918707
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 338,
+    "completion_tokens": 117,
+    "total_tokens": 455,
+    "latency_s": 11.509435892105103,
+    "timestamp": 1785372734.428596
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 303,
+    "completion_tokens": 113,
+    "total_tokens": 416,
+    "latency_s": 11.015238285064697,
+    "timestamp": 1785372745.4442172
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 325,
+    "completion_tokens": 66,
+    "total_tokens": 391,
+    "latency_s": 8.384340047836304,
+    "timestamp": 1785372753.829961
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 809,
+    "completion_tokens": 161,
+    "total_tokens": 970,
+    "latency_s": 15.048613786697388,
+    "timestamp": 1785372768.88014
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 330,
+    "completion_tokens": 73,
+    "total_tokens": 403,
+    "latency_s": 7.624787092208862,
+    "timestamp": 1785372776.505615
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 325,
+    "completion_tokens": 88,
+    "total_tokens": 413,
+    "latency_s": 8.987922191619873,
+    "timestamp": 1785372785.493896
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 323,
+    "completion_tokens": 23,
+    "total_tokens": 346,
+    "latency_s": 3.380740165710449,
+    "timestamp": 1785372788.875238
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 310,
+    "completion_tokens": 59,
+    "total_tokens": 369,
+    "latency_s": 6.455488920211792,
+    "timestamp": 1785372795.33107
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 308,
+    "completion_tokens": 65,
+    "total_tokens": 373,
+    "latency_s": 6.926137208938599,
+    "timestamp": 1785372802.2576058
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 328,
+    "completion_tokens": 78,
+    "total_tokens": 406,
+    "latency_s": 8.862105131149292,
+    "timestamp": 1785372811.1201248
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 302,
+    "completion_tokens": 53,
+    "total_tokens": 355,
+    "latency_s": 7.224352121353149,
+    "timestamp": 1785372818.346438
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 807,
+    "completion_tokens": 175,
+    "total_tokens": 982,
+    "latency_s": 16.22786784172058,
+    "timestamp": 1785372834.5755599
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 299,
+    "completion_tokens": 23,
+    "total_tokens": 322,
+    "latency_s": 3.3696823120117188,
+    "timestamp": 1785372837.9460192
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 328,
+    "completion_tokens": 75,
+    "total_tokens": 403,
+    "latency_s": 7.830259084701538,
+    "timestamp": 1785372845.776646
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 293,
+    "completion_tokens": 72,
+    "total_tokens": 365,
+    "latency_s": 7.522234916687012,
+    "timestamp": 1785372853.299329
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 267,
+    "completion_tokens": 67,
+    "total_tokens": 334,
+    "latency_s": 8.157583951950073,
+    "timestamp": 1785372861.4578612
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 768,
+    "completion_tokens": 71,
+    "total_tokens": 839,
+    "latency_s": 12.714564085006714,
+    "timestamp": 1785372874.1842182
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 253,
+    "completion_tokens": 69,
+    "total_tokens": 322,
+    "latency_s": 8.061298847198486,
+    "timestamp": 1785372882.245858
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 248,
+    "completion_tokens": 56,
+    "total_tokens": 304,
+    "latency_s": 6.406894207000732,
+    "timestamp": 1785372888.653198
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 249,
+    "completion_tokens": 127,
+    "total_tokens": 376,
+    "latency_s": 12.446222066879272,
+    "timestamp": 1785372901.099736
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 252,
+    "completion_tokens": 61,
+    "total_tokens": 313,
+    "latency_s": 6.862013101577759,
+    "timestamp": 1785372907.9621272
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 247,
+    "completion_tokens": 58,
+    "total_tokens": 305,
+    "latency_s": 6.565423250198364,
+    "timestamp": 1785372914.528043
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 233,
+    "completion_tokens": 53,
+    "total_tokens": 286,
+    "latency_s": 6.676145792007446,
+    "timestamp": 1785372921.206207
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 766,
+    "completion_tokens": 145,
+    "total_tokens": 911,
+    "latency_s": 13.666650772094727,
+    "timestamp": 1785372934.8744938
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 251,
+    "completion_tokens": 75,
+    "total_tokens": 326,
+    "latency_s": 8.08158016204834,
+    "timestamp": 1785372942.9568589
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 239,
+    "completion_tokens": 76,
+    "total_tokens": 315,
+    "latency_s": 7.856986045837402,
+    "timestamp": 1785372950.814871
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 245,
+    "completion_tokens": 73,
+    "total_tokens": 318,
+    "latency_s": 7.342558860778809,
+    "timestamp": 1785372958.15795
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 224,
+    "completion_tokens": 58,
+    "total_tokens": 282,
+    "latency_s": 6.916366100311279,
+    "timestamp": 1785372965.0754921
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 766,
+    "completion_tokens": 79,
+    "total_tokens": 845,
+    "latency_s": 7.967408180236816,
+    "timestamp": 1785372973.045002
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 251,
+    "completion_tokens": 74,
+    "total_tokens": 325,
+    "latency_s": 7.602637052536011,
+    "timestamp": 1785372980.64817
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 250,
+    "completion_tokens": 62,
+    "total_tokens": 312,
+    "latency_s": 7.017293214797974,
+    "timestamp": 1785372987.6659179
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 245,
+    "completion_tokens": 47,
+    "total_tokens": 292,
+    "latency_s": 5.162542104721069,
+    "timestamp": 1785372992.829076
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 225,
+    "completion_tokens": 68,
+    "total_tokens": 293,
+    "latency_s": 7.722454071044922,
+    "timestamp": 1785373000.5525901
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 765,
+    "completion_tokens": 136,
+    "total_tokens": 901,
+    "latency_s": 12.664231061935425,
+    "timestamp": 1785373013.21935
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 249,
+    "completion_tokens": 83,
+    "total_tokens": 332,
+    "latency_s": 8.270525932312012,
+    "timestamp": 1785373021.4903738
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 246,
+    "completion_tokens": 57,
+    "total_tokens": 303,
+    "latency_s": 6.519831895828247,
+    "timestamp": 1785373028.010485
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 244,
+    "completion_tokens": 82,
+    "total_tokens": 326,
+    "latency_s": 8.13441801071167,
+    "timestamp": 1785373036.1453388
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 187,
+    "completion_tokens": 109,
+    "total_tokens": 296,
+    "latency_s": 11.06099796295166,
+    "timestamp": 1785373047.209284
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 311,
+    "completion_tokens": 60,
+    "total_tokens": 371,
+    "latency_s": 7.895596027374268,
+    "timestamp": 1785373056.724097
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 767,
+    "completion_tokens": 112,
+    "total_tokens": 879,
+    "latency_s": 10.88336992263794,
+    "timestamp": 1785373067.610123
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 242,
+    "completion_tokens": 23,
+    "total_tokens": 265,
+    "latency_s": 3.6317760944366455,
+    "timestamp": 1785373071.242356
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 248,
+    "completion_tokens": 67,
+    "total_tokens": 315,
+    "latency_s": 6.86071515083313,
+    "timestamp": 1785373078.103692
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 246,
+    "completion_tokens": 65,
+    "total_tokens": 311,
+    "latency_s": 6.7325170040130615,
+    "timestamp": 1785373084.8367648
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 186,
+    "completion_tokens": 131,
+    "total_tokens": 317,
+    "latency_s": 12.017630815505981,
+    "timestamp": 1785373096.8558872
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 330,
+    "completion_tokens": 57,
+    "total_tokens": 387,
+    "latency_s": 7.85564112663269,
+    "timestamp": 1785373104.993202
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 782,
+    "completion_tokens": 74,
+    "total_tokens": 856,
+    "latency_s": 7.56881308555603,
+    "timestamp": 1785373112.5643678
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 267,
+    "completion_tokens": 55,
+    "total_tokens": 322,
+    "latency_s": 6.094907760620117,
+    "timestamp": 1785373118.6598022
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 267,
+    "completion_tokens": 72,
+    "total_tokens": 339,
+    "latency_s": 7.781393051147461,
+    "timestamp": 1785373126.441501
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 255,
+    "completion_tokens": 66,
+    "total_tokens": 321,
+    "latency_s": 7.2417151927948,
+    "timestamp": 1785373133.6835551
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 205,
+    "completion_tokens": 101,
+    "total_tokens": 306,
+    "latency_s": 9.51443600654602,
+    "timestamp": 1785373143.198855
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 316,
+    "completion_tokens": 64,
+    "total_tokens": 380,
+    "latency_s": 8.197966814041138,
+    "timestamp": 1785373151.672697
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 769,
+    "completion_tokens": 134,
+    "total_tokens": 903,
+    "latency_s": 12.726311922073364,
+    "timestamp": 1785373164.400332
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 253,
+    "completion_tokens": 47,
+    "total_tokens": 300,
+    "latency_s": 5.166567087173462,
+    "timestamp": 1785373169.5674381
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 244,
+    "completion_tokens": 64,
+    "total_tokens": 308,
+    "latency_s": 6.6038148403167725,
+    "timestamp": 1785373176.172436
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 248,
+    "completion_tokens": 66,
+    "total_tokens": 314,
+    "latency_s": 6.772304058074951,
+    "timestamp": 1785373182.945303
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 227,
+    "completion_tokens": 69,
+    "total_tokens": 296,
+    "latency_s": 7.799180030822754,
+    "timestamp": 1785373190.745478
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 764,
+    "completion_tokens": 123,
+    "total_tokens": 887,
+    "latency_s": 11.619800090789795,
+    "timestamp": 1785373202.366262
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 249,
+    "completion_tokens": 66,
+    "total_tokens": 315,
+    "latency_s": 6.78025484085083,
+    "timestamp": 1785373209.1480231
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 245,
+    "completion_tokens": 62,
+    "total_tokens": 307,
+    "latency_s": 6.41549015045166,
+    "timestamp": 1785373215.564022
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 243,
+    "completion_tokens": 37,
+    "total_tokens": 280,
+    "latency_s": 4.29529595375061,
+    "timestamp": 1785373219.8596349
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 216,
+    "completion_tokens": 56,
+    "total_tokens": 272,
+    "latency_s": 6.682286739349365,
+    "timestamp": 1785373226.5436292
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 765,
+    "completion_tokens": 98,
+    "total_tokens": 863,
+    "latency_s": 9.608407020568848,
+    "timestamp": 1785373236.1529531
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 244,
+    "completion_tokens": 108,
+    "total_tokens": 352,
+    "latency_s": 10.330002069473267,
+    "timestamp": 1785373246.483403
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 249,
+    "completion_tokens": 65,
+    "total_tokens": 314,
+    "latency_s": 6.669708967208862,
+    "timestamp": 1785373253.1535912
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 246,
+    "completion_tokens": 88,
+    "total_tokens": 334,
+    "latency_s": 8.68038296699524,
+    "timestamp": 1785373261.834451
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 227,
+    "completion_tokens": 59,
+    "total_tokens": 286,
+    "latency_s": 6.955430269241333,
+    "timestamp": 1785373268.791361
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 765,
+    "completion_tokens": 193,
+    "total_tokens": 958,
+    "latency_s": 17.794716119766235,
+    "timestamp": 1785373286.5871518
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 249,
+    "completion_tokens": 52,
+    "total_tokens": 301,
+    "latency_s": 5.640810012817383,
+    "timestamp": 1785373292.228427
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 246,
+    "completion_tokens": 67,
+    "total_tokens": 313,
+    "latency_s": 6.838850975036621,
+    "timestamp": 1785373299.0678458
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 244,
+    "completion_tokens": 57,
+    "total_tokens": 301,
+    "latency_s": 6.001333951950073,
+    "timestamp": 1785373305.0694668
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 219,
+    "completion_tokens": 58,
+    "total_tokens": 277,
+    "latency_s": 6.850052118301392,
+    "timestamp": 1785373311.920799
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 784,
+    "completion_tokens": 112,
+    "total_tokens": 896,
+    "latency_s": 10.868202209472656,
+    "timestamp": 1785373322.790215
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 269,
+    "completion_tokens": 97,
+    "total_tokens": 366,
+    "latency_s": 9.648274183273315,
+    "timestamp": 1785373332.438967
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 263,
+    "completion_tokens": 120,
+    "total_tokens": 383,
+    "latency_s": 11.648530006408691,
+    "timestamp": 1785373344.087839
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 257,
+    "completion_tokens": 114,
+    "total_tokens": 371,
+    "latency_s": 11.166191816329956,
+    "timestamp": 1785373355.254754
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 207,
+    "completion_tokens": 117,
+    "total_tokens": 324,
+    "latency_s": 10.58650803565979,
+    "timestamp": 1785373365.842572
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 352,
+    "completion_tokens": 62,
+    "total_tokens": 414,
+    "latency_s": 8.298897981643677,
+    "timestamp": 1785373374.476071
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 777,
+    "completion_tokens": 82,
+    "total_tokens": 859,
+    "latency_s": 8.31234884262085,
+    "timestamp": 1785373382.790277
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 262,
+    "completion_tokens": 62,
+    "total_tokens": 324,
+    "latency_s": 6.679413080215454,
+    "timestamp": 1785373389.471807
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 250,
+    "completion_tokens": 66,
+    "total_tokens": 316,
+    "latency_s": 7.0132622718811035,
+    "timestamp": 1785373396.485628
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 256,
+    "completion_tokens": 67,
+    "total_tokens": 323,
+    "latency_s": 7.093653917312622,
+    "timestamp": 1785373403.579869
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 251,
+    "completion_tokens": 77,
+    "total_tokens": 328,
+    "latency_s": 8.738213300704956,
+    "timestamp": 1785373412.3196201
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 777,
+    "completion_tokens": 106,
+    "total_tokens": 883,
+    "latency_s": 10.307068109512329,
+    "timestamp": 1785373422.628832
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 250,
+    "completion_tokens": 71,
+    "total_tokens": 321,
+    "latency_s": 7.436450004577637,
+    "timestamp": 1785373430.065865
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 262,
+    "completion_tokens": 67,
+    "total_tokens": 329,
+    "latency_s": 7.075287103652954,
+    "timestamp": 1785373437.141477
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 258,
+    "completion_tokens": 89,
+    "total_tokens": 347,
+    "latency_s": 9.015546321868896,
+    "timestamp": 1785373446.157484
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 247,
+    "completion_tokens": 79,
+    "total_tokens": 326,
+    "latency_s": 8.97217607498169,
+    "timestamp": 1785373455.1311228
+  },
+  {
+    "stage": "traversal_dfs",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 779,
+    "completion_tokens": 91,
+    "total_tokens": 870,
+    "latency_s": 9.066936016082764,
+    "timestamp": 1785373464.199033
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 264,
+    "completion_tokens": 62,
+    "total_tokens": 326,
+    "latency_s": 6.672238111495972,
+    "timestamp": 1785373470.871718
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 258,
+    "completion_tokens": 88,
+    "total_tokens": 346,
+    "latency_s": 8.866152286529541,
+    "timestamp": 1785373479.738397
+  },
+  {
+    "stage": "unknown",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 260,
+    "completion_tokens": 63,
+    "total_tokens": 323,
+    "latency_s": 6.738699913024902,
+    "timestamp": 1785373486.4776478
+  },
+  {
+    "stage": "generation",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 202,
+    "completion_tokens": 154,
+    "total_tokens": 356,
+    "latency_s": 13.58184003829956,
+    "timestamp": 1785373500.060964
+  },
+  {
+    "stage": "judge",
+    "backend": "ollama",
+    "model": "llama3.1:8b",
+    "prompt_tokens": 368,
+    "completion_tokens": 67,
+    "total_tokens": 435,
+    "latency_s": 9.005760192871094,
+    "timestamp": 1785373509.4122791
+  }
+]

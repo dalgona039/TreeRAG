@@ -292,6 +292,13 @@ class TreeRAGReasoner:
         if reference_context:
             context_str = reference_context + "\n\n" + context_str
 
+        # Expose the exact context handed to the generator so callers can
+        # measure real context size instead of re-deriving a proxy from the
+        # node list (see benchmarks/run_real_evaluation.py — that proxy read
+        # the wrong key for these nodes and under-counted PageTree-RAG's
+        # context by ~3x, which fed the paper's context-token comparison).
+        traversal_info["generator_context"] = context_str
+
         if not traversal_info["nodes_selected"] and not resolved_refs:
             traversal_info["fallback_reason"] = "no_relevant_sections"
             traversal_info["detected_language"] = language
@@ -299,6 +306,9 @@ class TreeRAGReasoner:
                 filename.replace("_index.json", "") for filename in self.index_filenames
             ]
             fallback_answer = self._build_no_context_response(language)
+            # No generation call happens on this path, so the generator
+            # consumed no context at all.
+            traversal_info["generator_context"] = ""
             print(
                 "⚠️ No relevant sections selected "
                 f"(algorithm={self.traversal_algorithm}, docs={len(self.index_filenames)}, "

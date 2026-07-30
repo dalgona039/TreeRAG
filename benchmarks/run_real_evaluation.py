@@ -75,8 +75,25 @@ def _flatten(node: Dict[str, Any], depth: int, acc: List[Tuple[Dict[str, Any], i
         _flatten(child, depth + 1, acc)
 
 
+def _node_body(node: Dict[str, Any]) -> str:
+    """Extract a node's body text, whichever key the producing system used.
+
+    Retrieval paths disagree on the key name for a node's body text:
+    ``BM25Retriever``/``DenseRetriever`` return raw PageIndex tree nodes
+    (``summary``); ``RaptorBaseline`` also emits ``summary``; but
+    ``TreeRAGReasoner`` builds its ``nodes_selected`` dicts with the body under
+    ``content`` (src/core/reasoner.py) and ``_run_flatrag`` emits ``{"id": ...}``
+    with no body at all. Reading only ``summary`` therefore silently measured
+    PageTree-RAG's context as title+page_ref only (~3x deflated) and FlatRAG's
+    as the empty string (0) — which is the real cause of the "FlatRAG context =
+    0" anomaly the paper currently footnotes as an unexplained instrumentation
+    gap, and it directly deflated the headline context-token comparison.
+    """
+    return str(node.get("summary") or node.get("content") or node.get("text") or "")
+
+
 def _node_text(node: Dict[str, Any]) -> str:
-    return f"{node.get('title', '')} {node.get('summary', '')}".strip()
+    return f"{node.get('title', '')} {_node_body(node)}".strip()
 
 
 def extractive_answer(nodes: List[Dict[str, Any]]) -> str:
@@ -86,7 +103,7 @@ def extractive_answer(nodes: List[Dict[str, Any]]) -> str:
     parts = []
     for n in nodes:
         title = n.get("title", "")
-        summary = n.get("summary", "")
+        summary = _node_body(n)
         page_ref = n.get("page_ref", "")
         entry = f"{title}: {summary}".strip(": ").strip()
         if page_ref:
@@ -222,7 +239,7 @@ class Evaluator:
             answer = self._llm_generate(context, q)
         else:
             answer = context
-        return answer, nodes
+        return answer, nodes, context
 
     def _run_dense(self, q: str, doc_id: str, branches: int):
         from src.core.dense_retrieval_baseline import DenseRetriever
@@ -235,7 +252,7 @@ class Evaluator:
             answer = self._llm_generate(context, q)
         else:
             answer = context
-        return answer, nodes
+        return answer, nodes, context
 
     def _run_flatrag(self, q: str, doc_id: str, branches: int):
         from src.core.flat_rag_baseline import FlatRAGBaseline
@@ -245,12 +262,18 @@ class Evaluator:
             self._index_cache[key] = FlatRAGBaseline([doc_id])
         baseline = self._index_cache[key]
         extractive, meta = baseline.query(q, max_branches=branches)
-        nodes = [{"id": d} for d in meta.get("retrieved_docs", [])]
+        # Map retrieved IDs back to FlatRAG's own flattened node dicts so the
+        # returned nodes carry title/body/page_ref like every other system's do.
+        # Previously this returned bare {"id": ...} stubs, which made FlatRAG's
+        # measured context identically 0 — the unexplained "FlatRAG context = 0"
+        # anomaly footnoted in the paper.
+        by_id = {d.get("id"): d for d in getattr(baseline, "documents", [])}
+        nodes = [by_id.get(d, {"id": d}) for d in meta.get("retrieved_docs", [])]
         if self.gen_backend == "ollama":
             answer = self._llm_generate(extractive, q)
         else:
             answer = extractive
-        return answer, nodes
+        return answer, nodes, extractive
 
     def load_raw_text(self, doc_id: str) -> str:
         """Resolve a doc_id (index filename) to its extracted plain text."""
@@ -295,7 +318,7 @@ class Evaluator:
             answer = self._llm_generate(extractive, q)
         else:
             answer = extractive
-        return answer, result["source_nodes"]
+        return answer, result["source_nodes"], extractive
 
     def _run_treerag(self, q: str, doc_id: str, algo: str, branches: int):
         if self.mode == "online":
@@ -322,7 +345,9 @@ class Evaluator:
             if algo == "auto":
                 auto_log = meta.get("auto_selected_algorithm", []) or []
                 self.last_chosen_algo = auto_log[0]["selected"] if auto_log else None
-            return answer, nodes
+            # The exact string the reasoner handed its generator, including
+            # compression — not a proxy re-derived from the node list.
+            return answer, nodes, meta.get("generator_context", "")
 
         # offline keyword approximation
         if algo == "auto":
@@ -334,13 +359,15 @@ class Evaluator:
             self.last_chosen_algo = "dfs" if chosen == "dfs" else "beam"
             k = branches if chosen == "dfs" else max(branches, 5)
             nodes = keyword_traversal(tree, q, k, prefer_shallow=(chosen == "dfs"))
-            return extractive_answer(nodes), nodes
+            _ctx = extractive_answer(nodes)
+            return _ctx, nodes, _ctx
 
         k = branches if algo == "dfs" else max(branches, 5)
         nodes = keyword_traversal(
             self.load_tree(doc_id), q, k, prefer_shallow=(algo == "dfs")
         )
-        return extractive_answer(nodes), nodes
+        _ctx = extractive_answer(nodes)
+        return _ctx, nodes, _ctx
 
     def run_system(self, system: str, q: str, doc_id: str, branches: int = 3):
         if system == "bm25":
@@ -448,11 +475,11 @@ def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator,
             t0 = time.perf_counter()
             evaluator.last_chosen_algo = None
             try:
-                answer, nodes = evaluator.run_system(
+                answer, nodes, gen_context = evaluator.run_system(
                     system, q["question"], q["document_id"]
                 )
             except Exception as exc:
-                answer, nodes = "", []
+                answer, nodes, gen_context = "", [], ""
                 print(f"   ⚠️  {system} failed on {q['question_id']}: {exc}")
             latency = time.perf_counter() - t0
 
@@ -463,7 +490,13 @@ def evaluate(dataset: Dict[str, Any], systems: List[str], evaluator: Evaluator,
                 if len(answer) < 10:
                     print(f"   ── ⛔ ANSWER TOO SHORT — smoke check FAIL")
 
-            context = extractive_answer(nodes)
+            # Measure and judge against the context the generator actually
+            # received, not a proxy rebuilt from the node list. The old proxy
+            # read only the "summary" key, which PageTree-RAG's nodes do not
+            # use ("content") and FlatRAG's stubs lacked entirely — deflating
+            # their measured context to ~1/3 and 0 respectively, and feeding
+            # the LLM judge a near-empty "Source Context" for those systems.
+            context = gen_context or extractive_answer(nodes)
             scores = evaluator.score_answer(q["question"], context, answer, expected)
             row = {
                 "question_id": q["question_id"],

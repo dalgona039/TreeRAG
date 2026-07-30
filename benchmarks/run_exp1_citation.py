@@ -110,7 +110,7 @@ def main() -> None:
 
             t0 = time.perf_counter()
             try:
-                answer, nodes = evaluator.run_system(
+                answer, nodes, _gen_context = evaluator.run_system(
                     system, q["question"], q["document_id"]
                 )
             except Exception as exc:

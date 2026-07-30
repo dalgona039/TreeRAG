@@ -3,6 +3,38 @@ from typing import Dict, List, Any, Tuple, Optional
 from dataclasses import dataclass
 import re
 
+_KOREAN_RE = re.compile(r"[가-힣]")
+_kiwi_instance = None
+
+
+def _get_kiwi():
+    """Lazy singleton Kiwi Korean morphological analyzer."""
+    global _kiwi_instance
+    if _kiwi_instance is None:
+        from kiwipiepy import Kiwi
+
+        _kiwi_instance = Kiwi()
+    return _kiwi_instance
+
+
+def _extract_critical_keywords(text: str) -> List[str]:
+    """Extract keyword stems for the false-negative recovery heuristic.
+
+    Korean is agglutinative — particles (조사) attach directly to nouns, so a
+    plain ``\\w{4,}`` regex extracts e.g. "초음파의" (noun + genitive particle)
+    which then fails to substring-match a title like "초음파 영상의 정의"
+    even though the core noun "초음파"/"음파" is clearly present in both. Use
+    Kiwi to extract noun stems (NNG/NNP) for Korean text instead; fall back to
+    the regex for non-Korean text where this doesn't apply.
+    """
+    if _KOREAN_RE.search(text):
+        try:
+            tokens = _get_kiwi().tokenize(text)
+            return [t.form for t in tokens if t.tag in ("NNG", "NNP") and len(t.form) >= 2]
+        except Exception:
+            pass  # fall through to regex on any tokenizer failure
+    return re.findall(r"\b\w{4,}\b", text.lower())
+
 
 @dataclass
 class FilteringDecision:
@@ -194,29 +226,30 @@ class ErrorRecoveryFilter:
     ) -> List[Dict[str, Any]]:
         
         recovered = []
-        query_lower = query.lower()
-        
+        critical_keywords = _extract_critical_keywords(query)
+
         for node in filtered_nodes:
             title = node.get('title', '').lower()
             summary = node.get('summary', '').lower()
-            
-            critical_keywords = re.findall(r'\b\w{4,}\b', query_lower)
-            
-            matches = sum(1 for kw in critical_keywords if kw in title)
 
-            # Word count, not character count: a character-length threshold
-            # (originally `len(title) > 20`) assumes English-scale titles and
-            # systematically fails on CJK text, where a complete, specific
-            # title like "초음파의 개요 및 역사" (4 words) is only 12
-            # characters — well under 20 — so a single strong keyword match
-            # was never recovered. Confirmed via the medical-domain fair
-            # rerun (B7): this made TreeNavigator's DFS over-filtering
+            # Matching against noun stems (Korean, via Kiwi) or word-boundary
+            # tokens (other languages) rather than raw particle-attached
+            # substrings — see _extract_critical_keywords. Originally this
+            # extracted `\b\w{4,}\b` from the query and required `len(title) >
+            # 20` as a secondary gate; both assumptions (substring matching,
+            # a 20-character title-length floor) are English-centric and
+            # fail on Korean's agglutinative morphology, where a short,
+            # complete, on-topic title like "초음파의 개요 및 역사" (4 words,
+            # 12 characters) never recovered. Confirmed via the medical-domain
+            # fair rerun (B7): this made TreeNavigator's DFS over-filtering
             # recovery a near-total no-op on Korean documents (27/42
             # questions fell back to "no relevant sections found").
+            matches = sum(1 for kw in critical_keywords if kw.lower() in title)
+
             if matches >= 2 or (matches >= 1 and len(title.split()) >= 3):
                 recovered.append(node)
                 self.false_negatives_detected += 1
-        
+
         return recovered[:3]
     
     def adaptive_threshold_adjustment(

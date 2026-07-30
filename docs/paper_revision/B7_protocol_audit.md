@@ -100,6 +100,130 @@ reported in the paper directly — either drop the medical entity recall = 1.000
 from the abstract/highlights entirely, or reframe Table 4 explicitly as an offline-path
 result with the fair-protocol numbers alongside it as the honest comparison.
 
+## 5a. ★ Follow-up: a real bug inflated DFS's collapse — found, fixed, re-measured
+
+The user pushed back on the DFS ROUGE-L=0.067 result ("that can't be right, is there a
+bug?") — a fair challenge that turned up a genuine, previously-unknown bug rather than a
+pure capability gap.
+
+**Root cause.** 27/42 DFS medical answers were the literal fallback boilerplate ("no
+relevant sections found"), traced to `TreeNavigator`'s over-filtering recovery path
+(`src/core/error_recovery.py::_recover_critical_nodes`, only wired into DFS —
+`beam_search.py` never calls it, which is also why Beam was far less affected). The
+recovery heuristic extracted query keywords with a plain regex
+(`\b\w{4,}\b`) and required an exact substring match against candidate titles, gated by
+`len(title) > 20` (raw character count). Korean is agglutinative — particles attach
+directly to nouns — so the regex extracted tokens like "초음파의" (noun + genitive
+particle) that never substring-match a title like "초음파 영상의 정의" even though the
+core noun ("초음파"/ultrasound) is clearly present in both, and the title-length gate
+assumes English-scale titles (a complete, on-topic 4-word Korean title is often under
+20 characters). Both defects are English-centric assumptions applied to Korean text.
+
+**Fix, in two passes** (`src/core/error_recovery.py`):
+1. First pass: character-length → word-count gate. Real but small effect: 27→25/42.
+2. Real fix: added `kiwipiepy` (Korean morphological analyzer, pip-installable, no
+   Java/system deps) to extract noun stems (NNG/NNP tags) instead of regex substrings
+   for Korean text, keeping the original regex as a fallback for non-Korean text. All
+   24 existing `error_recovery` unit/integration tests still pass unmodified.
+
+**Re-measured** (`data/benchmark_reports/online_local_llama_medical_b7_20260730_dfs_kiwi_fixed_n42.json`,
+DFS only, same 42 medical questions):
+
+| | Zero-retrieval fallbacks | ROUGE-L | Medical Entity Recall | Ctx tok | Latency |
+|---|---|---|---|---|---|
+| Before fix | 27/42 (64%) | 0.067 | 0.720 | 4.5 | 41.0s |
+| After fix | 13/42 (31%) | 0.087 | 0.835 | 9.8 | 70.1s |
+
+**The bug was real and the fix genuinely helped (27→13 fallbacks, entity recall
+0.720→0.835), but it does not overturn §5's reversal.** Even fixed, DFS remains at or
+near the bottom of all 6 systems on both ROUGE-L (0.087, still far below FlatRAG's
+0.337 or BM25's 0.257) and entity recall (0.835, still below BM25 0.895 / Dense 0.954 /
+FlatRAG 0.974). The 13 residual fallbacks include at least one on an *English* document
+(numbered headings like "10. CONCLUSION" scored 0.09 confidence against a clearly
+on-topic query) — a different, not-yet-diagnosed failure mode, not the Korean-specific
+one just fixed. **Honest conclusion: the offline-path Table 4 result
+(medical_entity_recall=1.000, DFS best ROUGE-L) still does not replicate under the fair
+protocol even after fixing a real, confirmed bug** — the reversal is real, though the
+bug inflated its size. Report both the bug-fix and the corrected (still-reversed)
+numbers in the paper; do not report only the pre-fix numbers.
+
+## 5b. ★★ Why the reversal happens at all: offline ROUGE-L is inflated by construction, not just by skipping LLM traversal
+
+Pushed further on *why* even the fixed DFS answers score so low (0.087) despite reading,
+on inspection, as accurate and on-topic (§5a's non-empty answers). Two things layer
+together:
+
+**(1) Answer-length mismatch (same mechanism as B5, replayed here more severely).**
+Gold `expected_answer_hint` in the medical benchmark averages **87 characters** — a
+terse one-line summary. Every system's actual generated answer is 3–5× longer:
+BM25 252.5, Dense 310.8, FlatRAG 238.9, RAPTOR 345.0, PageTree-RAG (DFS, fixed) 368.1,
+PageTree-RAG (Beam) 471.4 characters. Since ROUGE-L is F-measure (B5), all systems are
+mechanically penalized, and the two PageTree-RAG variants — whose answers are the
+*longest* of all six — are penalized hardest. This alone substantially explains DFS's
+low score even on the 29 non-empty, factually-correct answers.
+
+**(2) Offline mode's high score is a gold-circularity artifact, not evidence of better
+retrieval — direct textual proof.** Checked the *offline* extractive "answer" (raw
+node title+summary+page_ref, concatenated, no LLM) against gold for the same questions:
+
+> Gold: *"초음파 영상의 정의와 18세기부터 20세기 중반까지의 기술 발전 과정을 다룸"*
+> Offline DFS "answer": *"초음파의 개요 및 역사: **초음파 영상의 정의와 18세기부터
+> 20세기 중반까지의 기술 발전 과정을 다룸** [p.3-7] 초음파의 발생 및 장치: ... 초음파의
+> 역사: ... [p.6-7]"* — rouge_l = 0.29–0.51 across the three sampled questions.
+
+The gold phrase appears **verbatim, word-for-word**, inside the offline "answer." This
+is not a coincidence — it is the direct consequence of how the benchmark's gold was
+built (B2): `expected_answer_hint` is generated from, and verified to appear in, the
+*same source node's summary text* that offline mode's extractive answer directly
+outputs. Offline ROUGE-L is therefore high whenever the right node is anywhere in the
+retrieved set, almost independent of whether any real "answering" happened — it is a
+second, independent instance of the gold-circularity problem B2 documents for citation
+F1, now shown to also inflate offline-mode ROUGE-L specifically. Fair/generative mode
+requires the LLM to *paraphrase* that same content into original prose — which is what
+a real deployed system does — and paraphrasing mechanically breaks LCS-based overlap
+with a gold string lifted verbatim from the source, regardless of factual correctness.
+Offline mode's answer is also ~250–350 characters (similar length to the generative
+answers, confirmed by direct measurement), so this is **not primarily a length effect
+for the offline/online contrast — it's a verbatim-substring effect specific to how the
+gold was constructed**, layered on top of the length effect from (1) above.
+
+**Does switching to recall (B5's fix for the general benchmark) rescue PageTree-RAG
+here too? Checked directly — no.** Recomputed ROUGE-L Precision/Recall/F on the same
+already-generated answers (no new LLM calls; script pattern from B5):
+
+| System | Precision | Recall | F |
+|---|---|---|---|
+| BM25 | 0.210 | 0.474 | 0.257 |
+| Dense | 0.224 | 0.489 | 0.257 |
+| FlatRAG | 0.293 | **0.536** | 0.337 |
+| RAPTOR | 0.065 | 0.153 | 0.073 |
+| PageTree-RAG (DFS) | 0.056 | 0.226 | 0.087 |
+| PageTree-RAG (Beam) | 0.077 | 0.334 | 0.117 |
+
+Unlike the general-benchmark result in B5 (where switching to recall flips the ranking
+and PageTree-RAG (Beam) wins outright), **on the medical benchmark PageTree-RAG remains
+last or near-last under every P/R/F variant.** The metric-choice fix that rescues the
+general-benchmark comparison does not apply here — this is not merely a metric
+artifact. Combined with (1) and (2) above (length penalty, offline gold-circularity),
+the honest picture is: **the medical offline-vs-fair reversal is partly a genuine
+metric-construction artifact (offline's inflated score specifically), but the fair-protocol
+gap itself is not fully explained away — PageTree-RAG's medical-domain answers
+genuinely share less lexical content with the terse, term-specific gold references than
+baselines' answers do, under every ROUGE-L variant tested.**
+
+**Combined implication for the paper.** Report all of this, not a single clean story:
+(a) Table 4's current offline number is inflated by gold-circularity and should not be
+presented as-is without disclosure (§5, §5a, §5b(2)); (b) the fair-protocol reversal is
+real and — unlike the general benchmark — does not resolve under a recall-based metric
+either, so it should not be waved away as pure measurement artifact; (c) LLM-Judge
+(lexical-overlap-independent) tells a friendlier story — PageTree-RAG (Beam)'s
+LLM-Judge (0.80) is competitive with every baseline except Dense (0.81) even under the
+fair protocol — suggesting the gap may be more about surface lexical match with a
+terse, keyword-dense medical gold style than about factual correctness, but this is a
+plausible interpretation, not something directly proven here; confirming it would need
+a manual read of a sample of DFS/Beam medical answers against gold by a human judge,
+which was not done in this pass.
+
 ## 6. Rerunning Table 5 (Ablation, n=70) under the fair protocol
 
 Not attempted in this pass — flagged as out of scope for this session given the
@@ -113,8 +237,12 @@ reasonable next step once the medical rerun above is done.
   Table 4 and 5 confirmed byte-exact) and 6, 8 (both online/fair, Table 8 byte-exact
   from B5). Caption text confirms 9, 10, 11, 12 as fair-protocol by the authors' own
   prior claim, though not independently re-derived byte-for-byte here.
+  A real bug in DFS's over-filtering recovery logic (English-centric keyword/title-length
+  heuristics failing on Korean) was found, root-caused, fixed with a Korean morphological
+  analyzer, and re-measured (§5a) — the fix reduced but did not eliminate DFS's collapse
+  on the medical benchmark, and does not overturn the reversal finding.
 - **Not measured**: byte-exact source-file confirmation for Tables 3, 9, 10, 11, 12; a
   fair-protocol ablation rerun (Table 5) — queued as follow-up work, not run in this
-  session (lower priority than the medical rerun, which was completed — see §5 above,
-  and produced a critical finding: the fair-protocol medical result reverses the
-  paper's offline-path headline claim).
+  session. The 13 residual post-fix DFS fallbacks include at least one on an English
+  document with a distinct, undiagnosed failure mode (numbered section headings) — not
+  investigated further here.

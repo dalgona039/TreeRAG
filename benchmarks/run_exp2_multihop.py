@@ -109,16 +109,22 @@ def run_hotpotqa(n: int, seed: int, smoke: bool, limit: int = 0) -> Optional[Dic
         for q in questions:
             t0 = time.perf_counter()
             try:
-                answer, nodes = evaluator.run_system(
+                answer, nodes, gen_context = evaluator.run_system(
                     system, q["question"], q["document_id"]
                 )
             except Exception as exc:
                 print(f"   ⚠ {system} failed on {q['question_id']}: {exc}")
-                answer, nodes = "", []
+                answer, nodes, gen_context = "", [], ""
             latency = time.perf_counter() - t0
 
             expected = q.get("expected_answer_hint", "")
-            ctx = " ".join(n.get("summary", n.get("title", "")) for n in nodes)
+            # Use the context the generator actually received. Rebuilding it
+            # from nodes via the "summary" key silently yielded near-empty
+            # context for PageTree-RAG (stores its body under "content") and
+            # FlatRAG, corrupting the LLM judge's faithfulness signal.
+            ctx = gen_context or " ".join(
+                n.get("summary") or n.get("content") or n.get("title", "") for n in nodes
+            )
             scores = evaluator.score_answer(q["question"], ctx, answer, expected)
 
             if smoke:
